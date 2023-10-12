@@ -16,7 +16,15 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				
+				$('#regBtn').children().on('click', function(e) {
+					if($(this).val() == '기업회원') {
+						$('.indReg').hide();
+						$('.compReg').show();
+					} else {
+						$('.compReg').hide();
+						$('.indReg').show();
+					}
+				});
 			});
 			
 		</script>
@@ -93,7 +101,7 @@
 							<header>
 								
 								<h2>회원가입</h2>
-								<div>
+								<div id="regBtn"> 
 									<button class="bn632-hover bn27" class="regType" value="개인회원">개인회원</button>
 									<button class="bn632-hover bn27" class="regType" value="기업회원">기업회원</button>
 								</div>
@@ -161,9 +169,14 @@
                                         <label for="addr">주소</label>
                                         <input class="form-control" id="addr" type="text" name="addr" />
                                     </div>
+                                    <br>
                                     <input type="submit" value="가입하기">
                                     <input type="reset" value="다시작성">
 								</form>
+								
+								<br>
+								
+								<!-- 기업회원가입 양식 -->
 								<form action="login.jsp" class="compReg">
 									<textarea rows="20" cols="150" >
 가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
@@ -239,6 +252,7 @@
                                         	<option value="서비스직">서비스직</option>
                                         </select>
                                     </div>
+                                    <br>
                                     <input type="submit" value="가입하기">
                                     <input type="reset" value="다시작성">
 								</form>
