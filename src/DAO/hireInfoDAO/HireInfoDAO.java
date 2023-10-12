@@ -1,4 +1,4 @@
-package DAO;
+package DAO.hireInfoDAO;
 
 public class HireInfoDAO {
 
