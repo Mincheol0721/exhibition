@@ -48,8 +48,9 @@ public class HireInfoDAO {
 			// DataSouce커넥션풀 객체를 찾아서 반환해 줍니다.
 			ds = (DataSource) envContext.lookup("jdbc/oracle");
 			
+			System.out.println("DataSource 커넥션풀 객체 얻기 성공!");
 		} catch (Exception e) {
-			System.out.println("DataSouce커넥션풀 객체 얻기 실패  : " + e);
+			System.out.println("DataSource커넥션풀 객체 얻기 실패  : " + e);
 		}
 	
 	}
@@ -71,15 +72,47 @@ public class HireInfoDAO {
 		}
 	}
 	
+	//DB에 접속하여 레코드 총 개수를 반환하는 메소드
+	public int getHireInfoCount() {
+		int count = 0;
+		
+		try {
+			con = ds.getConnection();
+			
+			query = "select count(*) from hireInfo";
+			
+			pstmt = con.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("HireInfoDAO내부의 getHireInfoCount에서 예외 발생: " + e);
+		} finally {
+			freeResource();
+		}
+		
+		return count;
+	}
+	
 	//DB에 접속하여 채용정보 테이블 내부의 데이터들을 전부 조회해오는 메소드
-	public List<HireInfoVO> getHireInfoList() {
+	public List<HireInfoVO> getHireInfoList(int pageNum, int pageSize) {
 		
 		List<HireInfoVO> list = new ArrayList<HireInfoVO>(); 
 		
 		try {
 			con = ds.getConnection();
 			
-			query = "select * from hireInfo";
+			query = "SELECT * " + 
+					"FROM ( " + 
+					"    SELECT ROWNUM AS rn, h.* " + 
+					"    FROM hireinfo h " + 
+					"    WHERE ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
+					" ) " + 
+					" WHERE rn >= ((" + pageNum + " - 1) * " + pageSize + ") + 1";
 			
 			pstmt = con.prepareStatement(query);
 			
@@ -135,10 +168,8 @@ public class HireInfoDAO {
 	}
 
 	public void insertHireInfo(HireInfoVO vo) {
-		
 		try {
 			con = ds.getConnection();
-			
 			query = "INSERT INTO hireInfo (cname, htel, divcomp, homepage, jobtype, workTime, legal)  VALUES (?, ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(query);

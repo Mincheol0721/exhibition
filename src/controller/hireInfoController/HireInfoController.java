@@ -1,6 +1,7 @@
 package controller.hireInfoController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import VO.hireInfoVO.HireInfoVO;
 import service.hireInfoService.HireInfoService;
@@ -46,7 +50,8 @@ public class HireInfoController extends HttpServlet {
 		String nextPage = "";
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
-		
+	    PrintWriter out = response.getWriter();
+
 		//요청할 값 얻기
 		String cname = request.getParameter("cname");
 		String divComp = request.getParameter("divComp");
@@ -73,15 +78,41 @@ public class HireInfoController extends HttpServlet {
 				vo.setWorkTime(workTime);
 				
 				his.regHireInfo(vo);
-				nextPage = request.getContextPath() + "/view/hireInfoList.jsp";
-				System.out.println(nextPage);
+				nextPage = request.getContextPath() + "/view/index.jsp";
+				System.out.println("nextPage: " + nextPage);
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
+			} else if (action.equals("/getList.do")) {
+				
+				int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+				int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+				
+				JSONArray jsonArray = new JSONArray(); // [ ]
+				
+				List<HireInfoVO> list = his.getHireInfoList(pageNum, pageSize); 
+				
+				for( HireInfoVO vo : list ) {
+					JSONObject jsonObject = new JSONObject();
+					
+					jsonObject.put("cname", vo.getCname());
+					jsonObject.put("htel", vo.getHtel());
+					jsonObject.put("divComp", vo.getDivComp());
+					jsonObject.put("homepage", vo.getHomepage());
+					jsonObject.put("jobType", vo.getJobType());
+					jsonObject.put("workTime", vo.getWorkTime());
+					jsonObject.put("legal", vo.getLegal());
+					
+					jsonArray.add(jsonObject);
+					
+				} //for
+				
+				out.print(jsonArray.toString());
+				
 			}
 			
-			
-			/*// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-			dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
-			*/			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
