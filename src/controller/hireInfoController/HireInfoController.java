@@ -78,12 +78,8 @@ public class HireInfoController extends HttpServlet {
 				vo.setWorkTime(workTime);
 				
 				his.regHireInfo(vo);
-				nextPage = request.getContextPath() + "/view/index.jsp";
+				nextPage = "/view/hireInfoList.jsp";
 				System.out.println("nextPage: " + nextPage);
-
-				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if (action.equals("/getList.do")) {
 				
@@ -111,13 +107,17 @@ public class HireInfoController extends HttpServlet {
 				
 				out.print(jsonArray.toString());
 				
+				return;
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		
+		// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+		dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+
 	}
 
 }

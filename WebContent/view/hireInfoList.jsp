@@ -57,6 +57,7 @@
 				$.ajax({
 					url: '<%=request.getContextPath()%>/hireInfo/getList.do',
 					data: {pageNum:<%=pageNum%>, pageSize:<%=pageSize%>},
+					async: false,
 					type: 'POST',
 					dataType: 'json',
 					success: function(data) {
@@ -83,12 +84,10 @@
 		</script>
 		<style type="text/css">
 			.layout {
-			  width: 1366px;
-			  height: 768px;
+			  width: 100%;
 			
 			  display: grid;
-			  grid-template-rows: repeat(3, 1fr);
-			  grid-template-columns: repeat(3, 1fr);
+			  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 			  gap: 8px;
 			}
 			.card {
@@ -220,7 +219,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="hireInfoList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/view/hireInfoList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -228,11 +227,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="hireInfoList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/view/hireInfoList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item"><a href="hireInfoList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item"><a href="${path}/view/hireInfoList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -241,7 +240,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="hireInfoList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/view/hireInfoList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}
@@ -256,10 +255,6 @@
 						</article>
 					</div>
 				</div>
-			<!-- Footer -->
-			<div id="footer">
-				<jsp:include page="../inc/footer.jsp" />
-			</div>
 		</div>
 
 		<!-- Scripts -->

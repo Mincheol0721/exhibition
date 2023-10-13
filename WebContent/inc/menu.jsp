@@ -32,7 +32,7 @@
 	</head>
 	<body>
 		<ul>
-			<li><a href="index.jsp">홈</a></li>
+			<li><a href="${path}/view/index.jsp">홈</a></li>
 			<li>
 				<a href="#">박람회안내</a>
 				<ul>
@@ -43,7 +43,14 @@
 			<li>
 				<a href="#">기업채용</a>
 				<ul>
-					<li><a href="#">채용정보</a></li>
+					<li>
+						<a href="#">채용정보
+						<i class="fas fa-angle-right"></i></a>
+						<ul>
+							<li><a href="${path}/view/hireInfoList.jsp">채용정보 확인</a></li>
+							<li><a href="${path}/view/hireInfoReg.jsp">채용정보 등록</a></li>
+						</ul>
+					</li>
 					<li><a href="#">입사지원</a></li>
 				</ul>
 			</li>

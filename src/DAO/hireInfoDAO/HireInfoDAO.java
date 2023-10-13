@@ -105,7 +105,8 @@ public class HireInfoDAO {
 		
 		try {
 			con = ds.getConnection();
-			
+			System.out.println("pageNum: " + pageNum);
+			System.out.println("pageSize: " + pageSize);
 			query = "SELECT * " + 
 					"FROM ( " + 
 					"    SELECT ROWNUM AS rn, h.* " + 

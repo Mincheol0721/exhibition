@@ -42,7 +42,7 @@
 							<header>
 								<h2>채용정보 등록</h2>
 								<hr>
-								<form action="${path}/hireInfo/reg.do">
+								<form action="${path}/hireInfo/reg.do" method="post">
 									<table border="none">
 										<tr>
 											<th>기업명</th>

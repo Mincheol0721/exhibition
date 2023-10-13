@@ -209,15 +209,13 @@
 							</article>
 						</div>
 					</section>
-
+				
 				</div>
-
-			<!-- Footer -->
+				<!-- Footer -->
 				<div id="footer">
 					<jsp:include page="../inc/footer.jsp" />
 				</div>
-
-		</div>
+			</div>
 
 		<!-- Scripts -->
 			<script src="${path}/assets/js/jquery.min.js"></script>
