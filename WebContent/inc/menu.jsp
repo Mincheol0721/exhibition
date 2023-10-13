@@ -75,7 +75,7 @@
 				<a href="#">직업체험</a>
 				<ul>
 					<li><a href="#">직업체험</a></li>
-					<li><a href="#">부대행사</a></li>
+					<li><a href="${path}/view/eventList.jsp">부대행사</a></li>
 				</ul>
 			</li>
 			<li>
