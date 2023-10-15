@@ -8,8 +8,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cname = "마이크로소프트";
-// 	String cname = request.getParameter("cname");
+ 	String cname = request.getParameter("cname");
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
 		
@@ -21,7 +20,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>MY 채용정보</title>
+		<title>채용정보 상세보기</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -62,7 +61,7 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2>MY 채용정보</h2>
+								<h2>채용정보 상세보기</h2>
 								<br>
 								<br>
 								<form action="${path}/view/modHireInfo.jsp" method="post">

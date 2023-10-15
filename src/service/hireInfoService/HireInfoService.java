@@ -27,4 +27,12 @@ public class HireInfoService {
 		HireInfoVO vo = dao.getHireInfo(cname);
 		return vo;
 	}
+
+	public void updateHireInfo(HireInfoVO vo) {
+		dao.updateHireInfo(vo);
+	}
+
+	public void delHireInfo(String cname) {
+		dao.delHireInfo(cname);
+	}
 }

@@ -241,6 +241,7 @@
                                         <select id="jobtype" name="jobtype">
                                         	<option value="">모집직종</option>
                                         	<option value="경영·행정·사무직">경영·행정·사무직</option>
+											<option value="IT·소프트웨어">IT·소프트웨어</option>
                                         	<option value="교육·법률">교육·법률</option>
                                         	<option value="보건·의료직">보건·의료직</option>
                                         	<option value="예술·디자인·방송직">예술·디자인·방송직</option>

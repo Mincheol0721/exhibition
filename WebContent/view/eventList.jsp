@@ -61,7 +61,7 @@
 					dataType: 'json',
 					success: function(data) {
 						$.each(data, function(index, vo) {
-							$('.layout').append('<div class="myCard">' 
+							$('.layout').append('<div class="myCard" onclick="location.href=\'${path}/view/viewEvent.jsp?no=' + vo.no + '\'">' 
 													+ '<div class="innerCard">'
 														+ '<div class="frontSide"> '
 															+ '<p class="title"> ' + vo.title + ' </p>'

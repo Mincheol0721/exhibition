@@ -6,9 +6,8 @@
 
 <% 
 	request.setCharacterEncoding("UTF-8"); 
-	String cname = request.getParameter("cname");
-	System.out.println("cname: " + cname);
 	//id값(cname or cno) 받아오기
+	String cname = request.getParameter("cname");
 	
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
@@ -32,7 +31,10 @@
 				var cname = '<%=vo.getCname()%>';
 				
 				if(cname != 'null' || cname != '') {
-					
+					$('#divComp').val('<%=vo.getDivComp()%>').prop("selected",true);
+					$('#jobType').val('<%=vo.getJobType()%>').prop("selected",true);
+					$('#workTime').val('<%=vo.getWorkTime()%>').prop("selected",true);
+					$('#legal').val('<%=vo.getLegal()%>').prop("selected",true);
 				}
 				
 			});
@@ -79,7 +81,7 @@
 										<tr>
 											<th>사업체구분</th>
 											<td>
-												<select name="divComp">
+												<select id="divComp" name="divComp">
 													<option value="">사업체선택</option>
 													<option value="일반기업">일반기업</option>
 													<option value="공공기관">공공기관</option>
@@ -95,9 +97,10 @@
 										<tr>
 											<th>모집직종</th>
 											<td>
-												<select id="jobtype" name="jobType">
+												<select id="jobType" name="jobType">
 		                                        	<option value="">직종선택</option>
 		                                        	<option value="경영·행정·사무직">경영·행정·사무직</option>
+		                                        	<option value="IT·소프트웨어">IT·소프트웨어</option>
 		                                        	<option value="교육·법률">교육·법률</option>
 		                                        	<option value="보건·의료직">보건·의료직</option>
 		                                        	<option value="예술·디자인·방송직">예술·디자인·방송직</option>
@@ -113,7 +116,7 @@
 										<tr>
 											<th>근무시간</th>
 											<td>
-												<select name="workTime">
+												<select id="workTime" name="workTime">
 													<option value="">시간선택</option>
 													<option value="전일제">전일제</option>
 													<option value="반일제">반일제</option>
@@ -125,7 +128,7 @@
 										<tr>
 											<th>근무지역</th>
 											<td>
-												<select name="legal">
+												<select id="legal" name="legal">
 													<option value="">지역선택</option>
 													<option value="부산전체">부산전체</option>
 													<option value="중구">중구</option>

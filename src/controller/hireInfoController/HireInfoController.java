@@ -109,6 +109,19 @@ public class HireInfoController extends HttpServlet {
 				
 				return;
 			} else if(action.equals("/mod.do")) {
+				vo.setCname(cname); vo.setDivComp(divComp); vo.setHomepage(homepage);
+				vo.setHtel(htel); vo.setJobType(jobType); vo.setLegal(legal); vo.setWorkTime(workTime);
+				
+				his.updateHireInfo(vo);
+				
+				nextPage = "/view/myHireInfo.jsp";
+				System.out.println("nextPage: " + nextPage);
+				
+			} else if(action.equals("/del.do")) {
+				his.delHireInfo(cname);
+				
+				nextPage = "/view/hireInfoList.jsp";
+				System.out.println("nextPage: " + nextPage);
 				
 			}
 			

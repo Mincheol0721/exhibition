@@ -192,6 +192,45 @@ public class HireInfoDAO {
 		}
 		
 	}
+
+	public void updateHireInfo(HireInfoVO vo) {
+		try {
+			con = ds.getConnection();
+			query = "UPDATE hireinfo SET htel=?, divcomp=?, homepage=?, jobtype=?, worktime=?, legal=? WHERE cname=?";
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, vo.getHtel());
+			pstmt.setString(2, vo.getDivComp());
+			pstmt.setString(3, vo.getHomepage());
+			pstmt.setString(4, vo.getJobType());
+			pstmt.setString(5, vo.getWorkTime());
+			pstmt.setString(6, vo.getLegal());
+			pstmt.setString(7, vo.getCname());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("HireInfoDAO내부 updateHireInfo에서 예외 발생: " + e);
+		} finally {
+			freeResource();
+		}
+	}
+
+	public void delHireInfo(String cname) {
+		
+		try {
+			con = ds.getConnection();
+			query = "DELETE FROM hireinfo WHERE cname='" + cname + "'";
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("HireInfoDAO내부 delHireInfo에서 예외 발생: " + e);
+		} finally {
+			freeResource();
+		}
+	}
 	
 	//DB에 접속하여 cmember테이블에서 cname이 일치하는 행의 데이터를 가져오는 메소드
 	/*public CMemberVO getCmemberInfo(String cname) {
