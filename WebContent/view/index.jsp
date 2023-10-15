@@ -25,7 +25,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">취업 박람회</a></h1>
 								<hr />
 								<p>우수한 기업들과 만나고 새로운 기회를 발견하세요!</p>
 							</header>

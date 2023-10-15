@@ -140,10 +140,10 @@ public class HireInfoDAO {
 	}//getHireInfoList
 
 	//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
-	public HireInfoVO getHireInfo(String cno) {
+	public HireInfoVO getHireInfo(String cname) {
 		try {
 			con = ds.getConnection();
-			query = "select * from hireInfo where cname=(select cname from cmember where cno='" + cno + "')";
+			query = "select * from hireInfo where cname='" + cname + "'";
 			
 			pstmt = con.prepareStatement(query);
 			
@@ -168,6 +168,7 @@ public class HireInfoDAO {
 		return vo;
 	}
 
+	//DB에 접속하여 채용정보를 추가하는 메소드
 	public void insertHireInfo(HireInfoVO vo) {
 		try {
 			con = ds.getConnection();
@@ -192,5 +193,27 @@ public class HireInfoDAO {
 		
 	}
 	
+	//DB에 접속하여 cmember테이블에서 cname이 일치하는 행의 데이터를 가져오는 메소드
+	/*public CMemberVO getCmemberInfo(String cname) {
+		
+		try {
+			con = ds.getConnection();
+			query = "SELECT * FROM cMember WHERE cname='" + cname + "'";
+			
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				memtype = rs.getString("memtype");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("HireInfoDAO내부 getMemtype에서 예외 발생: " + e);
+		} finally {
+			freeResource();
+		}
+		
+		return vo;
+	}*/
 	
 }

@@ -77,6 +77,6 @@ public class HireInfoVO {
 
 	public void setLegal(String legal) {
 		this.legal = legal;
-	};
+	}
 	
 }

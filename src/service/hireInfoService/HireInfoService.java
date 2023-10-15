@@ -22,4 +22,9 @@ public class HireInfoService {
 		
 		return list;
 	}
+
+	public HireInfoVO getHireInfo(String cname) {
+		HireInfoVO vo = dao.getHireInfo(cname);
+		return vo;
+	}
 }

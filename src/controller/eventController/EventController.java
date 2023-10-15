@@ -52,7 +52,7 @@ public class EventController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 	    PrintWriter out = response.getWriter();
 	    
-	    int no = Integer.parseInt( request.getParameter("no") );
+	    int no = 0;
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String ipart = request.getParameter("ipart");
@@ -72,8 +72,8 @@ public class EventController extends HttpServlet {
 				//요청한 값 얻기
 			    int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 			    int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-//				System.out.println("con pagenum: " + pageNum);
-//				System.out.println("con pagesize: " + pageSize);
+				System.out.println("con pagenum: " + pageNum);
+				System.out.println("con pagesize: " + pageSize);
 				
 				JSONArray jsonArray = new JSONArray(); // [ ]
 				
@@ -102,6 +102,8 @@ public class EventController extends HttpServlet {
 				return;
 				
 			} else if(action.equals("/modEvent.do")) {
+				no = Integer.parseInt( request.getParameter("no") );
+				
 				vo.setNo(no); vo.setTitle(title); vo.setContent(content); vo.setIpart(ipart); vo.setReqTime(reqTime); 
 				vo.setStartTime(startTime); vo.setEndTime(endTime); vo.setService(service); vo.setLocate(locate);
 				
@@ -109,11 +111,14 @@ public class EventController extends HttpServlet {
 				
 				nextPage = "/view/eventList.jsp";
 				System.out.println("nextPage: " + nextPage);
+				
 			} else if(action.equals("/delEvent.do")) {
+				no = Integer.parseInt( request.getParameter("no") );
 				es.delEvent(no);
 				
 				nextPage = "/view/eventList.jsp";
 				System.out.println("nextPage: " + nextPage);
+				
 			} else if(action.equals("/reg.do")) {
 				System.out.println("action값: " + action);
 				
@@ -130,7 +135,6 @@ public class EventController extends HttpServlet {
 				nextPage = "/view/eventList.jsp";
 				System.out.println("nextPage: " + nextPage);
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

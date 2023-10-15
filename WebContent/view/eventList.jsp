@@ -102,7 +102,7 @@
 			  background-color: transparent;
 			  max-width: 720px;
 			  width: 70%;
-			  height: 240px;
+			  height: 320px;
 			  margin: 10px auto;
 			  perspective: 1000px;
 			}
@@ -247,7 +247,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">부산 취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">부산 취업 박람회</a></h1>
 							</header>
 						</div>
 
@@ -336,16 +336,6 @@
 					</div>
 				</div>
 		</div>
-
-		<!-- Scripts -->
-			<script src="${path}/assets/js/jquery.min.js"></script>
-			<script src="${path}/assets/js/jquery.dropotron.min.js"></script>
-			<script src="${path}/assets/js/jquery.scrolly.min.js"></script>
-			<script src="${path}/assets/js/jquery.scrollex.min.js"></script>
-			<script src="${path}/assets/js/browser.min.js"></script>
-			<script src="${path}/assets/js/breakpoints.min.js"></script>
-			<script src="${path}/assets/js/util.js"></script>
-			<script src="${path}/assets/js/main.js"></script>
 
 	</body>
 </html>

@@ -108,6 +108,8 @@ public class HireInfoController extends HttpServlet {
 				out.print(jsonArray.toString());
 				
 				return;
+			} else if(action.equals("/mod.do")) {
+				
 			}
 			
 		} catch (Exception e) {

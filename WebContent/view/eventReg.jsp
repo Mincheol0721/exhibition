@@ -12,7 +12,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<noscript><link rel="stylesheet" href="/assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
@@ -23,7 +23,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">부산 취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">부산 취업 박람회</a></h1>
 							</header>
 						</div>
 

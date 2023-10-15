@@ -1,18 +1,42 @@
+<%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
+<%@page import="VO.hireInfoVO.HireInfoVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% request.setCharacterEncoding("UTF-8"); %>
+<% 
+	request.setCharacterEncoding("UTF-8"); 
+	String cname = request.getParameter("cname");
+	System.out.println("cname: " + cname);
+	//id값(cname or cno) 받아오기
+	
+	HireInfoVO vo = null;
+	HireInfoDAO dao = new HireInfoDAO();
+	
+	vo = dao.getHireInfo(cname);
+	
+%>
 <c:set var="path"  value="${pageContext.request.contextPath}"  /> 
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>채용정보 등록</title>
+		<title>채용정보 수정</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var cname = '<%=vo.getCname()%>';
+				
+				if(cname != 'null' || cname != '') {
+					
+				}
+				
+			});
+		</script>
 	</head>
 	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
@@ -40,17 +64,17 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2>채용정보 등록</h2>
+								<h2>채용정보 수정</h2>
 								<hr>
-								<form action="${path}/hireInfo/reg.do" method="post">
+								<form action="${path}/hireInfo/mod.do" method="post">
 									<table border="none">
 										<tr>
 											<th>기업명</th>
-											<td><input type="text" name="cname"></td>
+											<td><input type="text" name="cname" value="<%=vo.getCname()%>"></td>
 										</tr>
 										<tr>
 											<th>전화번호</th>
-											<td><input type="tel" name="htel"></td>
+											<td><input type="tel" name="htel" value="<%=vo.getHtel()%>"></td>
 										</tr>
 										<tr>
 											<th>사업체구분</th>
@@ -66,7 +90,7 @@
 										</tr>
 										<tr>
 											<th>홈페이지링크</th>
-											<td><input type="text" name="homepage"></td>
+											<td><input type="text" name="homepage" value="<%=vo.getHomepage()%>"></td>
 										</tr>
 										<tr>
 											<th>모집직종</th>
@@ -124,7 +148,6 @@
 												</select>
 											</td>
 										</tr>
-										
 									</table>
 									<input type="submit" value="등록">
 									<input type="reset" value="다시작성">
