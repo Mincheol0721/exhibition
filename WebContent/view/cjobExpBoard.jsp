@@ -7,11 +7,6 @@
 <c:set var="path" value="<%=request.getContextPath()%>" />
 
 <!DOCTYPE HTML>
-<!--
-	Helios by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 	<head>
 		<title>No Sidebar - Helios by HTML5 UP</title>
@@ -46,22 +41,23 @@
 
 					<div class="container">
 						<article id="main" class="special">
+							
+							
+							<c:forEach var="cjobExpVO" items="${requestScope.expolist }">
 							<header>
-								<h2><a href="#">No Sidebar</a></h2>
-								<p>
-									Morbi convallis lectus malesuada sed fermentum dolore amet
+								<h2><a href="#">${cjobExpVO.title}</a></h2>
+								<p>                            
+									${cjobExpVO.content}
 								</p>
+							
 							</header>
 							<a href="#" class="image featured"><img src="${path}/images/pic06.jpg" alt="" /></a>
-							<p>
-								Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-								posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-								lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-								consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-								interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-								natoque aenean scelerisque vel lacinia mollis quam sodales congue.
-							</p>
+							<p>대상:  ${cjobExpVO.iPart}</p> 
+							<p>장소: ${cjobExpVO.locate}</p> 
+							<p>이용시간:  ${cjobExpVO.startTime}~${cjobExpVO.endTime}</p>
 							
+							<button type="button" class="btn text-white" style="background-color: rgb(0, 0, 255);">신청하러 가기</button>
+							</c:forEach>
 							
 						</article>
 						<hr />

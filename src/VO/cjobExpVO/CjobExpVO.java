@@ -28,6 +28,9 @@ public class CjobExpVO {
 		this.fileName = fileName;
 		this.fileRealName = fileRealName;
 	}
+	public CjobExpVO() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getCname() {
 		return cname;
 	}

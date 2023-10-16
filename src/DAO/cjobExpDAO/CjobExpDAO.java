@@ -3,6 +3,8 @@ package DAO.cjobExpDAO;
 import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.naming.Context;
@@ -24,9 +26,10 @@ public class CjobExpDAO {
 	
 	//커넥션풀 생성 후 커넥션 객체 얻는 생성자
 	public CjobExpDAO() {
-		try {
+		try {		
 			Context ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+			Context envContext = (Context) ctx.lookup("java:/comp/env");
+			ds = (DataSource) envContext.lookup("jdbc/oracle2");
 			
 		} catch (Exception e) {
 			System.out.println("DB연결 실패! - "+ e);
@@ -41,9 +44,9 @@ public class CjobExpDAO {
 	}
 
 	//모든 직업체험조회
-		public Vector getcjobExpList() {
+		public ArrayList getcjobExpList() {
 			
-			Vector vector = new Vector();
+			ArrayList list = new ArrayList();
 			
 			//조회된 한행의 차량정보를 저장할 CarListVo객체의 참조변수
 			CjobExpVO cjobExpVO = null;
@@ -74,7 +77,7 @@ public class CjobExpDAO {
 							rs.getString("fileRealName"));
 							
 					
-					vector.add(cjobExpVO);
+					list.add(cjobExpVO);
 				}
 			}catch (Exception e) {
 				System.out.println("getAllCarList메소드에서 SQL오류 : "+ e);
@@ -83,7 +86,7 @@ public class CjobExpDAO {
 				closeResource();
 			}
 			
-			return vector;
+			return list;
 		}
 
 
