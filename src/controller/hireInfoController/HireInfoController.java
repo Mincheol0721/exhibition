@@ -2,6 +2,8 @@ package controller.hireInfoController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -51,15 +53,19 @@ public class HireInfoController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 	    PrintWriter out = response.getWriter();
-
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	    
 		//요청할 값 얻기
 		String cname = request.getParameter("cname");
 		String divComp = request.getParameter("divComp");
 		String htel = request.getParameter("htel");
 		String homepage = request.getParameter("homepage");
-		String jobType = request.getParameter("jobType");
+		String jobtype = request.getParameter("jobtype");
 		String workTime = request.getParameter("workTime");
 		String legal = request.getParameter("legal");
+		String appType = request.getParameter("appType");
+		String appstart = request.getParameter("appstart");
+		String appexpire = request.getParameter("appexpire");
 		
 		String action = request.getPathInfo();
 		
@@ -73,9 +79,12 @@ public class HireInfoController extends HttpServlet {
 				vo.setDivComp(divComp);
 				vo.setHomepage(homepage);
 				vo.setHtel(htel);
-				vo.setJobType(jobType);
+				vo.setJobtype(jobtype);
 				vo.setLegal(legal);
 				vo.setWorkTime(workTime);
+				vo.setAppType(appType);
+				vo.setAppstart(appstart); 
+				vo.setAppexpire(appexpire);
 				
 				his.regHireInfo(vo);
 				nextPage = "/view/hireInfoList.jsp";
@@ -97,9 +106,12 @@ public class HireInfoController extends HttpServlet {
 					jsonObject.put("htel", vo.getHtel());
 					jsonObject.put("divComp", vo.getDivComp());
 					jsonObject.put("homepage", vo.getHomepage());
-					jsonObject.put("jobType", vo.getJobType());
+					jsonObject.put("jobtype", vo.getJobtype());
 					jsonObject.put("workTime", vo.getWorkTime());
 					jsonObject.put("legal", vo.getLegal());
+					jsonObject.put("appType", vo.getAppType());
+					jsonObject.put("appstart", vo.getAppstart());
+					jsonObject.put("appexpire", vo.getAppexpire());
 					
 					jsonArray.add(jsonObject);
 					
@@ -110,7 +122,8 @@ public class HireInfoController extends HttpServlet {
 				return;
 			} else if(action.equals("/mod.do")) {
 				vo.setCname(cname); vo.setDivComp(divComp); vo.setHomepage(homepage);
-				vo.setHtel(htel); vo.setJobType(jobType); vo.setLegal(legal); vo.setWorkTime(workTime);
+				vo.setHtel(htel); vo.setJobtype(jobtype); vo.setLegal(legal); vo.setWorkTime(workTime);
+				vo.setAppType(appType); vo.setAppstart(appstart); vo.setAppexpire(appexpire);
 				
 				his.updateHireInfo(vo);
 				

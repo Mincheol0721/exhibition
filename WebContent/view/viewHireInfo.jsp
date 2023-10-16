@@ -85,7 +85,7 @@
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">모집 직종</th>
-											<td><%=vo.getJobType()%></td>
+											<td><%=vo.getJobtype()%></td>
 											<th style="border:1px solid gray;">전화번호</th>
 											<td><%=vo.getHtel()%></td>
 										</tr>
@@ -95,7 +95,14 @@
 											<th style="border:1px solid gray;">근무시간</th>
 											<td><%=vo.getWorkTime()%></td>
 										</tr>
+										<tr style="border:1px solid gray;">
+											<th style="border:1px solid gray;">모집전형</th>
+											<td><%=vo.getAppType()%>접수</td>
+											<th style="border:1px solid gray;">접수기간</th>
+											<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%></td>
+										</tr>
 									</table>
+									<input type="button" value="글목록" onclick="location.href='${path}/view/hireInfoList.jsp'">
 									<button type="submit">수정하기</button>
 									<button type="button" onclick="location.href='${path}/hireInfo/del.do?cname=<%=cname%>'">삭제하기</button>
 								</form>

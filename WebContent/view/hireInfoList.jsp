@@ -70,7 +70,7 @@
 														+ '<p class="card__description">'
 															+ '<ul>'
 																+ '<li>사업체구분: ' + vo.divComp + '</li>'
-																+ '<li>모집직종: ' + vo.jobType + '</li>'
+																+ '<li>모집직종: ' + vo.jobtype + '</li>'
 																+ '<li>근무시간: ' + vo.workTime + '</li>'
 																+ '<li>근무지역: ' + vo.legal + '</li>'
 																+ '<li>전화번호: ' + vo.htel+ '</li>'
@@ -116,6 +116,7 @@
 			.card:hover {
 			  transform: scale(1.05);
 			  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+			  cursor: pointer;
 			}
 			
 			.card__content {

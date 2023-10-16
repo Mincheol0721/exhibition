@@ -1971,6 +1971,7 @@ input, select, textarea {
 		form input[type="email"]:focus,
 		form input[type="password"]:focus,
 		form input[type="tel"]:focus,
+		form input[type="date"]:focus,
 		form select:focus,
 		form textarea:focus {
 			background: #fff;
@@ -1982,6 +1983,7 @@ input, select, textarea {
 	form input[type="password"],
 	form input[type="tel"],
 	form input[type="radio"],
+	form input[type="date"],
 	form select {
 		line-height: 1em;
 	}

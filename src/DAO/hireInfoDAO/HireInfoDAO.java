@@ -113,7 +113,8 @@ public class HireInfoDAO {
 					"    FROM hireinfo h " + 
 					"    WHERE ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
 					" ) " + 
-					" WHERE rn >= ((" + pageNum + " - 1) * " + pageSize + ") + 1";
+					" WHERE rn >= ((" + pageNum + " - 1) * " + pageSize + ") + 1 " +
+					" ORDER BY appexpire DESC";
 			
 			pstmt = con.prepareStatement(query);
 			
@@ -124,9 +125,12 @@ public class HireInfoDAO {
 									 rs.getString("htel"), 
 									 rs.getString("divComp"), 
 									 rs.getString("homepage"), 
-									 rs.getString("jobType"), 
+									 rs.getString("jobtype"), 
 									 rs.getString("workTime"), 
-									 rs.getString("legal") );		
+									 rs.getString("legal"),
+									 rs.getString("appType"),
+									 rs.getString("appstart"),
+									 rs.getString("appexpire"));		
 				list.add(vo);
 			}
 			
@@ -154,9 +158,12 @@ public class HireInfoDAO {
 									 rs.getString("htel"), 
 									 rs.getString("divComp"), 
 									 rs.getString("homepage"), 
-									 rs.getString("jobType"), 
+									 rs.getString("jobtype"), 
 									 rs.getString("workTime"), 
-									 rs.getString("legal") );
+									 rs.getString("legal"),
+									 rs.getString("appType"),
+									 rs.getString("appstart"),
+									 rs.getString("appexpire"));
 			}
 			
 		} catch (Exception e) {
@@ -172,16 +179,20 @@ public class HireInfoDAO {
 	public void insertHireInfo(HireInfoVO vo) {
 		try {
 			con = ds.getConnection();
-			query = "INSERT INTO hireInfo (cname, htel, divcomp, homepage, jobtype, workTime, legal)  VALUES (?, ?, ?, ?, ?, ?, ?)";
+			query = "INSERT INTO hireInfo (cname, htel, divcomp, homepage, jobtype, workTime, legal, appType, appstart, appexpire)  "
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, TO_DATE(?, 'YYYY-MM-DD'), TO_DATE(?, 'YYYY-MM-DD'))";
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, vo.getCname());
 			pstmt.setString(2, vo.getHtel());
 			pstmt.setString(3, vo.getDivComp());
 			pstmt.setString(4, vo.getHomepage());
-			pstmt.setString(5, vo.getJobType());
+			pstmt.setString(5, vo.getJobtype());
 			pstmt.setString(6, vo.getWorkTime());
 			pstmt.setString(7, vo.getLegal());
+			pstmt.setString(8, vo.getAppType());
+			pstmt.setString(9, vo.getAppstart());
+			pstmt.setString(10, vo.getAppexpire());
 			
 			pstmt.executeUpdate();
 			
@@ -196,16 +207,18 @@ public class HireInfoDAO {
 	public void updateHireInfo(HireInfoVO vo) {
 		try {
 			con = ds.getConnection();
-			query = "UPDATE hireinfo SET htel=?, divcomp=?, homepage=?, jobtype=?, worktime=?, legal=? WHERE cname=?";
+			query = "UPDATE hireinfo SET htel=?, divcomp=?, homepage=?, jobtype=?, worktime=?, legal=?, appstart=TO_DATE(?, 'YYYY-MM-DD'), appexpire=TO_DATE(?, 'YYYY-MM-DD') WHERE cname=?";
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, vo.getHtel());
 			pstmt.setString(2, vo.getDivComp());
 			pstmt.setString(3, vo.getHomepage());
-			pstmt.setString(4, vo.getJobType());
+			pstmt.setString(4, vo.getJobtype());
 			pstmt.setString(5, vo.getWorkTime());
 			pstmt.setString(6, vo.getLegal());
-			pstmt.setString(7, vo.getCname());
+			pstmt.setString(7, vo.getAppstart());
+			pstmt.setString(8, vo.getAppexpire());
+			pstmt.setString(9, vo.getCname()); 
 			
 			pstmt.executeUpdate();
 			

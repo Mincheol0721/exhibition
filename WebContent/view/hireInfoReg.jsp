@@ -1,8 +1,14 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<% request.setCharacterEncoding("UTF-8"); %>
+<% 
+	request.setCharacterEncoding("UTF-8"); 
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+// 	System.out.println("date: " + sdf.format(new Date()));
+%>
 <c:set var="path"  value="${pageContext.request.contextPath}"  /> 
 
 <!DOCTYPE html>
@@ -11,8 +17,28 @@
 		<title>채용정보 등록</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="${path}/assets/css/main.css" />
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				var appstart = $('#appstart');
+				
+				appstart.on('change', function() {
+					$('#appexpire').attr('min', appstart.val());
+				});
+			});
+		</script>
+		<style type="text/css">
+			input[type="date"] {
+				display: inline-block;
+				border: 0;
+				background: #fafafa;
+				width: 28%;
+				border-radius: 0.5em;
+				border: solid 1px #E5E5E5;
+				padding: 1em;
+			}
+		</style>
 	</head>
 	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
@@ -71,9 +97,10 @@
 										<tr>
 											<th>모집직종</th>
 											<td>
-												<select id="jobtype" name="jobType">
+												<select id="jobtype" name="jobtype">
 		                                        	<option value="">직종선택</option>
 		                                        	<option value="경영·행정·사무직">경영·행정·사무직</option>
+		                                        	<option value="IT·소프트웨어">IT·소프트웨어</option>
 		                                        	<option value="교육·법률">교육·법률</option>
 		                                        	<option value="보건·의료직">보건·의료직</option>
 		                                        	<option value="예술·디자인·방송직">예술·디자인·방송직</option>
@@ -122,6 +149,24 @@
 													<option value="기장군">기장군</option>
 													<option value="기타">기타</option>
 												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>모집전형</th>
+											<td>
+												<select name="appType">
+													<option value="">전형선택</option>
+													<option value="서류">서류</option>
+													<option value="면접">면접</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>모집기간</th>
+											<td>
+												<input type="date" value="<%=sdf.format(new Date())%>" name="appstart" id="appstart">
+												&nbsp;&nbsp;~&nbsp;&nbsp;
+												<input type="date" name="appexpire" id="appexpire">
 											</td>
 										</tr>
 										

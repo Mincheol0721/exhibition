@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
 <%@page import="VO.hireInfoVO.HireInfoVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -13,6 +14,8 @@
 	HireInfoDAO dao = new HireInfoDAO();
 	
 	vo = dao.getHireInfo(cname);
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 %>
 <c:set var="path"  value="${pageContext.request.contextPath}"  /> 
@@ -30,15 +33,29 @@
 			$(function() {
 				var cname = '<%=vo.getCname()%>';
 				
+<%-- 				console.log('apptype: ', '<%=vo.getAppType()%>'); --%>
+				
 				if(cname != 'null' || cname != '') {
 					$('#divComp').val('<%=vo.getDivComp()%>').prop("selected",true);
-					$('#jobType').val('<%=vo.getJobType()%>').prop("selected",true);
+					$('#jobtype').val('<%=vo.getJobtype()%>').prop("selected",true);
 					$('#workTime').val('<%=vo.getWorkTime()%>').prop("selected",true);
 					$('#legal').val('<%=vo.getLegal()%>').prop("selected",true);
+					$('#appType').val('<%=vo.getAppType()%>').prop("selected",true);
 				}
 				
 			});
 		</script>
+		<style type="text/css">
+			input[type="date"] {
+				display: inline-block;
+				border: 0;
+				background: #fafafa;
+				width: 28%;
+				border-radius: 0.5em;
+				border: solid 1px #E5E5E5;
+				padding: 1em;
+			}
+		</style>
 	</head>
 	<body class="no-sidebar is-preload">
 		<div id="page-wrapper">
@@ -97,7 +114,7 @@
 										<tr>
 											<th>모집직종</th>
 											<td>
-												<select id="jobType" name="jobType">
+												<select id="jobtype" name="jobtype">
 		                                        	<option value="">직종선택</option>
 		                                        	<option value="경영·행정·사무직">경영·행정·사무직</option>
 		                                        	<option value="IT·소프트웨어">IT·소프트웨어</option>
@@ -151,8 +168,26 @@
 												</select>
 											</td>
 										</tr>
+										<tr>
+											<th>모집전형</th>
+											<td>
+												<select name="appType" id="appType">
+													<option value="">전형선택</option>
+													<option value="서류">서류</option>
+													<option value="면접">면접</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>모집기간</th>
+											<td style="justify-content: space-between; text-align: center;">
+												<input type="date" value="<%=vo.getAppstart().substring(0, 10)%>" name="appstart" id="appstart">
+											 	&nbsp;&nbsp;~&nbsp;&nbsp;
+												<input type="date" value="<%=vo.getAppexpire().substring(0, 10)%>" name="appexpire" id="appexpire">
+											</td>
+										</tr>
 									</table>
-									<input type="submit" value="등록">
+									<input type="submit" value="수정완료">
 									<input type="reset" value="다시작성">
 								</form>
 							</header>

@@ -28,9 +28,13 @@
 		<style type="text/css">
 		td {
 			text-align: left;
+			border: 1px solid gray;
+			border-collapse: collapse;
 		}
 		th {
 			background-color: lightgray;
+			border: 1px solid gray;
+			border-collapse: collapse;
 		}
 		</style>
 	</head>
@@ -64,31 +68,31 @@
 								<hr>
 									<input type="hidden" name="no" value=<%=vo.getNo()%>>
 									<table border="none">
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th>행사명</th>
 											<td style="padding-left: 20px;"><%=vo.getTitle()%></td>
 										</tr>
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th style="vertical-align: middle;">내용</th>
 											<td style="padding-left: 20px;"><%=vo.getContent()%></td>
 										</tr>
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th>대상</th>
 											<td style="padding-left: 20px;"><%=vo.getIpart()%></td>
 										</tr>
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th>소요시간</th>
 											<td style="padding-left: 20px;"><%=vo.getReqTime()%></td>
 										</tr>
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th>이용시간</th>
 											<td style="padding-left: 20px;"><%=vo.getStartTime()%> ~ <%=vo.getEndTime()%></td>
 										</tr>
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th>제공서비스</th>
 											<td style="padding-left: 20px;"><%=vo.getService()%></td>
 										</tr>
-										<tr>
+										<tr style="border: 1px solid lightgray; border-collapse: collapse;">
 											<th>장소</th>
 											<td style="padding-left: 20px;"><%=vo.getLocate()%></td>
 										</tr>
