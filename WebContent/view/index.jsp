@@ -6,6 +6,9 @@
 
 <c:set var="path" value="<%=request.getContextPath()%>" />
 
+<%-- 회원정보 추가, 회원정보 수정, 회원정보 삭제에 성공하면  request에 바인딩된 msg에 관한 성공메세지를 조건에 따라 결과를 보여주기 위한 코드 --%>    
+
+
 <!DOCTYPE html>
 <html>
 	<head>
