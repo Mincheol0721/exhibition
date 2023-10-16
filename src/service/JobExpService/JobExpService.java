@@ -1,13 +1,13 @@
-package service.cjobExpService;
+package service.JobExpService;
 
 import java.util.ArrayList;
 
-import DAO.cjobExpDAO.CjobExpDAO;
+import DAO.JobExpDAO.JobExpDAO;
 
 //부장
-public class CjobExpService {
+public class JobExpService {
 	
-	CjobExpDAO cjobExpDAO = new CjobExpDAO();
+	JobExpDAO cjobExpDAO = new JobExpDAO();
 	
 	public ArrayList getcjobExpListSerivce() {
 		return cjobExpDAO.getcjobExpList();

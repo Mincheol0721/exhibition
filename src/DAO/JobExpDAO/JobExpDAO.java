@@ -1,4 +1,4 @@
-package DAO.cjobExpDAO;
+package DAO.JobExpDAO;
 
 import java.sql.Connection; 
 import java.sql.PreparedStatement;
@@ -11,13 +11,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import VO.cjobExpVO.CjobExpVO;
+import VO.JobExpVO.cJobExpVO;
 
 
 
 
 
-public class CjobExpDAO {
+public class JobExpDAO {
 
 	Connection con;
 	PreparedStatement pstmt;
@@ -25,7 +25,7 @@ public class CjobExpDAO {
 	DataSource ds;
 	
 	//커넥션풀 생성 후 커넥션 객체 얻는 생성자
-	public CjobExpDAO() {
+	public JobExpDAO() {
 		try {		
 			Context ctx = new InitialContext();
 			Context envContext = (Context) ctx.lookup("java:/comp/env");
@@ -49,7 +49,7 @@ public class CjobExpDAO {
 			ArrayList list = new ArrayList();
 			
 			//조회된 한행의 차량정보를 저장할 CarListVo객체의 참조변수
-			CjobExpVO cjobExpVO = null;
+			cJobExpVO cjobExpVO = null;
 			
 			try {
 				//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
@@ -65,7 +65,7 @@ public class CjobExpDAO {
 				//CarListVo객체를 Vector배열에 추가 하여 담습니다.
 				while (rs.next()) {
 					
-					cjobExpVO = new CjobExpVO(rs.getString("cname"), 
+					cjobExpVO = new cJobExpVO(rs.getString("cname"), 
 							rs.getString("title"), 
 							rs.getString("content"), 
 							rs.getString("iPart"), 

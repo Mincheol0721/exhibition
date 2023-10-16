@@ -45,7 +45,7 @@
 							
 							<c:forEach var="cjobExpVO" items="${requestScope.expolist }">
 							<header>
-								<h2><a href="#">${cjobExpVO.title}</a></h2>
+								<h2>${cjobExpVO.title}</a></h2>
 								<p>                            
 									${cjobExpVO.content}
 								</p>
@@ -56,7 +56,7 @@
 							<p>장소: ${cjobExpVO.locate}</p> 
 							<p>이용시간:  ${cjobExpVO.startTime}~${cjobExpVO.endTime}</p>
 							
-							<button type="button" class="btn text-white" style="background-color: rgb(0, 0, 255);">신청하러 가기</button>
+							<button type="button" class="btn text-white" style="background-color: rgb(0, 0, 255);"  onClick="location.href='${path}/cjobExp/JobExpReg.do'">신청하러 가기</button>
 							</c:forEach>
 							
 						</article>

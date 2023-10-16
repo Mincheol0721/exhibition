@@ -1,4 +1,4 @@
-package controller.cjobExpController;
+package controller.JobExpController;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import VO.cjobExpVO.CjobExpVO;
-import service.cjobExpService.CjobExpService;
+import VO.JobExpVO.cJobExpVO;
+import service.JobExpService.JobExpService;
 
 
 @WebServlet("/cjobExp/*")
-public class CjobExpController extends HttpServlet {
+public class JobExpController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,8 +36,8 @@ public class CjobExpController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("2단계 요청 주소: "+action);
 		
-		CjobExpService cjobExpService = new CjobExpService();
-		CjobExpVO cjobExpVO = new CjobExpVO();
+		JobExpService cjobExpService = new JobExpService();
+		cJobExpVO cjobExpVO = new cJobExpVO();
 		String nextPage = null;
 				
 		if(action == null || action.equals("/cjobExpBoard.do")) {
@@ -49,8 +49,19 @@ public class CjobExpController extends HttpServlet {
 			
 			request.setAttribute("expolist", expolist);
 			
-			nextPage="/view/cjobExpBoard.jsp";
+			nextPage="/view/JobExpBoard.jsp";
 			
+		}else if(action.equals("/JobExpReg.do")) {
+			System.out.println("asd");
+			nextPage="/view/JobExpReg.jsp";
+		
+		
+		}else if(action.equals("/JobExpReg2.do")) {
+			String name = request.getParameter("name");
+			String tel = request.getParameter("tel");
+		
+			
+		
 		}
 		
 		//포워딩 (디스패처 방식)
