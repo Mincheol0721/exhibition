@@ -1,16 +1,16 @@
-<%@page import="VO.eventInfoVO.EventInfoVO"%>
-<%@page import="DAO.eventInfoDAO.EventInfoDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
+<c:set var="path" value="<%=request.getContextPath()%>" />
+
 <!DOCTYPE HTML>
 	
 <html>
 	<head>
-		<title>[취업박람회 행사안내]</title>
+		<title>취업박람회 행사안내</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -25,7 +25,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="#" id="logo">부산 취업 박람회 소개</a></h1>
+								<h1><a href="#" id="logo">부산 취업박람회 소개</a></h1>
 							</header>
 						</div>
 
@@ -43,11 +43,11 @@
 							<header>
 								<h2><a href="#">행사 안내</a></h2>
 								<p>
-									"2023 하반기 부산 진로·취업 박람회"
+									"2023 부산 취업박람회"
 								</p>
 							</header>
 							<p style="text-align:center">
-								대한민국의 미래 도약을 위해 일자리 기회를 제공하고 기업 구인난 해소를 지원하고자 2023년 하반기 부산 진로·취업 박람회를 개최합니다.<br>
+								대한민국의 미래 도약을 위해 일자리 기회를 제공하고 기업 구인난 해소를 지원하고자 2023년 하반기 부산 취업박람회를 개최합니다.<br>
 								적성과 적합한 직업 탐색과 진로 설계의 기회를 제공하며, 좋은 일자리를 꿈꾸는 많은 청년들을 위해 마련된 행사입니다.<br>											
 							</p>
 							<section>
@@ -59,74 +59,76 @@
 								<table class="page-table" cellspacing="0" cellpadding="0">							
 							        <tr>
 							            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">행사명</th>
-							            <td class="page-tdb page-bgcolor1">eventInfo테이블에서 뿌려줄 데이터</td>
+							            <td class="page-tdb page-bgcolor1">부산 취업박람회</td>
 							        </tr>
 							        <tr>
 							            <th class="page-tda" style="text-align:center; padding:0px;">일시</th>
-							            <td class="page-tdb">eventInfo테이블에서 뿌려줄 데이터</td>
+							            <td class="page-tdb">2023. 10. 25 ~ 2023. 11. 02</td>
 							        </tr>
 							        <tr>
 							            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">장소</th>
-							            <td class="page-tdb page-bgcolor1">eventInfo테이블에서 뿌려줄 데이터</td>
+							            <td class="page-tdb page-bgcolor1">벡스코 1층 다목적홀</td>
 							        </tr>
 							        <tr>
 							            <th class="page-tda" style="text-align:center; padding:0px;">참여대상</th>
-							            <td class="page-tdb">eventInfo테이블에서 뿌려줄 데이터</td>
+							            <td class="page-tdb">구인 · 구직을 희망하는 기업 및 구직자</td>
 							        </tr>
 							        <tr>
 							            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">참여방법</th>
-							            <td class="page-tdb page-bgcolor1">사전등록 ~ 23. 10. 25 까지, 현장접수 및 단체접수 가능</td>
+							            <td class="page-tdb page-bgcolor1">사전등록 ~ 23. 10. 24 까지, 현장접수 및 단체접수 가능</td>
 							        </tr>
 							        <tr>
 							            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">행사내용</th>
-							            <td class="page-tdb page-bgcolor1">행사내용 / write or remove</td>
+							            <td class="page-tdb page-bgcolor1">구인 구직자 취업 컨설팅 및 부대 내 행사(이력서 사진 촬영, 스트레스 코칭)</td>
 							        </tr>
 							        <tr>
 							            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">참여기업</th>
-							            <td class="page-tdb page-bgcolor1">eventInfo테이블에서 뿌려줄 데이터</td>
+							            <td class="page-tdb page-bgcolor1">50여개업체 (직 · 간접 참여가능)</td>
 							        </tr>
 							    </table>
 							    </div>	
-							    <div class="img-div"><!-- 모집 광고 포스터가 들어갈 자리 -->
-							    <a href="#"><img src="../images/hire1.jpg" style="border-radius: 20px;width: 530px;height: 500px;" title=""/></a>									    
+							    <div class="img-div">
+							    	<!-- 모집 광고 포스터가 들어갈 자리 -->
+							    	<img src="../images/eventInfo_poster.jpg" style="width: 430px;height: 580px;" title="" id="pdfImage"/><br>	
+							    	(포스터 클릭 시 PDF파일을 요청합니다.)							    
 								</div>
 								</div>	
 							</section>					
 						</article>
 						<hr />
-						<div class="row">
-							<!-- 행사 안내와 더불어 다른 내용을 보여주거나 or 다른 박람회를 보여줌 // 지금은 다른 박람회의 정보도 볼 수 있게끔 제작 예정 -->
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">IT 취업 박람회</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">금융권 취업 박람회</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a>
-								<header>
-									<h3><a href="#">보건·의료 취업 박람회</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
-							</article>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 							행사 안내와 더불어 다른 내용을 보여주거나 or 다른 박람회를 보여줌 -->
+<!-- 							<article class="col-4 col-12-mobile special"> -->
+<!-- 								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a> -->
+<!-- 								<header> -->
+<!-- 									<h3><a href="#">IT 취업 박람회</a></h3> -->
+<!-- 								</header> -->
+<!-- 								<p> -->
+<!-- 									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam -->
+<!-- 									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum. -->
+<!-- 								</p> -->
+<!-- 							</article> -->
+<!-- 							<article class="col-4 col-12-mobile special"> -->
+<!-- 								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a> -->
+<!-- 								<header> -->
+<!-- 									<h3><a href="#">금융권 취업 박람회</a></h3> -->
+<!-- 								</header> -->
+<!-- 								<p> -->
+<!-- 									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam -->
+<!-- 									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum. -->
+<!-- 								</p> -->
+<!-- 							</article> -->
+<!-- 							<article class="col-4 col-12-mobile special"> -->
+<!-- 								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a> -->
+<!-- 								<header> -->
+<!-- 									<h3><a href="#">보건·의료 취업 박람회</a></h3> -->
+<!-- 								</header> -->
+<!-- 								<p> -->
+<!-- 									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam -->
+<!-- 									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum. -->
+<!-- 								</p> -->
+<!-- 							</article> -->
+<!-- 						</div> -->
 					</div>
 
 				</div>
@@ -147,6 +149,17 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+			<script>
+	        // 이미지를 클릭할 때 PDF를 열도록 클릭 이벤트를 추가
+	        document.getElementById('pdfImage').addEventListener('click', function () {
+            // PDF 파일 경로
+            var pdfUrl = '../pdf/Exhibition.pdf';
+
+            // PDF를 새 창에서 열도록 윈도우 팝업을 생성
+            window.open(pdfUrl, '_blank');
+        });
+    </script>
 
 	</body>
 </html>

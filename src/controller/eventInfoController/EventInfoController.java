@@ -21,7 +21,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import VO.eventInfoVO.EventInfoVO;
-import servicee.eventInfoService.EventInfoService;
+import service.eventInfoService.EventInfoService;
 
 @WebServlet("/eventInfo/*")
 public class EventInfoController extends HttpServlet{

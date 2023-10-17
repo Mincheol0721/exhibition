@@ -1,4 +1,4 @@
-package servicee.eventInfoService;
+package service.eventInfoService;
 
 import DAO.eventInfoDAO.EventInfoDAO;
 

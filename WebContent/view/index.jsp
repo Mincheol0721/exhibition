@@ -47,10 +47,9 @@
 			<!-- Banner -->
 				<section id="banner">
 					<header>
-						<h2>Hi. You're looking at <strong>Helios</strong>.</h2>
+						<h2>2023 하반기 <strong>부산 취업박람회</strong></h2>
 						<p>
-							A (free) responsive site template by <a href="http://html5up.net">HTML5 UP</a>.
-							Built with HTML5/CSS3 and released under the <a href="http://html5up.net/license">CCA</a> license.
+							더 나은 미래를 향한 발돋움. 부산 취업박람회에서 시작됩니다. 다양한 기업을 만나고 경험을 해보세요.
 						</p>
 					</header>
 				</section>
@@ -62,7 +61,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Pulvinar sagittis congue</a></h3>
+								<h3><a href="#">마이크로소프트</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -70,7 +69,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Fermentum sagittis proin</a></h3>
+								<h3><a href="#">스타벅스</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -78,7 +77,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+								<h3><a href="#">A병원</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -86,7 +85,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
+								<h3><a href="#">메가커피</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -94,7 +93,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Varius magnis sollicitudin</a></h3>
+								<h3><a href="#">B병원</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -102,7 +101,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Pulvinar sagittis congue</a></h3>
+								<h3><a href="#">기업정보6</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -110,7 +109,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Fermentum sagittis proin</a></h3>
+								<h3><a href="#">기업정보7</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -118,7 +117,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+								<h3><a href="#">기업정보8</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -126,7 +125,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Ultrices urna sit lobortis</a></h3>
+								<h3><a href="#">기업정보9</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -134,7 +133,7 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">Varius magnis sollicitudin</a></h3>
+								<h3><a href="#">기업정보10</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -176,39 +175,34 @@
 
 					<section id="features" class="container special">
 						<header>
-							<h2>Morbi ullamcorper et varius leo lacus</h2>
-							<p>Ipsum volutpat consectetur orci metus consequat imperdiet duis integer semper magna.</p>
+							<h3>대한민국을 대표하는 우수 중견기업이 참가하는 이번 박람회는 채용정보를 포함한 다양한 콘텐츠를 온·오프라인으로 제공합니다.<br></h3>
+							<p>채용정보와 취업 준비생들에게 실질적으로 도움이 되는 다채로운 프로그램을 마련했습니다.<br>
+							      취업을 희망하는 청년 인재 여러분의 많은 관심과 참여 부탁드립니다.</p>
 						</header>
 						<div class="row">
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic07.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>									
 								<header>
-									<h3><a href="#">Gravida aliquam penatibus</a></h3>
-								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
+									<h3><a href="#">채용 공고</a></h3>
+								</header>		
+								<!-- 안내 페이지로 이동 링크 수정해야함 -->					
+								<a href="#" class="image featured"><img src="../images/index_cMember.jpg" alt="" /></a>															
 							</article>
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>							
 								<header>
-									<h3><a href="#">Sed quis rhoncus placerat</a></h3>
+									<h3><a href="#">취업 특강</a></h3>
 								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
+								<!-- 안내 페이지로 이동 링크 수정해야함 -->
+								<a href="#" class="image featured"><img src="../images/index_jobLecture.jpg" alt="" /></a>
 							</article>
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic09.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>							
 								<header>
-									<h3><a href="#">Magna laoreet et aliquam</a></h3>
+									<h3><a href="#">직업 체험 프로그램</a></h3>
 								</header>
-								<p>
-									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam
-									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum.
-								</p>
+								<!-- 안내 페이지로 이동 링크 수정해야함 -->
+								<a href="#" class="image featured"><img src="../images/index_cjobExp.jpg" alt="" /></a>
 							</article>
 						</div>
 					</section>
