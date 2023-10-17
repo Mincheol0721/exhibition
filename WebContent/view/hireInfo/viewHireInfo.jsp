@@ -8,8 +8,7 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cname = "마이크로소프트";
-// 	String cname = request.getParameter("cname");
+ 	String cname = request.getParameter("cname");
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
 		
@@ -21,7 +20,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>MY 채용정보</title>
+		<title>채용정보 상세보기</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -52,7 +51,7 @@
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
@@ -62,10 +61,10 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2>MY 채용정보</h2>
+								<h2>채용정보 상세보기</h2>
 								<br>
 								<br>
-								<form action="${path}/view/modHireInfo.jsp" method="post">
+								<form action="${path}/view/hireInfo/modHireInfo.jsp" method="post">
 									<input type="hidden" name="cname" value="<%=vo.getCname()%>">
 									<table style="border:1px solid gray; border-collapse: collapse;">
 										<tr style="border:1px solid gray;">
@@ -103,6 +102,7 @@
 											<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%></td>
 										</tr>
 									</table>
+									<input type="button" value="글목록" onclick="location.href='${path}/view/hireInfo/hireInfoList.jsp'">
 									<button type="submit">수정하기</button>
 									<button type="button" onclick="location.href='${path}/hireInfo/del.do?cname=<%=cname%>'">삭제하기</button>
 								</form>
@@ -112,7 +112,7 @@
 				</div>
 			<!-- Footer -->
 			<div id="footer">
-				<jsp:include page="../inc/footer.jsp" />
+				<jsp:include page="/inc/footer.jsp" />
 			</div>
 		</div>
 

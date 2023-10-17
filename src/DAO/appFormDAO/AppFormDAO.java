@@ -114,10 +114,10 @@ public class AppFormDAO {
 						"FROM ( " + 
 						"    SELECT ROWNUM AS rn, a.* " + 
 						"    FROM appForm a " + 
-						"    WHERE ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
+						"    WHERE acname='" + cname + "' and " + 
+						" ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
 						" ) " + 
-						" WHERE rn >= ((" + pageNum + " - 1) * " + pageSize + ") + 1" + 
-						" and cname='" + cname + "'" ;
+						" WHERE rn >= ((" + pageNum + " - 1) * " + pageSize + ") + 1";
 				
 				pstmt = con.prepareStatement(query);
 				

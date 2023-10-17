@@ -1,48 +1,31 @@
+<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
-<%@page import="VO.hireInfoVO.HireInfoVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% 
 	request.setCharacterEncoding("UTF-8"); 
-	//id값(cname or cno) 받아오기
-	String cname = request.getParameter("cname");
-	
-	HireInfoVO vo = null;
-	HireInfoDAO dao = new HireInfoDAO();
-	
-	vo = dao.getHireInfo(cname);
-	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	
+// 	System.out.println("date: " + sdf.format(new Date()));
 %>
 <c:set var="path"  value="${pageContext.request.contextPath}"  /> 
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>채용정보 수정</title>
+		<title>채용정보 등록</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="${path}/assets/css/main.css" />
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				var cname = '<%=vo.getCname()%>';
+				var appstart = $('#appstart');
 				
-<%-- 				console.log('apptype: ', '<%=vo.getAppType()%>'); --%>
-				
-				if(cname != 'null' || cname != '') {
-					$('#divComp').val('<%=vo.getDivComp()%>').prop("selected",true);
-					$('#jobtype').val('<%=vo.getJobtype()%>').prop("selected",true);
-					$('#workTime').val('<%=vo.getWorkTime()%>').prop("selected",true);
-					$('#legal').val('<%=vo.getLegal()%>').prop("selected",true);
-					$('#appType').val('<%=vo.getAppType()%>').prop("selected",true);
-				}
-				
+				appstart.on('change', function() {
+					$('#appexpire').attr('min', appstart.val());
+				});
 			});
 		</script>
 		<style type="text/css">
@@ -72,7 +55,7 @@
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
@@ -83,22 +66,22 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2>채용정보 수정</h2>
+								<h2>채용정보 등록</h2>
 								<hr>
-								<form action="${path}/hireInfo/mod.do" method="post">
+								<form action="${path}/hireInfo/reg.do" method="post">
 									<table border="none">
 										<tr>
 											<th>기업명</th>
-											<td><input type="text" name="cname" value="<%=vo.getCname()%>"></td>
+											<td><input type="text" name="cname"></td>
 										</tr>
 										<tr>
 											<th>전화번호</th>
-											<td><input type="tel" name="htel" value="<%=vo.getHtel()%>"></td>
+											<td><input type="tel" name="htel"></td>
 										</tr>
 										<tr>
 											<th>사업체구분</th>
 											<td>
-												<select id="divComp" name="divComp">
+												<select name="divComp">
 													<option value="">사업체선택</option>
 													<option value="일반기업">일반기업</option>
 													<option value="공공기관">공공기관</option>
@@ -109,7 +92,7 @@
 										</tr>
 										<tr>
 											<th>홈페이지링크</th>
-											<td><input type="text" name="homepage" value="<%=vo.getHomepage()%>"></td>
+											<td><input type="text" name="homepage"></td>
 										</tr>
 										<tr>
 											<th>모집직종</th>
@@ -133,7 +116,7 @@
 										<tr>
 											<th>근무시간</th>
 											<td>
-												<select id="workTime" name="workTime">
+												<select name="workTime">
 													<option value="">시간선택</option>
 													<option value="전일제">전일제</option>
 													<option value="반일제">반일제</option>
@@ -145,7 +128,7 @@
 										<tr>
 											<th>근무지역</th>
 											<td>
-												<select id="legal" name="legal">
+												<select name="legal">
 													<option value="">지역선택</option>
 													<option value="부산전체">부산전체</option>
 													<option value="중구">중구</option>
@@ -171,7 +154,7 @@
 										<tr>
 											<th>모집전형</th>
 											<td>
-												<select name="appType" id="appType">
+												<select name="appType">
 													<option value="">전형선택</option>
 													<option value="서류">서류</option>
 													<option value="면접">면접</option>
@@ -180,14 +163,15 @@
 										</tr>
 										<tr>
 											<th>모집기간</th>
-											<td style="justify-content: space-between; text-align: center;">
-												<input type="date" value="<%=vo.getAppstart().substring(0, 10)%>" name="appstart" id="appstart">
-											 	&nbsp;&nbsp;~&nbsp;&nbsp;
-												<input type="date" value="<%=vo.getAppexpire().substring(0, 10)%>" name="appexpire" id="appexpire">
+											<td>
+												<input type="date" value="<%=sdf.format(new Date())%>" name="appstart" id="appstart">
+												&nbsp;&nbsp;~&nbsp;&nbsp;
+												<input type="date" name="appexpire" id="appexpire">
 											</td>
 										</tr>
+										
 									</table>
-									<input type="submit" value="수정완료">
+									<input type="submit" value="등록">
 									<input type="reset" value="다시작성">
 								</form>
 							</header>
@@ -197,7 +181,7 @@
 
 			<!-- Footer -->
 			<div id="footer">
-				<jsp:include page="../inc/footer.jsp" />
+				<jsp:include page="/inc/footer.jsp" />
 			</div>
 		</div>
 

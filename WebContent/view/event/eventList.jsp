@@ -61,7 +61,7 @@
 					dataType: 'json',
 					success: function(data) {
 						$.each(data, function(index, vo) {
-							$('.layout').append('<div class="myCard" onclick="location.href=\'${path}/view/viewEvent.jsp?no=' + vo.no + '\'">' 
+							$('.layout').append('<div class="myCard" onclick="location.href=\'${path}/view/event/viewEvent.jsp?no=' + vo.no + '\'">' 
 													+ '<div class="innerCard">'
 														+ '<div class="frontSide"> '
 															+ '<p class="title"> ' + vo.title + ' </p>'
@@ -74,7 +74,7 @@
 																+ '<li>이용시간: ' + vo.startTime + ' ~ ' + vo.endTime + '</li>'
 																+ '<li>제공서비스: ' + vo.service + '</li>'
 																+ '<li>장소: ' + vo.locate + '</li>'
-																+ '<button type="button" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/view/modEvent.jsp?no=' + vo.no + '\'">'
+																+ '<button type="button" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/view/event/modEvent.jsp?no=' + vo.no + '\'">'
 																+ '수정하기'
 																+ '</button> &nbsp;&nbsp;&nbsp;'
 																+ '<button type="button" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/event/delEvent.do?no=' + vo.no + '\'">'
@@ -247,13 +247,13 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="${path}/view/index.jsp" id="logo">부산 취업 박람회</a></h1>
+								<h1><a href="/view/index.jsp" id="logo">부산 취업 박람회</a></h1>
 							</header>
 						</div>
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
@@ -299,7 +299,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/view/eventList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/view/event/eventList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -307,11 +307,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/view/eventList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/view/event/eview/event/ist.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item"><a href="${path}/view/eventList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item"><a href="${path}/view/event/eventList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -320,7 +320,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/view/eventList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/view/event/eventList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

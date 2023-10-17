@@ -73,6 +73,7 @@ public class AppFormController extends HttpServlet {
 			    int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 				System.out.println("con pagenum: " + pageNum);
 				System.out.println("con pagesize: " + pageSize);
+				System.out.println("con cname: " + cname);
 				
 				JSONArray jsonArray = new JSONArray(); // [ ]
 				
