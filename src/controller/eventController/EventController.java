@@ -99,6 +99,8 @@ public class EventController extends HttpServlet {
 				
 				out.print(jsonArray.toString());
 				
+				request.setAttribute("list", list);
+				
 				return;
 				
 			} else if(action.equals("/modEvent.do")) {

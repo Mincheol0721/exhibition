@@ -52,6 +52,15 @@ public class AppFormController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 	    PrintWriter out = response.getWriter();
 	    
+	    //요청한 값 얻기
+	    int pageNum = 1;
+	    if(request.getParameter("pageNum") != null) {
+	    	pageNum = Integer.parseInt(request.getParameter("pageNum"));
+	    }
+	    int pageSize = 5;
+	    if(request.getParameter("pageSize") != null) {
+	    	Integer.parseInt(request.getParameter("pageSize"));
+	    }
 	    String cname = request.getParameter("cname");
 	    String name = request.getParameter("name");
 	    String ssn = request.getParameter("ssn");
@@ -68,35 +77,16 @@ public class AppFormController extends HttpServlet {
 		try {
 			
 			if(action.equals("/getList.do")) {
-				//요청한 값 얻기
-			    int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-			    int pageSize = Integer.parseInt(request.getParameter("pageSize"));
 				System.out.println("con pagenum: " + pageNum);
 				System.out.println("con pagesize: " + pageSize);
 				System.out.println("con cname: " + cname);
 				
-				JSONArray jsonArray = new JSONArray(); // [ ]
-				
 				list = as.getAppFormList(pageNum, pageSize, cname); 
 				System.out.println("list개수: " + list.size());
 				
-				for( AppFormVO vo : list ) { 
-					JSONObject jsonObject = new JSONObject();
-					
-					jsonObject.put("name", vo.getName());
-					jsonObject.put("ssn", vo.getSsn());
-					jsonObject.put("addr", vo.getAddr());
-					jsonObject.put("tel", vo.getTel());
-					jsonObject.put("milServ", vo.getMilServ());
-					jsonObject.put("edu", vo.getEdu());
-					jsonObject.put("eduStat", vo.getEduStat());
-					jsonArray.add(jsonObject);
-					
-				} //for
+				request.setAttribute("list", list);
 				
-				out.print(jsonArray.toString());
-				
-				return;
+				nextPage = "/view/appForm/appFormList.jsp";
 				
 			} 
 			

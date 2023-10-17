@@ -8,8 +8,8 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-	String cname = "마이크로소프트";
-// 	String cname = request.getParameter("cname");
+	String cname = (String)session.getAttribute("cname");
+	System.out.println("cname: " + cname);
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
 		

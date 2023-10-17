@@ -1,3 +1,4 @@
+<%@page import="controller.appFormController.AppFormController"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="VO.appFormVO.AppFormVO"%>
@@ -12,11 +13,22 @@
 	AppFormDAO dao = new AppFormDAO();
 	AppFormVO vo = new AppFormVO();
 	List<AppFormVO> list = null; 
+	String id = (String)session.getAttribute("id");
+	if(id == null || id.length() == 0) id = " ";
+// 	System.out.println("id: " + id);
+	int isAdmin = 0;
+	if (session.getAttribute("isAdmin") != null) {
+		isAdmin = (Integer)session.getAttribute("isAdmin");
+	} 
+// 	System.out.println("isAdmin: " + isAdmin);
+	String cno = (String)session.getAttribute("cno");
+// 	if(cno == null || cno.length() == 0) cno = "";
+// 	System.out.println("cno: " + cno);
 	
-	String cname = request.getParameter("cname");
+	String cname = (String)session.getAttribute("cname");
 	
 	//전체 글 개수
-	int count = dao.getAppFormCount(); 
+	int count = dao.getAppFormCount(cname); 
 	System.out.println("count: " + count);
 	//하나의 화면에 띄워줄 글 개수 10
 	int pageSize = 5;
@@ -60,8 +72,14 @@
 			});
 		</script>
 		<style type="text/css">
+			.layout {
+			  width: 100%;
+			  margin: 20px auto;
+			  display: flex;
+			  flex-wrap: wrap;
+			  gap: 8px;
+			}
 			.card {
-			  position: relative;
 			  width: 350px;
 			  height: 250px;
 			  background-image: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
@@ -69,6 +87,7 @@
 			  display: flex;
 			  padding: 10px 30px;
 			  flex-direction: column;
+			  flex-grow: 3;
 			  gap: 10px;
 			  align-items: center;
 			  justify-content: center;
@@ -186,16 +205,16 @@
 						<article id="main" class="special">
 							<header>
 								<h2>입사지원서</h2>
-<%-- 								<c:forEach var="vo" items="${list}"> --%>
-									<div class="card">
-										<p class="heading">Card Hover</p>
-										<p class="para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.
-										</p><div class="overlay"></div>
-										<button class="card-btn" onclick="location.href='${path}/view/viewAppFormList'">Click</button>
-									</div>
-<%-- 								</c:forEach> --%>
-								
-								
+								<div class="layout">
+	 								<c:forEach var="vo" items="${list}">
+										<div class="card">
+											<p class="heading">${vo.name}</p>
+											<p class="para">${vo.addr}</p>
+											<div class="overlay"></div>
+											<button class="card-btn" onclick="location.href='${path}/view/viewAppFormList'">Click</button>
+										</div>
+									</c:forEach>
+								</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
@@ -229,7 +248,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/view/appFormList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -237,11 +256,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/view/appFormList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item"><a href="${path}/view/appFormList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item"><a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -250,7 +269,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/view/appFormList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

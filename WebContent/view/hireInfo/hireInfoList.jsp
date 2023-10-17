@@ -13,6 +13,7 @@
 	HireInfoDAO dao = new HireInfoDAO();
 	HireInfoVO vo = new HireInfoVO();
 	List<HireInfoVO> list = null; 
+	String cname = (String)session.getAttribute("cname");
 	
 	//전체 글 개수
 	int count = dao.getHireInfoCount();

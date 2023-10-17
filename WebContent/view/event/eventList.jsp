@@ -13,6 +13,20 @@
 	EventVO vo = new EventVO();
 	List<EventVO> list = null; 
 	
+	String id = (String)session.getAttribute("id");
+	if(id == null || id.length() == 0) id = ".";
+	System.out.println("id: " + id);
+	
+	int isAdmin = 0;
+	if (session.getAttribute("isAdmin") != null) {
+		isAdmin = (Integer)session.getAttribute("isAdmin");
+	} 
+	System.out.println("isAdmin: " + isAdmin);
+	
+	String cno = (String)session.getAttribute("cno");
+// 	if(cno == null || cno.length() == 0) cno = "";
+	System.out.println("cno: " + cno);
+	
 	//전체 글 개수
 	int count = dao.getEventCount(); 
 	System.out.println("count: " + count);
@@ -74,10 +88,10 @@
 																+ '<li>이용시간: ' + vo.startTime + ' ~ ' + vo.endTime + '</li>'
 																+ '<li>제공서비스: ' + vo.service + '</li>'
 																+ '<li>장소: ' + vo.locate + '</li>'
-																+ '<button type="button" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/view/event/modEvent.jsp?no=' + vo.no + '\'">'
+																+ '<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/view/event/modEvent.jsp?no=' + vo.no + '\'">'
 																+ '수정하기'
 																+ '</button> &nbsp;&nbsp;&nbsp;'
-																+ '<button type="button" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/event/delEvent.do?no=' + vo.no + '\'">'
+																+ '<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/event/delEvent.do?no=' + vo.no + '\'">'
 																+ '삭제하기'
 																+ '</button>'
 															+ '</ul></p>'
@@ -88,6 +102,11 @@
 					}
 				});//ajax
 				
+				if('${id}' != null && <%=isAdmin%> == 1) {
+					$('.adminBtn').show();
+				} else {
+					$('.adminBtn').hide();
+				}
 			});
 		</script>
 		<style type="text/css">
@@ -265,7 +284,7 @@
 							<header>
 								<h2>부대행사</h2>
 								<section class="layout"></section>
-								<button type="button" onclick="location.href='${path}/view/eventReg.jsp'">행사등록</button>
+								<button type="button" class="adminBtn" onclick="location.href='${path}/view/event/eventReg.jsp'">행사등록</button>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
