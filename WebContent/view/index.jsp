@@ -61,7 +61,9 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">마이크로소프트</a></h3>
+								<!-- 사진 클릭 시 해당 기업의 채용정보로 이동한다면? -->
+								<a href="#"><img src="../images/index_microsoft.jpg" style="width: 270px;height: 170px;" alt="" /></a>
+								<h3>마이크로소프트</h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -69,7 +71,8 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">스타벅스</a></h3>
+								<a href="#"><img src="../images/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
+								<h3>스타벅스</h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -77,7 +80,8 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
 							<header>
-								<h3><a href="#">A병원</a></h3>
+								<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+								<h3>A병원</h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
@@ -85,13 +89,14 @@
 						<article>
 							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
 							<header>
+								<a href="#"><img src="../images/index_megacoffee.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3><a href="#">메가커피</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">B병원</a></h3>
 							</header>
@@ -99,7 +104,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보6</a></h3>
 							</header>
@@ -107,7 +112,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보7</a></h3>
 							</header>
@@ -115,7 +120,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보8</a></h3>
 							</header>
@@ -131,7 +136,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
+							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보10</a></h3>
 							</header>
@@ -147,24 +152,10 @@
 					<article id="main" class="container special">
 						<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
 						<header>
-							<h2><a href="#">Sed massa imperdiet magnis</a></h2>
-							<p>
-								Sociis aenean eu aenean mollis mollis facilisis primis ornare penatibus aenean. Cursus ac enim
-								pulvinar curabitur morbi convallis. Lectus malesuada sed fermentum dolore amet.
-							</p>
-						</header>
-						<p>
-							Commodo id natoque malesuada sollicitudin elit suscipit. Curae suspendisse mauris posuere accumsan massa
-							posuere lacus convallis tellus interdum. Amet nullam fringilla nibh nulla convallis ut venenatis purus
-							sit arcu sociis. Nunc fermentum adipiscing tempor cursus nascetur adipiscing adipiscing. Primis aliquam
-							mus lacinia lobortis phasellus suscipit. Fermentum lobortis non tristique ante proin sociis accumsan
-							lobortis. Auctor etiam porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum
-							consequat integer interdum integer purus sapien. Nibh eleifend nulla nascetur pharetra commodo mi augue
-							interdum tellus. Ornare cursus augue feugiat sodales velit lorem. Semper elementum ullamcorper lacinia
-							natoque aenean scelerisque.
-						</p>
+							<h2><a href="#"></a></h2>
+						<a href="#" class="image featured"><img src="../images/index_mainPoster.jpg" alt="" /></a>
 						<footer>
-							<a href="#" class="button">Continue Reading</a>
+							<a href="eventInfo.jsp" class="button">상세 보기</a>
 						</footer>
 					</article>
 
