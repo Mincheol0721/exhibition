@@ -7,25 +7,25 @@
 <c:set var="path" value="<%=request.getContextPath()%>" />
 
 <!DOCTYPE HTML>
-
+	
 <html>
 	<head>
-		<title>박람회 이용 안내</title>
+		<title>취업박람회 행사안내</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="no-sidebar is-preload">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>	
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
+	</head>		
 		<div id="page-wrapper">
-
+			
 			<!-- Header -->
 				<div id="header">
 
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.html" id="logo">Helios</a></h1>
+								<h1><a href="#" id="logo">부산 취업박람회</a></h1>
 							</header>
 						</div>
 
@@ -33,78 +33,54 @@
 					<nav id="nav">
 						<jsp:include page="../inc/menu.jsp" />
 					</nav>
-
 				</div>
 
 			<!-- Main -->
 				<div class="wrapper style1">
-
-					<div class="container">
-						<article id="main" class="special">
+					<div class="container">				
+						<article id="main" class="special">					
 							<header>
-								<h2><a href="#">이용 안내</a></h2>
-								<p>
-									오시는 길
-								</p>
-							</header>							
-							<!-- * 카카오맵 - 벡스코 지도퍼가기 -->
-							<!-- 1. 지도 노드 -->
-							<div id="daumRoughmapContainer1697532655607" class="root_daum_roughmap root_daum_roughmap_landing"></div>
-							
-							<!--
-								2. 설치 스크립트
-								* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
-							-->
-							<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-							
-							<!-- 3. 실행 스크립트 -->
-							<script charset="UTF-8">
-								new daum.roughmap.Lander({
-									"timestamp" : "1697532655607",
-									"key" : "2ghcb",
-									"mapWidth" : "640",
-									"mapHeight" : "360"
-								}).render();
-							</script>
+								<h2><a href="#">이용 안내</a></h2>							
+							</header>
 							
 							<section>
 								<header>
-									<h3>Ultrices tempor sagittis nisl</h3>
+									<h3>오시는 길</h3>
 								</header>
-								<p>
-									Nascetur volutpat nibh ullamcorper vivamus at purus. Cursus ultrices porttitor sollicitudin imperdiet
-									at pretium tellus in euismod a integer sodales neque. Nibh quis dui quis mattis eget imperdiet venenatis
-									feugiat. Neque primis ligula cum erat aenean tristique luctus risus ipsum praesent iaculis. Fermentum elit
-									fringilla consequat dis arcu. Pellentesque mus tempor vitae pretium sodales porttitor lacus. Phasellus
-									egestas odio nisl duis sociis purus faucibus morbi. Eget massa mus etiam sociis pharetra magna.
-								</p>
-								<p>
-									Eleifend auctor turpis magnis sed porta nisl pretium. Aenean suspendisse nulla eget sed etiam parturient
-									orci cursus nibh. Quisque eu nec neque felis laoreet diam morbi egestas. Dignissim cras rutrum consectetur
-									ut penatibus fermentum nibh erat malesuada varius.
-								</p>
-							</section>
-							<section>
-								<header>
-									<h3>Augue euismod feugiat tempus</h3>
-								</header>
-								<p>
-									Pretium tellus in euismod a integer sodales neque. Nibh quis dui quis mattis eget imperdiet venenatis
-									feugiat. Neque primis ligula cum erat aenean tristique luctus risus ipsum praesent iaculis. Fermentum elit
-									ut nunc urna volutpat donec cubilia commodo risus morbi. Lobortis vestibulum velit malesuada ante
-									egestas odio nisl duis sociis purus faucibus morbi. Eget massa mus etiam sociis pharetra magna.
-								</p>
-							</section>
-						</article>
-						<hr />						
+								<div class="page-table-div">
+								<div class="table-div">					
+								<!-- * 카카오맵 - 벡스코 지도퍼가기 -->
+								<!-- 1. 지도 노드 -->
+								<div id="daumRoughmapContainer1697532655607" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+				
+								<!--
+									2. 설치 스크립트
+									* 지도 퍼가기 서비스를 2개 이상 넣을 경우, 설치 스크립트는 하나만 삽입합니다.
+								-->
+								<script charset="UTF-8" class="daum_roughmap_loader_script" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+								
+								<!-- 3. 실행 스크립트 -->
+								<script charset="UTF-8">
+									new daum.roughmap.Lander({
+										"timestamp" : "1697532655607",
+										"key" : "2ghcb",
+										"mapWidth" : "640",
+										"mapHeight" : "360"
+									}).render();
+								</script>
+								
+							    </div>	
+								</div>	
+							</section>												
+						</article>				
+						<hr/>					
 					</div>
-
 				</div>
 
 			<!-- Footer -->
-			<div id="footer">
-				<jsp:include page="../inc/footer.jsp" />
-			</div>
+				<div id="footer">
+					<jsp:include page="../inc/footer.jsp" />
+				</div>
 
 		</div>
 
@@ -117,6 +93,17 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			
+			<script>
+	        // 이미지를 클릭할 때 PDF를 열도록 클릭 이벤트를 추가
+	        document.getElementById('pdfImage').addEventListener('click', function () {
+            // PDF 파일 경로
+            var pdfUrl = '../pdf/Exhibition.pdf';
+
+            // PDF를 새 창에서 열도록 윈도우 팝업을 생성
+            window.open(pdfUrl, '_blank');
+        });
+    </script>
 
 	</body>
 </html>
