@@ -62,6 +62,8 @@ public class EventInfoController extends HttpServlet{
 		String locate = request.getParameter("locate");
 		String iPart = request.getParameter("iPart");
 		String cPart = request.getParameter("cPart");
+		String way = request.getParameter("way");
+		String content = request.getParameter("content");
 		String fileName = request.getParameter("fileName");
 		String fileRealName = request.getParameter("fileRealName");
 		
@@ -70,7 +72,7 @@ public class EventInfoController extends HttpServlet{
 		
 		try {
 			
-			if(action.equals("/getEventInfo.do")) {
+			if(action == null || action.equals("/getEventInfo.do")) {
 				
 				vo.setNo(no);
 				vo.setName(name);
@@ -79,14 +81,33 @@ public class EventInfoController extends HttpServlet{
 				vo.setLocate(locate);
 				vo.setiPart(iPart);
 				vo.setcPart(cPart);
+				vo.setWay(way);
+				vo.setContent(content);
 				vo.setFileName(fileName);
 				vo.setFileRealName(fileRealName);	
 				
-				es.getEventInfo(no);
+				es.getEventInfo(name);
 				
 				nextPage = "/view/eventInfo.jsp"; // 다음 페이지 경로 설정
 				
-			}		
+			}else if (action.equals("/getEventInfoList.do")) {
+				
+				vo.setNo(no);
+				vo.setName(name);
+				vo.setStartDate(startDate);
+				vo.setEndDate(endDate);
+				vo.setLocate(locate);
+				vo.setiPart(iPart);
+				vo.setcPart(cPart);
+				vo.setWay(way);
+				vo.setContent(content);
+				vo.setFileName(fileName);
+				vo.setFileRealName(fileRealName);	
+				
+				es.getEventInfo(name);
+				
+				nextPage = "/view/eventInfo.jsp"; // 다음 페이지 경로 설정
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace(); // 예외 발생 시 콘솔에 스택 트레이스 출력

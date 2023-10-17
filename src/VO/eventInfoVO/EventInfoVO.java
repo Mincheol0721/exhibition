@@ -9,6 +9,8 @@ public class EventInfoVO {
     String locate;    		// 장소
     String iPart;  			// 참여대상(개인)
     String cPart;  			// 참여기업
+    String way;				// 참여방법
+    String content;			// 행사내용
     String fileName; 		// 첨부이미지파일(포스터)이름
     String fileRealName; 	// 첨부이미지파일(포스터)실제이름
     
@@ -18,7 +20,7 @@ public class EventInfoVO {
 	}    
 
 	public EventInfoVO(int no, String name, String startDate, String endDate, String locate, String iPart, String cPart,
-			String fileName, String fileRealName) {
+			String way, String content, String fileName, String fileRealName) {
 		this.no = no;
 		this.name = name;
 		this.startDate = startDate;
@@ -26,6 +28,8 @@ public class EventInfoVO {
 		this.locate = locate;
 		this.iPart = iPart;
 		this.cPart = cPart;
+		this.way = way;
+		this.content = content;
 		this.fileName = fileName;
 		this.fileRealName = fileRealName;
 	}
@@ -86,7 +90,22 @@ public class EventInfoVO {
 	public void setcPart(String cPart) {
 		this.cPart = cPart;
 	}
+	
+	public String getWay() {
+		return way;
+	}
 
+	public void setWay(String way) {
+		this.way = way;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public String getFileName() {
 		return fileName;
 	}

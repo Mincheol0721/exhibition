@@ -1,5 +1,7 @@
 package service.eventInfoService;
 
+import java.util.ArrayList;
+
 import DAO.eventInfoDAO.EventInfoDAO;
 
 public class EventInfoService {
@@ -12,9 +14,14 @@ public class EventInfoService {
 		
 	}
 	
-	public void getEventInfo(int no) { 
+	public void getEventInfo(String name) { 
 		
-		dao.getEventInfo(no);
+		dao.getEventInfo(name);
 		
+	}
+	
+	public void getEventInfoList() {
+		
+		dao.getEventInfoList();
 	}
 }

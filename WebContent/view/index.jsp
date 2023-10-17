@@ -155,7 +155,7 @@
 							<h2><a href="#"></a></h2>
 						<a href="#" class="image featured"><img src="../images/index_mainPoster.jpg" alt="" /></a>
 						<footer>
-							<a href="eventInfo.jsp" class="button">상세 보기</a>
+							<a href="eventInfo_main.jsp" class="button">상세 보기</a>
 						</footer>
 					</article>
 
@@ -166,9 +166,13 @@
 
 					<section id="features" class="container special">
 						<header>
-							<h3>대한민국을 대표하는 우수 중견기업이 참가하는 이번 박람회는 채용정보를 포함한 다양한 콘텐츠를 온·오프라인으로 제공합니다.<br></h3>
-							<p>채용정보와 취업 준비생들에게 실질적으로 도움이 되는 다채로운 프로그램을 마련했습니다.<br>
-							      취업을 희망하는 청년 인재 여러분의 많은 관심과 참여 부탁드립니다.</p>
+							<p style="font-size: 25px; font-weight: bold;">
+								대한민국을 대표하는 우수 중견기업이 참가하는 이번 박람회는 채용정보를 포함한 다양한 콘텐츠를 온·오프라인으로 제공합니다.
+							</p>
+							<p style="font-size: 24px;">
+								채용정보와 취업 준비생들에게 실질적으로 도움이 되는 다채로운 프로그램을 마련했습니다.<br>
+								취업을 희망하는 청년 인재 여러분의 많은 관심과 참여 부탁드립니다.
+							</p>
 						</header>
 						<div class="row">
 							<article class="col-4 col-12-mobile special">

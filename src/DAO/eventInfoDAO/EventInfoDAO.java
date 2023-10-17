@@ -92,11 +92,65 @@ public class EventInfoDAO {
 		
 	}//getEventInfoCount
 		
-	//행사 안내 조회
-	public EventInfoVO getEventInfo(int no) {
+	//DB로부터 모든 박람회 정보를 불러오는 메소드(조회)
+	public ArrayList<EventInfoVO> getEventInfoList() {
 		
-		System.out.println("getEventInfo메소드가 받는 글번호: " + no);
-		query = "select * from eventInfo where no=?";
+		//등록된 과목들을 담을 객체
+		ArrayList<EventInfoVO> list = new ArrayList<EventInfoVO>();
+		//query문
+		query = "select * from eventInfo";
+		
+		try {
+			
+			//DB연결
+			con = ds.getConnection();	
+			
+			//DB에 쿼리문 문자열 전송
+			pstmt = con.prepareStatement(query);
+			
+			//쿼리 실행
+			rs = pstmt.executeQuery();
+			
+			//rs객체에 담겨있음 -> 컬렉션 객체에 담기
+			while(rs.next()) {
+				
+				EventInfoVO vo = new EventInfoVO();
+				
+				//하나씩 저장
+				vo.setNo(rs.getInt("no"));
+				vo.setName(rs.getString("name"));
+				vo.setStartDate(rs.getString("startDate"));
+				vo.setEndDate(rs.getString("endDate"));
+				vo.setLocate(rs.getString("locate"));
+				vo.setiPart(rs.getString("iPart"));
+				vo.setcPart(rs.getString("cPart"));
+				vo.setWay(rs.getString("way"));
+				vo.setContent(rs.getString("content"));
+				vo.setFileName(rs.getString("fileName"));				
+				vo.setFileRealName(rs.getString("fileRealName"));			
+				
+				list.add(vo);
+			
+			}	
+			
+			System.out.println("getEventInfoList메소드 실행 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getEventInfoList메소드 실행 오류 : " + e);
+		} finally {
+			freeResource();
+		}
+		
+		return list;
+		
+	}//getEventInfoList end
+		
+	//특정 박람회 포스터 클릭 시 조회하는 메소드
+	public EventInfoVO getEventInfo(String name) {
+		
+		System.out.println("getEventInfo메소드가 박람회 이름: " + name);
+		query = "select * from eventInfo where name=?";
 		
 		try {
 			
@@ -106,7 +160,7 @@ public class EventInfoDAO {
 			pstmt = con.prepareStatement(query);
 			
 			//DB에 전달할 ?값 세팅
-			pstmt.setInt(1, no);
+			pstmt.setString(1, name);
 			
 			rs = pstmt.executeQuery();
 			
@@ -119,7 +173,9 @@ public class EventInfoDAO {
 				vo.setEndDate(rs.getString("endDate"));
 				vo.setLocate(rs.getString("locate"));
 				vo.setiPart(rs.getString("iPart"));
-				vo.setcPart(rs.getString("cPart"));				
+				vo.setcPart(rs.getString("cPart"));
+				vo.setWay(rs.getString("way"));
+				vo.setContent(rs.getString("content"));
 				vo.setFileName(rs.getString("fileName"));				
 				vo.setFileRealName(rs.getString("fileRealName"));				
 				
@@ -129,15 +185,15 @@ public class EventInfoDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("getCourseInfo메소드 실행 오류 : " + e);
+			System.out.println("getEventInfo메소드 실행 오류 : " + e);
 		} finally {
 			freeResource();
 		}
 		
-		//수정할 과목명에 대한 과목 객체 전달
 		return vo;
 
 	}//getEventInfo end
-
 	
+	
+
 }

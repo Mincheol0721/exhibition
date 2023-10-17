@@ -37,13 +37,12 @@
 
 			<!-- Main -->
 				<div class="wrapper style1">
-
-					<div class="container">
-						<article id="main" class="special">
+					<div class="container">				
+						<article id="main" class="special">					
 							<header>
-								<h2><a href="#">행사 안내</a></h2>
+								<h2><a href="#">행사 안내</a></h2>							
 								<p>
-									"2023 부산 취업박람회"
+									"부산 취업박람회"
 								</p>
 							</header>
 							<p style="text-align:center">
@@ -56,7 +55,7 @@
 								</header>
 								<div class="page-table-div">
 								<div class="table-div">					
-								<table class="page-table" cellspacing="0" cellpadding="0">							
+								<table class="page-table" cellspacing="0" cellpadding="0">												
 							        <tr>
 							            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">행사명</th>
 							            <td class="page-tdb page-bgcolor1">부산 취업박람회</td>
@@ -88,49 +87,36 @@
 							    </table>
 							    </div>	
 							    <div class="img-div">
-							    	<!-- 모집 광고 포스터가 들어갈 자리 -->
+							    	<!-- 제작한 모집 광고 포스터가 들어가는 자리 -->
 							    	<img src="../images/eventInfo_poster.jpg" style="width: 430px;height: 580px;" title="" id="pdfImage"/><br>	
-							    	(포스터 클릭 시 PDF파일을 요청합니다.)							    
+							    	(포스터 클릭 시 PDF파일을 요청, 인쇄 가능.)							    
 								</div>
 								</div>	
-							</section>					
-						</article>
+							</section>												
+						</article>				
 						<hr />
-<!-- 						<div class="row"> -->
-<!-- 							행사 안내와 더불어 다른 내용을 보여주거나 or 다른 박람회를 보여줌 -->
-<!-- 							<article class="col-4 col-12-mobile special"> -->
-<!-- 								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a> -->
-<!-- 								<header> -->
-<!-- 									<h3><a href="#">IT 취업 박람회</a></h3> -->
-<!-- 								</header> -->
-<!-- 								<p> -->
-<!-- 									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam -->
-<!-- 									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum. -->
-<!-- 								</p> -->
-<!-- 							</article> -->
-<!-- 							<article class="col-4 col-12-mobile special"> -->
-<!-- 								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a> -->
-<!-- 								<header> -->
-<!-- 									<h3><a href="#">금융권 취업 박람회</a></h3> -->
-<!-- 								</header> -->
-<!-- 								<p> -->
-<!-- 									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam -->
-<!-- 									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum. -->
-<!-- 								</p> -->
-<!-- 							</article> -->
-<!-- 							<article class="col-4 col-12-mobile special"> -->
-<!-- 								<a href="#" class="image featured"><img src="../images/job.jpg" alt="" /></a> -->
-<!-- 								<header> -->
-<!-- 									<h3><a href="#">보건·의료 취업 박람회</a></h3> -->
-<!-- 								</header> -->
-<!-- 								<p> -->
-<!-- 									Amet nullam fringilla nibh nulla convallis tique ante proin sociis accumsan lobortis. Auctor etiam -->
-<!-- 									porttitor phasellus tempus cubilia ultrices tempor sagittis. Nisl fermentum consequat integer interdum. -->
-<!-- 								</p> -->
-<!-- 							</article> -->
-<!-- 						</div> -->
+						<div class="row">
+							<!-- 다른 박람회 안내 -->
+							<article class="col-4 col-12-mobile special">
+								<header>
+									<a href="#">"2023 청년 디지털 일자리 채용박람회"</a>									
+								</header>
+								<a href="#" class="image featured"><img src="../images/Digital_poster.jpg" alt="" /></a>
+							</article>
+							<article class="col-4 col-12-mobile special">
+								<header>
+									<a href="#">"2023 예일패션몰 퍼포먼스 마케터 채용박람회"</a>
+								</header>
+								<a href="#" class="image featured"><img src="../images/Yeill_poster.jpg" alt="" /></a>
+							</article>
+							<article class="col-4 col-12-mobile special">
+								<header>
+									<a href="#">"2024 대학입시 정보박람회"</a>
+								</header>
+								<a href="#" class="image featured"><img src="../images/Uni_poster.jpg" alt="" /></a>
+							</article>
+						</div>
 					</div>
-
 				</div>
 
 			<!-- Footer -->
