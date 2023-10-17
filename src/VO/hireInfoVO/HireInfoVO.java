@@ -1,6 +1,7 @@
 package VO.hireInfoVO;
 
 public class HireInfoVO {
+	
 	String cname; //기업명
 	String htel; //기업 전화번호
 	String divComp; //사업체 구분(일반기업, 공공기관 사회적기업 등)

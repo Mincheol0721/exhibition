@@ -43,8 +43,8 @@
 			<li>
 				<a href="#">박람회안내</a>
 				<ul>
-					<li><a href="#">행사안내</a></li>
-					<li><a href="#">이용안내</a></li>
+					<li><a href="${path}/view/eventInfo_main.jsp">행사안내</a></li>
+					<li><a href="${path}/view/guide.jsp">이용안내</a></li>
 				</ul>
 			</li>
 			<li>
