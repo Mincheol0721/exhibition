@@ -101,7 +101,7 @@ public class AppFormDAO {
 			return count;
 		}
 		
-		//DB에 접속하여 채용정보 테이블 내부의 데이터들을 전부 조회해오는 메소드
+		//DB에 접속하여 입사지원서 테이블 중 로그인 한 회사에 지원한 지원서 데이터들만 조회해오는 메소드
 		public List<AppFormVO> getAppFormList(int pageNum, int pageSize, String cname) {
 			
 			List<AppFormVO> list = new ArrayList<AppFormVO>(); 
@@ -169,96 +169,6 @@ public class AppFormDAO {
 			return vo;
 		}
 		
-		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
-		public List<CareerExpVO> getCarExp(String name) {
-			CareerExpVO cevo = null;
-			List<CareerExpVO> clist = new ArrayList<CareerExpVO>();
-			
-			try {
-				con = ds.getConnection();
-				query = "select * from careerExp where name='" + name + "'";
-				
-				pstmt = con.prepareStatement(query);
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					cevo = new CareerExpVO( rs.getString("cname"), 
-										    rs.getString("startDate"), 
-										    rs.getString("endDate"), 
-										    rs.getString("damdang") );
-					
-					clist.add(cevo);
-				}
-				
-			} catch (Exception e) {
-				System.out.println("AppFormDAO내부 getCarExp에서 예외 발생: " + e);
-			} finally {
-				freeResource();
-			}
-			
-			return clist;
-		}
 		
-		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
-		public List<LicenseVO> getLicense(String name) {
-			LicenseVO lvo = null;
-			List<LicenseVO> llist = new ArrayList<LicenseVO>();
-			
-			try {
-				con = ds.getConnection();
-				query = "select * from license where name'" + name + "'";
-				
-				pstmt = con.prepareStatement(query);
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					lvo = new LicenseVO(rs.getString("lname"), 
-									    rs.getString("getDate"), 
-									    rs.getString("pub") );
-					
-					llist.add(lvo);
-				}
-				
-			} catch (Exception e) {
-				System.out.println("AppFormDAO내부 getLicense에서 예외 발생: " + e);
-			} finally {
-				freeResource();
-			}
-			
-			return llist;
-		}
-		
-		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
-		public List<TrainingVO> getTraining(String name) {
-			TrainingVO tvo = null;
-			List<TrainingVO> tlist = new ArrayList<TrainingVO>();
-			
-			try {
-				con = ds.getConnection();
-				query = "select * from training where name'" + name + "'";
-				
-				pstmt = con.prepareStatement(query);
-				
-				rs = pstmt.executeQuery();
-				
-				while(rs.next()) {
-					tvo = new TrainingVO( rs.getInt("tno"), 
-										  rs.getString("eduName"), 
-										  rs.getString("startDate"), 
-										  rs.getString("endDate"), 
-										  rs.getString("content"));
-					tlist.add(tvo);
-				}
-				
-			} catch (Exception e) {
-				System.out.println("AppFormDAO내부 getLicense에서 예외 발생: " + e);
-			} finally {
-				freeResource();
-			}
-			
-			return tlist;
-		}
 		
 }

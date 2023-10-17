@@ -16,7 +16,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import VO.appFormVO.AppFormVO;
-import VO.appFormVO.CareerExpVO;
 import service.appFormService.AppFormService;
 
 @WebServlet("/appForm/*")
