@@ -4,8 +4,15 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<c:set var="path" value="<%=request.getContextPath()%>" />
+<%
+	String id = (String)session.getAttribute("id");
+	int isAdmin = (Integer)session.getAttribute("isAdmin");
+	String cno = (String)session.getAttribute("cno");
+%>
 
+<c:set var="path" value="<%=request.getContextPath()%>" />
+<c:set var="id" value="${sessionScope.id}"></c:set>
+<c:set var="isAdmin" value="${sessionScope.isAdmin}"></c:set>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -67,15 +74,44 @@
 			<li>
 				<a href="#">직업체험</a>
 				<ul>
-					<li><a href="#">직업체험</a></li>
+					<li><a href="http://localhost:8090/exhibition/cjobExp/cjobExpBoard.do">직업체험</a></li>
 					<li><a href="#">부대행사</a></li>
 				</ul>
 			</li>
 			<li>
 				<a href="#">회원기능</a>
+				
 				<ul>
-					<li><a href="login.jsp" class="membership">로그인</a></li>
-					<li><a href="register.jsp" class="membership">회원가입</a></li>
+					<c:choose>
+					<c:when test="${id == null && cno == null}">
+					<li><a href="${path}/view/login/login.jsp" class="membership">로그인</a></li>
+					<li><a href="${path}/view/register.jsp" class="membership">회원가입</a></li>
+					</c:when>
+					</c:choose>
+					<c:choose>
+					
+					<%-- 개인회원일 경우 --%>
+					<c:when test="${id != null && cno == null && isAdmin == 0}">
+					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
+					<li><a href="#" class="membership">마이페이지</a></li>
+					</c:when>
+					
+					<%-- 관리자일 경우 --%>
+					<c:when test="${id != null && isAdmin == 1}">
+					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
+					<li><a href="${path}/view/mypage/mypage.jsp" class="membership">마이페이지</a></li>
+					</c:when>
+					
+					<%-- 기업회원일 경우  --%>
+					<c:when test="${cno != null && id == null}">
+					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
+					<li><a href="#" class="membership">마이페이지</a></li>
+					</c:when>
+					
+					</c:choose>
+					
+
+					
 				</ul>
 			</li>
 		</ul>
