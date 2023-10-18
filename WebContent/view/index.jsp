@@ -96,7 +96,6 @@
 
 						<article>
 							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
-							<header>
 								<h3><a href="#">B병원</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
