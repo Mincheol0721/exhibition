@@ -82,10 +82,14 @@ public class JoinDAO {
 				String name = vo.getName();
 				String itel = vo.getItel();
 				String email = vo.getEmail();
-				String addr = vo.getAddr();
-				
+				String addr1 = vo.getAddr1();
+				String addr2 = vo.getAddr2();
+				String addr3 = vo.getAddr3();
+				String addr4 = vo.getAddr4();
+				String filename = vo.getFileName();
+				String fileRealName = vo.getFileRealName();
 				//sql문 작성
-				String sql = "insert into iMember(id, password, ssn, name, itel, email, addr) values(?, ?, ?, ?, ?, ?, ?)";
+				String sql = "insert into iMember(id, password, ssn, name, itel, email, addr1, addr2, addr3, addr4,filename,fileRealName) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				
 				pstmt= con.prepareStatement(sql);
 				
@@ -95,8 +99,12 @@ public class JoinDAO {
 				pstmt.setString(4, name);
 				pstmt.setString(5, itel);
 				pstmt.setString(6, email);
-				pstmt.setString(7, addr);
-				
+				pstmt.setString(7, addr1);
+				pstmt.setString(8, addr2);
+				pstmt.setString(9, addr3);
+				pstmt.setString(10, addr4);
+				pstmt.setString(11, filename);
+				pstmt.setString(12, fileRealName);
 				pstmt.executeUpdate();
 				
 			} catch (Exception e) {
@@ -121,9 +129,16 @@ public class JoinDAO {
 				String divcomp = vo.getDivcomp(); //기업 사업체 구분(일반기업, 공공기관, 사회적기업)
 				String jobtype = vo.getJobtype(); //모집 직종
 				String password = vo.getPassword(); // 비밀번호
-				
+				String fileName = vo.getFileName();
+				String fileRealName = vo.getFileRealName();
+				String addr1 = vo.getAddr1();
+				String addr2 = vo.getAddr2();
+				String addr3 = vo.getAddr3();
+				String addr4 = vo.getAddr4();
 				//sql문 작성
-				String sql = "insert into CMember (cno, ctel, name, divcomp, jobtype, cname,password) values(? ,? ,? ,? ,? ,?, ?)";
+				String sql = "insert into CMember "
+						+ " (cno, ctel, name, divcomp, jobtype, cname, password,fileName,fileRealName,addr1,addr2,addr3,addr4) "
+						+ " values(? ,? ,? ,? ,? ,?, ?, ?, ?, ?, ?, ?, ?)";
 				pstmt = con.prepareStatement(sql);
 				
 					pstmt.setString(1, cno);
@@ -133,7 +148,12 @@ public class JoinDAO {
 					pstmt.setString(5, jobtype);
 					pstmt.setString(6, cname);
 					pstmt.setString(7, password);
-				
+					pstmt.setString(8, fileName);
+					pstmt.setString(9, fileRealName);
+					pstmt.setString(10, addr1);
+					pstmt.setString(11, addr2);
+					pstmt.setString(12, addr3);
+					pstmt.setString(13, addr4);
 				pstmt.executeUpdate();
 				
 				

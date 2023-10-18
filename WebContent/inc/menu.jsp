@@ -39,7 +39,7 @@
 	</head>
 	<body>
 		<ul>
-			<li><a href="index.jsp">홈</a></li>
+			<li><a href="${path}/view/index.jsp">홈</a></li>
 			<li>
 				<a href="#">박람회안내</a>
 				<ul>
@@ -93,7 +93,7 @@
 					<%-- 개인회원일 경우 --%>
 					<c:when test="${id != null && cno == null && isAdmin == 0}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="#" class="membership">마이페이지</a></li>
+					<li><a href="${path}/view/mypage/iMypage.jsp" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					<%-- 관리자일 경우 --%>
@@ -105,7 +105,7 @@
 					<%-- 기업회원일 경우  --%>
 					<c:when test="${cno != null && id == null}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="#" class="membership">마이페이지</a></li>
+					<li><a href="${path}/view/mypage/cMypage.jsp" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					</c:choose>

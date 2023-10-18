@@ -78,7 +78,7 @@
 	    $("#email").focusout(function() {
 			var mail = $("#email");
     		var mailValue = mail.val();
-    		var mailReg = /^\w{5,12}@[a-z]{2,10}[\.][a-z]{2,3}[\.]?[a-z]{0,2}$/;
+    		var mailReg = /^\w{5,12}@[a-z]{2,10}[\\.][a-z]{2,3}[\\\\.]?[a-z]{0,2}$/;
     		var rsEmail = mailReg.test(mailValue);
     		
 	    	if(!rsEmail){
@@ -375,9 +375,8 @@
 	   	});
 	   
 	    $("#cno").focusout(function() {
-			var cno = $("#cno");
-			var cnoValue = $("#cno").val();
-	    	if( /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/.test( cnoValue ) ){
+			
+	    	if( /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/.test( $("#cno").val() ) ){
 	    		
 	    		//입력한 아이디가 DB에 저장되어 있는지 없는지 확인 요청
 	    		//Ajax기술을 이용 하여 비동기 방식으로 MemberController로 합니다.
@@ -395,9 +394,13 @@
 	    			success : function(data,textStatus){
 	    				//서버페이지에서 전송된 사업자등록번호 중복? 인지 아닌지 판단하여
 	    				//현재 join.jsp화면에 보여주는 처리 구문 작성
-	    				if(data=='usable'){ //아이디가 DB에 없으면?
+	    				
+	    				if(data=='checkOk'){ //사업자등록번호가 DB에 없으면?
+	    					
 	    					$("#cnoInput").text("사용할 수 있는 사업자번호 입니다.").css("color","blue");
-	    				}else{ //사업자등록번호가 DB에 있으면?
+	    					
+	    				}else { //사업자등록번호가 DB에 있으면?
+	    					
 	    					$("#cnoInput").text("이미 사용중인 사업자번호 입니다.").css("color","red");
 	    				}
 	    				
@@ -463,11 +466,23 @@
 		alert("모집직종을 선택해 주세요");
 			
 		}
-			
+	    });	
 		
+	    $("input[name='addr1'],input[name='addr2'],input[name='addr3'],input[name='addr4']").focusout(function() {
+	    	
+	    	if(	$("input[name='addr1']").val()== "" || 
+				$("input[name='addr2']").val()== "" ||
+				$("input[name='addr3']").val()== "" ||
+				$("input[name='addr4']").val()== "" ){
+				
+			$("#addressInput2").text("주소를 모두 작성하여주세요.").css("color","red");
+		}else{
+			$("#addressInput2").css("display","none");
+		}
+    });
 		 
-	    });
-		
+	    
+//=================================================================================		
 		function check2() {
 			
 			//약관동의 <input>요소를 선택해서 가져와 
@@ -497,15 +512,15 @@
    	    	
    	    	var idReg = RegExp(/^[0-9]{3}-[0-9]{2}-[0-9]{5}$/);
    	    	var resultcno = idReg.test(cnoValue);
-   	    	
+   	    	console.log(cno);
     		if(!resultcno){
-    			$("#cnoInput").text("사업자번호를 다시 입력해주세요").css("color","red");
+    			$("#cnoInput").text("사업자번호를 입력해주세요").css("color","red");
     			cno.focus();
     			
-    			return false;
-    		}else {
-    			$("#cnoInput").text("사용할 수 있는 사업자번호 입니다.").css("color","blue");
+    			
     		}
+    			
+    		
     		
     		//====================================================================================================
     		var name2 = $("#name2");
@@ -581,6 +596,27 @@
 				jobType.focus();
 				return false;
 			}
+    		//====================================================================================================
+
+    		var addr1 = $("#sample4_postcode2");
+    		var addr2 = $("#sample4_roadAddress2"); 
+    		var addr3 = $("#sample4_jibunAddress2")
+    		var addr4 = $("#sample4_detailAddress2");
+    		
+    		var addrVal1 = addr1.val();
+    		var addrVal2 = addr2.val();
+    		var addrVal3 = addr3.val();
+    		var addrVal4 = addr4.val();
+    		
+    		if(addrVal1 == "" || addrVal2 == "" || addrVal3 == "" || addrVal4 == "" ){
+    			$("#addressInput").text("주소를 모두 작성하여주세요.").css("color","red");
+    			addr4.focus();
+    			
+    			return false;
+    		}else{
+    			$("#addressInput").text("올바르게 입력되었습니다.").css("color","blue");
+    		}
+    			
     		
     		//===================================================================================================
     		alert("회원가입이 완료 되었습니다.");
