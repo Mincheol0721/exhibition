@@ -69,7 +69,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">부산 취업 박람회</a></h1>
+								<h1><a href="index.jsp" id="logo">마이 페이지</a></h1>
 							</header>
 						</div>
 
@@ -84,12 +84,13 @@
 					
 			<!-- Main -->
 				<div class="wrapper style1" style="float: none; margin: 0 auto;">
-						<div align="center"><h2>마이 페이지</h2></div>
+						<div align="center"></div>
 						<br>
 						<br>
-						<img alt="mypage" src="images/mypage_01.png" onclick="info();" style="cursor: pointer" id="info">	
-						<img alt="mypage" src="images/mypage_02.png" onclick="">
-						<img alt="mypage" src="images/mypage_03.png" onclick="">
+						<img alt="mypage" src="images/mypage_01.png" style="cursor: pointer" id="info1">	
+						<img alt="mypage" src="images/mypage_02.png" onclick="" style="cursor: pointer" id="info2">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img alt="mypage" src="images/mypage_03.png" onclick="" style="cursor: pointer" id="info2">
 
 				</div>
 
@@ -109,6 +110,14 @@
 			<script src="${path}/assets/js/breakpoints.min.js"></script>
 			<script src="${path}/assets/js/util.js"></script>
 			<script src="${path}/assets/js/main.js"></script>
+			
+			<script type="text/javascript">
+				$("#info1").on('click',function(){
+					
+					location.href = "http://localhost:8090/Exhibition/memberInfo/iInfo.me";
+		    		
+				})
+			</script>
 	
 	</body>
 </html>

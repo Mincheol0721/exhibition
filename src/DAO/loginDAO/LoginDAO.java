@@ -133,7 +133,8 @@ public class LoginDAO {
 					
 					rs = pstmt.executeQuery();
 					if(rs.next()) {//입력한 아이디로 조회한 행이 있으면? (아이디가 있으면?)
-						
+						System.out.println("입력한 비밀번호: " + cPwd);
+						System.out.println("DB 비밀번호: " + rs.getString("password"));
 						//입력한 비밀번호와 조회된 비밀번호와 비교해서 있으면 ?(비밀번호가 있으면?)
 						if(cPwd.equals(rs.getString("password"))) {
 							check = 1;
