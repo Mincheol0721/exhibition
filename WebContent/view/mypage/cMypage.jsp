@@ -87,10 +87,10 @@
 						<div align="center"></div>
 						<br>
 						<br>
-						<img alt="mypage" src="images/mypage_01.png" style="cursor: pointer" id="info1">	
-						<img alt="mypage" src="images/mypage_02.png" onclick="" style="cursor: pointer" id="info2">
+						<img alt="mypage" src="images/mypage_01.png" style="cursor: pointer" id="cinfo1">	
+						<img alt="mypage" src="images/mypage_02.png" onclick="" style="cursor: pointer" id="cinfo2">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<img alt="mypage" src="images/mypage_03.png" onclick="" style="cursor: pointer" id="info2">
+						<img alt="mypage" src="images/mypage_03.png" onclick="" style="cursor: pointer" id="cinfo2">
 
 				</div>
 
@@ -112,9 +112,9 @@
 			<script src="${path}/assets/js/main.js"></script>
 			
 			<script type="text/javascript">
-				$("#info1").on('click',function(){
+				$("#cinfo1").on('click',function(){
 					
-					location.href = "http://localhost:8090/Exhibition/memberInfo/iInfo.me";
+					location.href = "http://localhost:8090/Exhibition/memberInfo/cInfo.me";
 		    		
 				})
 			</script>
