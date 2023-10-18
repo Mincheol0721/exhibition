@@ -15,7 +15,6 @@
 		<meta charset="UTF-8">
 		<title>2023 부산 진로·취업 박람회</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="${path}/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
@@ -28,7 +27,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">취업 박람회</a></h1>
 								<hr />
 								<p>우수한 기업들과 만나고 새로운 기회를 발견하세요!</p>
 							</header>
@@ -39,7 +38,7 @@
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
@@ -59,52 +58,51 @@
 					<div class="reel">
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="${path}/pic01.jpg" alt="" /></a>
 							<header>
 								<!-- 사진 클릭 시 해당 기업의 채용정보로 이동한다면? -->
-								<a href="#"><img src="../images/index_microsoft.jpg" style="width: 270px;height: 170px;" alt="" /></a>
+								<a href="#"><img src="${path}/images/index_microsoft.jpg" style="width: 270px;height: 170px;" alt="" /></a>
 								<h3>마이크로소프트</h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="${path}/pic02.jpg" alt="" /></a>
 							<header>
-								<a href="#"><img src="../images/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
+								<a href="#"><img src="${path}/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3>스타벅스</h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="${path}/pic03.jpg" alt="" /></a>
 							<header>
-								<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+								<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 								<h3>A병원</h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="${path}/pic04.jpg" alt="" /></a>
 							<header>
-								<a href="#"><img src="../images/index_megacoffee.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
+								<a href="#"><img src="${path}/images/index_megacoffee.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3><a href="#">메가커피</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
 
 						<article>
-							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
-							<header>
+							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 								<h3><a href="#">B병원</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
 
 						<article>
-							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보6</a></h3>
 							</header>
@@ -112,7 +110,7 @@
 						</article>
 
 						<article>
-							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보7</a></h3>
 							</header>
@@ -120,7 +118,7 @@
 						</article>
 
 						<article>
-							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보8</a></h3>
 							</header>
@@ -128,7 +126,7 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
+							<a href="#" class="image featured"><img src="${path}/images/pic04.jpg" alt="" /></a>
 							<header>
 								<h3><a href="#">기업정보9</a></h3>
 							</header>
@@ -136,7 +134,7 @@
 						</article>
 
 						<article>
-							<a href="#"><img src="../images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 							<header>
 								<h3><a href="#">기업정보10</a></h3>
 							</header>
@@ -150,10 +148,10 @@
 				<div class="wrapper style2">
 
 					<article id="main" class="container special">
-						<a href="#" class="image featured"><img src="images/pic06.jpg" alt="" /></a>
+						<a href="#" class="image featured"><img src="${path}/images/pic06.jpg" alt="" /></a>
 						<header>
 							<h2><a href="#"></a></h2>
-						<a href="#" class="image featured"><img src="../images/index_mainPoster.jpg" alt="" /></a>
+						<a href="#" class="image featured"><img src="${path}/images/index_mainPoster.jpg" alt="" /></a>
 						<footer>
 							<a href="eventInfo_main.jsp" class="button">상세 보기</a>
 						</footer>
@@ -176,28 +174,28 @@
 						</header>
 						<div class="row">
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>									
+								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>									
 								<header>
 									<h3><a href="#">채용 공고</a></h3>
 								</header>		
 								<!-- 안내 페이지로 이동 링크 수정해야함 -->					
-								<a href="#" class="image featured"><img src="../images/index_cMember.jpg" alt="" /></a>															
+								<a href="#" class="image featured"><img src="${path}/images/index_cMember.jpg" alt="" /></a>															
 							</article>
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>							
+								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>							
 								<header>
 									<h3><a href="#">취업 특강</a></h3>
 								</header>
 								<!-- 안내 페이지로 이동 링크 수정해야함 -->
-								<a href="#" class="image featured"><img src="../images/index_jobLecture.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="${path}/images/index_jobLecture.jpg" alt="" /></a>
 							</article>
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>							
+								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>							
 								<header>
 									<h3><a href="#">직업 체험 프로그램</a></h3>
 								</header>
 								<!-- 안내 페이지로 이동 링크 수정해야함 -->
-								<a href="#" class="image featured"><img src="../images/index_cjobExp.jpg" alt="" /></a>
+								<a href="#" class="image featured"><img src="${path}/images/index_cjobExp.jpg" alt="" /></a>
 							</article>
 						</div>
 					</section>
@@ -206,7 +204,7 @@
 
 			<!-- Footer -->
 				<div id="footer">
-					<jsp:include page="../inc/footer.jsp" />
+					<jsp:include page="/inc/footer.jsp" />
 				</div>
 
 		</div>
