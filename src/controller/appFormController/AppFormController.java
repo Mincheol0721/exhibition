@@ -57,9 +57,9 @@ public class AppFormController extends HttpServlet {
 	    if(request.getParameter("pageNum") != null) {
 	    	pageNum = Integer.parseInt(request.getParameter("pageNum"));
 	    }
-	    int pageSize = 5;
+	    int pageSize = 6;
 	    if(request.getParameter("pageSize") != null) {
-	    	Integer.parseInt(request.getParameter("pageSize"));
+	    	pageSize = Integer.parseInt(request.getParameter("pageSize"));
 	    }
 	    String cname = request.getParameter("cname");
 	    String name = request.getParameter("name");
@@ -71,12 +71,12 @@ public class AppFormController extends HttpServlet {
 	    String eduStat = request.getParameter("eduStat");
 	    
 	    String action = request.getPathInfo();
-		System.out.println("AppFormController 2단계 요청주소: " + action);
 		
 
 		try {
 			
 			if(action.equals("/getList.do")) {
+				System.out.println("AppFormController 2단계 요청주소: " + action);
 				System.out.println("con pagenum: " + pageNum);
 				System.out.println("con pagesize: " + pageSize);
 				System.out.println("con cname: " + cname);
@@ -88,15 +88,36 @@ public class AppFormController extends HttpServlet {
 				
 				nextPage = "/view/appForm/appFormList.jsp";
 				
-			} 
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
+			} else if(action.equals("/getAppForm.do")) {
+				System.out.println("AppFormController 2단계 요청주소: " + action);
+//				ssn = request.getParameter("ssn");
+				System.out.println("ssn: " + ssn);
+				
+				vo = as.getAppForm(ssn);
+				List<AppFormVO> careerExp = as.getCareerExp(ssn);
+				List<AppFormVO> license = as.getLicense(ssn);
+				List<AppFormVO> training = as.getTraining(ssn);
+				
+				request.setAttribute("vo", vo);
+				request.setAttribute("carExp", careerExp);
+				request.setAttribute("license", license);
+				request.setAttribute("training", training);
+				
+				nextPage = "/view/appForm/viewAppForm.jsp?ssn=" + ssn; 
+				System.out.println("nextPage: " + nextPage);
+				
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-		dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 		
 	}
 	

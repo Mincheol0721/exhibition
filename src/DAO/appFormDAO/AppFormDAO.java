@@ -105,35 +105,7 @@ public class AppFormDAO {
 			try {
 				con = ds.getConnection();
 				
-				query = "select count(*) from (SELECT ROWNUM AS rn, a.* " + 
-						"						FROM ( " + 
-						"							SELECT " + 
-						"						        af.name AS name, " + 
-						"						        af.ssn AS ssn, " + 
-						"						        af.cname AS acname, " + 
-						"						        af.addr AS addr, " + 
-						"						        af.tel AS tel, " + 
-						"						        af.milServ AS milServ, " + 
-						"						        af.edu AS edu, " + 
-						"						        af.eduStat AS eduStat, " + 
-						"						        ce.cname AS cname, " + 
-						"						        ce.startDate AS cstartDate, " + 
-						"						        ce.endDate AS cendDate, " + 
-						"						        ce.damdang AS damdang, " + 
-						"						        l.lname AS lname, " + 
-						"						        l.lnum AS lnum, " + 
-						"						        l.getDate AS getDate, " + 
-						"						        l.pub AS publisher, " + 
-						"						        t.eduName AS eduName, " + 
-						"						        t.startDate AS eduStartDate, " + 
-						"						        t.endDate AS eduEndDate, " + 
-						"						        t.content AS eduContent " + 
-						"						        FROM appForm af " + 
-						"						        LEFT JOIN careerExp ce ON af.name = ce.name " + 
-						"						        LEFT JOIN license l ON af.name = l.name " + 
-						"						        LEFT JOIN training t ON af.name = t.name " + 
-						"						    ) a " + 
-						"	 					) where cname='" + cname + "'";
+				query = "select count(*) from appform where cname='" + cname + "'";
 				
 				pstmt = con.prepareStatement(query);
 				
@@ -174,22 +146,31 @@ public class AppFormDAO {
 						"        af.milServ AS milServ, " + 
 						"        af.edu AS edu, " + 
 						"        af.eduStat AS eduStat, " + 
-						"        ce.cname AS cname, " + 
-						"        ce.startDate AS cstartDate, " + 
-						"        ce.endDate AS cendDate, " + 
-						"        ce.damdang AS damdang, " + 
-						"        l.lname AS lname, " + 
-						"        l.lnum AS lnum, " + 
-						"        l.getDate AS getDate, " + 
-						"        l.pub AS publisher, " + 
-						"        t.eduName AS eduName, " + 
-						"        t.startDate AS eduStartDate, " + 
-						"        t.endDate AS eduEndDate, " + 
-						"        t.content AS eduContent " + 
+						"        MAX(ce.cname) AS cname, " + 
+						"        MAX(ce.startDate) AS cstartDate, " + 
+						"        MAX(ce.endDate) AS cendDate, " + 
+						"        MAX(ce.damdang) AS damdang, " + 
+						"        MAX(l.lname) AS lname, " + 
+						"        MAX(l.lnum) AS lnum, " + 
+						"        MAX(l.getDate) AS getDate, " + 
+						"        MAX(l.pub) AS publisher, " + 
+						"        MAX(t.eduName) AS eduName, " + 
+						"        MAX(t.startDate) AS eduStartDate, " + 
+						"        MAX(t.endDate) AS eduEndDate, " + 
+						"        MAX(t.content) AS eduContent" + 
 						"        FROM appForm af " + 
 						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
 						"        LEFT JOIN license l ON af.name = l.name " + 
-						"        LEFT JOIN training t ON af.name = t.name " + 
+						"        LEFT JOIN training t ON af.name = t.name " +
+						"		 GROUP BY " + 
+						"            af.name, " + 
+						"            af.ssn, " + 
+						"            af.cname, " + 
+						"            af.addr, " + 
+						"            af.tel, " + 
+						"            af.milServ, " + 
+						"            af.edu, " + 
+						"            af.eduStat" + 
 						"    ) a" + 
 						"    WHERE a.acname='" + cname + "' and " + 
 						" ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
@@ -237,17 +218,70 @@ public class AppFormDAO {
 		}//getAppFormList
 		
 		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
-		public AppFormVO getAppForm(String cname) {
+		public AppFormVO getAppForm(String ssn) {
+			List<AppFormVO> list = new ArrayList<AppFormVO>();
 			try {
 				con = ds.getConnection();
-				query = "select * from AppForm where cname=" + cname;
+				query = "SELECT * " + 
+						"FROM ( " + 
+						"    SELECT ROWNUM AS rn, a.* " + 
+						"    FROM ( " + 
+						"	 SELECT " + 
+						"        af.name AS name, " + 
+						"        af.ssn AS ssn, " + 
+						"        af.cname AS acname, " + 
+						"        af.addr AS addr, " + 
+						"        af.tel AS tel, " + 
+						"        af.milServ AS milServ, " + 
+						"        af.edu AS edu, " + 
+						"        af.eduStat AS eduStat, " + 
+						"        ce.cname AS cname, " + 
+						"        ce.startDate AS cstartDate, " + 
+						"        ce.endDate AS cendDate, " + 
+						"        ce.damdang AS damdang, " + 
+						"        l.lname AS lname, " + 
+						"        l.lnum AS lnum, " + 
+						"        l.getDate AS getDate, " + 
+						"        l.pub AS publisher, " + 
+						"        t.eduName AS eduName, " + 
+						"        t.startDate AS eduStartDate, " + 
+						"        t.endDate AS eduEndDate, " + 
+						"        t.content AS eduContent" + 
+						"        FROM appForm af " + 
+						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
+						"        LEFT JOIN license l ON af.name = l.name " + 
+						"        LEFT JOIN training t ON af.name = t.name " +
+						"    ) a" + 
+						"    WHERE a.ssn='" + ssn + "')"; 
+						
 				
 				pstmt = con.prepareStatement(query);
+				
 				
 				rs = pstmt.executeQuery();
 				
 				if(rs.next()) {
 					vo = new AppFormVO();
+					vo.setName(rs.getString("name"));
+					vo.setSsn(rs.getString("ssn"));
+					vo.setAddr(rs.getString("addr")); 
+					vo.setTel(rs.getString("tel")); 
+					vo.setMilServ(rs.getString("milServ")); 
+					vo.setEdu(rs.getString("edu")); 
+					vo.setEduStat(rs.getString("eduStat"));
+					vo.setCname(rs.getString("cname"));
+					vo.setCstartDate(rs.getString("cstartDate"));
+					vo.setCendDate(rs.getString("cendDate"));
+					vo.setDamdang(rs.getString("damdang"));
+					vo.setLname(rs.getString("lname"));
+					vo.setLnum(rs.getString("lnum"));
+					vo.setGetDate(rs.getString("getDate"));
+					vo.setPub(rs.getString("publisher"));
+					vo.setEduName(rs.getString("eduname"));
+					vo.setTstartDate(rs.getString("edustartdate"));
+					vo.setTendDate(rs.getString("eduenddate"));
+					vo.setContent(rs.getString("educontent"));
+					
 				}
 			
 			} catch (Exception e) {
@@ -259,6 +293,192 @@ public class AppFormDAO {
 			return vo;
 		}
 		
+		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
+		public List<AppFormVO> getCareerExp(String ssn) {
+			List<AppFormVO> list = new ArrayList<AppFormVO>();
+			try {
+				con = ds.getConnection();
+				query = "SELECT * " + 
+						"FROM ( " + 
+						"    SELECT ROWNUM AS rn, a.* " + 
+						"    FROM ( " + 
+						"	 SELECT " + 
+						"        af.name AS name, " + 
+						"        af.ssn AS ssn, " + 
+						"        af.cname AS acname, " + 
+						"        af.addr AS addr, " + 
+						"        af.tel AS tel, " + 
+						"        af.milServ AS milServ, " + 
+						"        af.edu AS edu, " + 
+						"        af.eduStat AS eduStat, " + 
+						"        ce.cname AS cname, " + 
+						"        ce.startDate AS cstartDate, " + 
+						"        ce.endDate AS cendDate, " + 
+						"        ce.damdang AS damdang, " + 
+						"        l.lname AS lname, " + 
+						"        l.lnum AS lnum, " + 
+						"        l.getDate AS getDate, " + 
+						"        l.pub AS publisher, " + 
+						"        t.eduName AS eduName, " + 
+						"        t.startDate AS eduStartDate, " + 
+						"        t.endDate AS eduEndDate, " + 
+						"        t.content AS eduContent" + 
+						"        FROM appForm af " + 
+						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
+						"        LEFT JOIN license l ON af.name = l.name " + 
+						"        LEFT JOIN training t ON af.name = t.name " +
+						"    ) a" + 
+						"    WHERE a.ssn='" + ssn + "')"; 
+				
+				
+				pstmt = con.prepareStatement(query);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo = new AppFormVO();
+					
+					vo.setCname(rs.getString("cname"));
+					vo.setCstartDate(rs.getString("cstartDate"));
+					vo.setCendDate(rs.getString("cendDate"));
+					vo.setDamdang(rs.getString("damdang"));
+					
+					list.add(vo);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("AppFormDAO내부 getCareerExp에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return list;
+		}
+		
+		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
+		public List<AppFormVO> getLicense(String ssn) {
+			List<AppFormVO> list = new ArrayList<AppFormVO>();
+			try {
+				con = ds.getConnection();
+				query = "SELECT * " + 
+						"FROM ( " + 
+						"    SELECT ROWNUM AS rn, a.* " + 
+						"    FROM ( " + 
+						"	 SELECT " + 
+						"        af.name AS name, " + 
+						"        af.ssn AS ssn, " + 
+						"        af.cname AS acname, " + 
+						"        af.addr AS addr, " + 
+						"        af.tel AS tel, " + 
+						"        af.milServ AS milServ, " + 
+						"        af.edu AS edu, " + 
+						"        af.eduStat AS eduStat, " + 
+						"        ce.cname AS cname, " + 
+						"        ce.startDate AS cstartDate, " + 
+						"        ce.endDate AS cendDate, " + 
+						"        ce.damdang AS damdang, " + 
+						"        l.lname AS lname, " + 
+						"        l.lnum AS lnum, " + 
+						"        l.getDate AS getDate, " + 
+						"        l.pub AS publisher, " + 
+						"        t.eduName AS eduName, " + 
+						"        t.startDate AS eduStartDate, " + 
+						"        t.endDate AS eduEndDate, " + 
+						"        t.content AS eduContent" + 
+						"        FROM appForm af " + 
+						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
+						"        LEFT JOIN license l ON af.name = l.name " + 
+						"        LEFT JOIN training t ON af.name = t.name " +
+						"    ) a" + 
+						"    WHERE a.ssn='" + ssn + "')"; 
+						
+				
+				pstmt = con.prepareStatement(query);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo = new AppFormVO();
+					vo.setLname(rs.getString("lname"));
+					vo.setLnum(rs.getString("lnum"));
+					vo.setGetDate(rs.getString("getDate"));
+					vo.setPub(rs.getString("publisher"));
+					
+					list.add(vo);
+				}
+			
+			} catch (Exception e) {
+				System.out.println("AppFormDAO내부 getAppForm에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return list;
+		}
+
+		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
+		public List<AppFormVO> getTraining(String ssn) {
+			List<AppFormVO> list = new ArrayList<AppFormVO>();
+			try {
+				con = ds.getConnection();
+				query = "SELECT * " + 
+						"FROM ( " + 
+						"    SELECT ROWNUM AS rn, a.* " + 
+						"    FROM ( " + 
+						"	 SELECT " + 
+						"        af.name AS name, " + 
+						"        af.ssn AS ssn, " + 
+						"        af.cname AS acname, " + 
+						"        af.addr AS addr, " + 
+						"        af.tel AS tel, " + 
+						"        af.milServ AS milServ, " + 
+						"        af.edu AS edu, " + 
+						"        af.eduStat AS eduStat, " + 
+						"        ce.cname AS cname, " + 
+						"        ce.startDate AS cstartDate, " + 
+						"        ce.endDate AS cendDate, " + 
+						"        ce.damdang AS damdang, " + 
+						"        l.lname AS lname, " + 
+						"        l.lnum AS lnum, " + 
+						"        l.getDate AS getDate, " + 
+						"        l.pub AS publisher, " + 
+						"        t.eduName AS eduName, " + 
+						"        t.startDate AS eduStartDate, " + 
+						"        t.endDate AS eduEndDate, " + 
+						"        t.content AS eduContent" + 
+						"        FROM appForm af " + 
+						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
+						"        LEFT JOIN license l ON af.name = l.name " + 
+						"        LEFT JOIN training t ON af.name = t.name " +
+						"    ) a" + 
+						"    WHERE a.ssn='" + ssn + "')"; 
+						
+				
+				pstmt = con.prepareStatement(query);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo = new AppFormVO();
+					vo.setEduName(rs.getString("eduname"));
+					vo.setTstartDate(rs.getString("edustartdate"));
+					vo.setTendDate(rs.getString("eduenddate"));
+					vo.setContent(rs.getString("educontent"));
+					
+					list.add(vo);
+				}
+			
+			} catch (Exception e) {
+				System.out.println("AppFormDAO내부 getAppForm에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return list;
+		}
 		
 		
 }

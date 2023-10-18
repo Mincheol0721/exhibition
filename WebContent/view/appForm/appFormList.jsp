@@ -31,7 +31,7 @@
 	int count = dao.getAppFormCount(cname); 
 	System.out.println("count: " + count);
 	//하나의 화면에 띄워줄 글 개수 10
-	int pageSize = 5;
+	int pageSize = 6;
 	
 	//현재 보여질 페이지번호 가져오기
 	String pageNum = request.getParameter("pageNum");
@@ -74,21 +74,22 @@
 		<style type="text/css">
 			.layout {
 			  width: 100%;
-			  margin: 20px auto;
-			  display: flex;
-			  flex-wrap: wrap;
+			  display: grid;
+			  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 			  gap: 8px;
 			}
 			.card {
+			  position: relative;
+			  display: flex;
 			  width: 350px;
 			  height: 250px;
 			  background-image: linear-gradient(-45deg, #f89b29 0%, #ff0f7b 100% );
+			  margin: 10px auto;
+			  perspective: 1000px;
+			  align-items: center;
+			  justify-content: center;
 			  border-radius: 10px;
-			  display: flex;
 			  padding: 10px 30px;
-			  flex-direction: column;
-			  flex-grow: 3;
-			  gap: 10px;
 			  align-items: center;
 			  justify-content: center;
 			  overflow: hidden;
@@ -207,12 +208,15 @@
 								<h2>입사지원서</h2>
 								<div class="layout">
 	 								<c:forEach var="vo" items="${list}">
+									<form action="${path}/appForm/getAppForm.do" method="post">
+										<input type="hidden" name="ssn" value="${vo.ssn}">
 										<div class="card">
 											<p class="heading">${vo.name}</p>
 											<p class="para">${vo.addr}</p>
 											<div class="overlay"></div>
-											<button class="card-btn" onclick="location.href='${path}/view/viewAppFormList'">Click</button>
+											<button type="submit" class="card-btn" style="color: black;">Click</button>
 										</div>
+									</form>
 									</c:forEach>
 								</div>
 						<div class="container-fluid">
@@ -248,7 +252,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/appForm/getList.do?cname=<%=cname%>&pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -256,11 +260,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/appForm/getList.do?cname=<%=cname%>&pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item"><a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item"><a href="${path}/appForm/getList.do?cname=<%=cname%>&pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -269,7 +273,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/view/appForm/appFormList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/appForm/getList.do?cname=<%=cname%>&pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

@@ -21,5 +21,21 @@ public class AppFormService {
 		return list;
 	}
 
+	public AppFormVO getAppForm(String ssn) {
+		return dao.getAppForm(ssn);
+	}
+
+	public List<AppFormVO> getCareerExp(String ssn) {
+		return dao.getCareerExp(ssn);
+	}
+
+	public List<AppFormVO> getLicense(String ssn) {
+		return dao.getLicense(ssn);
+	}
+
+	public List<AppFormVO> getTraining(String ssn) {
+		return dao.getTraining(ssn);
+	}
+
 	
 }
