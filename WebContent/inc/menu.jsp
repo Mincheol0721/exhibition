@@ -74,7 +74,7 @@
 			<li>
 				<a href="#">직업체험</a>
 				<ul>
-					<li><a href="http://localhost:8090/exhibition/cjobExp/cjobExpBoard.do">직업체험</a></li>
+					<li><a href="${path}/cjobExp/cjobExpBoard.do">직업체험</a></li>
 					<li><a href="#">부대행사</a></li>
 				</ul>
 			</li>
