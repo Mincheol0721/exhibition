@@ -45,6 +45,7 @@
 				<ul>
 					<li><a href="${path}/view/eventInfo_main.jsp">행사안내</a></li>
 					<li><a href="${path}/view/guide.jsp">이용안내</a></li>
+					<li><a href="${path}/notice/noticeBoard.do">공지사항</a></li>
 				</ul>
 			</li>
 			<li>
