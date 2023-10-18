@@ -52,6 +52,15 @@ public class EventController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 	    PrintWriter out = response.getWriter();
 	    
+	    //요청한 값 얻기
+	    int pageNum = 1;
+	    if(request.getParameter("pageNum") != null) {
+	    	pageNum = Integer.parseInt(request.getParameter("pageNum"));
+	    }
+	    int pageSize = 5;
+	    if(request.getParameter("pageSize") != null) {
+	    	pageSize = Integer.parseInt(request.getParameter("pageSize"));
+	    }
 	    int no = 0;
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -69,39 +78,38 @@ public class EventController extends HttpServlet {
 		try {
 			
 			if(action.equals("/getList.do")) {
-				//요청한 값 얻기
-			    int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-			    int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-				System.out.println("con pagenum: " + pageNum);
-				System.out.println("con pagesize: " + pageSize);
-				
-				JSONArray jsonArray = new JSONArray(); // [ ]
-				
 				list = es.getEventList(pageNum, pageSize); 
 				System.out.println("list개수: " + list.size());
 				
-				for( EventVO vo : list ) { 
-					JSONObject jsonObject = new JSONObject();
-					
-					jsonObject.put("no", vo.getNo());
-					jsonObject.put("title", vo.getTitle());
-					jsonObject.put("content", vo.getContent());
-					jsonObject.put("ipart", vo.getIpart());
-					jsonObject.put("reqTime", vo.getReqTime());
-					jsonObject.put("startTime", vo.getStartTime());
-					jsonObject.put("endTime", vo.getEndTime());
-					jsonObject.put("service", vo.getService());
-					jsonObject.put("locate", vo.getLocate());
-					
-					jsonArray.add(jsonObject);
-					
-				} //for
-				
-				out.print(jsonArray.toString());
-				
 				request.setAttribute("list", list);
 				
-				return;
+				nextPage = "/view/event/eventList.jsp";
+				
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
+			} else if(action.equals("/getEvent.do")) {
+				no = Integer.parseInt( request.getParameter("no") );
+				vo = es.getEvent(no);
+				
+				request.setAttribute("vo", vo);
+				
+				nextPage = "/view/event/viewEvent.jsp?no=" + no;
+				
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
+			} else if(action.equals("/modEventPage.do")) {
+				no = Integer.parseInt( request.getParameter("no") );
+				
+				nextPage = "/view/event/modEvent.jsp?no=" + no;
+				
+				System.out.println("nextPage: " + nextPage);
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/modEvent.do")) {
 				no = Integer.parseInt( request.getParameter("no") );
@@ -111,16 +119,21 @@ public class EventController extends HttpServlet {
 				
 				es.updateEvent(vo);
 				
-				nextPage = "/view/eventList.jsp";
+				nextPage = "/event/getList.do";
 				System.out.println("nextPage: " + nextPage);
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/delEvent.do")) {
 				no = Integer.parseInt( request.getParameter("no") );
 				es.delEvent(no);
 				
-				nextPage = "/view/eventList.jsp";
+				nextPage = "/event/getList.do";
 				System.out.println("nextPage: " + nextPage);
-				
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 			} else if(action.equals("/reg.do")) {
 				System.out.println("action값: " + action);
 				
@@ -134,17 +147,23 @@ public class EventController extends HttpServlet {
 				vo.setLocate(locate);
 				
 				es.regEvent(vo);
-				nextPage = "/view/eventList.jsp";
+				nextPage = "/event/getList.do";
 				System.out.println("nextPage: " + nextPage);
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+			} else if(action.equals("/eventReg.do")) {
+				
+				nextPage = "/view/event/eventReg.jsp";
+				System.out.println("nextPage: " + nextPage);
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-		dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 		
 	}
 	

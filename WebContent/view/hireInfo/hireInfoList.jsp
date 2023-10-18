@@ -56,32 +56,7 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				$.ajax({
-					url: '<%=request.getContextPath()%>/hireInfo/getList.do',
-					data: {pageNum:<%=pageNum%>, pageSize:<%=pageSize%>},
-					async: false,
-					type: 'POST',
-					dataType: 'json',
-					success: function(data) {
-						$.each(data, function(index, vo) {
-							$('.layout').append('<div class="card" onclick="location.href=\'${path}/view/hireInfo/viewHireInfo.jsp?cname=' + vo.cname + '\'">'
-													+ '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg>'
-													+ '<div class="card__content">'
-														+ '<p class="card__title"> ' + vo.cname + ' </p>'
-														+ '<p class="card__description">'
-															+ '<ul>'
-																+ '<li>사업체구분: ' + vo.divComp + '</li>'
-																+ '<li>모집직종: ' + vo.jobtype + '</li>'
-																+ '<li>근무시간: ' + vo.workTime + '</li>'
-																+ '<li>근무지역: ' + vo.legal + '</li>'
-																+ '<li>전화번호: ' + vo.htel+ '</li>'
-															+ '</ul>'
-														+ '</p>'
-													+ '</div>'
-												+ '</div>');
-						})
-					}
-				});
+				
 			});
 		</script>
 		<style type="text/css">
@@ -187,7 +162,25 @@
 						<article id="main" class="special">
 							<header>
 								<h2>채용정보 조회</h2>
-								<section class="layout"></section>
+								<section class="layout">
+									<c:forEach var="vo" items="${list}">
+									<div class="card" onclick="location.href='${path}/hireInfo/viewHireInfo.do?cname=${vo.cname}'">
+										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg>
+										<div class="card__content">
+											<p class="card__title">${vo.cname}</p>
+											<p class="card__description">
+												<ul>
+													<li>사업체구분: ${vo.divComp} </li>
+													<li>모집직종: ${vo.jobtype} </li>
+													<li>근무시간: ${vo.workTime} </li>
+													<li>근무지역: ${vo.legal} </li>
+													<li>전화번호: ${vo.htel} </li>
+												</ul>
+											</p>
+										</div>
+									</div>
+									</c:forEach>
+								</section>
 							
 						<div class="container-fluid">
 							<div class="row">
@@ -222,7 +215,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/view/hireInfo/hireInfoList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/hireInfo/getList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -230,11 +223,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/view/hireInfo/hireInfoList.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/hireInfo/getList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item"><a href="${path}/view/hireInfo/hireInfoList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item "><a href="${path}/hireInfo/getList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -243,7 +236,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/view/hireInfo/hireInfoList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/hireInfo/getList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

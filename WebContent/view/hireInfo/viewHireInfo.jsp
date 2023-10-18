@@ -64,48 +64,43 @@
 								<h2>채용정보 상세보기</h2>
 								<br>
 								<br>
-								<form action="${path}/view/hireInfo/modHireInfo.jsp" method="post">
-									<input type="hidden" name="cname" value="<%=vo.getCname()%>">
-									<table style="border:1px solid gray; border-collapse: collapse;">
-										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">기업명</th>
-											<td><%=vo.getCname()%></td>
-											<th style="border:1px solid gray;">대표자명</th>
-											<td><%=vo.getCname()%></td>
-										</tr>
-										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">주소</th>
-											<td colspan="3" style="text-align: left; padding-left: 20px;"><%=vo.getHomepage()%></td>
-										</tr>
-										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">홈페이지</th>
-											<td colspan="3" style="text-align: left; padding-left: 20px;">
-												<a href="<%=vo.getHomepage()%>" style="text-decoration: none;"><%=vo.getHomepage()%></a>
-											</td>
-										</tr>
-										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">모집 직종</th>
-											<td><%=vo.getJobtype()%></td>
-											<th style="border:1px solid gray;">전화번호</th>
-											<td><%=vo.getHtel()%></td>
-										</tr>
-										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">근무지역</th>
-											<td><%=vo.getLegal()%></td>
-											<th style="border:1px solid gray;">근무시간</th>
-											<td><%=vo.getWorkTime()%></td>
-										</tr>
-										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">모집전형</th>
-											<td><%=vo.getAppType()%>접수</td>
-											<th style="border:1px solid gray;">접수기간</th>
-											<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%></td>
-										</tr>
-									</table>
-									<input type="button" value="글목록" onclick="location.href='${path}/view/hireInfo/hireInfoList.jsp'">
-									<button type="submit">수정하기</button>
-									<button type="button" onclick="location.href='${path}/hireInfo/del.do?cname=<%=cname%>'">삭제하기</button>
-								</form>
+								<table style="border:1px solid gray; border-collapse: collapse;">
+									<tr style="border:1px solid gray;">
+										<th style="border:1px solid gray;">기업명</th>
+										<td><%=vo.getCname()%></td>
+										<th style="border:1px solid gray;">대표자명</th>
+										<td><%=vo.getCname()%></td>
+									</tr>
+									<tr style="border:1px solid gray;">
+										<th style="border:1px solid gray;">주소</th>
+										<td colspan="3" style="text-align: left; padding-left: 20px;"><%=vo.getHomepage()%></td>
+									</tr>
+									<tr style="border:1px solid gray;">
+										<th style="border:1px solid gray;">홈페이지</th>
+										<td colspan="3" style="text-align: left; padding-left: 20px;">
+											<a href="<%=vo.getHomepage()%>" style="text-decoration: none;"><%=vo.getHomepage()%></a>
+										</td>
+									</tr>
+									<tr style="border:1px solid gray;">
+										<th style="border:1px solid gray;">모집 직종</th>
+										<td><%=vo.getJobtype()%></td>
+										<th style="border:1px solid gray;">전화번호</th>
+										<td><%=vo.getHtel()%></td>
+									</tr>
+									<tr style="border:1px solid gray;">
+										<th style="border:1px solid gray;">근무지역</th>
+										<td><%=vo.getLegal()%></td>
+										<th style="border:1px solid gray;">근무시간</th>
+										<td><%=vo.getWorkTime()%></td>
+									</tr>
+									<tr style="border:1px solid gray;">
+										<th style="border:1px solid gray;">모집전형</th>
+										<td><%=vo.getAppType()%>접수</td>
+										<th style="border:1px solid gray;">접수기간</th>
+										<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%></td>
+									</tr>
+								</table>
+								<input type="button" value="글목록" onclick="javascript:history.go(-1)">
 							</header>
 						</article>
 					</div>

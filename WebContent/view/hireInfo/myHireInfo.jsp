@@ -65,8 +65,7 @@
 								<h2>MY 채용정보</h2>
 								<br>
 								<br>
-								<form action="${path}/view/hireInfo/modHireInfo.jsp" method="post">
-									<input type="hidden" name="cname" value="<%=vo.getCname()%>">
+								<form action="${path}/hireInfo/modPage.do?cname=<%=vo.getCname()%>" method="post">
 									<table style="border:1px solid gray; border-collapse: collapse;">
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">기업명</th>

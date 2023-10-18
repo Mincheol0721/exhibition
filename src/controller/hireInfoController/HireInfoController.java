@@ -56,6 +56,8 @@ public class HireInfoController extends HttpServlet {
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    
 		//요청할 값 얻기
+	    int pageNum = 1;
+	    int pageSize = 9;
 		String cname = request.getParameter("cname");
 		String divComp = request.getParameter("divComp");
 		String htel = request.getParameter("htel");
@@ -87,39 +89,40 @@ public class HireInfoController extends HttpServlet {
 				vo.setAppexpire(appexpire);
 				
 				his.regHireInfo(vo);
-				nextPage = "/view/hireInfoList.jsp";
+				nextPage = "/view/hireInfo/myHireInfo.jsp?cname=" + cname;
+				System.out.println("nextPage: " + nextPage);
+				
+			} else if (action.equals("/regPage.do")) {
+				
+				System.out.println("cname: " + cname);
+				nextPage = "/view/hireInfo/hireInfoReg.jsp?cname="+cname;
+				
+			} else if (action.equals("/viewHireInfo.do")) {
+				
+				System.out.println("cname: " + cname);
+				nextPage = "/view/hireInfo/viewHireInfo.jsp?cname="+cname;
+				
+			} else if (action.equals("/myHireInfo.do")) {
+				
+				System.out.println("cname: " + cname);
+				nextPage = "/view/hireInfo/myHireInfo.jsp?cname="+cname;
 				System.out.println("nextPage: " + nextPage);
 				
 			} else if (action.equals("/getList.do")) {
-				
-				int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-				int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-				
-				JSONArray jsonArray = new JSONArray(); // [ ]
+				if(request.getParameter("pageNum") != null) pageNum = Integer.parseInt(request.getParameter("pageNum"));
 				
 				List<HireInfoVO> list = his.getHireInfoList(pageNum, pageSize); 
 				
-				for( HireInfoVO vo : list ) {
-					JSONObject jsonObject = new JSONObject();
-					
-					jsonObject.put("cname", vo.getCname());
-					jsonObject.put("htel", vo.getHtel());
-					jsonObject.put("divComp", vo.getDivComp());
-					jsonObject.put("homepage", vo.getHomepage());
-					jsonObject.put("jobtype", vo.getJobtype());
-					jsonObject.put("workTime", vo.getWorkTime());
-					jsonObject.put("legal", vo.getLegal());
-					jsonObject.put("appType", vo.getAppType());
-					jsonObject.put("appstart", vo.getAppstart());
-					jsonObject.put("appexpire", vo.getAppexpire());
-					
-					jsonArray.add(jsonObject);
-					
-				} //for
+				request.setAttribute("list", list);
 				
-				out.print(jsonArray.toString());
+				nextPage = "/view/hireInfo/hireInfoList.jsp";
 				
-				return;
+			} else if(action.equals("/modPage.do")) {
+				System.out.println("cname: " + cname);
+				
+				nextPage = "/view/hireInfo/modHireInfo.jsp?cname=" + cname;
+				System.out.println("nextPage: " + nextPage);
+
 			} else if(action.equals("/mod.do")) {
 				vo.setCname(cname); vo.setDivComp(divComp); vo.setHomepage(homepage);
 				vo.setHtel(htel); vo.setJobtype(jobtype); vo.setLegal(legal); vo.setWorkTime(workTime);
@@ -127,13 +130,14 @@ public class HireInfoController extends HttpServlet {
 				
 				his.updateHireInfo(vo);
 				
-				nextPage = "/view/myHireInfo.jsp";
+				nextPage = "/view/hireInfo/myHireInfo.jsp";
 				System.out.println("nextPage: " + nextPage);
 				
 			} else if(action.equals("/del.do")) {
+				System.out.println("cname: " + cname);
 				his.delHireInfo(cname);
 				
-				nextPage = "/view/hireInfoList.jsp";
+				nextPage = "/view/index.jsp";
 				System.out.println("nextPage: " + nextPage);
 				
 			}
@@ -141,7 +145,7 @@ public class HireInfoController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 		dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드

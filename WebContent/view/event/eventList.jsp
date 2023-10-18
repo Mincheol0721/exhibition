@@ -67,47 +67,25 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				$.ajax({
-					url: '<%=request.getContextPath()%>/event/getList.do',
-					data: {pageNum:<%=pageNum%>, pageSize:<%=pageSize%>},
-					async: false,
-					type: 'POST',
-					dataType: 'json',
-					success: function(data) {
-						$.each(data, function(index, vo) {
-							$('.layout').append('<div class="myCard" onclick="location.href=\'${path}/view/event/viewEvent.jsp?no=' + vo.no + '\'">' 
-													+ '<div class="innerCard">'
-														+ '<div class="frontSide"> '
-															+ '<p class="title"> ' + vo.title + ' </p>'
-															+ '<p>' + vo.content + '</p>'
-														+ '</div>'
-														+ '<div class="backSide"> '
-															+ '<p><ul>'
-																+ '<li>대상: ' + vo.ipart + '</li>'
-																+ '<li>소요시간: ' + vo.reqTime + '</li>'
-																+ '<li>이용시간: ' + vo.startTime + ' ~ ' + vo.endTime + '</li>'
-																+ '<li>제공서비스: ' + vo.service + '</li>'
-																+ '<li>장소: ' + vo.locate + '</li>'
-																+ '<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/view/event/modEvent.jsp?no=' + vo.no + '\'">'
-																+ '수정하기'
-																+ '</button> &nbsp;&nbsp;&nbsp;'
-																+ '<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="location.href=\'${path}/event/delEvent.do?no=' + vo.no + '\'">'
-																+ '삭제하기'
-																+ '</button>'
-															+ '</ul></p>'
-														+ '</div>'
-													+ '</div>'
-												+ '</div>');
-						})
-					}
-				});//ajax
-				
 				if('${id}' != null && <%=isAdmin%> == 1) {
 					$('.adminBtn').show();
 				} else {
 					$('.adminBtn').hide();
 				}
+				
 			});
+			function view(no) {
+				location.href= '<%=request.getContextPath()%>/event/getEvent.do?no=' + no;
+			}
+			
+			function mod(no) {
+				location.href= '<%=request.getContextPath()%>/event/modEventPage.do?no=' + no;
+			}
+			
+			function view(no) {
+				location.href= '<%=request.getContextPath()%>/event/delEvent.do?no=' + no;
+			}
+			
 		</script>
 		<style type="text/css">
 			.layout {
@@ -283,8 +261,37 @@
 						<article id="main" class="special">
 							<header>
 								<h2>부대행사</h2>
-								<section class="layout"></section>
-								<button type="button" class="adminBtn" onclick="location.href='${path}/view/event/eventReg.jsp'">행사등록</button>
+								<section class="layout">
+									<c:forEach var="vo" items="${list}">
+										<div class="myCard"> 
+											<div class="innerCard">
+												<div class="frontSide">
+													<p class="title">${vo.title}</p>
+													<p>${vo.content}</p>
+												</div>
+												<div class="backSide">
+													<p><ul>
+														<li>대상: ${vo.ipart} </li>
+														<li>소요시간: ${vo.reqTime} </li>
+														<li>이용시간: ${vo.startTime}  ~ ${vo.endTime} </li>
+														<li>제공서비스: ${vo.service} </li>
+														<li>장소: ${vo.locate} </li>
+														<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="view(${vo.no});">
+															글보기
+														</button> &nbsp;&nbsp;&nbsp;
+														<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="mod(${vo.no});">
+															수정하기
+														</button> &nbsp;&nbsp;&nbsp;
+														<button type="button" class="adminBtn" style="background-color: #caf0f8; color: #0077b6;" onclick="del(${vo.no});">
+															삭제하기
+														</button>
+													</ul></p>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</section>
+								<button type="button" class="adminBtn" onclick="location.href='${path}/event/eventReg.do'">행사등록</button>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
@@ -318,7 +325,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/view/event/eventList.jsp?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/event/getList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -326,11 +333,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/view/event/eview/event/ist.jsp?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/event/getList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item"><a href="${path}/view/event/eventList.jsp?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item"><a href="${path}/event/getList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -339,7 +346,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/view/event/eventList.jsp?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/event/getList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}
@@ -354,6 +361,7 @@
 						</article>
 					</div>
 				</div>
+				
 		</div>
 
 	</body>

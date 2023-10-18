@@ -1,3 +1,5 @@
+<%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
+<%@page import="VO.CMemberVO.CMemberVO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -7,6 +9,8 @@
 <% 
 	request.setCharacterEncoding("UTF-8"); 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String cname = request.getParameter("cname");
+	CMemberVO cvo = new HireInfoDAO().getCmemberInfo(cname);
 // 	System.out.println("date: " + sdf.format(new Date()));
 %>
 <c:set var="path"  value="${pageContext.request.contextPath}"  /> 
@@ -17,7 +21,6 @@
 		<title>채용정보 등록</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="${path}/assets/css/main.css" />
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
@@ -26,6 +29,9 @@
 				appstart.on('change', function() {
 					$('#appexpire').attr('min', appstart.val());
 				});
+				
+				$('#divComp').val('<%=cvo.getDivcomp()%>').prop("selected",true);
+				$('#jobtype').val('<%=cvo.getJobtype()%>').prop("selected",true);
 			});
 		</script>
 		<style type="text/css">
@@ -72,16 +78,16 @@
 									<table border="none">
 										<tr>
 											<th>기업명</th>
-											<td><input type="text" name="cname"></td>
+											<td><input type="text" name="cname" value="<%=cvo.getCname()%>"></td>
 										</tr>
 										<tr>
 											<th>전화번호</th>
-											<td><input type="tel" name="htel"></td>
+											<td><input type="tel" name="htel" value="<%=cvo.getCtel()%>"></td>
 										</tr>
 										<tr>
 											<th>사업체구분</th>
 											<td>
-												<select name="divComp">
+												<select name="divComp" id="divComp">
 													<option value="">사업체선택</option>
 													<option value="일반기업">일반기업</option>
 													<option value="공공기관">공공기관</option>

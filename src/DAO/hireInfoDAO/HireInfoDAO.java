@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import VO.CMemberVO.CMemberVO;
 import VO.hireInfoVO.HireInfoVO;
 
 public class HireInfoDAO {
@@ -246,8 +247,8 @@ public class HireInfoDAO {
 	}
 	
 	//DB에 접속하여 cmember테이블에서 cname이 일치하는 행의 데이터를 가져오는 메소드
-	/*public CMemberVO getCmemberInfo(String cname) {
-		
+	public CMemberVO getCmemberInfo(String cname) {
+		CMemberVO cvo = new CMemberVO();
 		try {
 			con = ds.getConnection();
 			query = "SELECT * FROM cMember WHERE cname='" + cname + "'";
@@ -256,7 +257,12 @@ public class HireInfoDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				memtype = rs.getString("memtype");
+				cvo.setCno(rs.getString("cno"));
+				cvo.setCname(rs.getString("cname"));
+				cvo.setCtel(rs.getString("ctel"));
+				cvo.setName(rs.getString("name"));
+				cvo.setDivcomp(rs.getString("divComp"));
+				cvo.setJobtype(rs.getString("jobType"));
 			}
 			
 		} catch (Exception e) {
@@ -265,7 +271,7 @@ public class HireInfoDAO {
 			freeResource();
 		}
 		
-		return vo;
-	}*/
+		return cvo;
+	}
 	
 }

@@ -32,6 +32,10 @@ public class EventService {
 	public void regEvent(EventVO vo) {
 		dao.insertEvent(vo); 
 	}
+
+	public EventVO getEvent(int no) {
+		return dao.getEvent(no);
+	}
 	
 	
 }
