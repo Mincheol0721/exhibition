@@ -17,10 +17,6 @@
 		<script type="text/javascript">
 				
 			$(function() {
-				$('.indReg').hide();
-				$('.compReg').hide();
-				
-				
 				$('#regBtn').children().on('click', function(e) {
 					if($(this).val() == '기업회원') {
 						$('.indReg').hide();
@@ -130,13 +126,13 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">부산 취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">부산 취업 박람회</a></h1>
 							</header>
 						</div>
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
@@ -355,6 +351,7 @@
                                         <select id="jobtype" name="jobtype">
                                         	<option value="">모집직종</option>
                                         	<option value="경영·행정·사무직">경영·행정·사무직</option>
+											<option value="IT·소프트웨어">IT·소프트웨어</option>
                                         	<option value="교육·법률">교육·법률</option>
                                         	<option value="보건·의료직">보건·의료직</option>
                                         	<option value="예술·디자인·방송직">예술·디자인·방송직</option>
@@ -389,13 +386,8 @@
 										</div>
                                     <br>
                                     <b id="jobTypeInput"></b>
-                                   <a href="#" onclick="check2(); return false;" 
-									   type="button"
-										class="bn631-hover bn27">가입하기</a>
-									
-                                     <a href="#" 
-									   type="reset" onclick="top.location='javascript:location.reload()'"
-										class="bn631-hover bn27">다시입력</a>
+                                    <a href="#" onclick="check2(); return false;" type="button" class="bn631-hover bn27">가입하기</a>
+									                  <a href="#" type="reset" class="bn631-hover bn27">다시입력</a>
 								</form>
 							</header>
 					</div>
@@ -404,7 +396,7 @@
 
 			<!-- Footer -->
 				<div id="footer">
-					<jsp:include page="../inc/footer.jsp" />
+					<jsp:include page="/inc/footer.jsp" />
 				</div>
 
 		</div>
