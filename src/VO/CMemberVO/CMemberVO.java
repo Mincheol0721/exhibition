@@ -16,6 +16,8 @@ public class CMemberVO {
     private String addr3; 
     private String addr4;
 	
+	public CMemberVO() {}
+    
     public CMemberVO(String cno, String ctel, String name, String cname, String divcomp, String jobtype,
 			String password, String fileName, String fileRealName, String addr1, String addr2, String addr3,
 			String addr4) {

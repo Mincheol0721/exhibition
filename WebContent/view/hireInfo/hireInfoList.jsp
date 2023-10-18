@@ -45,12 +45,6 @@
 	
 	//날짜 포맷
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	//오늘 날짜 얻기
-	Calendar today = Calendar.getInstance();
-	today.set(Calendar.HOUR_OF_DAY, 0);
-	today.set(Calendar.MINUTE, 0);
-	today.set(Calendar.SECOND, 0);
-	today.set(Calendar.MILLISECOND, 0);
 	
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -67,20 +61,27 @@
 			$(function() {
 				
 			});
+			
+			function view(cname, expireDate) {
+				if(expireDate <= 0) {
+					alert('접수가 끝난 정보입니다. \r\n조회만 됩니다.');
+				}
+				location.href='<%=request.getContextPath()%>/hireInfo/viewHireInfo.do?cname=' + cname + '&expireDate=' + expireDate;
+			}
 		</script>
 		<style type="text/css">
 			.layout {
 			  width: 100%;
 			
 			  display: grid;
-			  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 			  gap: 8px;
 			}
 			.card {
 			  position: relative;
 			  margin: 0 auto;
-			  width: 300px;
-			  height: 250px;
+			  width: 400px;
+			  height: 300px;
 			  background-color: #f2f2f2;
 			  border-radius: 10px;
 			  display: flex;
@@ -173,7 +174,7 @@
 								<h2>채용정보 조회</h2>
 								<section class="layout">
 									<c:forEach var="vo" items="${list}">
-									<div class="card" onclick="location.href='${path}/hireInfo/viewHireInfo.do?cname=${vo.cname}'">
+									<div class="card" onclick="view('${vo.cname}', '${vo.expireDate}')">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg>
 										<div class="card__content">
 											<p class="card__title">${vo.cname}</p>
@@ -184,23 +185,14 @@
 													<li>근무시간: ${vo.workTime} </li>
 													<li>근무지역: ${vo.legal} </li>
 													<li>전화번호: ${vo.htel} </li>
-													<%
-													String todayStr = sdf.format(today.getTime());
-													Date today2 = sdf.parse(todayStr);
-// 													System.out.println("오늘날짜 : " + todayStr);
-													
-													int expireDate = 0;
-													list = (List)request.getAttribute("list");
-													for(HireInfoVO vo2 : list) {
-														Date expire = sdf.parse(vo2.getAppexpire());
-														System.out.println("접수마감일: " + expire);
-														
-														expireDate = (int) ( (expire.getTime() - today2.getTime()) / (24 * 60 * 60 * 1000) );
-													%>
-													<li>D-DAY: <%=expireDate%> </li>
-													<%	
-													}
-													%>
+											<c:choose>
+												<c:when test="${vo.expireDate > 0}">
+													<li>D-Day: ${vo.expireDate}일</li>
+												</c:when>
+												<c:when test="${vo.expireDate <= 0}">
+													<li>D-Day: 마감</li>
+												</c:when>
+											</c:choose>
 												</ul>
 											</p>
 										</div>

@@ -12,8 +12,9 @@
 	System.out.println("cname: " + cname);
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
-		
+	
 	vo = dao.getHireInfo(cname);
+	int dday = vo.getExpireDate();
 %>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -99,7 +100,9 @@
 											<th style="border:1px solid gray;">모집전형</th>
 											<td><%=vo.getAppType()%>접수</td>
 											<th style="border:1px solid gray;">접수기간</th>
-											<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%></td>
+											<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%> 
+												(<% if(dday<=0) { %> 접수마감)<% }else { %> 
+											<%=dday %>일 남음) <% } %> </td>
 										</tr>
 									</table>
 									<button type="submit">수정하기</button>

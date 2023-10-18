@@ -11,7 +11,7 @@
  	String cname = request.getParameter("cname");
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
-		
+	int dday = Integer.parseInt(request.getParameter("expireDate"));
 	vo = dao.getHireInfo(cname);
 %>
 
@@ -97,7 +97,9 @@
 										<th style="border:1px solid gray;">모집전형</th>
 										<td><%=vo.getAppType()%>접수</td>
 										<th style="border:1px solid gray;">접수기간</th>
-										<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%></td>
+										<td><%=vo.getAppstart().substring(0,10)%> ~ <%=vo.getAppexpire().substring(0,10)%> 
+											(<% if(dday <= 0) { %> 접수마감)<% }else { %> 
+											<%=dday %>일 남음) <% } %> </td>
 									</tr>
 								</table>
 								<input type="button" value="글목록" onclick="javascript:history.go(-1)">

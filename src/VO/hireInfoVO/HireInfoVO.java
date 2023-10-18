@@ -1,7 +1,5 @@
 package VO.hireInfoVO;
 
-import java.sql.Date;
-
 public class HireInfoVO {
 	String cname; //기업명
 	String htel; //기업 전화번호
@@ -13,6 +11,7 @@ public class HireInfoVO {
 	String appType; //접수종류(서류, 면접)
 	String appstart; //접수시작일
 	String appexpire; //접수마감일
+	int expireDate; //d-day를 출력하기 위해 저장할 변수
 	
 	public HireInfoVO() {}
 
@@ -119,6 +118,14 @@ public class HireInfoVO {
 
 	public void setAppexpire(String appexpire) {
 		this.appexpire = appexpire;
+	}
+
+	public int getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(int expireDate) {
+		this.expireDate = expireDate;
 	}
 	
 }

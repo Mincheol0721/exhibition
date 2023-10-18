@@ -100,7 +100,9 @@ public class HireInfoController extends HttpServlet {
 			} else if (action.equals("/viewHireInfo.do")) {
 				
 				System.out.println("cname: " + cname);
-				nextPage = "/view/hireInfo/viewHireInfo.jsp?cname="+cname;
+				String expireDate = request.getParameter("expireDate");
+				System.out.println("expiredate: " + expireDate);
+				nextPage = "/view/hireInfo/viewHireInfo.jsp?cname="+cname+"&expireDate="+expireDate;
 				
 			} else if (action.equals("/myHireInfo.do")) {
 				

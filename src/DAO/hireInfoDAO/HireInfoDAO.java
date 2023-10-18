@@ -4,7 +4,10 @@ package DAO.hireInfoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.naming.Context;
@@ -28,6 +31,12 @@ public class HireInfoDAO {
 	private HireInfoVO vo;
 	//쿼리문을 저장할 변수
 	private String query;
+	private Calendar today;
+	private SimpleDateFormat sdf;
+	private String todayStr;
+	private Date today1;
+	private int expireDate;
+	private Date expire;
 	
 	//MemberDAO클래스의 기본생성자
 	//역할 : new MemberDAO(); 객체 생성시 호출되는 생성자로 !!
@@ -121,7 +130,7 @@ public class HireInfoDAO {
 			pstmt = con.prepareStatement(query);
 			
 			rs = pstmt.executeQuery();
-			
+			sdf = new SimpleDateFormat("yyyy-MM-dd");
 			while(rs.next()) {
 				vo = new HireInfoVO( rs.getString("cname"), 
 									 rs.getString("htel"), 
@@ -132,7 +141,26 @@ public class HireInfoDAO {
 									 rs.getString("legal"),
 									 rs.getString("appType"),
 									 rs.getString("appstart"),
-									 rs.getString("appexpire"));		
+									 rs.getString("appexpire"));
+				//오늘 날짜 얻기
+				sdf = new SimpleDateFormat("yyyy-MM-dd");
+				today = Calendar.getInstance();
+				today.set(Calendar.HOUR_OF_DAY, 0);
+				today.set(Calendar.MINUTE, 0);
+				today.set(Calendar.SECOND, 0);
+				today.set(Calendar.MILLISECOND, 0);
+				todayStr = sdf.format(today.getTime());
+				today1 = sdf.parse(todayStr);
+				
+				for(int i=0; i < 1; i++) {
+				
+				expire = sdf.parse(vo.getAppexpire());
+				System.out.println("접수마감일: " + expire);
+				
+				expireDate = (int) ( (expire.getTime() - today1.getTime()) / (24 * 60 * 60 * 1000) );
+				vo.setExpireDate(expireDate);
+				}
+				
 				list.add(vo);
 			}
 			
@@ -166,7 +194,23 @@ public class HireInfoDAO {
 									 rs.getString("appType"),
 									 rs.getString("appstart"),
 									 rs.getString("appexpire"));
-			}
+				}
+			
+			//오늘 날짜 얻기
+			sdf = new SimpleDateFormat("yyyy-MM-dd");
+			today = Calendar.getInstance();
+			today.set(Calendar.HOUR_OF_DAY, 0);
+			today.set(Calendar.MINUTE, 0);
+			today.set(Calendar.SECOND, 0);
+			today.set(Calendar.MILLISECOND, 0);
+			todayStr = sdf.format(today.getTime());
+			today1 = sdf.parse(todayStr);
+			
+			expire = sdf.parse(vo.getAppexpire());
+			System.out.println("expire: " + expire);
+			expireDate = (int) ( (expire.getTime() - today1.getTime()) / (24 * 60 * 60 * 1000) );
+			
+			vo.setExpireDate(expireDate);
 			
 		} catch (Exception e) {
 			System.out.println("HireInfoDAO내부 getHireInfo에서 예외 발생: " + e);
