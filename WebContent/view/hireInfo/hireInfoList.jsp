@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="VO.hireInfoVO.HireInfoVO"%>
 <%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
@@ -5,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path"  value="${pageContext.request.contextPath}"  /> 
 
 <% 
@@ -41,8 +44,14 @@
 	
 	
 	//날짜 포맷
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	//오늘 날짜 얻기
+	Calendar today = Calendar.getInstance();
+	today.set(Calendar.HOUR_OF_DAY, 0);
+	today.set(Calendar.MINUTE, 0);
+	today.set(Calendar.SECOND, 0);
+	today.set(Calendar.MILLISECOND, 0);
+	
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -101,7 +110,7 @@
 			  left: 0;
 			  width: 100%;
 			  height: 100%;
-			  padding: 20px;
+			  padding: 10px;
 			  box-sizing: border-box;
 			  background-color: #f2f2f2;
 			  transform: rotateX(-90deg);
@@ -175,6 +184,23 @@
 													<li>근무시간: ${vo.workTime} </li>
 													<li>근무지역: ${vo.legal} </li>
 													<li>전화번호: ${vo.htel} </li>
+													<%
+													String todayStr = sdf.format(today.getTime());
+													Date today2 = sdf.parse(todayStr);
+// 													System.out.println("오늘날짜 : " + todayStr);
+													
+													int expireDate = 0;
+													list = (List)request.getAttribute("list");
+													for(HireInfoVO vo2 : list) {
+														Date expire = sdf.parse(vo2.getAppexpire());
+														System.out.println("접수마감일: " + expire);
+														
+														expireDate = (int) ( (expire.getTime() - today2.getTime()) / (24 * 60 * 60 * 1000) );
+													%>
+													<li>D-DAY: <%=expireDate%> </li>
+													<%	
+													}
+													%>
 												</ul>
 											</p>
 										</div>
