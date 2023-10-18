@@ -10,7 +10,7 @@ public class CMemberVO {
     private String password; //비밀번호
 	
     public CMemberVO() {}
-    
+  
     //모든 변수를 매개변수로 받는 생성자
     public CMemberVO(String cno, String ctel, String name, String cname, String divcomp, String jobtype,String password) {
 		super();
