@@ -147,11 +147,11 @@
 								<h2>회원가입</h2>
 								<div id="regBtn"> 
 									<button class="bn632-hover bn27" class="regType" value="개인회원">개인회원</button>
-									<button class="bn632-hover bn27" type="text" class="regType" value="기업회원">기업회원</button>
+									<button class="bn632-hover bn27"  class="regType" value="기업회원">기업회원</button>
 								</div>
-								<form action="${path}/Join/addIMember.do" class="indReg" method="post">
+								<form action="${path}/Join/addIMember.do" class="indReg" method="post" enctype="multipart/form-data">
 									<textarea rows="20" cols="150"  readonly="readonly">
-가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
+가. 수집하는 개인정보의 항목첫째, 회사는 회원가입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
 회원가입
 - 이름, 생년월일, 성별, 아이디, 비밀번호, 별명, 연락처(메일주소, 휴대폰 번호 중 선택), 가입인증정보
 만14세 미만 아동 회원가입
@@ -180,7 +180,12 @@
 									<b id="agreeInput" class="regType" ></b>
 									</div>
 									<br>
-									
+									<div class="regdiv">
+                                        <label for="file">프로필사진</label>
+                                        <input class="form-control" id="file" type="file" name="file" />
+                                        <br>
+                                        <br>
+                                    </div>
 									
 									<div class="regdiv">
                                         <label for="id">아이디<span><small id="chkId"></small></span></label>
@@ -207,7 +212,7 @@
                                         <b id="nameInput"></b>
                                     </div>
                                     <div class="regdiv">
-                                        <label for="mobile">전화번호</label>
+                                        <label for="tel">전화번호</label>
                                         <input class="form-control" id="tel" type="tel" name="tel" placeholder="연락처를 '-'없이 적어주세요."/>
                                         <br>
                                         <b id="telInput"></b>
@@ -247,6 +252,7 @@
 										</div>
 										</div>
 										</div>
+										
                                     <br>
                                 
                                     <a href="#" onclick="check(); return false;" 
@@ -261,7 +267,7 @@
 								<br>
 								
 								<!-- 기업회원가입 양식 -->
-								<form action="${path}/Join/addCMember.do" class="compReg" method="post">
+								<form action="${path}/Join/addCMember.do" class="compReg" method="post" enctype="multipart/form-data">
 									<textarea rows="20" cols="150" id="agree" readonly="readonly">
 가. 수집하는 개인정보의 항목첫째, 회사는 회원가 입, 원활한 고객상담, 각종 서비스의 제공을 위해 최초 회원가입 당시 아래와 같은 최소한의 개인정보를 필수항목으로 수집하고 있습니다.
 회원가입
@@ -287,10 +293,17 @@
 - 생성정보 수집 툴을 통한 수집
 									</textarea>	
 									<br>
-									개인정보 수집 및 이용에 동의합니다. <input type="checkbox" name="clause" id="clause2"> 
+									개인정보 수집 및 이용에 동의합니다. <input type="checkbox" name="clause" id="clause2" > 
 									<div class="container">
 									<b id="agreeInput2" class="regType" ></b>
 									</div>
+									<br>
+									<div class="regdiv">
+                                        <label for="file">회사사진</label>
+                                        <input class="form-control" id="file2" type="file" name="file2" />
+                                        <br>
+                                        <br>
+                                    </div>
 									<br>
 									<div class="regdiv">
                                         <label for="id">회사명<span><small id="chkId"></small></span></label>
@@ -299,19 +312,19 @@
                                         <b id="cnameInput"></b>
                                     </div>
 									<div class="regdiv">
-                                        <label for="id">사업자등록번호<span><small id="chkId"></small></span></label>
+                                        <label for="cno">사업자등록번호<span><small id="chkId"></small></span></label>
                                         <input class="form-control" id="cno" type="text" name="cno" placeholder="-를 넣어서 입력해 주세요 (ex)123-45-67890"/>
                                         <br>
                                         <b id="cnoInput"></b>
                                     </div>
                                     <div class="regdiv">
                                         <label for="name2">대표자명</label>
-                                        <input class="form-control" id="name2" type="text" name="name" />
+                                        <input class="form-control" id="name2" type="text" name="name2" />
                                         <br>
                                         <b id="nameInput2"></b>
                                     </div>
                                     <div class="regdiv">
-                                        <label for="mobile">회사 전화번호</label>
+                                        <label for="ctel">회사 전화번호</label>
                                         <input class="form-control" id="ctel" type="tel" name="ctel" />
                                         <br>
                                         <b id="ctelInput"></b>
@@ -350,6 +363,27 @@
                                         	<option value="서비스직">서비스직</option>
                                         </select>
                                     </div>
+                                    <div class="form-group">
+									<div class="regdiv">
+										<div class="col-6">
+											<%-- name속성값 address1 부터 ~~ address5 까지 입력되어 있는 주소를 모두 합쳐서 DB에 address열에  INSERT 하자. --%>
+											
+											 
+											<input type="text" id="sample4_postcode2" name="addr1" class="form-control" placeholder="우편번호">
+											<input type="button" onclick="sample4_execDaumPostcode2()" value="우편번호 찾기" class="form-control"><br>
+											
+											<input type="text" id="sample4_roadAddress2" name="addr2" placeholder="도로명주소" class="form-control">
+											<input type="text" id="sample4_jibunAddress2" placeholder="지번주소" name="addr3" class="form-control">
+											
+											<span id="guide" style="color:#999;display:none"></span>
+											
+											<input type="text" id="sample4_detailAddress2" placeholder="상세주소" name="addr4" class="form-control">
+											
+											<br>
+											<b id="addressInput2"></b>
+										</div>
+										</div>
+										</div>
                                     <br>
                                     <b id="jobTypeInput"></b>
                                     <a href="#" onclick="check2(); return false;" type="button" class="bn631-hover bn27">가입하기</a>
@@ -423,6 +457,57 @@
 		                document.getElementById('sample4_postcode').value = data.zonecode;
 		                document.getElementById("sample4_roadAddress").value = roadAddr;
 		                document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+		                
+		                
+
+		                var guideTextBox = document.getElementById("guide");
+		                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+		                if(data.autoRoadAddress) {
+		                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+		                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+		                    guideTextBox.style.display = 'block';
+
+		                } else if(data.autoJibunAddress) {
+		                    var expJibunAddr = data.autoJibunAddress;
+		                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+		                    guideTextBox.style.display = 'block';
+		                } else {
+		                    guideTextBox.innerHTML = '';
+		                    guideTextBox.style.display = 'none';
+		                }
+		            }
+		        }).open();
+		    }
+		    
+		    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		    function sample4_execDaumPostcode2() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var roadAddr = data.roadAddress; // 도로명 주소 변수
+		                var extraRoadAddr = ''; // 참고 항목 변수
+
+		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                    extraRoadAddr += data.bname;
+		                }
+		                // 건물명이 있고, 공동주택일 경우 추가한다.
+		                if(data.buildingName !== '' && data.apartment === 'Y'){
+		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                }
+		                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                if(extraRoadAddr !== ''){
+		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+		                }
+
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                document.getElementById('sample4_postcode2').value = data.zonecode;
+		                document.getElementById("sample4_roadAddress2").value = roadAddr;
+		                document.getElementById("sample4_jibunAddress2").value = data.jibunAddress;
 		                
 		                
 
