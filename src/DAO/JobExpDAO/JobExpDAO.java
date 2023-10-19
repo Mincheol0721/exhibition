@@ -1,6 +1,7 @@
 package DAO.JobExpDAO;
 
 import java.sql.Connection; 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -11,7 +12,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import VO.JobExpVO.cJobExpVO;
+import VO.JobExpVO.CJobExpVO;
+import VO.JobExpVO.IJobExpVO;
+
+
 
 
 
@@ -48,8 +52,8 @@ public class JobExpDAO {
 			
 			ArrayList list = new ArrayList();
 			
-			//조회된 한행의 차량정보를 저장할 CarListVo객체의 참조변수
-			cJobExpVO cjobExpVO = null;
+			
+			CJobExpVO cjobExpVO = null;
 			
 			try {
 				//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
@@ -65,7 +69,7 @@ public class JobExpDAO {
 				//CarListVo객체를 Vector배열에 추가 하여 담습니다.
 				while (rs.next()) {
 					
-					cjobExpVO = new cJobExpVO(rs.getString("cname"), 
+					cjobExpVO = new CJobExpVO(rs.getString("cname"), 
 							rs.getString("title"), 
 							rs.getString("content"), 
 							rs.getString("iPart"), 
@@ -80,7 +84,7 @@ public class JobExpDAO {
 					list.add(cjobExpVO);
 				}
 			}catch (Exception e) {
-				System.out.println("getAllCarList메소드에서 SQL오류 : "+ e);
+				System.out.println("getcjobExpList메소드에서 SQL오류 : "+ e);
 			}finally {
 				//자원해제
 				closeResource();
@@ -89,7 +93,87 @@ public class JobExpDAO {
 			return list;
 		}
 
-
-}//cjobExpDAO닫기
+		public int insertIjobExp(IJobExpVO iJobExpVO) {
+			int result = 0;
+		try {
+			//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
+			con = ds.getConnection();
+			
+			String name = iJobExpVO.getName();
+			String tel = iJobExpVO.getTel();
+			
+			String query="insert into ijobExp (no, name, tel) values (ijobExp_no.NEXTVAL, ?, ?) ";
+			
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, name);
+			pstmt.setString(2, tel);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("insertIjobExp메소드에서 SQL오류 : "+ e);
+		}finally {
+			closeResource();
+		}		
+			
+			
+		return result;
+					
+					
+		}
+		
+		public int insertCjobExp(CJobExpVO cJobExpVO) {
+			int result = 0;
+		try {
+			//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
+			con = ds.getConnection();
+			
+			String cname = cJobExpVO.getCname();
+			String title = cJobExpVO.getTitle();
+			String content = cJobExpVO.getContent();
+			String iPart = cJobExpVO.getiPart();
+			String teacher = cJobExpVO.getTeacher();
+			String startTime = cJobExpVO.getStartTime();
+			String endTime = cJobExpVO.getEndTime();
+			String locate = cJobExpVO.getLocate();
+			String fileName = cJobExpVO.getFileName();
+			String fileRealName = cJobExpVO.getFileRealName();
+			
+			
+			
+			
+			String query="insert into cjobExpReg (cname, title, content,iPart,teacher,startTime,endTime,locate,fileName,fileRealName) "
+						+ "values (?, ?, ? ,? ,? ,?, ?, ? ,? ,?)";
+			
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, cname);
+			pstmt.setString(2, title);
+			pstmt.setString(3, content);
+			pstmt.setString(4, iPart);
+			pstmt.setString(5, teacher);
+			pstmt.setString(6, startTime);
+			pstmt.setString(7, endTime);
+			pstmt.setString(8, locate);
+			pstmt.setString(9, fileName);
+			pstmt.setString(10, fileRealName);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (Exception e) {
+			System.out.println("insertCjobExp메소드에서 SQL오류 : "+ e);
+		}finally {
+			closeResource();
+		}		
+			
+			
+		return result;
+					
+					
+		}
+}
 
 
