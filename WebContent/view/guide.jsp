@@ -10,11 +10,11 @@
 	
 <html>
 	<head>
-		<title>취업박람회 행사안내</title>
+		<title>취업박람회 이용안내</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>	
+		<link rel="stylesheet" href="${path}/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>	
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
 	</head>		
 		<div id="page-wrapper">
@@ -78,32 +78,19 @@
 				</div>
 
 			<!-- Footer -->
-				<div id="footer">
-					<jsp:include page="../inc/footer.jsp" />
-				</div>
-
+			<div id="footer">
+				<jsp:include page="../inc/footer.jsp" />
+			</div>
 		</div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.dropotron.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			
-			<script>
-	        // 이미지를 클릭할 때 PDF를 열도록 클릭 이벤트를 추가
-	        document.getElementById('pdfImage').addEventListener('click', function () {
-            // PDF 파일 경로
-            var pdfUrl = '../pdf/Exhibition.pdf';
-
-            // PDF를 새 창에서 열도록 윈도우 팝업을 생성
-            window.open(pdfUrl, '_blank');
-        });
-    </script>
-
+		<script src="${path}/assets/js/jquery.min.js"></script>
+		<script src="${path}/assets/js/jquery.dropotron.min.js"></script>
+		<script src="${path}/assets/js/jquery.scrolly.min.js"></script>
+		<script src="${path}/assets/js/jquery.scrollex.min.js"></script>
+		<script src="${path}/assets/js/browser.min.js"></script>
+		<script src="${path}/assets/js/breakpoints.min.js"></script>
+		<script src="${path}/assets/js/util.js"></script>
+		<script src="${path}/assets/js/main.js"></script>
 	</body>
 </html>
