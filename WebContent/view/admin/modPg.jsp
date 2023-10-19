@@ -1,29 +1,34 @@
-<%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
-<%@page import="VO.CMemberVO.CMemberVO"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="DAO.pgsDAO.PgsDAO"%>
+<%@page import="VO.pgsVO.PgsVO"%>
+<%@page import="VO.appFormVO.AppFormVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<c:set var="path"  value="${pageContext.request.contextPath}"  /> 
 
 <% 
 	request.setCharacterEncoding("UTF-8"); 
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	String cname = request.getParameter("cname");
+	PgsVO vo = null;
+	PgsDAO dao = new PgsDAO();
+	int pno = Integer.parseInt(request.getParameter("pno"));
+	vo = dao.getPgs(pno);
 %>
-<c:set var="path"  value="${pageContext.request.contextPath}"  /> 
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>채용정보 등록</title>
+		<title>프로그램 및 행사 관리</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="${path}/assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				var startDate = $('#startDate');
-				var endDate = $('#endDate'); 
+				$('#pgtype').val('<%=vo.getPgtype()%>').prop("selected",true);
 				
 				//시작일자에 맞춰 종료일자를 시작일자 이전으로 설정하지 못하게 처리
 				$('#startDate').on('change', function() {
@@ -38,19 +43,27 @@
 					console.log(startTime.val());
 					endTime.attr("min", startTime.val());
 				});
-				
 			});
 		</script>
 		<style type="text/css">
-			input[type="date"], input[type="time"] {
-				display: inline-block;
-				border: 0;
-				background: #fafafa;
-				width: 28%;
-				border-radius: 0.5em;
-				border: solid 1px #E5E5E5;
-				padding: 1em;
-			}
+		table td {
+		 	vertical-align: middle;
+			text-align: left;
+			padding-left: 10px;
+			border: 1px solid gray;
+			border-collapse: collapse;
+		}
+		table th {
+			background-color: lightgray;
+			vertical-align: middle;
+			border: 1px solid gray;
+			border-collapse: collapse;
+		}
+		#photo {
+			padding: 0;
+			text-align: center;
+			vertical-align: middle;
+		}
 		</style>
 	</head>
 	<body class="no-sidebar is-preload">
@@ -79,9 +92,10 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2>프로그램 및 행사 등록</h2>
+								<h2>프로그램 및 행사 내용 수정</h2>
 								<hr>
-								<form action="${path}/admin/reg.do" method="post">
+									<form action="${path}/admin/modPgs.do" method="post">
+									<input type="hidden" name="pno" value="<%=vo.getPno()%>">
 									<table border="none">
 										<tr>
 											<th>프로그램 종류</th>
@@ -96,46 +110,46 @@
 										</tr>
 										<tr>
 											<th>프로그램명</th>
-											<td><input type="text" name="pgname"></td>
+											<td><input type="text" name="pgname" value="<%=vo.getPgname()%>"></td>
 										</tr>
 										<tr>
 											<th>제목</th>
-											<td><input type="text" name="title"></td>
+											<td><input type="text" name="title" value="<%=vo.getTitle()%>"></td>
 										</tr>
 										<tr>
 											<th style="vertical-align: middle;">내용</th>
-											<td><textarea name="content" cols="80"></textarea></td>
+											<td><textarea name="content" cols="80"><%=vo.getContent()%></textarea></td>
 										</tr>
 										<tr>
 											<th>대상</th>
-											<td><input type="text" name="ipart"></td>
+											<td><input type="text" name="ipart" value="<%=vo.getIpart()%>"></td>
 										</tr>
 										<tr id="colTeacher">
 											<th>강사</th>
-											<td><input type="text" name="teacher"></td>
+											<td><input type="text" name="teacher" value="<%=vo.getTeacher()%>"></td>
 										</tr>
 										<tr>
 											<th>진행 기간</th>
 											<td>
-												<input type="date" id="startDate" name="startDate" value="<%=sdf.format(new Date())%>">
+												<input type="date" id="startDate" name="startDate" value="<%=vo.getStartDate().substring(0, 10)%>">
 												&nbsp;&nbsp;~&nbsp;&nbsp;
-												<input type="date" id="endDate" name="endDate">
+												<input type="date" id="endDate" name="endDate"  value="<%=vo.getEndDate().substring(0, 10)%>">
 											</td>
 										</tr>
 										<tr>
 											<th>프로그램 시간</th>
 											<td>
-												<input type="time" name="startTime" id="startTime" required>
+												<input type="time" name="startTime" id="startTime"  value="<%=vo.getStartTime()%>" required>
 												&nbsp;&nbsp;~&nbsp;&nbsp;
-												<input type="time" name="endTime" id="startTime" required>
+												<input type="time" name="endTime" id="startTime" value="<%=vo.getEndTime()%>" required>
 											</td>
 										</tr>
 										<tr>
 											<th>진행 장소</th>
-											<td><input type="text" name="locate"></td>
+											<td><input type="text" name="locate" value="<%=vo.getLocate()%>"></td>
 										</tr>
 									</table>
-									<input type="submit" value="등록">
+									<input type="submit" value="수정완료">
 									<input type="reset" value="다시작성">
 								</form>
 							</header>

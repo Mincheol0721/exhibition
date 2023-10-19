@@ -22,7 +22,7 @@
 	System.out.println("count: " + count);
 	
 	//하나의 화면에 띄워줄 글 개수 10
-	int pageSize = 9;
+	int pageSize = 10;
 	
 	//현재 보여질 페이지번호 가져오기
 	String pageNum = request.getParameter("pageNum");
@@ -64,7 +64,7 @@
 			});
 			
 			function goReg() {
-				location.href="/admin/pgRegPage.do";
+				location.href="<%=request.getContextPath()%>/admin/pgRegPage.do";
 			}
 		</script>
 		<style type="text/css">
@@ -113,8 +113,9 @@
 					<article id="main" class="special">
 						<header>
 							<h2>프로그램 및 행사 관리</h2>
+							<div>
 							<jsp:include page="/inc/pgsBtn.jsp" />
-							
+							</div>
 							<section class="layout">
 	                        	<table class="table table-striped">
 									<tr>
@@ -123,9 +124,9 @@
 									  	<th>프로그램 기간</th>
 									</tr>
 									<c:forEach var="vo" items="${list}">
-									<tr onclick="location.href='${path}/pgs/getPgs.do?pno=${vo.pno}'" class="pgTr">
+									<tr onclick="location.href='${path}/admin/getPgs.do?pno=${vo.pno}'" class="pgTr">
 									 	<td>${vo.pgtype}</td>
-									 	<td>${vo.title}, ${vo.pno}</td>
+									 	<td>${vo.title}</td>
 									 	<td>${ fn:substring(vo.startDate, 0, 10) } ~ ${ fn:substring(vo.endDate, 0, 10) }</td>
 								 	</tr>
 									</c:forEach>

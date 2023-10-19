@@ -25,5 +25,17 @@ public class PgsService {
 		return dao.getPgs(pno); 
 	}
 
+	public void updatePgs(PgsVO vo) {
+		dao.updatePgs(vo);
+	}
+
+	public void regPgs(PgsVO vo) {
+		dao.regPgs(vo);
+	}
+
+	public void delPgs(int pno) {
+		dao.delPgs(pno);
+	}
+
 	
 }

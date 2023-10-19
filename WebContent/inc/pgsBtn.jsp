@@ -10,7 +10,7 @@
 	
 	PgsDAO dao = new PgsDAO();
 	PgsVO vo = null;
-	List<PgsVO> list = null;
+	List<PgsVO> list = null; 
 	
 	//전체 글 개수
 	int count = dao.getPgsCount();
@@ -47,77 +47,56 @@
 		<link rel="stylesheet" href="${path}/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
 		<script type="text/javascript">
-		$(function() {
+			$(function() {
 				
 			});
 			
+				
 			function callPgs(pageNum, pageSize) {
-				location.href='<%=request.getContextPath()%>/pgs/getList.do?pageNum=<%=pageNum%>';
+				
+				location.href='<%=request.getContextPath()%>/admin/getList.do?pageNum=<%=pageNum%>';
 			}
+			
 		</script>
 		<style type="text/css">
-		.conBtn {
-			display: flex;
-			justify-content: center;
-			flex-wrap: wrap;
+		.shadow__btn {
+			padding: 10px 20px;
 			margin: 10px auto;
-			
-		}
-		button {
-			--glow-color: rgb(217, 176, 255);
-			--glow-spread-color: rgba(191, 123, 255, 0.781);
-			--enhanced-glow-color: rgb(231, 206, 255);
-			--btn-color: rgb(100, 61, 136);
-			margin: 20px auto;
-			border: .25em solid var(--glow-color);
-			padding: 1em 3em;
-			color: var(--glow-color);
-			font-size: 15px;
-			font-weight: bold;
-			background-color: var(--btn-color);
-			border-radius: 1em;
-			outline: none;
-			box-shadow: 0 0 1em .25em var(--glow-color),
-			       0 0 4em 1em var(--glow-spread-color),
-			       inset 0 0 .75em .25em var(--glow-color);
-			text-shadow: 0 0 .5em var(--glow-color);
-			position: relative;
-			transition: all 0.3s;
-		}		
-		button::after {
-			pointer-events: none;
-			content: "";
-			position: absolute;
-			top: 120%;
-			left: 0;
-			height: 100%;
-			width: 100%;
-			background-color: var(--glow-spread-color);
-			filter: blur(2em);
-			opacity: .7;
-			transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
+			border: none;
+			font-size: 17px;
+			color: #fff;
+			border-radius: 7px;
+			letter-spacing: 4px;
+			font-weight: 700;
+			text-transform: uppercase;
+			transition: 0.5s;
+			transition-property: box-shadow;
 		}
 		
-		button:hover {
-			color: var(--btn-color);
-			background-color: var(--glow-color);
-			box-shadow: 0 0 1em .25em var(--glow-color),
-			        0 0 2em 1em var(--glow-spread-color),
-			        inset 0 0 .75em .25em var(--glow-color);
+		.shadow__btn {
+			background: rgb(0,140,255);
+			box-shadow: 0 0 25px rgb(0,140,255);
 		}
 		
-		button:active {
-			box-shadow: 0 0 0.6em .25em var(--glow-color),
-			        0 0 2.5em 2em var(--glow-spread-color),
-			        inset 0 0 .5em .25em var(--glow-color);
+		.shadow__btn:hover {
+			box-shadow: 0 0 5px rgb(0,140,255),
+		    	        0 0 25px rgb(0,140,255),
+		        	    0 0 50px rgb(0,140,255),
+		            	0 0 100px rgb(0,140,255);
 		}
 		</style>
 	</head>
 	<body>
-		<div class="conBtn">
-			<button type="button" class="manageBtn"> 신청자 관리 </button>
-			<button type="button" class="manageBtn"> 구직자 관리 </button>
-			<button type="button" class="manageBtn" onclick="callPgs();"> 프로그램 및 행사 관리 </button>
-		</div>
+		<header>
+			<button class="shadow__btn" value="구직자 관리">
+				구직자 관리
+			</button>
+			<button class="shadow__btn" value="신청자 관리">
+				신청자 관리
+			</button>
+			<button class="shadow__btn" onclick="callPgs(<%=pageNum%>, <%=pageSize%>)" value="프로그램 및 행사 관리">
+				프로그램 및 행사 관리
+			</button>
+		</header>
 	</body>
 </html>

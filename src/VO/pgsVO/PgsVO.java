@@ -16,7 +16,7 @@ public class PgsVO {
 				   locate,			//행사 장소
 				   fileName,		//첨부파일 이름
 				   fileRealName;	//첨부파일 실제이름
-	private Date startDate,			//프로그램 시작일자
+	private String startDate,			//프로그램 시작일자
 				 endDate; 			//프로그램 종료일자
 	
 	public PgsVO() {}
@@ -37,8 +37,8 @@ public class PgsVO {
 	}
 	
 	public PgsVO(int pno, String pgname, String pgtype, String title, String content, String ipart, String teacher,
-			String startTime, String endTime, String locate, String fileName, String fileRealName, Date startDate,
-			Date endDate) {
+			String startTime, String endTime, String locate, String fileName, String fileRealName, String startDate,
+			String endDate) {
 		super();
 		this.pno = pno;
 		this.pgname = pgname;
@@ -152,19 +152,19 @@ public class PgsVO {
 		this.fileRealName = fileRealName;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 	

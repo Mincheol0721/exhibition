@@ -2,40 +2,37 @@ package controller.pgsController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import VO.pgsVO.PgsVO;
 import service.pgsService.copy.PgsService;
 
-@WebServlet("/pgs/*")
+@WebServlet("/admin/*")
 public class PgsController extends HttpServlet {
-	  
-	// 게시글 정보를 저장하는 리스트
+	
 	private List<PgsVO> list;
 	
-	// 게시판 서비스 객체
 	private PgsService ps; 
 	
-	// 게시글 정보 객체
 	private PgsVO vo;
 
+	@Override
 	// 서블릿 초기화 메서드, 서블릿 컨테이너에 의해 서블릿 초기화 시 호출됨
-	public void init(ServletConfig config) throws ServletException {
+	public void init() throws ServletException {
 		ps = new PgsService();
 		vo = new PgsVO();
 	}
-		
+	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doHandle(request, response);
@@ -47,10 +44,12 @@ public class PgsController extends HttpServlet {
 	}
 	
 	protected void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		String nextPage = "";
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=utf-8");
 	    PrintWriter out = response.getWriter();
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	    
 	    //요청한 값 얻기
 	    int pageNum = 1;
@@ -66,9 +65,21 @@ public class PgsController extends HttpServlet {
 	    if(request.getParameter("pno") != null) {
 			pno = Integer.parseInt(request.getParameter("pno"));
 		}
+	    String pgtype = request.getParameter("pgtype");
+	    String pgname = request.getParameter("pgname");
+	    String title = request.getParameter("title");
+	    String content = request.getParameter("content");
+	    String ipart = request.getParameter("ipart");
+	    String teacher = request.getParameter("teacher");
+	    if(teacher == null || teacher.length() == 0) { teacher = "-"; }
+	    String startDate = request.getParameter("startDate");
+	    String endDate = request.getParameter("endDate");
+	    String startTime = request.getParameter("startTime");
+	    String endTime = request.getParameter("endTime");
+	    String locate = request.getParameter("locate");
 	    
 	    String action = request.getPathInfo();
-		
+		System.out.println("action: " + action);
 
 		try {
 			
@@ -78,7 +89,6 @@ public class PgsController extends HttpServlet {
 				System.out.println("admin.do: " + nextPage);
 				
 			} else if(action.equals("/getList.do")) {
-				
 				System.out.println("pageNum: " + pageNum);
 				System.out.println("pageSize: " + pageSize);
 				
@@ -93,13 +103,35 @@ public class PgsController extends HttpServlet {
 				vo = ps.getPgs(pno);
 				
 				request.setAttribute("vo", vo);
-				System.out.println("voTitle: " + vo.getTitle());
 				
 				nextPage = "/view/admin/viewPg.jsp";
-			} else if(action.equals("/pgRegPage.do")) {
 				
+			} else if(action.equals("/pgRegPage.do")) {
 				nextPage = "/view/admin/pgReg.jsp";
 				
+			} else if(action.equals("/reg.do")) {
+				vo.setPgtype(pgtype); vo.setPgname(pgname); vo.setTitle(title); vo.setContent(content); 
+				vo.setIpart(ipart); vo.setTeacher(teacher); vo.setStartDate(startDate); vo.setEndDate(endDate); 
+				vo.setStartTime(startTime); vo.setEndTime(endTime); vo.setLocate(locate);
+				
+				ps.regPgs(vo);
+				nextPage = "/admin/getList.do?pageNum=" + pageNum;
+				
+			} else if(action.equals("/modPage.do")) {
+				System.out.println(pno);
+				nextPage = "/view/admin/modPg.jsp?pno=" + pno;
+				
+			} else if(action.equals("/modPgs.do")) {
+				vo.setPno(pno); vo.setPgtype(pgtype); vo.setPgname(pgname); vo.setTitle(title); 
+				vo.setContent(content); vo.setIpart(ipart); vo.setTeacher(teacher); vo.setStartDate(startDate); 
+				vo.setEndDate(endDate); vo.setStartTime(startTime); vo.setEndTime(endTime); vo.setLocate(locate);
+				
+				ps.updatePgs(vo);
+				nextPage = "/admin/getPgs.do?pno=" + pno;
+				
+			} else if(action.equals("/del.do")) {
+				ps.delPgs(pno);
+				nextPage = "/admin/getList.do?pageNum=" + pageNum;
 			}
 			
 		} catch (Exception e) {
@@ -111,6 +143,4 @@ public class PgsController extends HttpServlet {
 		dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 		
 	}
-	
-	
 }

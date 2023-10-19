@@ -41,8 +41,17 @@
 				</div>
 
 			<!-- Main -->
-			<div class="content">
-				<jsp:include page="/inc/pgsBtn.jsp" />
+			<div class="wrapper style1">
+				<div class="container">
+					<article id="main" class="special">
+						<header>
+							<h2>관리자 페이지</h2>
+							<div>
+							<jsp:include page="/inc/pgsBtn.jsp" />
+							</div>
+						</header>
+					</article>
+				</div>
 			</div>
 		</div>
 

@@ -110,8 +110,10 @@ public class PgsDAO {
 				query = "SELECT * " + 
 						"FROM ( " + 
 						"    SELECT ROWNUM AS rn, p.* " + 
-						"    FROM pgs p " + 
-						"    WHERE ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
+						"    FROM ( " +
+						"	 	SELECT * FROM pgs ORDER BY pno DESC " + 
+						"    ) p " + 
+						" 	 WHERE ROWNUM <= ( " + pageNum + " * " + pageSize + ") " + 
 						" ) " + 
 						" WHERE rn >= ((" + pageNum + " - 1) * " + pageSize + ") + 1";
 				
@@ -132,8 +134,8 @@ public class PgsDAO {
 								    rs.getString("locate"), 
 								    rs.getString("fileName"), 
 								    rs.getString("fileRealName"), 
-								    rs.getDate("startDate"), 
-								    rs.getDate("endDate") ); 
+								    rs.getString("startDate"), 
+								    rs.getString("endDate") ); 
 					
 					list.add(vo);
 				}
@@ -174,8 +176,8 @@ public class PgsDAO {
 						    rs.getString("locate"), 
 						    rs.getString("fileName"), 
 						    rs.getString("fileRealName"), 
-						    rs.getDate("startDate"), 
-						    rs.getDate("endDate") ); 
+						    rs.getString("startDate"), 
+						    rs.getString("endDate") ); 
 				}
 			
 			} catch (Exception e) {
@@ -186,6 +188,83 @@ public class PgsDAO {
 			
 			return vo;
 		}
+
+		public void regPgs(PgsVO vo) {
+			try {
+				con = ds.getConnection();
+				query = "INSERT INTO pgs(pno, pgname, pgtype, title, content, iPart, teacher, startTime, endTime, locate, fileName, fileRealName, startDate, endDate) " + 
+						"VALUES(pgs_pno.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, vo.getPgname());
+				pstmt.setString(2, vo.getPgtype());
+				pstmt.setString(3, vo.getTitle());
+				pstmt.setString(4, vo.getContent());
+				pstmt.setString(5, vo.getIpart());
+				pstmt.setString(6, vo.getTeacher());
+				pstmt.setString(7, vo.getStartTime());
+				pstmt.setString(8, vo.getEndTime());
+				pstmt.setString(9, vo.getLocate());
+				pstmt.setString(10, vo.getFileName());
+				pstmt.setString(11, vo.getFileRealName());
+				pstmt.setString(12, vo.getStartDate());
+				pstmt.setString(13, vo.getEndDate());
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("PgsDAO내부 regPgs에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+		
+		public void updatePgs(PgsVO vo) {
+			try {
+				con = ds.getConnection();
+				query = "UPDATE pgs SET pgname=?, pgtype=?, title=?, content=?, iPart=?, teacher=?, startTime=?, endTime=?, locate=?, fileName=?, fileRealName=?, startDate=?, endDate=? " +
+						" WHERE pno=" + vo.getPno(); 
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, vo.getPgname());
+				pstmt.setString(2, vo.getPgtype());
+				pstmt.setString(3, vo.getTitle());
+				pstmt.setString(4, vo.getContent());
+				pstmt.setString(5, vo.getIpart());
+				pstmt.setString(6, vo.getTeacher());
+				pstmt.setString(7, vo.getStartTime());
+				pstmt.setString(8, vo.getEndTime());
+				pstmt.setString(9, vo.getLocate());
+				pstmt.setString(10, vo.getFileName());
+				pstmt.setString(11, vo.getFileRealName());
+				pstmt.setString(12, vo.getStartDate());
+				pstmt.setString(13, vo.getEndDate());
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("PgsDAO내부 modPgs에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+
+		public void delPgs(int pno) {
+			try {
+				con = ds.getConnection();
+				query = "DELETE FROM pgs WHERE pno=" + pno;
+				
+				pstmt = con.prepareStatement(query);
+				
+				rs = pstmt.executeQuery();
+				
+			} catch (Exception e) {
+				System.out.println("PgsDAO내부 delPgs에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+
 		
 		
 }

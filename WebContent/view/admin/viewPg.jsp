@@ -9,7 +9,6 @@
 
 <% 
 	request.setCharacterEncoding("UTF-8"); 
-	
 %>
 
 <!DOCTYPE html>
@@ -19,7 +18,12 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="${path}/assets/css/main.css" />
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
+		<script type="text/javascript">
+			$(function() {
+			});
+		</script>
 		<style type="text/css">
 		table td {
 		 	vertical-align: middle;
@@ -69,7 +73,6 @@
 							<header>
 								<h2>프로그램 및 행사 내용 상세보기</h2>
 								<hr>
-									<form>
 									<table border="none">
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;" width="10%">프로그램 종류</th>
@@ -92,12 +95,12 @@
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">내용</th>
-											<td colspan="3" style="min-height: 100px;">${vo.content}</td>
+											<td colspan="3" style="min-height: 100px;"><pre>${vo.content}</pre></td>
 										</tr>
 									</table>
-									<input type="button" value="글목록" onclick="javascript: history.go(-1);">
-									<input type="submit" value="수정하기" onclick="goMod(${vo.pno});">
-									</form>
+									<input type="button" value="글목록" onclick="location.href='${path}/admin/getList.do'">
+									<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${path}/admin/modPage.do?pno=${vo.pno}'">
+									<input type="button" class="adminBtn" value="삭제하기" onclick="location.href='${path}/admin/del.do?pno=${vo.pno}'">
 							</header>
 					</div>
 
