@@ -1,8 +1,8 @@
+<%@page import="VO.pgsVO.PgsVO"%>
+<%@page import="DAO.pgsDAO.PgsDAO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
-<%@page import="VO.hireInfoVO.HireInfoVO"%>
-<%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
@@ -13,14 +13,14 @@
 <% 
 	request.setCharacterEncoding("UTF-8"); 
 	
-	HireInfoDAO dao = new HireInfoDAO();
-	HireInfoVO vo = new HireInfoVO();
-	List<HireInfoVO> list = null; 
-	String cname = (String)session.getAttribute("cname");
+	PgsDAO dao = new PgsDAO();
+	PgsVO vo = null;
+	List<PgsVO> list = null;
 	
 	//전체 글 개수
-	int count = dao.getHireInfoCount();
-//	System.out.println("count: " + count);
+	int count = dao.getPgsCount();
+	System.out.println("count: " + count);
+	
 	//하나의 화면에 띄워줄 글 개수 10
 	int pageSize = 9;
 	
@@ -52,96 +52,38 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>채용정보 조회</title>
+		<title>프로그램 및 행사 관리</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
 				
 			});
 			
-			function view(cname, expireDate) {
-				if(expireDate <= 0) {
-					alert('접수가 끝난 정보입니다. \r\n조회만 됩니다.');
-				}
-				location.href='<%=request.getContextPath()%>/hireInfo/viewHireInfo.do?cname=' + cname + '&expireDate=' + expireDate;
+			function goReg() {
+				location.href="/admin/pgRegPage.do";
 			}
 		</script>
 		<style type="text/css">
 			.layout {
-			  width: 100%;
-			  display: grid;
-			  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			  gap: 8px;
+				width: 100%;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+				gap: 8px;
 			}
-			.card {
-			  position: relative;
-			  margin: 0 auto;
-			  width: 300px;
-			  height: 300px;
-			  background-color: #f2f2f2;
-			  border-radius: 10px;
-			  display: flex;
-			  align-items: center;
-			  justify-content: center;
-			  overflow: hidden;
-			  perspective: 1000px;
-			  box-shadow: 0 0 0 5px #ffffff80;
-			  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			.pgTr:hover {
+				cursor: pointer;
 			}
-			
-			.card svg {
-			  width: 48px;
-			  fill: #333;
-			  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+			.flexbox {
+				display: flex;
+				justify-content: flex-end;
+				align-items: flex-start;
 			}
-			
-			.card:hover {
-			  transform: scale(1.05);
-			  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
-			  cursor: pointer;
-			}
-			
-			.card__content {
-			  position: absolute;
-			  top: 0;
-			  left: 0;
-			  width: 100%;
-			  height: 100%;
-			  padding: 10px;
-			  box-sizing: border-box;
-			  background-color: #f2f2f2;
-			  transform: rotateX(-90deg);
-			  transform-origin: bottom;
-			  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-			}
-			
-			.card__content li {
-			  text-align: left;
-			}
-			
-			.card:hover .card__content {
-			  transform: rotateX(0deg);
-			}
-			
-			.card__title {
-			  margin: 0;
-			  font-size: 20px;
-			  color: #333;
-			  font-weight: 700;
-			}
-			
-			.card:hover svg {
-			  scale: 0;
-			}
-			
-			.card__description {
-			  margin: 10px 0 0;
-			  font-size: 14px;
-			  color: #777;
-			  line-height: 1.2;
+			.flexbox [type=button] {
+				margin-bottom: 30px;
 			}
 		</style>
 	</head>
@@ -166,39 +108,32 @@
 				</div>
 
 			<!-- Main -->
-				<div class="wrapper style1">
-					<div class="container">
-						<article id="main" class="special">
-							<header>
-								<h2>채용정보 조회</h2>
-								<section class="layout">
-									<c:forEach var="vo" items="${list}">
-									<div class="card" onclick="view('${vo.cname}', '${vo.expireDate}')">
-										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 5H4V19L13.2923 9.70649C13.6828 9.31595 14.3159 9.31591 14.7065 9.70641L20 15.0104V5ZM2 3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V3.9934ZM8 11C6.89543 11 6 10.1046 6 9C6 7.89543 6.89543 7 8 7C9.10457 7 10 7.89543 10 9C10 10.1046 9.10457 11 8 11Z"></path></svg>
-										<div class="card__content">
-											<p class="card__title">${vo.cname}</p>
-											<p class="card__description">
-												<ul>
-													<li>사업체구분: ${vo.divComp} </li>
-													<li>모집직종: ${vo.jobtype} </li>
-													<li>근무시간: ${vo.workTime} </li>
-													<li>근무지역: ${vo.legal} </li>
-													<li>전화번호: ${vo.htel} </li>
-											<c:choose>
-												<c:when test="${vo.expireDate > 0}">
-													<li>D-Day: ${vo.expireDate}일</li>
-												</c:when>
-												<c:when test="${vo.expireDate <= 0}">
-													<li>D-Day: 마감</li>
-												</c:when>
-											</c:choose>
-												</ul>
-											</p>
-										</div>
-									</div>
-									</c:forEach>
-								</section>
+			<div class="wrapper style1">
+				<div class="container">
+					<article id="main" class="special">
+						<header>
+							<h2>프로그램 및 행사 관리</h2>
+							<jsp:include page="/inc/pgsBtn.jsp" />
 							
+							<section class="layout">
+	                        	<table class="table table-striped">
+									<tr>
+										<th>프로그램 종류</th>
+									  	<th>프로그램명</th>
+									  	<th>프로그램 기간</th>
+									</tr>
+									<c:forEach var="vo" items="${list}">
+									<tr onclick="location.href='${path}/pgs/getPgs.do?pno=${vo.pno}'" class="pgTr">
+									 	<td>${vo.pgtype}</td>
+									 	<td>${vo.title}, ${vo.pno}</td>
+									 	<td>${ fn:substring(vo.startDate, 0, 10) } ~ ${ fn:substring(vo.endDate, 0, 10) }</td>
+								 	</tr>
+									</c:forEach>
+								</table>
+							</section>
+							<div class="flexbox">
+								<input type="button" value="등록하기" onclick="goReg();">
+							</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
@@ -232,7 +167,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/hireInfo/getList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/admin/getList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -240,11 +175,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/hireInfo/getList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/admin/getList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item "><a href="${path}/hireInfo/getList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item "><a href="${path}/admin/getList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -253,7 +188,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/hireInfo/getList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/admin/getList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

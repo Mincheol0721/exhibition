@@ -11,8 +11,10 @@
 	int isAdmin = (Integer)session.getAttribute("isAdmin");
 	String cno = (String)session.getAttribute("cno");
 	String cname = (String)session.getAttribute("cname");
-	
-	HireInfoVO vo = new HireInfoDAO().getHireInfo(cname);
+	HireInfoVO vo = null;
+	if(cname != null){
+		vo = new HireInfoDAO().getHireInfo(cname);
+	}
 %>
 
 <c:set var="path" value="<%=request.getContextPath()%>" />
@@ -137,7 +139,7 @@
 					<%-- 관리자일 경우 --%>
 					<c:when test="${id != null && isAdmin == 1}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="${path}/view/mypage/mypage.jsp" class="membership">마이페이지</a></li>
+					<li><a href="${path}/admin/admin.do" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					<%-- 기업회원일 경우  --%>
