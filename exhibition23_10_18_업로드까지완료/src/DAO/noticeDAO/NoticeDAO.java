@@ -38,7 +38,7 @@ public class NoticeDAO {
 		if(rs != null)try {rs.close();} catch (Exception e) {e.printStackTrace();}
 	}
 	
-	//모든 직업체험조회
+			//모든 공지사항조회
 			public ArrayList getNoticeList() {
 				
 				ArrayList list = new ArrayList();
@@ -81,6 +81,50 @@ public class NoticeDAO {
 				}
 				
 				return list;
+			}
+			
+			//하나의 공지사항만 조회하는 메소드
+			public NoticeVO getOneNotice(int no) {
+				
+				NoticeVO noticeVO = new NoticeVO();
+				
+				
+				try {
+					//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
+					con = ds.getConnection();
+					//DB의 carlist테이블 저장된 모든 차량을 조회하는 SELECT문장을 sql변수에 저장
+					String sql = "select * from articles where id=?";
+					
+					pstmt.setInt(1, no );
+					//SELECT문장을 DB의 carlist테이블에 전송해서 조회할 PreparedStatement객체 얻기
+					pstmt = con.prepareStatement(sql);
+					//SLELCT문장을 실행하여 조회된 데이터들을 ResultSet에 담아 반환 받기
+					rs = pstmt.executeQuery();
+					
+
+				
+					
+						noticeVO = new NoticeVO(
+								rs.getString("no"), 
+								rs.getString("articleType"), 
+								rs.getString("title"), 
+								rs.getString("content"),  
+								rs.getString("fileName"), 
+								rs.getString("fileRealName"), 
+								rs.getDate("writeDate"), 
+								rs.getString("readCount"));
+								
+						
+						
+					
+				}catch (Exception e) {
+					System.out.println("getNoticeList메소드에서 SQL오류 : "+ e);
+				}finally {
+					//자원해제
+					closeResource();
+				}
+				
+				return noticeVO;
 			}
 }//NoticeDAO
 

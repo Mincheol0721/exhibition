@@ -40,8 +40,19 @@
 				<div class="wrapper style1">
 
 					<div class="container">
-						<table>
+						<table >
+							<tr border="1">
+								<td>제목</td>		
+							</tr>
 							
+							<tr>
+								<td>분류</td>		
+							</tr>
+							
+							<tr>
+								<td>내용</td>		
+							</tr>
+						
 						</table>
 						<hr />
 						

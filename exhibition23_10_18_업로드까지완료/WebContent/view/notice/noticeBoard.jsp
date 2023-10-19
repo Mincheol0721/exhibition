@@ -53,7 +53,7 @@
                    	           		<tr align="center">
                    	           			<td>${NoticeVO.no }</td>
                    	           			<td>${NoticeVO.articleType }</td>
-                   	           			<td><a href="/notice/viweNotice.do">${NoticeVO.title }</a></td>
+                   	           			<td><a href="${path}/notice/viewNotice.do">${NoticeVO.title }</a></td>
                    	           			<td>${NoticeVO.writeDate }</td>
                    	           			<td>${NoticeVO.readCount }</td>	
                    	           		</tr>

@@ -51,7 +51,10 @@ public class noticeController extends HttpServlet {
 			nextPage="/view/notice/noticeBoard.jsp";
 		}else if(action.equals("/viewNotice.do")) {
 			
+			
+//			 noticeService.getOneNoticeService();
 			nextPage="/view/notice/viewNotice.jsp";
+			
 		}
 		
 		//포워딩 (디스패처 방식)
