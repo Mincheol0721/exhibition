@@ -2,6 +2,8 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <c:set var="path" value="<%=request.getContextPath()%>" />
@@ -63,7 +65,11 @@
 								        </tr>
 								        <tr>
 								            <th class="page-tda" style="text-align:center; padding:0px;">일시</th>
-								            <td class="page-tdb">${eventInfoList[0].startDate} ~ ${eventInfoList[0].endDate}</td>
+											<td class="page-tdb">
+												<!-- 연도, 월, 일만 보이게끔 수정했음 -->
+												<c:out value="${fn:substring(eventInfoList[0].startDate, 0, 10)}" /> ~ 
+												<c:out value="${fn:substring(eventInfoList[0].endDate, 0, 10)}" />
+											</td>
 								        </tr>
 								        <tr>
 								            <th class="page-tda page-bgcolor1" style="text-align:center; padding:0px;">장소</th>
