@@ -98,9 +98,9 @@
 											<td colspan="3" style="min-height: 100px;"><pre>${vo.content}</pre></td>
 										</tr>
 									</table>
-									<input type="button" value="글목록" onclick="location.href='${path}/admin/getList.do'">
-									<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${path}/admin/modPage.do?pno=${vo.pno}'">
-									<input type="button" class="adminBtn" value="삭제하기" onclick="location.href='${path}/admin/del.do?pno=${vo.pno}'">
+									<input type="button" value="글목록" onclick="location.href='${path}/pgs/getList.do'">
+									<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${path}/pgs/modPage.do?pno=${vo.pno}'">
+									<input type="button" class="adminBtn" value="삭제하기" onclick="location.href='${path}/pgs/del.do?pno=${vo.pno}'">
 							</header>
 					</div>
 

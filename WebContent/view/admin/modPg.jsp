@@ -94,7 +94,7 @@
 							<header>
 								<h2>프로그램 및 행사 내용 수정</h2>
 								<hr>
-									<form action="${path}/admin/modPgs.do" method="post">
+									<form action="${path}/pgs/modPgs.do" method="post">
 									<input type="hidden" name="pno" value="<%=vo.getPno()%>">
 									<table border="none">
 										<tr>

@@ -1,3 +1,5 @@
+<%@page import="VO.applicantVO.ApplicantVO"%>
+<%@page import="DAO.applicantDAO.ApplicantDAO"%>
 <%@page import="VO.pgsVO.PgsVO"%>
 <%@page import="DAO.pgsDAO.PgsDAO"%>
 <%@page import="java.util.Calendar"%>
@@ -13,12 +15,12 @@
 <% 
 	request.setCharacterEncoding("UTF-8"); 
 	
-	PgsDAO dao = new PgsDAO();
-	PgsVO vo = null;
-	List<PgsVO> list = null;
+	ApplicantDAO dao = new ApplicantDAO();
+	ApplicantVO vo = null;
+	List<ApplicantVO> list = null;
 	
-	//전체 글 개수
-	int count = dao.getPgsCount();
+	//전체 글 수
+	int count = dao.getMCount();
 	System.out.println("count: " + count);
 	
 	//하나의 화면에 띄워줄 글 개수 10
@@ -52,7 +54,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>프로그램 및 행사 관리</title>
+		<title>신청자 관리 - 개인</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -62,10 +64,6 @@
 			$(function() {
 				
 			});
-			
-			function goReg() {
-				location.href="<%=request.getContextPath()%>/pgs/pgRegPage.do";
-			}
 		</script>
 		<style type="text/css">
 			.layout {
@@ -112,24 +110,33 @@
 				<div class="container">
 					<article id="main" class="special">
 						<header>
-							<h2>프로그램 및 행사 관리</h2>
+							<h2>신청자 관리</h2>
 							<div>
 							<jsp:include page="/inc/pgsBtn.jsp" />
 							</div>
+							<!-- 회원구분버튼 영역 -->
+								<jsp:include page="/inc/selectMember.jsp" />
+							<!-- 회원구분버튼 영역 -->
 							<section class="layout">
-	                        	<table class="table table-striped">
-									<tr>
-										<th>프로그램 종류</th>
-									  	<th>프로그램명</th>
-									  	<th>프로그램 기간</th>
+	                        	<table class="table table-striped" style="font-size: 14px; vertical-align: middle; text-align: center;">
+									<tr style="font-weight: 700;">
+										<th>신청자명</th>
+									  	<th>신청자 연락처</th>
+									  	<th>신청일</th>
+									  	<th>신청시간</th>
+									  	<th>수정</th>
+									  	<th>삭제</th>
 									</tr>
-									<c:forEach var="vo" items="${list}">
-									<tr onclick="location.href='${path}/pgs/getPgs.do?pno=${vo.pno}'" class="pgTr">
-									 	<td>${vo.pgtype}</td>
-									 	<td>${vo.title}</td>
-									 	<td>${ fn:substring(vo.startDate, 0, 10) } ~ ${ fn:substring(vo.endDate, 0, 10) }</td>
-								 	</tr>
-									</c:forEach>
+								<c:forEach var="vo" items="${meetings}">
+									<tr>
+										<td>${vo.name}</td>
+										<td>${vo.sctel}</td>
+										<td>${ fn:substring(vo.regDate, 0, 10) }</td> 
+										<td>${vo.ampm}&nbsp;&nbsp;${vo.startTime}&nbsp;&nbsp;~&nbsp;&nbsp;${vo.endTime}</td>
+										<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/applicant/modMeeting.do?no=${vo.no}'">수정</button></td>
+										<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/applicant/delMeeting.do?no=${vo.no}'">삭제</button></td>
+									</tr>
+								</c:forEach>
 								</table>
 							</section>
 							<div class="flexbox">
@@ -168,7 +175,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/pgs/getList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/applicat/getIList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -176,11 +183,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/pgs/getList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/applicant/getIList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item "><a href="${path}/pgs/getList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item "><a href="${path}/applicant/getIList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -189,7 +196,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/pgs/getList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/applicant/getIList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

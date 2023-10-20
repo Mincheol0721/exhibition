@@ -8,14 +8,6 @@
 <% 
 	request.setCharacterEncoding("UTF-8"); 
 	
-	PgsDAO dao = new PgsDAO();
-	PgsVO vo = null;
-	List<PgsVO> list = null; 
-	
-	//전체 글 개수
-	int count = dao.getPgsCount();
-	System.out.println("count: " + count);
-	
 	//하나의 화면에 띄워줄 글 개수 10
 	int pageSize = 9;
 	
@@ -48,13 +40,30 @@
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
 		<script type="text/javascript">
 			$(function() {
+				var selMember = $('#selectMember');
+				var selEvent = $('#selectEvent');
+				var btn = $('#btn');
+				
+				btn.children().on('click', function() {
+					if($(this).val() == '신청자 관리') {
+						selEvent.show();
+					}
+				});
+				
+				selEvent.children().on('click', function() {
+					if($(this).val() == '직업체험') {
+						selMember.show();
+					}
+				});
 				
 			});
 			
-				
-			function callPgs(pageNum, pageSize) {
-				
-				location.href='<%=request.getContextPath()%>/admin/getList.do?pageNum=<%=pageNum%>';
+			function callPgs() {
+				location.href='<%=request.getContextPath()%>/pgs/getList.do?pageNum=<%=pageNum%>';
+			}
+			
+			function callMeetings() {
+				location.href='<%=request.getContextPath()%>/applicant/getMeetings.do?pageNum=<%=pageNum%>';
 			}
 			
 		</script>
@@ -84,19 +93,35 @@
 		        	    0 0 50px rgb(0,140,255),
 		            	0 0 100px rgb(0,140,255);
 		}
+		#selectMember {
+			margin: 0, auto;
+		}
 		</style>
 	</head>
 	<body>
 		<header>
-			<button class="shadow__btn" value="구직자 관리">
-				구직자 관리
-			</button>
-			<button class="shadow__btn" value="신청자 관리">
-				신청자 관리
-			</button>
-			<button class="shadow__btn" onclick="callPgs(<%=pageNum%>, <%=pageSize%>)" value="프로그램 및 행사 관리">
-				프로그램 및 행사 관리
-			</button>
+			<div id="btn">
+				<button class="shadow__btn" value="구직자 관리">
+					구직자 관리
+				</button>
+				<button class="shadow__btn" value="신청자 관리">
+					신청자 관리
+				</button>
+				<button class="shadow__btn" onclick="callPgs();" value="프로그램 및 행사 관리">
+					프로그램 및 행사 관리
+				</button>
+			</div>
+			<div id="selectEvent" style="display: none;">
+				<button class="shadow__btn" value="직업체험" onclick="location.href='<%=request.getContextPath()%>/applicant/getIList.do?pageNum=<%=pageNum%>&pageSize=<%=pageSize%>'">
+					직업체험
+				</button>
+				<button class="shadow__btn" value="모의면접" onclick="callMeetings();">
+					모의면접
+				</button>
+				<button class="shadow__btn" value="자기소개서">
+					자기소개서 컨설팅
+				</button>
+			</div>
 		</header>
 	</body>
 </html>

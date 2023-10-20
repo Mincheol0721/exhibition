@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import VO.JobExpVO.cJobExpVO;
+import VO.JobExpVO.CJobExpVO;
 import service.JobExpService.JobExpService;
 
 
@@ -37,7 +37,7 @@ public class JobExpController extends HttpServlet {
 		System.out.println("2단계 요청 주소: "+action);
 		
 		JobExpService cjobExpService = new JobExpService();
-		cJobExpVO cjobExpVO = new cJobExpVO();
+		CJobExpVO cjobExpVO = new CJobExpVO();
 		String nextPage = null;
 				
 		if(action == null || action.equals("/cjobExpBoard.do")) {

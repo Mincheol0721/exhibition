@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import VO.pgsVO.PgsVO;
 import service.pgsService.copy.PgsService;
 
-@WebServlet("/admin/*")
+@WebServlet("/pgs/*")
 public class PgsController extends HttpServlet {
 	
 	private List<PgsVO> list;
@@ -127,11 +127,11 @@ public class PgsController extends HttpServlet {
 				vo.setEndDate(endDate); vo.setStartTime(startTime); vo.setEndTime(endTime); vo.setLocate(locate);
 				
 				ps.updatePgs(vo);
-				nextPage = "/admin/getPgs.do?pno=" + pno;
+				nextPage = "/pgs/getPgs.do?pno=" + pno;
 				
 			} else if(action.equals("/del.do")) {
 				ps.delPgs(pno);
-				nextPage = "/admin/getList.do?pageNum=" + pageNum;
+				nextPage = "/pgs/getList.do?pageNum=" + pageNum;
 			}
 			
 		} catch (Exception e) {

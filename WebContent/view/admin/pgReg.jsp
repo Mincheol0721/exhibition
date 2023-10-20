@@ -81,7 +81,7 @@
 							<header>
 								<h2>프로그램 및 행사 등록</h2>
 								<hr>
-								<form action="${path}/admin/reg.do" method="post">
+								<form action="${path}/pgs/reg.do" method="post">
 									<table border="none">
 										<tr>
 											<th>프로그램 종류</th>
