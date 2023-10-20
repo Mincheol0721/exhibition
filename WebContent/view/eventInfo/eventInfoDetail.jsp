@@ -31,7 +31,7 @@
 
 					<!-- Nav -->
 					<nav id="nav">
-						<jsp:include page="../inc/menu.jsp" />
+						<jsp:include page="/inc/menu.jsp" />
 					</nav>
 				</div>
 
@@ -102,7 +102,7 @@
 
 			<!-- Footer -->
 			<div id="footer">
-				<jsp:include page="../inc/footer.jsp" />
+				<jsp:include page="/inc/footer.jsp" />
 			</div>
 		</div>
 

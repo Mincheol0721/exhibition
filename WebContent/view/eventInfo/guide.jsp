@@ -31,7 +31,7 @@
 
 					<!-- Nav -->
 					<nav id="nav">
-						<jsp:include page="../inc/menu.jsp" />
+						<jsp:include page="/inc/menu.jsp" />
 					</nav>
 				</div>
 
@@ -45,7 +45,7 @@
 							
 							<section>
 								<header>
-									<h3>행사장 위치</h3>
+									<h3>오시는 길</h3>
 								</header>
 								<div class="page-table-div">
 								<div class="table-div">					
@@ -79,7 +79,7 @@
 
 			<!-- Footer -->
 			<div id="footer">
-				<jsp:include page="../inc/footer.jsp" />
+				<jsp:include page="/inc/footer.jsp" />
 			</div>
 		</div>
 

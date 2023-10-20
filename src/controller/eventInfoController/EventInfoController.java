@@ -59,7 +59,7 @@ public class EventInfoController extends HttpServlet{
 				 
 				List<EventInfoVO> list = es.getEventInfoList();
 				request.setAttribute("eventInfoList", list);
-				nextPage = "/view/eventInfo.jsp"; 
+				nextPage = "/view/eventInfo/eventInfo.jsp"; 
 			 
 				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
@@ -70,7 +70,7 @@ public class EventInfoController extends HttpServlet{
 				int no = Integer.parseInt(request.getParameter("no"));			  				        
 		        EventInfoVO eventInfo = es.getEventInfo(no); // EventInfoService의 getEventInfo 메소드를 호출하여 정보 가져오기
 		        request.setAttribute("eventInfo", eventInfo);
-		        nextPage = "/view/eventInfoDetail.jsp"; // 상세 정보를 보여줄 JSP 페이지의 경로
+		        nextPage = "/view/eventInfo/eventInfoDetail.jsp"; // 상세 정보를 보여줄 JSP 페이지의 경로
 		        		 
 		        // 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 

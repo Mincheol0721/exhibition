@@ -60,13 +60,13 @@ public class MainController extends HttpServlet {
 		
 		}else if(action.equals("/eventInfo.do")) {
 			
-			nextPage = "/view/eventInfo.jsp";			
+			nextPage = "/view/eventInfo/eventInfo.jsp";			
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 			dispatch.forward(request, response); 
 			
 		}else if(action.equals("/guide.do")) {
 			
-			nextPage = "/view/guide.jsp";
+			nextPage = "/view/eventInfo/guide.jsp";
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 			dispatch.forward(request, response); 
 			
