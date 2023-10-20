@@ -89,7 +89,7 @@
 							    </div>	
 							    <div class="img-div">
 							    	<!-- 제작한 모집 광고 포스터가 들어가는 자리 -->
-							    	<img src="${path}/images/${eventInfoList[0].fileName}" style="width: 430px;height: 580px;" title="" onclick="window.open(this.src)"/><br>								    						    
+							    	<img src="${path}/images/${eventInfoList[0].fileName}" style="width: 400px;height: 550px;" title="" onclick="window.open(this.src)"/><br>								    						    
 									(포스터 클릭 시 크게 볼 수 있습니다.)
 								</div>								
 							</div>
@@ -101,9 +101,9 @@
 						<c:forEach var="eventInfo" items="${eventInfoList}">
 					        <article class="col-4 col-12-mobile special">
 					            <header>
-					                <a href="${path}/EventInfo/getEventInfoList.do?no=${eventInfo.no}">"${eventInfo.name}"</a>					                
+					                <a href="${path}/EventInfo/getEventInfo.do?no=${eventInfo.no}">"${eventInfo.name}"</a>					                
 					            </header>
-					            <a href="${path}/EventInfo/getEventInfoList.do?no=${eventInfo.no}" class="image featured">
+					            <a href="${path}/EventInfo/getEventInfo.do?no=${eventInfo.no}" class="image featured">
 					                <img src="${path}/images/${eventInfo.fileName}" alt="${eventInfo.name}" />
 					            </a>
 					        </article>

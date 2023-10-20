@@ -38,7 +38,7 @@ public class MainController extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 
 		String action = request.getPathInfo();
-		System.out.println("EventInfoController 2단계 요청주소: " + action);
+		System.out.println("MainController 2단계 요청주소: " + action);
 		// 		/index.do 메뉴에서 홈화면 눌렀을 때
 		//		/searchIndexNo.do 상세보기(또는 해당 사진) 눌렀을 때
 		// 		/eventInfo.do 박람회안내-행사안내 눌렀을 때

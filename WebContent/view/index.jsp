@@ -96,7 +96,12 @@
 						</article>
 					</div>
 				</section>
-
+				
+				<!-- 공간 띄움 -->
+				<section id="banner">
+					<br>
+				</section>
+				
 			<!-- Main -->
 				<div class="wrapper style2">
 

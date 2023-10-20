@@ -45,7 +45,7 @@
 							
 							<section>
 								<header>
-									<h3>오시는 길</h3>
+									<h3>행사장 위치</h3>
 								</header>
 								<div class="page-table-div">
 								<div class="table-div">					
