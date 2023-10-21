@@ -120,12 +120,12 @@ public class ApplicantDAO {
 			return count;
 		};
 		
-		public int getMCount() {
+		public int getConsCount(String constype) {
 			int count = 0;
 			
 			try {
 				con = ds.getConnection();
-				query = "SELECT count(*) FROM cons WHERE constype='모의면접'";
+				query = "SELECT count(*) FROM cons WHERE constype='" + constype + "'";
 				
 				pstmt = con.prepareStatement(query);
 				rs = pstmt.executeQuery();
@@ -135,14 +135,13 @@ public class ApplicantDAO {
 				}
 				
 			} catch (Exception e) {
-				System.out.println("ApplicantDAO내부 getMCount에서 예외 발생: " + e);
+				System.out.println("ApplicantDAO내부 getConsCount에서 예외 발생: " + e);
 			} finally {
 				freeResource();
 			}
 			
 			return count;
 		};
-		
 		
 		//신청한 직업체험 리스트들을 전부 조회해오는 메소드
 		public List<ApplicantVO> getCList(int pageNum, int pageSize) {
@@ -221,8 +220,8 @@ public class ApplicantDAO {
 			
 			return list;
 		}
-
-		public List<ApplicantVO> getMeetings(int pageNum, int pageSize) {
+		
+		public List<ApplicantVO> getConsList(int pageNum, int pageSize, String constype) {
 			list = new ArrayList<ApplicantVO>();
 			
 			try {
@@ -230,12 +229,12 @@ public class ApplicantDAO {
 				query = "SELECT * FROM ( "
 						  + " SELECT ROWNUM AS rn, c.* "
 						  + " FROM cons c "
-						  + " WHERE ROWNUM <= ( " + pageNum + "*" + pageSize + ") "
-						  + " ) WHERE constype='모의면접' and "
-						  + " rn >= ( ( " + pageNum + " - 1 ) * " + pageSize + ") + 1 ";
+						  + " WHERE constype='" + constype + "' and "
+						  + " ROWNUM <= ( " + pageNum + "*" + pageSize + ") "
+						  + " ) WHERE rn >= ( ( " + pageNum + " - 1 ) * " + pageSize + ") + 1 ";
 				pstmt = con.prepareStatement(query);
 				
-//				System.out.println("query문: " + query);
+				System.out.println("query문: " + query);
 				
 				rs = pstmt.executeQuery();
 				
@@ -271,5 +270,81 @@ public class ApplicantDAO {
 			return list;
 		}
 		
-		
+		public ApplicantVO getCons(int no) {
+			try {
+				con = ds.getConnection();
+				query = "SELECT * FROM cons WHERE no=" + no;
+				pstmt = con.prepareStatement(query);
+				rs = pstmt.executeQuery();
+				pstmt = con.prepareStatement(query);
+				
+				System.out.println("query문: " + query);
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo = new ApplicantVO();
+					vo.setTitle(rs.getString("title")); 
+					vo.setContent(rs.getString("content")); 
+					vo.setIpart(rs.getString("iPart")); 
+					vo.setStartTime(rs.getString("startTime")); 
+					vo.setEndTime(rs.getString("endTime")); 
+					vo.setLocate(rs.getString("locate")); 
+					vo.setFileName(rs.getString("fileName")); 
+					vo.setFileRealName(rs.getString("fileRealName")); 
+					vo.setUsePeople(rs.getInt("usePeople")); 
+					vo.setReservation(rs.getInt("reservation")); 
+					vo.setAmpm(rs.getString("ampm")); 
+					vo.setHomepage(rs.getString("homepage")); 
+					vo.setConstype(rs.getString("consType"));
+					vo.setSitel(rs.getString("sitel") );
+					vo.setNo(rs.getInt("no"));
+					vo.setName(rs.getString("name"));
+					vo.setRegDate(rs.getString("regDate"));
+				}
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 getMeeting(단일)에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return vo;
+		}
+
+		public void delCons(int no) {
+			try {
+				con = ds.getConnection();
+				query = "DELETE FROM cons WHERE no=" + no;
+				pstmt = con.prepareStatement(query);
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 delCons에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+
+		public void updateCons(ApplicantVO vo, int no) {
+			
+			try {
+				con = ds.getConnection();
+				query = "UPDATE cons SET regDate=?, startTime=?, name=?, sitel=? WHERE no=" + no;
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, vo.getRegDate());
+				pstmt.setString(2, vo.getStartTime());
+				pstmt.setString(3, vo.getName());
+				pstmt.setString(4, vo.getSitel());
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 updateCons에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+
 }

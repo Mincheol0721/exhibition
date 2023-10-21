@@ -22,9 +22,26 @@ public class ApplicantService {
 		return dao.getIList(pageNum, pageSize);
 	}
 
-	public List<ApplicantVO> getMeetings(int pageNum, int pageSize) {
-		return dao.getMeetings(pageNum, pageSize);
+	public List<ApplicantVO> getConsList(int pageNum, int pageSize, String constype) {
+		return dao.getConsList(pageNum, pageSize, constype); 
 	}
 
+	public ApplicantVO getCons(int no) {
+		return dao.getCons(no);
+	}
+
+	public void delCons(int no) {
+		dao.delCons(no);
+		
+	}
+
+	public void modCons(ApplicantVO vo, int no) {
+		dao.updateCons(vo, no);
+		
+	}
+
+	public ApplicantVO getMeeting(int no) {
+		return dao.getCons(no);
+	}
 	
 }

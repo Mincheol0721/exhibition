@@ -63,13 +63,21 @@ public class ApplicantController extends HttpServlet {
 	    if(request.getParameter("pageSize") != null) {
 	    	pageSize = Integer.parseInt(request.getParameter("pageSize"));
 	    }
+	    int no = 0;
+	    if(request.getParameter("no") != null) {
+	    	no = Integer.parseInt(request.getParameter("no"));
+	    }
 	    String cname = request.getParameter("cname");
-	    
-	    
+	    String constype = null;
+		if(request.getParameter("constype") == null) {
+			constype = "자기소개서";
+		} else {
+			constype = request.getParameter("constype");
+		}
+		System.out.println("constype: " + constype);
 	    String action = request.getPathInfo();
-		
 
-		try {
+	    try {
 			
 			if(action.equals("/getCList.do")) {
 				
@@ -87,18 +95,47 @@ public class ApplicantController extends HttpServlet {
 				
 				nextPage = "/view/admin/ijobExp.jsp" ;
 				
-			} else if(action.equals("/getMeetings.do")) {
+			} else if(action.equals("/getCons.do")) {
+				constype = request.getParameter("constype");
+//				System.out.println(constype);
 				
-				list = as.getMeetings(pageNum, pageSize);
+				list = as.getConsList(pageNum, pageSize, constype);
 				
-				request.setAttribute("meetings", list);
+				request.setAttribute("Cons", list);
 				
-				nextPage = "/view/admin/meetings.jsp";
+				nextPage = "/view/admin/Cons.jsp?constype=" + constype + "&pageNum=" + pageNum;
 				
+			} else if(action.equals("/modPage.do")) {
+//				System.out.println("no: " + no);
+				vo = as.getMeeting(no);
 				
-			} else if(action.equals("/getSelfIntro.do")) {
-			
+				request.setAttribute("vo", vo);
 				
+				nextPage = "/view/admin/modCons.jsp?no=" + no;
+				
+			} else if(action.equals("/modCons.do")) {
+				String name = request.getParameter("name");
+				String sitel = request.getParameter("sitel");
+				String regDate = request.getParameter("regDate");
+				String startTime = request.getParameter("startTime");
+				String endTime = request.getParameter("endTime");
+//				System.out.println(name + ", " + sitel + ", " + regDate + ", " + startTime);
+				
+				vo.setName(name); vo.setSitel(sitel); vo.setRegDate(regDate); vo.setStartTime(startTime); vo.setEndTime(endTime);
+				
+				as.modCons(vo, no);
+				
+				list = as.getConsList(pageNum, pageSize, constype);
+				request.setAttribute("Cons", list);
+				
+				nextPage = "/applicant/getCons.do?constype=" + constype;
+				System.out.println(nextPage);
+				
+			} else if(action.equals("/delCons.do")) {
+				
+				as.delCons(no);
+				
+				nextPage = "/applicant/getCons.do?constype=" + constype;
 				
 			} 
 			

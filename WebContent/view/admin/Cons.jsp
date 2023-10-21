@@ -17,10 +17,16 @@
 	
 	ApplicantDAO dao = new ApplicantDAO();
 	ApplicantVO vo = null;
-	List<ApplicantVO> list = null;
+	
+	String constype = null;
+	if(request.getParameter("constype") == null) {
+		constype = "자기소개서";
+	} else {
+		constype = request.getParameter("constype");
+	}
 	
 	//전체 글 수
-	int count = dao.getMCount();
+	int count = dao.getConsCount(constype); 
 	System.out.println("count: " + count);
 	
 	//하나의 화면에 띄워줄 글 개수 10
@@ -54,7 +60,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>신청자 관리 - 개인</title>
+		<title>신청자 관리 - 모의면접</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -62,8 +68,19 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 			$(function() {
-				
+				var btn = $('.mod');
+				<%-- 
+				btn.on('click', function(e) {
+					$(this).parent().parent().html('<td><input type="text" name="name" value="${vo.name}"></td>' +
+													'<td><input type="tel" name="sitel" value="${vo.sitel}"></td>' +
+													'<td><input type="date" name="regDate" value="${ fn:substring(vo.regDate, 0, 10) }"</td>' + 
+													'<td><input type="time" name="startTime" value="${vo.startTime}"</td>' + 
+													'<td><button type="button" onclick="location.href=\'<%=request.getContextPath()%>/applicant/modMeeting.do?no=${vo.no}\'">수정</button></td>' +
+													'<td><button type="button" onclick="location.href=\'<%=request.getContextPath()%>/applicant/delMeeting.do?no=${vo.no}\'">삭제</button></td>');
+				});
+				 --%>
 			});
+			
 		</script>
 		<style type="text/css">
 			.layout {
@@ -83,6 +100,52 @@
 			.flexbox [type=button] {
 				margin-bottom: 30px;
 			}
+			.bn30 {
+		  float: right;
+		  margin: 0 5px;
+		  border: 5em;
+		  cursor: pointer;
+		  outline: none;
+		  font-size: 16px;
+		  -webkit-transform: translate(0);
+		  transform: translate(0);
+		  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+		  padding: 0.7em 2em;
+		  border-radius: 65px;
+		  box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438);
+		  -webkit-transition: box-shadow 0.25s;
+		  transition: box-shadow 0.25s;
+		  color: white;
+		}
+		
+		.bn30 .text {
+		  background-clip: text;
+		  -webkit-background-clip: text;
+		  -webkit-text-fill-color: transparent;
+		  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+		}
+		
+		.bn30:after {
+		  content: "";
+		  border-radius: 18px;
+		  position: absolute;
+		  margin: 4px;
+		  top: 0;
+		  left: 0;
+		  bottom: 0;
+		  right: 0;
+		  z-index: -1;
+		  background: #0e0e10;
+		}
+		
+		.bn30:hover {
+		  background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+		  box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+		}
+		
+		.bn30:hover .text {
+		  background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+		}
 		</style>
 	</head>
 	<body class="no-sidebar is-preload">
@@ -110,14 +173,18 @@
 				<div class="container">
 					<article id="main" class="special">
 						<header>
-							<h2>신청자 관리</h2>
+							<h2>신청자 관리 - 컨설팅</h2>
 							<div>
 							<jsp:include page="/inc/pgsBtn.jsp" />
 							</div>
-							<!-- 회원구분버튼 영역 -->
-								<jsp:include page="/inc/selectMember.jsp" />
-							<!-- 회원구분버튼 영역 -->
+							<button class="bn30" value="자기소개서" onclick="location.href='<%=request.getContextPath()%>/applicant/getCons.do?constype=자기소개서'">
+								자기소개서
+							</button>
+							<button class="bn30" value="모의면접" onclick="location.href='<%=request.getContextPath()%>/applicant/getCons.do?constype=모의면접'">
+								모의면접
+							</button>
 							<section class="layout">
+								<form>
 	                        	<table class="table table-striped" style="font-size: 14px; vertical-align: middle; text-align: center;">
 									<tr style="font-weight: 700;">
 										<th>신청자명</th>
@@ -127,21 +194,19 @@
 									  	<th>수정</th>
 									  	<th>삭제</th>
 									</tr>
-								<c:forEach var="vo" items="${meetings}">
-									<tr>
+								<c:forEach var="vo" items="${Cons}">
+									<tr class="tr">
 										<td>${vo.name}</td>
-										<td>${vo.sctel}</td>
+										<td>${vo.sitel}</td>
 										<td>${ fn:substring(vo.regDate, 0, 10) }</td> 
-										<td>${vo.ampm}&nbsp;&nbsp;${vo.startTime}&nbsp;&nbsp;~&nbsp;&nbsp;${vo.endTime}</td>
-										<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/applicant/modMeeting.do?no=${vo.no}'">수정</button></td>
-										<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/applicant/delMeeting.do?no=${vo.no}'">삭제</button></td>
+										<td>${vo.startTime} (30분간 진행)</td>
+										<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/applicant/modPage.do?no=${vo.no}'">수정</button></td>
+										<td><button type="button" onclick="location.href='<%=request.getContextPath()%>/applicant/delCons.do?no=${vo.no}'">삭제</button></td>
 									</tr>
 								</c:forEach>
 								</table>
+								</form>
 							</section>
-							<div class="flexbox">
-								<input type="button" value="등록하기" onclick="goReg();">
-							</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
@@ -175,7 +240,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/applicat/getIList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/applicat/getCons.do?constype=<%=request.getParameter("constype")%>&pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -183,11 +248,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/applicant/getIList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/applicant/getCons.do?constype=<%=request.getParameter("constype")%>&pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item "><a href="${path}/applicant/getIList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item "><a href="${path}/applicant/getCons.do?constype=<%=request.getParameter("constype")%>&pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -196,7 +261,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/applicant/getIList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/applicant/getCons.do?constype=<%=request.getParameter("constype")%>&pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

@@ -7,9 +7,16 @@
 
 <% 
 	request.setCharacterEncoding("UTF-8"); 
+
+	String constype = null;
+	if(request.getParameter("constype") == null) {
+		constype = "자기소개서";
+	} else {
+		constype = request.getParameter("constype");
+	}
 	
 	//하나의 화면에 띄워줄 글 개수 10
-	int pageSize = 9;
+	int pageSize = 10;
 	
 	//현재 보여질 페이지번호 가져오기
 	String pageNum = request.getParameter("pageNum");
@@ -62,8 +69,8 @@
 				location.href='<%=request.getContextPath()%>/pgs/getList.do?pageNum=<%=pageNum%>';
 			}
 			
-			function callMeetings() {
-				location.href='<%=request.getContextPath()%>/applicant/getMeetings.do?pageNum=<%=pageNum%>';
+			function callCons() {
+				location.href='<%=request.getContextPath()%>/applicant/getCons.do?constype=<%=constype%>';
 			}
 			
 		</script>
@@ -115,11 +122,8 @@
 				<button class="shadow__btn" value="직업체험" onclick="location.href='<%=request.getContextPath()%>/applicant/getIList.do?pageNum=<%=pageNum%>&pageSize=<%=pageSize%>'">
 					직업체험
 				</button>
-				<button class="shadow__btn" value="모의면접" onclick="callMeetings();">
-					모의면접
-				</button>
-				<button class="shadow__btn" value="자기소개서">
-					자기소개서 컨설팅
+				<button class="shadow__btn" value="모의면접" onclick="callCons();">
+					컨설팅
 				</button>
 			</div>
 		</header>
