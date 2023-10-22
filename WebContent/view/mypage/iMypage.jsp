@@ -88,9 +88,9 @@
 						<br>
 						<br>
 						<img alt="mypage" src="images/mypage_01.png" style="cursor: pointer" id="info1">	
-						<img alt="mypage" src="images/mypage_02.png" onclick="" style="cursor: pointer" id="info2">
+						<img alt="mypage" src="images/mypage_02.png" style="cursor: pointer" id="info2">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<img alt="mypage" src="images/mypage_03.png" onclick="" style="cursor: pointer" id="info2">
+						<img alt="mypage" src="images/mypage_03.png" style="cursor: pointer" id="info3">
 
 				</div>
 
@@ -115,6 +115,11 @@
 				$("#info1").on('click',function(){
 					
 					location.href = "http://localhost:8090/Exhibition/memberInfo/iInfo.me";
+		    		
+				})
+				$("#info2").on('click',function(){
+					
+					location.href = "http://localhost:8090/Exhibition/memberInfo/application.me";
 		    		
 				})
 			</script>

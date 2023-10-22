@@ -39,9 +39,38 @@ public class IMemberVO {
 		this.fileRealName = fileRealName;
 	}
 	
-	public IMemberVO(String password, String name, String addr1, String addr2, String addr3, String addr4, String itel,
-			String email) {
+	public IMemberVO(String id, String password, String ssn, String name, String addr1, String addr2, String addr3,
+			String addr4, String itel, String email,String fileRealName) {
 		super();
+		this.id = id;
+		this.password = password;
+		this.ssn = ssn;
+		this.name = name;
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.addr3 = addr3;
+		this.addr4 = addr4;
+		this.itel = itel;
+		this.email = email;
+		this.fileRealName = fileRealName;
+	}
+
+	public IMemberVO(String addr1, String addr2, String addr3, String addr4, String itel, String fileName,
+			String fileRealName) {
+		super();
+		this.addr1 = addr1;
+		this.addr2 = addr2;
+		this.addr3 = addr3;
+		this.addr4 = addr4;
+		this.itel = itel;
+		this.fileName = fileName;
+		this.fileRealName = fileRealName;
+	}
+
+	public IMemberVO(String password, String name, String addr1, String addr2, String addr3, String addr4,
+			String itel, String email) {
+		super();
+		
 		this.password = password;
 		this.name = name;
 		this.addr1 = addr1;
@@ -50,6 +79,7 @@ public class IMemberVO {
 		this.addr4 = addr4;
 		this.itel = itel;
 		this.email = email;
+		
 	}
 
 	//getter & setter
