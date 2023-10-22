@@ -8,6 +8,7 @@ import DAO.memberInfoDAO.MemberInfoDAO;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
+import VO.iJobExpVO.IjobExpVO;
 import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
 import VO.iapplicationVO.LicenseVO;
@@ -79,6 +80,16 @@ public class MemberInfoService {
 	}
 	public List<AllAppFormVO> serviceSearchAppFormInfo(AllAppFormVO vo) {
 		return dao.searchAppFormInfo(vo);
+	}
+	
+	//단위기능8. 직업체험 예약 내역 조회
+	public List<IjobExpVO> servicelistMembers(IMemberVO vo) {
+		return dao.listMembers(vo);
+	}
+	//단위기능 9. 직업체험 예약 내역 삭제 기능
+	public void serviceDelMember(String no) {
+		dao.delMember(no);
+		
 	}
 	
 	

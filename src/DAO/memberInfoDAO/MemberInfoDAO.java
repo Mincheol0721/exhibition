@@ -3,6 +3,7 @@ package DAO.memberInfoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.apache.regexp.recompile;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
+import VO.iJobExpVO.IjobExpVO;
 import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
 import VO.iapplicationVO.LicenseVO;
@@ -1072,5 +1074,58 @@ public class MemberInfoDAO {
 
 			}
 
+			public List<IjobExpVO> listMembers(IMemberVO vo) {
+				List<IjobExpVO> list = new ArrayList<IjobExpVO>();
+				try {
+					//DB연결
+					con = dataSource.getConnection();
+					//Sql문 작성
+					String sql = "select * from ijobExp where name = ?";
+					pstmt = con.prepareStatement(sql);
+					
+					pstmt.setString(1, vo.getName());
+					
+					rs = pstmt.executeQuery();
+					
+					while (rs.next()) {
+						 int no = rs.getInt("no");
+						 String tel = rs.getString("tel");
+						 String name = rs.getString("name");
+						 String jobexpname = rs.getString("jobexpname");
+						 Timestamp regDate = rs.getTimestamp("regDate");
+						
+						IjobExpVO ivo = new IjobExpVO(no, tel, name, jobexpname, regDate);
+						
+						list.add(ivo);
+					}
+				} catch (Exception e) {
+					System.out.println("MemberInfoDAO클래스의 listMembers메소드의 sql문 오류" + e);
+				}finally {
+					freeResource();
+				}
+				return list;
+			}
+			
+			public void delMember(String no) {
+				
+				try {
+					//1.커넥션풀(DataSouce)객체 내부에 있는 Connection객체 얻기(DB연결)
+					con = dataSource.getConnection();
+					//2.매개변수로 전달 받은 삭제할 회원 아이디를 이용해 DELETE SQL문장 만들기
+					String sql = "delete from ijobExp where no=?";
+					//3. delete문장 전체를 미리 로드한 OraclcePreparedStatementWrapper실행 객체 얻기
+					pstmt = con.prepareStatement(sql);
+					//3.1 ? 설정
+					pstmt.setString(1, no);
+					//4. 완성된 delete전체 문장을  DB에 전송해서 실행!
+					pstmt.executeUpdate(); //삭제에 성공하면 1을 반환 , 삭제에 실패하면 0을 반환 
+					
+				} catch (Exception e) {
+					System.out.println("MemberDAO의 delMember메소드 내부에서 SQL문 실행 오류 : " + e);
+				} finally {
+					//자원해제 
+					freeResource();
+				}
+			}
 			
 }//class의 끝
