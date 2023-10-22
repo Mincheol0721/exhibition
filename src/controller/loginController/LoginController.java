@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.appFormDAO.AppFormDAO;
 import service.LoginService.LoginService;
 
 
@@ -92,16 +93,14 @@ public class LoginController extends HttpServlet {
 					int isAdmin = 0;
 					String cno = request.getParameter("cno");
 					String cpwd = request.getParameter("cPwd");
-					
 					//서비스단에서 로그인 처리하기 위한 메소드
 					result = loginService.serviceClogin(cno,cpwd); 
-					
-					//
 					
 					if (result == 1) {
 						HttpSession session = request.getSession();
 						session.setAttribute("cno", cno);
-						
+						String cname = new AppFormDAO().getCname(cno);
+						session.setAttribute("cname", cname);
 					}else if(result == -1) {
 						out.println("<script>");
 						out.println("window.alert('아이디 틀림');");

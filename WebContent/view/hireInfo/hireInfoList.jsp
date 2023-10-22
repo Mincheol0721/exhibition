@@ -72,15 +72,14 @@
 		<style type="text/css">
 			.layout {
 			  width: 100%;
-			
 			  display: grid;
-			  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+			  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 			  gap: 8px;
 			}
 			.card {
 			  position: relative;
 			  margin: 0 auto;
-			  width: 400px;
+			  width: 300px;
 			  height: 300px;
 			  background-color: #f2f2f2;
 			  border-radius: 10px;

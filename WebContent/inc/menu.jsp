@@ -11,8 +11,10 @@
 	int isAdmin = (Integer)session.getAttribute("isAdmin");
 	String cno = (String)session.getAttribute("cno");
 	String cname = (String)session.getAttribute("cname");
-	
-	HireInfoVO vo = new HireInfoDAO().getHireInfo(cname);
+	HireInfoVO vo = null;
+	if(cname != null){
+		vo = new HireInfoDAO().getHireInfo(cname);
+	}
 %>
 
 <c:set var="path" value="<%=request.getContextPath()%>" />
@@ -56,12 +58,12 @@
 	</head>
 	<body>
 		<ul>
-			<li><a href="${path}/view/index.jsp">홈</a></li>
+			<li><a href="${path}/Menu/searchIndexNo.do">홈</a></li>
 			<li>
 				<a href="#">박람회안내</a>
 				<ul>
-					<li><a href="${path}/view/eventInfo_main.jsp">행사안내</a></li>
-					<li><a href="${path}/view/guide.jsp">이용안내</a></li>
+					<li><a href="${path}/EventInfo/getEventInfoList.do">행사안내</a></li>
+					<li><a href="${path}/Menu/guide.do">이용안내</a></li>
 				</ul>
 			</li>
 			<li>
@@ -137,7 +139,7 @@
 					<%-- 관리자일 경우 --%>
 					<c:when test="${id != null && isAdmin == 1}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="${path}/view/mypage/mypage.jsp" class="membership">마이페이지</a></li>
+					<li><a href="${path}/admin/admin.do" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					<%-- 기업회원일 경우  --%>
@@ -147,9 +149,7 @@
 					</c:when>
 					
 					</c:choose>
-					
-
-					
+		
 				</ul>
 			</li>
 		</ul>
