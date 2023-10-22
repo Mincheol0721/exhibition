@@ -24,6 +24,10 @@ public class CMemberVO {
     //getter & setter
     
     
+	public CMemberVO() {
+		
+	}
+
 	public String getCno() {
 		return cno;
 	}
