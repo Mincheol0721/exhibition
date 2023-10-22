@@ -310,6 +310,10 @@ public class HireInfoDAO {
 				cvo.setName(rs.getString("name"));
 				cvo.setDivcomp(rs.getString("divComp"));
 				cvo.setJobtype(rs.getString("jobType"));
+				cvo.setAddr1(rs.getString("addr1"));
+				cvo.setAddr2(rs.getString("addr2"));
+				cvo.setAddr3(rs.getString("addr3"));
+				cvo.setAddr4(rs.getString("addr4"));
 			}
 			
 		} catch (Exception e) {
