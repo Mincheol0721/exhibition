@@ -16,7 +16,12 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script type="text/javascript">
 				
-			$(function() {
+		
+		
+		$(function() {
+			$('.indReg').hide();
+			$('.compReg').hide();
+			
 				$('#regBtn').children().on('click', function(e) {
 					if($(this).val() == '기업회원') {
 						$('.indReg').hide();
