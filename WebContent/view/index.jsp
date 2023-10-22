@@ -12,7 +12,6 @@
 		<meta charset="UTF-8">
 		<title>2023 부산 진로·취업 박람회</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="${path}/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	</head>
@@ -25,7 +24,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">취업 박람회</a></h1>
 								<hr />
 								<p>우수한 기업들과 만나고 새로운 기회를 발견하세요!</p>
 								<!-- ${vo.no} : 상세보기 no값 받아오는지 확인용 -->
@@ -37,7 +36,7 @@
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
@@ -56,6 +55,7 @@
 				<section class="carousel">
 					<div class="reel">
 						<article>
+							<a href="#" class="image featured"><img src="${path}/pic01.jpg" alt="" /></a>
 							<header>
 							    <a href="#"><img src="${path}/images/index_microsoft.jpg" style="width: 270px; height: 170px;" alt="마이크로소프트" /></a>
 							    <h3>마이크로소프트</h3>
@@ -66,6 +66,8 @@
 						<article>
 							<header>
 								<a href="#"><img src="${path}/images/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
+							<header>
+								<a href="#"><img src="${path}/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3>스타벅스</h3>
 							</header>
 							<p>서비스직 구인 중</p>
@@ -136,6 +138,7 @@
 						</header>
 						<div class="row">
 							<article class="col-4 col-12-mobile special">
+								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>									
 								<header>
 									<h3><a href="#">채용 공고</a></h3>
 								</header>		
@@ -143,6 +146,7 @@
 								<a href="#" class="image featured"><img src="${path}/images/index_cMember.jpg" alt="" /></a>															
 							</article>
 							<article class="col-4 col-12-mobile special">
+								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>							
 								<header>
 									<h3><a href="#">취업 특강</a></h3>
 								</header>
@@ -150,6 +154,7 @@
 								<a href="#" class="image featured"><img src="${path}/images/index_jobLecture.jpg" alt="" /></a>
 							</article>
 							<article class="col-4 col-12-mobile special">
+								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>							
 								<header>
 									<h3><a href="#">직업 체험 프로그램</a></h3>
 								</header>
@@ -163,7 +168,7 @@
 
 			<!-- Footer -->
 				<div id="footer">
-					<jsp:include page="../inc/footer.jsp" />
+					<jsp:include page="/inc/footer.jsp" />
 				</div>
 
 		</div>

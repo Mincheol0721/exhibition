@@ -27,7 +27,7 @@
     <Manager pathname="" />
     -->
     
-
+    <!-- 톰캣 서버가 실행될때  DB와 미리 연결을 맺은 Connection객체들을 보관하는 역할의 DataSource객체(커넥션풀역할을하는 객체) 생성 설정 -->
     <Resource
     	name="jdbc/oracle"  
     	auth="Container"
@@ -55,10 +55,4 @@
     	다른 속성들은 고정적으로 사용되며, 주로 driverClassNmae, username, password, url속성만 변경해서 사용합니다.
      -->  
 </Context>
-
-
-
-
-
-
 

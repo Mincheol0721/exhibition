@@ -1,3 +1,5 @@
+<%@page import="VO.hireInfoVO.HireInfoVO"%>
+<%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -8,6 +10,11 @@
 	String id = (String)session.getAttribute("id");
 	int isAdmin = (Integer)session.getAttribute("isAdmin");
 	String cno = (String)session.getAttribute("cno");
+	String cname = (String)session.getAttribute("cname");
+	HireInfoVO vo = null;
+	if(cname != null){
+		vo = new HireInfoDAO().getHireInfo(cname);
+	}
 %>
 
 <c:set var="path" value="<%=request.getContextPath()%>" />
@@ -34,7 +41,19 @@
 					$(this).children().removeClass("fa-angle-down");
 					$(this).children().addClass("fa-angle-right");
 				});
-			});									
+				
+				console.log("menu cname: <%=cname%>");
+			});
+			
+			function reqReg() {
+				alert('등록된 정보가 없습니다');
+				location.href = '<%=request.getContextPath()%>/hireInfo/regPage.do?cname=<%=cname%>';
+			}
+			
+			function reqView() {
+				alert('이미 등록된 정보가 있습니다.');
+				location.href = '<%=request.getContextPath()%>/hireInfo/myHireInfo.do?cname=<%=cname%>';
+			}
 		</script>
 	</head>
 	<body>
@@ -50,8 +69,29 @@
 			<li>
 				<a href="#">기업채용</a>
 				<ul>
-					<li><a href="#">채용정보</a></li>
-					<li><a href="#">입사지원</a></li>
+					<li>
+						<c:choose>
+						<c:when test="${cno != null && id == null}">
+						<a href="#">채용정보
+						<i class="fas fa-angle-right"></i></a>
+						<ul>
+						<% if(vo == null) { %>
+							<li><a href="#" onclick="reqReg();">채용정보 확인</a></li>
+							<li><a href="${path}/hireInfo/regPage.do?cname=<%=cname%>">채용정보 등록</a></li>
+						<% } else { %>
+							<li><a href="${path}/hireInfo/myHireInfo.do?cname=<%=cname%>">채용정보 확인</a></li>
+							<li><a href="#" onclick="reqView()">채용정보 등록</a></li>
+						<% } %>
+						</ul>
+						<li><a href="${path}/appForm/getList.do?cname=<%=cname%>">입사지원</a></li>
+						</c:when>
+						<c:otherwise>
+						<a href="${path}/hireInfo/getList.do">채용정보</a>
+						<li><a href="#">입사지원</a></li> <!-- 입사지원서 작성 페이지로 포워딩하게 주소 작성 -->
+						</c:otherwise>
+						</c:choose>
+					</li>
+					
 				</ul>
 			</li>
 			<li>
@@ -74,8 +114,8 @@
 			<li>
 				<a href="#">직업체험</a>
 				<ul>
-					<li><a href="http://localhost:8090/exhibition/cjobExp/cjobExpBoard.do">직업체험</a></li>
-					<li><a href="#">부대행사</a></li>
+					<li><a href="${path}/cjobExp/cjobExpBoard.do">직업체험</a></li>
+					<li><a href="${path}/event/getList.do">부대행사</a></li>
 				</ul>
 			</li>
 			<li>
@@ -93,19 +133,19 @@
 					<%-- 개인회원일 경우 --%>
 					<c:when test="${id != null && cno == null && isAdmin == 0}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="#" class="membership">마이페이지</a></li>
+					<li><a href="${path}/view/mypage/iMypage.jsp" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					<%-- 관리자일 경우 --%>
 					<c:when test="${id != null && isAdmin == 1}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="${path}/view/mypage/mypage.jsp" class="membership">마이페이지</a></li>
+					<li><a href="${path}/admin/admin.do" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					<%-- 기업회원일 경우  --%>
 					<c:when test="${cno != null && id == null}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="#" class="membership">마이페이지</a></li>
+					<li><a href="${path}/view/mypage/cMypage.jsp" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					</c:choose>
