@@ -1,6 +1,6 @@
 package VO.JobExpVO;
 
-public class cJobExpVO {
+public class CJobExpVO {
 
 	String cname;
 	String title;
@@ -14,7 +14,7 @@ public class cJobExpVO {
 	String fileRealName;
 	
 	
-	public cJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
+	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
 			String endTime, String locate, String fileName, String fileRealName) {
 		super();
 		this.cname = cname;
@@ -28,7 +28,11 @@ public class cJobExpVO {
 		this.fileName = fileName;
 		this.fileRealName = fileRealName;
 	}
-	public cJobExpVO() {
+	public CJobExpVO() {
+		// TODO Auto-generated constructor stub
+	}
+	public CJobExpVO(String string, String string2, String string3, String string4, String string5, String string6,
+			String string7, String string8, String string9, String string10, String string11, String string12) {
 		// TODO Auto-generated constructor stub
 	}
 	public String getCname() {

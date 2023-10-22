@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import VO.CMemberVO.CMemberVO;
+import VO.IMemberVO.IMemberVO;
 import VO.hireInfoVO.HireInfoVO;
 import service.hireInfoService.HireInfoService;
 
@@ -114,7 +116,6 @@ public class HireInfoController extends HttpServlet {
 				if(request.getParameter("pageNum") != null) pageNum = Integer.parseInt(request.getParameter("pageNum"));
 				
 				List<HireInfoVO> list = his.getHireInfoList(pageNum, pageSize); 
-				
 				request.setAttribute("list", list);
 				
 				nextPage = "/view/hireInfo/hireInfoList.jsp";
