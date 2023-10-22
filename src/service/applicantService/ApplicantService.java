@@ -1,8 +1,9 @@
-package service.applicantService.copy;
+package service.applicantService;
 
 import java.util.List;
 
 import DAO.applicantDAO.ApplicantDAO;
+import VO.IMemberVO.IMemberVO;
 import VO.applicantVO.ApplicantVO;
 
 
@@ -43,5 +44,21 @@ public class ApplicantService {
 	public ApplicantVO getMeeting(int no) {
 		return dao.getCons(no);
 	}
-	
+
+	public List<IMemberVO> getImemberList(int pageNum, int pageSize) {
+		return dao.getImemberList(pageNum, pageSize);
+	}
+
+	public IMemberVO getJobSeeker(String id) {
+		return dao.getJobSeeker(id);
+	}
+
+	public void updateJobSeeker(IMemberVO vo, String id) {
+		dao.updateJobSeeker(vo, id);
+	}
+
+	public void delJobSeeker(String id) {
+		dao.delJobSeeker(id);
+	}
+
 }

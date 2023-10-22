@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import VO.pgsVO.PgsVO;
-import service.pgsService.copy.PgsService;
+import service.pgsService.PgsService;
 
 @WebServlet("/pgs/*")
 public class PgsController extends HttpServlet {

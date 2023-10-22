@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import VO.IMemberVO.IMemberVO;
 import VO.applicantVO.ApplicantVO;
 
 public class ApplicantDAO {
@@ -136,6 +137,29 @@ public class ApplicantDAO {
 				
 			} catch (Exception e) {
 				System.out.println("ApplicantDAO내부 getConsCount에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return count;
+		};
+		
+		public int getJSCount() {
+			int count = 0;
+			
+			try {
+				con = ds.getConnection();
+				query = "SELECT count(*) FROM imember WHERE isSeek=0";
+				
+				pstmt = con.prepareStatement(query);
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 getJSCount에서 예외 발생: " + e);
 			} finally {
 				freeResource();
 			}
@@ -342,6 +366,130 @@ public class ApplicantDAO {
 				
 			} catch (Exception e) {
 				System.out.println("ApplicantDAO내부 updateCons에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+
+		public List<IMemberVO> getImemberList(int pageNum, int pageSize) {
+			List<IMemberVO> list = new ArrayList<IMemberVO>();
+			System.out.println("pageNum: " + pageNum + ", pageSize: " + pageSize);
+			try {
+				con = ds.getConnection();
+				query = "SELECT * FROM ( "
+						  + " SELECT ROWNUM AS rn, i.* "
+						  + " FROM imember i "
+						  + " WHERE isseek <> -1 and "
+						  + " ROWNUM <= ( " + pageNum + "*" + pageSize + ") "
+						  + " ORDER BY ID ASC "
+						  + " ) WHERE rn >= ( ( " + pageNum + " - 1 ) * " + pageSize + ") + 1 ";
+				pstmt = con.prepareStatement(query);
+				
+				System.out.println("query문: " + query);
+				
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					IMemberVO vo = new IMemberVO( rs.getString("id"), 
+												  rs.getString("password"), 
+												  rs.getString("ssn"), 
+												  rs.getString("name"), 
+												  rs.getString("addr1"),
+												  rs.getString("addr2"),
+												  rs.getString("addr3"),
+												  rs.getString("addr4"),
+												  rs.getString("itel"),
+												  rs.getString("email"),
+												  rs.getString("fileName"),
+												  rs.getString("fileRealName") );
+					vo.setRegDate(rs.getDate("regDate").toString());
+					vo.setIsSeek(rs.getInt("isseek"));
+					
+					list.add(vo);
+				}
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 getImemberList에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return list;
+		}
+
+		public IMemberVO getJobSeeker(String id) {
+			IMemberVO vo = new IMemberVO();
+			System.out.println("id: " + id);
+			try {
+				con = ds.getConnection();
+				query = "SELECT * FROM imember WHERE id='" + id + "'";
+				pstmt = con.prepareStatement(query);
+				
+				System.out.println("query문: " + query);
+				
+				rs = pstmt.executeQuery();
+				
+				if (rs.next()) {
+					vo = new IMemberVO( rs.getString("id"), 
+												  rs.getString("password"), 
+												  rs.getString("ssn"), 
+												  rs.getString("name"), 
+												  rs.getString("addr1"),
+												  rs.getString("addr2"),
+												  rs.getString("addr3"),
+												  rs.getString("addr4"),
+												  rs.getString("itel"),
+												  rs.getString("email"),
+												  rs.getString("fileName"),
+												  rs.getString("fileRealName") );
+					System.out.println(rs.getDate("regDate").toString());
+					vo.setRegDate(rs.getDate("regDate").toString());
+					vo.setIsSeek(rs.getInt("isseek"));
+				}
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 getJobSeeker에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return vo;
+		}
+
+		public void updateJobSeeker(IMemberVO vo, String id) {
+			try {
+				con = ds.getConnection();
+				query = "UPDATE imember SET name=?, itel=?, ssn=?, email=?, addr1=?, addr2=?, addr3=?, addr4=?, regDate=?, isSeek=? WHERE id='" + id + "'";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getItel());
+				pstmt.setString(3, vo.getSsn());
+				pstmt.setString(4, vo.getEmail());
+				pstmt.setString(5, vo.getAddr1());
+				pstmt.setString(6, vo.getAddr2());
+				pstmt.setString(7, vo.getAddr3());
+				pstmt.setString(8, vo.getAddr4());
+				pstmt.setString(9, vo.getRegDate());
+				pstmt.setInt(10, vo.getIsSeek());
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 updateJS에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+
+		public void delJobSeeker(String id) {
+			try {
+				con = ds.getConnection();
+				query = "DELETE FROM imember WHERE id='" + id + "'";
+				pstmt = con.prepareStatement(query);
+				
+				pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("ApplicantDAO내부 delJobSeeker에서 예외 발생: " + e);
 			} finally {
 				freeResource();
 			}

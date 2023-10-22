@@ -73,6 +73,10 @@
 				location.href='<%=request.getContextPath()%>/applicant/getCons.do?constype=<%=constype%>';
 			}
 			
+			function jobSeekers() {
+				location.href='<%=request.getContextPath()%>/applicant/getImember.do?pageNum=<%=pageNum%>';
+			}
+			
 		</script>
 		<style type="text/css">
 		.shadow__btn {
@@ -108,7 +112,7 @@
 	<body>
 		<header>
 			<div id="btn">
-				<button class="shadow__btn" value="구직자 관리">
+				<button class="shadow__btn" value="구직자 관리" onclick="jobSeekers();">
 					구직자 관리
 				</button>
 				<button class="shadow__btn" value="신청자 관리">
