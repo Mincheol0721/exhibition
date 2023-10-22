@@ -74,6 +74,7 @@
 				}
 				
 			});
+			
 			function view(no) {
 				location.href= '<%=request.getContextPath()%>/event/getEvent.do?no=' + no;
 			}
@@ -82,7 +83,7 @@
 				location.href= '<%=request.getContextPath()%>/event/modEventPage.do?no=' + no;
 			}
 			
-			function view(no) {
+			function del(no) {
 				location.href= '<%=request.getContextPath()%>/event/delEvent.do?no=' + no;
 			}
 			

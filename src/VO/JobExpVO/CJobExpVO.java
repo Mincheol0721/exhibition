@@ -16,6 +16,22 @@ public class CJobExpVO {
 	
 	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
 			String endTime, String locate, String fileName, String fileRealName) {
+	private String cname;
+	private String title;
+	private String content;
+	private String iPart;
+	private String teacher;
+	private String startTime;
+	private String endTime;
+	private String locate;
+	private String fileName;
+	private String fileRealName;
+	private String startDate;
+	private String endDate;
+	private int isrecog;
+	
+	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
+			String endTime, String locate, String fileName, String fileRealName, String startDate, String endDate) {
 		super();
 		this.cname = cname;
 		this.title = title;
@@ -27,14 +43,14 @@ public class CJobExpVO {
 		this.locate = locate;
 		this.fileName = fileName;
 		this.fileRealName = fileRealName;
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
+	
 	public CJobExpVO() {
 		// TODO Auto-generated constructor stub
 	}
-	public CJobExpVO(String string, String string2, String string3, String string4, String string5, String string6,
-			String string7, String string8, String string9, String string10, String string11, String string12) {
-		// TODO Auto-generated constructor stub
-	}
+    
 	public String getCname() {
 		return cname;
 	}
