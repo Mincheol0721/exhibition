@@ -87,7 +87,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.jsp" id="logo">부산 취업 박람회</a></h1>
+								<h1><a href="${path}/view/index.jsp" id="logo">부산 취업 박람회</a></h1>
 							</header>
 						</div>
 
