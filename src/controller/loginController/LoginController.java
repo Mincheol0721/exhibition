@@ -58,7 +58,7 @@ public class LoginController extends HttpServlet {
 		try {
 			if(action == null || action.equals("/Ilogin.me")) {
 	 			int result = -1;
-				int isAdmin = 0;
+				int isAdmin = -1;
 				String id = request.getParameter("id");
 				String pwd = request.getParameter("pwd");
 				
@@ -84,6 +84,7 @@ public class LoginController extends HttpServlet {
 					out.println("</script>");
 					return;
 				}
+				System.out.println(isAdmin);
 				nextPage = "/view/index.jsp";
 			//기업회원의 로그인 요청
 			}else if (action.equals("/Clogin.me")) {
