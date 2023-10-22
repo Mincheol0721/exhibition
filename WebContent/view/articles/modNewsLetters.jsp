@@ -1,18 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" 
-	pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% request.setCharacterEncoding("UTF-8"); %>
-
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-<% 
-    DAO.newsLettersDAO.NewsLettersDAO ndao = new DAO.newsLettersDAO.NewsLettersDAO();
-    request.setAttribute("ndao", ndao);
+<%
+	int isAdmin = (Integer)session.getAttribute("isAdmin");
 %>
-
-<c:set var="path" value="${pageContext.request.contextPath}" />
-
+<c:set var="path" value="<%=request.getContextPath()%>" /> 
+<c:set var="isAdmin" value="${sessionScope.isAdmin}"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +29,7 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="#" id="logo">뉴스레터 새 글 추가</a></h1>
+								<h1><a href="#" id="logo">뉴스레터 게시글 수정</a></h1>
 							</header>
 						</div>
 
@@ -49,18 +44,19 @@
 					<div class="container">				
 						<article id="main" class="special">					
 					<section>					    					    				   
-						<form action="${path}/Articles/NewsLettersInsert.do" method="post">
-					        <label for="title">제목:</label>
-					        <input type="text" name="title" id="title" required><br><br>
-					        
-					        <label for="content">내용:</label><br>
-					        <textarea name="content" id="content" rows="10" cols="50" required></textarea><br><br>
-					        
-					        <input type="submit" value="작성">
-						</form>
+					    <form action="${path}/Articles/UpdateNewsLetter.do" method="post">
+						    <input type="hidden" name="no" value="${vo.no}" />
 						    
-					    <br><br>
-					    <a href="${path}/Articles/NewsLetters_forAdmin.do">뉴스레터 목록</a>		    
+						    <label for="title"> 제목:</label>
+						    <input type="text" name="title" value="${vo.title}" />  <br>
+						        
+						    <label for="content"> 내용: </label>
+						    <textarea name="content" >${vo.content}</textarea>  <br>
+						    
+						    <input type="submit" value="수정 완료" />
+					    </form>
+					    
+					    <a href="${path}/Articles/NewsLetters_forAdmin.do">뉴스레터 목록</a>			    
 				
 
 					</section>
