@@ -3,6 +3,7 @@ package service.appFormService;
 import java.util.List;
 
 import DAO.appFormDAO.AppFormDAO;
+import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
 
 public class AppFormService {
@@ -36,6 +37,15 @@ public class AppFormService {
 	public List<AppFormVO> getTraining(String ssn) {
 		return dao.getTraining(ssn);
 	}
+
+	public IMemberVO getImember(String ssn) {
+		return dao.getImember(ssn);
+	}
+
+	public byte[] getImageBytesFromDatabase(String imageId) {
+		return dao.getImageBytesFromDatabase(imageId);
+	}
+	
 
 	
 }

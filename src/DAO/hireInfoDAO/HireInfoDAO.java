@@ -142,6 +142,9 @@ public class HireInfoDAO {
 									 rs.getString("appType"),
 									 rs.getString("appstart"),
 									 rs.getString("appexpire"));
+				vo.setFileName(rs.getString("fileName"));
+				vo.setFileRealName(rs.getString("fileRealName"));
+				
 				//오늘 날짜 얻기
 				sdf = new SimpleDateFormat("yyyy-MM-dd");
 				today = Calendar.getInstance();

@@ -77,7 +77,9 @@
 											<td>${vo.name}</td>
 											<th style="border:1px solid gray;" >주민등록번호</th>
 											<td>${vo.ssn}</td>
-											<td rowspan="4" id="photo" height="300px">증명사진란</td>
+											<td rowspan="4" id="photo" height="300px">
+												<img alt="증명사진란" src="${path}/upload/${ivo.fileName}" style="height: 300px; vertical-align: middle; object-fit: scale-down;"> 
+											</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">전화번호</th>

@@ -1,6 +1,10 @@
 package controller.appFormController;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -15,6 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import com.oreilly.servlet.multipart.Part;
+
+import DAO.appFormDAO.AppFormDAO;
+import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
 import service.appFormService.AppFormService;
 
@@ -69,6 +77,7 @@ public class AppFormController extends HttpServlet {
 	    String milServ = request.getParameter("milServ");
 	    String edu = request.getParameter("edu");
 	    String eduStat = request.getParameter("eduStat");
+	    String imageId = request.getParameter("imageId");
 	    
 	    String action = request.getPathInfo();
 		
@@ -101,11 +110,25 @@ public class AppFormController extends HttpServlet {
 				List<AppFormVO> careerExp = as.getCareerExp(ssn);
 				List<AppFormVO> license = as.getLicense(ssn);
 				List<AppFormVO> training = as.getTraining(ssn);
+				IMemberVO ivo = as.getImember(ssn);
+				request.setAttribute("ivo", ivo);
 				
 				request.setAttribute("vo", vo);
 				request.setAttribute("carExp", careerExp);
 				request.setAttribute("license", license);
 				request.setAttribute("training", training);
+				
+				// 이전에 DB에서 이미지를 읽어왔다고 가정
+		        byte[] imageBytes = getImageBytesFromDatabase(imageId);
+		        
+		        if (imageBytes != null) {
+		            // 이미지 콘텐츠 타입 설정
+		            response.setContentType("image/jpg"); // 이미지 포맷에 따라 변경 가능
+		            
+		            // 이미지 출력
+		            response.getOutputStream().write(imageBytes);
+		        } 
+		        request.setAttribute("img", imageBytes);
 				
 				nextPage = "/view/appForm/viewAppForm.jsp?ssn=" + ssn; 
 				System.out.println("nextPage: " + nextPage);
@@ -120,6 +143,11 @@ public class AppFormController extends HttpServlet {
 		}
 		
 	}
-	
+
+	// DB에서 이미지 바이트 배열을 가져오는 메서드
+	private byte[] getImageBytesFromDatabase(String imageId) {
+	    return new AppFormService().getImageBytesFromDatabase(imageId);
+	}
+
 	
 }
