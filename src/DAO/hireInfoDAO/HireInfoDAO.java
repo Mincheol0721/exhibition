@@ -142,6 +142,9 @@ public class HireInfoDAO {
 									 rs.getString("appType"),
 									 rs.getString("appstart"),
 									 rs.getString("appexpire"));
+				vo.setFileName(rs.getString("fileName"));
+				vo.setFileRealName(rs.getString("fileRealName"));
+				
 				//오늘 날짜 얻기
 				sdf = new SimpleDateFormat("yyyy-MM-dd");
 				today = Calendar.getInstance();
@@ -310,6 +313,12 @@ public class HireInfoDAO {
 				cvo.setName(rs.getString("name"));
 				cvo.setDivcomp(rs.getString("divComp"));
 				cvo.setJobtype(rs.getString("jobType"));
+				cvo.setFileName(rs.getString("fileName"));
+				cvo.setFileRealName(rs.getString("fileRealName"));
+				cvo.setAddr1(rs.getString("addr1"));
+				cvo.setAddr2(rs.getString("addr2"));
+				cvo.setAddr3(rs.getString("addr3"));
+				cvo.setAddr4(rs.getString("addr4"));
 			}
 			
 		} catch (Exception e) {

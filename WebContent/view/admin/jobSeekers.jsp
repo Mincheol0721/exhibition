@@ -1,5 +1,5 @@
-<%@page import="VO.pgsVO.PgsVO"%>
-<%@page import="DAO.pgsDAO.PgsDAO"%>
+<%@page import="DAO.applicantDAO.ApplicantDAO"%>
+<%@page import="VO.IMemberVO.IMemberVO"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
@@ -13,12 +13,12 @@
 <% 
 	request.setCharacterEncoding("UTF-8"); 
 	
-	PgsDAO dao = new PgsDAO();
-	PgsVO vo = null;
-	List<PgsVO> list = null;
+	IMemberVO vo = null;
+	ApplicantDAO dao = new ApplicantDAO();
+	List<IMemberVO> list = null;
 	
 	//전체 글 개수
-	int count = dao.getPgsCount();
+	int count = dao.getJSCount(); 
 	System.out.println("count: " + count);
 	
 	//하나의 화면에 띄워줄 글 개수 10
@@ -52,7 +52,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>프로그램 및 행사 관리</title>
+		<title>구직자 관리</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -62,10 +62,6 @@
 			$(function() {
 				
 			});
-			
-			function goReg() {
-				location.href="<%=request.getContextPath()%>/pgs/pgRegPage.do";
-			}
 		</script>
 		<style type="text/css">
 			.layout {
@@ -74,7 +70,7 @@
 				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 				gap: 8px;
 			}
-			.pgTr:hover {
+			.jsTr:hover {
 				cursor: pointer;
 			}
 			.flexbox {
@@ -112,29 +108,45 @@
 				<div class="container">
 					<article id="main" class="special">
 						<header>
-							<h2>프로그램 및 행사 관리</h2>
+							<h2>구직자 관리</h2>
 							<div>
 							<jsp:include page="/inc/pgsBtn.jsp" />
 							</div>
 							<section class="layout">
 	                        	<table class="table table-striped">
 									<tr>
-										<th>프로그램 종류</th>
-									  	<th>프로그램명</th>
-									  	<th>프로그램 기간</th>
+										<th>구직자명</th>
+									  	<th>구직자 연락처</th>
+									  	<th>구직자 이메일</th>
+									  	<th>구직자 주소</th>
+									  	<th>구직상태</th>
 									</tr>
-									<c:forEach var="vo" items="${list}">
-									<tr onclick="location.href='${path}/pgs/getPgs.do?pno=${vo.pno}'" class="pgTr">
-									 	<td>${vo.pgtype}</td>
-									 	<td>${vo.title}</td>
-									 	<td>${ fn:substring(vo.startDate, 0, 10) } ~ ${ fn:substring(vo.endDate, 0, 10) }</td>
+									<c:forEach var="vo" items="${imember}">
+									<tr onclick="location.href='${path}/applicant/getJobSeeker.do?id=${vo.id}'" class="jsTr">
+									 	<td>${vo.name}</td>
+									 	<td>${vo.itel}</td>
+									 	<td>${vo.email}</td>
+									 	<td>
+									 	${vo.addr1})&nbsp; ${vo.addr2}&nbsp; ${vo.addr4}
+									 	<c:if test="${vo.addr3 != '-'}">
+									 	&nbsp;(${vo.addr3})
+									 	</c:if>
+									 	</td>
+								 	<c:choose>
+								 	<c:when test="${vo.isSeek == 0}">
+									 	<td>구직중</td>
+								 	</c:when>
+								 	<c:when test="${vo.isSeek == 1}">
+									 	<td>재직중</td>
+								 	</c:when>
+								 	<c:when test="${vo.isSeek == 2}">
+									 	<td>휴직중</td>
+								 	</c:when>
+								 	</c:choose>
 								 	</tr>
 									</c:forEach>
 								</table>
 							</section>
-							<div class="flexbox">
-								<input type="button" value="등록하기" onclick="goReg();">
-							</div>
 						<div class="container-fluid">
 							<div class="row">
 								<div class="col-md-12">
@@ -168,7 +180,7 @@
 										if(startPage > pageBlock) {
 			%>
 											<li class="page-item">
-								    			<a href="${path}/pgs/getList.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
+								    			<a href="${path}/applicant/getImember.do?pageNum=<%=startPage - pageBlock%>" class="page-link">‹</a>
 								    		</li>
 			<%
 										}
@@ -176,11 +188,11 @@
 										for(int i = startPage; i <= endPage; i++) {
 											if(i == currentPage) {
 			%>											
-								    			<li class="page-item active"><a href="${path}/pgs/getList.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
+								    			<li class="page-item active"><a href="${path}/applicant/getImember.do?pageNum=<%=currentPage%>" class="page-link"><%=currentPage %></a></li>
 			<%
 											} else {
 			%>	
-								    			<li class="page-item "><a href="${path}/pgs/getList.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
+								    			<li class="page-item "><a href="${path}/applicant/getImember.do?pageNum=<%=i%>" class="page-link"><%=i %></a></li>
 			<%	
 											}
 										
@@ -189,7 +201,7 @@
 										if(endPage < pageCount) {
 			%>													
 											<li class="page-item">
-								    			<a href="${path}/pgs/getList.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
+								    			<a href="${path}/applicant/getImember.do?pageNum=<%=startPage + pageBlock%>" class="page-link">›</a>
 								    		</li>
 			<%													
 										}

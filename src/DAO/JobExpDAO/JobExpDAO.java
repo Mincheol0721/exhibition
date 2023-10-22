@@ -11,11 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import VO.JobExpVO.cJobExpVO;
-
-
-
-
+import VO.JobExpVO.CJobExpVO;
 
 public class JobExpDAO {
 
@@ -44,50 +40,52 @@ public class JobExpDAO {
 	}
 
 	//모든 직업체험조회
-		public ArrayList getcjobExpList() {
-			
-			ArrayList list = new ArrayList();
-			
-			//조회된 한행의 차량정보를 저장할 CarListVo객체의 참조변수
-			cJobExpVO cjobExpVO = null;
-			
-			try {
-				//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
-				con = ds.getConnection();
-				//DB의 carlist테이블 저장된 모든 차량을 조회하는 SELECT문장을 sql변수에 저장
-				String sql = "select * from cjobExpReg";
-				//SELECT문장을 DB의 carlist테이블에 전송해서 조회할 PreparedStatement객체 얻기
-				pstmt = con.prepareStatement(sql);
-				//SLELCT문장을 실행하여 조회된 데이터들을 ResultSet에 담아 반환 받기
-				rs = pstmt.executeQuery();
-				//반복문을 활용하여 ResultSet객체에 조회된 한줄 정보씩 얻어와
-				//CarListVo객체의 각변수에 저장 후 
-				//CarListVo객체를 Vector배열에 추가 하여 담습니다.
-				while (rs.next()) {
-					
-					cjobExpVO = new cJobExpVO(rs.getString("cname"), 
-							rs.getString("title"), 
-							rs.getString("content"), 
-							rs.getString("iPart"), 
-							rs.getString("teacher"), 
-							rs.getString("startTime"), 
-							rs.getString("endTime"), 
-							rs.getString("locate"), 
-							rs.getString("fileName"), 
-							rs.getString("fileRealName"));
-							
-					
-					list.add(cjobExpVO);
-				}
-			}catch (Exception e) {
-				System.out.println("getAllCarList메소드에서 SQL오류 : "+ e);
-			}finally {
-				//자원해제
-				closeResource();
+	public ArrayList getcjobExpList() {
+		
+		ArrayList list = new ArrayList();
+		
+		//조회된 한행의 차량정보를 저장할 CarListVo객체의 참조변수
+		CJobExpVO cjobExpVO = null;
+		
+		try {
+			//DB접속 : 커넥션풀에 만들어져 있는 커넥션 얻기
+			con = ds.getConnection();
+			//DB의 carlist테이블 저장된 모든 차량을 조회하는 SELECT문장을 sql변수에 저장
+			String sql = "select * from cjobExpReg";
+			//SELECT문장을 DB의 carlist테이블에 전송해서 조회할 PreparedStatement객체 얻기
+			pstmt = con.prepareStatement(sql);
+			//SLELCT문장을 실행하여 조회된 데이터들을 ResultSet에 담아 반환 받기
+			rs = pstmt.executeQuery();
+			//반복문을 활용하여 ResultSet객체에 조회된 한줄 정보씩 얻어와
+			//CarListVo객체의 각변수에 저장 후 
+			//CarListVo객체를 Vector배열에 추가 하여 담습니다.
+			while (rs.next()) {
+				
+				cjobExpVO = new CJobExpVO(rs.getString("cname"), 
+						rs.getString("title"), 
+						rs.getString("content"), 
+						rs.getString("iPart"), 
+						rs.getString("teacher"), 
+						rs.getString("startTime"), 
+						rs.getString("endTime"), 
+						rs.getString("locate"), 
+						rs.getString("fileName"), 
+						rs.getString("fileRealName"),
+						rs.getString("startDate"),
+						rs.getString("endDate"));
+						
+				
+				list.add(cjobExpVO);
 			}
-			
-			return list;
+		}catch (Exception e) {
+			System.out.println("getAllCarList메소드에서 SQL오류 : "+ e);
+		}finally {
+			//자원해제
+			closeResource();
 		}
+		
+		return list;
+	}
 
 
 }//cjobExpDAO닫기

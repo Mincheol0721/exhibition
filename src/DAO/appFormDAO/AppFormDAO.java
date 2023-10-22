@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import VO.CMemberVO.CMemberVO;
+import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
 
 public class AppFormDAO {
@@ -480,5 +481,66 @@ public class AppFormDAO {
 			return list;
 		}
 		
+		
+		//DB에 접속하여 로그인 한 기업에 해당하는 채용정보 데이터를 조회해오는 메소드
+		public IMemberVO getImember(String ssn) {
+			IMemberVO vo = null;
+			byte[] imageBytes;
+			System.out.println("ssnImember: " + ssn);
+			try {
+				con = ds.getConnection();
+				query = "SELECT * FROM imember WHERE ssn='" + ssn + "'"; 
+				
+				
+				pstmt = con.prepareStatement(query);
+				
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()) {
+					vo = new IMemberVO( rs.getString("id"), 
+										rs.getString("password"), 
+										rs.getString("ssn"),
+										rs.getString("name"), 
+										rs.getString("addr1"), 
+										rs.getString("addr2"), 
+										rs.getString("addr3"), 
+										rs.getString("addr4"), 
+										rs.getString("itel"), 
+										rs.getString("email"), 
+										rs.getString("fileName"), 
+										rs.getString("fileRealName") );
+				}
+				
+			} catch (Exception e) {
+				System.out.println("AppFormDAO내부 getAppForm에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+			
+			return vo;
+		}
+		
+		public byte[] getImageBytesFromDatabase(String imageId) {
+		    byte[] imageBytes = null;
+		    
+		    try {
+		    	con = ds.getConnection();
+				query = "SELECT * FROM imember WHERE fileName='" + imageId + "'"; 
+				pstmt = con.prepareStatement(query);
+				rs = pstmt.executeQuery();
+				
+		        if (rs.next()) {
+		            // 이미지 데이터를 바이트 배열로 읽어옴
+		            imageBytes = rs.getBytes("fileName");
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    } finally {
+		       freeResource();
+		    }
+		    
+		    return imageBytes;
+		}
 		
 }

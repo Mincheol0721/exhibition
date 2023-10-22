@@ -14,14 +14,14 @@ public class IMemberVO {
 	private String addr4; // 주소
 	private String itel; // 사용자 연락처
 	private String email; //사용자 이메일
-	private Date regDate; // 가입일
+	private String regDate; // 가입일
 	private int isAdmin; // 관리자 여부(0: 일반사용자, 1: 관리자)
-    private int memType;  // 회원 타입(개인: 0, 기업: 1)
+    private int isSeek;  // 구직상태 (0: 구직(실직), 1: 재직, 2: 휴직 / -1: 관리자)
     private String fileName; //첨부이미지파일(포스터)이름
     private String fileRealName; //첨부파일 실제 이름
 	
-	
-	
+    public IMemberVO() {}
+    
 	public IMemberVO(String id, String password, String ssn, String name, String addr1, String addr2, String addr3,
 			String addr4, String itel, String email, String fileName, String fileRealName) {
 		super();
@@ -55,11 +55,6 @@ public class IMemberVO {
 		this.fileRealName = fileRealName;
 	}
 
-	
-	
-
-
-
 	public IMemberVO(String addr1, String addr2, String addr3, String addr4, String itel, String fileName,
 			String fileRealName) {
 		super();
@@ -88,20 +83,17 @@ public class IMemberVO {
 	}
 
 	//getter & setter
-	
-	
-	
 	public String getId() {
 		return id;
 	}
-	public int getMemType() {
-		return memType;
+	public int getIsSeek() {
+		return isSeek;
 	}
 
 
 
-	public void setMemType(int memType) {
-		this.memType = memType;
+	public void setIsSeek(int isSeek) {
+		this.isSeek = isSeek;
 	}
 
 
@@ -187,10 +179,10 @@ public class IMemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getRegDate() {
+	public String getRegDate() {
 		return regDate;
 	}
-	public void setRegDate(Date regDate) {
+	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
 	public int getIsAdmin() {

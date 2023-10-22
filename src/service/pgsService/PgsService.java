@@ -1,4 +1,4 @@
-package service.pgsService.copy;
+package service.pgsService;
 
 import java.util.List;
 

@@ -1,3 +1,4 @@
+<%@page import="VO.CMemberVO.CMemberVO"%>
 <%@page import="java.util.List"%>
 <%@page import="VO.hireInfoVO.HireInfoVO"%>
 <%@page import="DAO.hireInfoDAO.HireInfoDAO"%>
@@ -11,6 +12,8 @@
  	String cname = request.getParameter("cname");
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
+	CMemberVO cvo = dao.getCmemberInfo(cname);
+	
 	int dday = Integer.parseInt(request.getParameter("expireDate"));
 	vo = dao.getHireInfo(cname);
 %>
@@ -73,7 +76,9 @@
 									</tr>
 									<tr style="border:1px solid gray;">
 										<th style="border:1px solid gray;">주소</th>
-										<td colspan="3" style="text-align: left; padding-left: 20px;"><%=vo.getHomepage()%></td>
+										<td colspan="3" style="text-align: left; padding-left: 20px;">
+											<%=cvo.getAddr1()%>) <%=cvo.getAddr2()%> <%=cvo.getAddr4()%> <%if(!cvo.getAddr3().equals("-")) { %>(<%=cvo.getAddr3()%>)<% } %> 
+										</td>
 									</tr>
 									<tr style="border:1px solid gray;">
 										<th style="border:1px solid gray;">홈페이지</th>

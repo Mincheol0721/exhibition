@@ -11,6 +11,8 @@ public class HireInfoVO {
 	String appType; //접수종류(서류, 면접)
 	String appstart; //접수시작일
 	String appexpire; //접수마감일
+	String fileName;
+	String fileRealName;
 	int expireDate; //d-day를 출력하기 위해 저장할 변수
 	
 	public HireInfoVO() {}
@@ -126,6 +128,22 @@ public class HireInfoVO {
 
 	public void setExpireDate(int expireDate) {
 		this.expireDate = expireDate;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileRealName() {
+		return fileRealName;
+	}
+
+	public void setFileRealName(String fileRealName) {
+		this.fileRealName = fileRealName;
 	}
 	
 }

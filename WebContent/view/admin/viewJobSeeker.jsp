@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>프로그램 및 행사 관리</title>
+		<title>구직자 관리</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="${path}/assets/css/main.css" />
@@ -71,36 +71,56 @@
 					<div class="container">
 						<article id="main" class="special">
 							<header>
-								<h2>프로그램 및 행사 내용 상세보기</h2>
+								<h2>구직자 정보 상세보기</h2>
 								<hr>
 									<table border="none">
 										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;" width="10%">프로그램 종류</th>
-											<td width="15%">[${vo.pgtype}] </td>
-											<th style="border:1px solid gray; width: 30%">프로그램명</th>
-											<td width="45%">${vo.title}</td>
+											<th style="border:1px solid gray;" width="20%">구직자 ID</th>
+											<td width="30%">${vo.id} </td>
+											<th style="border:1px solid gray; width: 20%">구직자명</th>
+											<td width="30%">${vo.name}</td>
 										</tr>
 										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">제목</th>
-											<td colspan="3" style="text-align: left;">${vo.title}</td>
+											<th style="border:1px solid gray;">구직자 연락처</th>
+											<td>${vo.itel}</td>
+											<th style="border:1px solid gray;">구직자 주민등록번호</th>
+											<td>${fn:substring(vo.ssn,0,8)}******</td>
 										</tr>
 										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">대상</th>
-											<td>${vo.ipart}</td>
-											<th style="border:1px solid gray;">프로그램 기간 및 시간</th>
-											<td>
-												- 기간: ${fn:substring(vo.startDate, 0, 10)} ~ ${fn:substring(vo.endDate, 0, 10)} <br>
-												- 진행시간: ${vo.startTime} ~ ${vo.endTime}
+											<th style="border:1px solid gray;">이메일 주소</th>
+											<td colspan="3">${vo.email}</td>
+										</tr>
+										<tr style="border:1px solid gray;">
+											<th style="border:1px solid gray;">주소</th>
+											<td colspan="3">
+											${vo.addr1})&nbsp; ${vo.addr2}&nbsp; ${vo.addr4}
+										 	<c:if test="${vo.addr3 != '-'}">
+										 	&nbsp;(${vo.addr3})
+										 	</c:if>
 											</td>
 										</tr>
 										<tr style="border:1px solid gray;">
-											<th style="border:1px solid gray;">내용</th>
-											<td colspan="3" style="min-height: 100px;"><pre>${vo.content}</pre></td>
+											<th style="border:1px solid gray;">회원가입일</th>
+											<td>${vo.regDate}</td>
+											<th style="border:1px solid gray;">구직상태</th> 
+											<td>
+											<c:choose>
+										 	<c:when test="${vo.isSeek == 0}">
+											 	구직중
+										 	</c:when>
+										 	<c:when test="${vo.isSeek == 1}">
+											 	재직중
+										 	</c:when>
+										 	<c:when test="${vo.isSeek == 2}">
+											 	휴직중
+										 	</c:when>
+										 	</c:choose>
+											</td>
 										</tr>
 									</table>
-									<input type="button" value="글목록" onclick="location.href='${path}/pgs/getList.do'">
-									<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${path}/pgs/modPage.do?pno=${vo.pno}'">
-									<input type="button" class="adminBtn" value="삭제하기" onclick="location.href='${path}/pgs/del.do?pno=${vo.pno}'">
+									<input type="button" value="글목록" onclick="location.href='${path}/applicant/getImember.do'">
+									<input type="button" class="adminBtn" value="수정하기" onclick="location.href='${path}/applicant/modJSPage.do?id=${vo.id}'">
+									<input type="button" class="adminBtn" value="삭제하기" onclick="location.href='${path}/applicant/delJobSeeker.do?id=${vo.id}'">
 							</header>
 					</div>
 
