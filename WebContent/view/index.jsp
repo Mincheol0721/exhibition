@@ -54,15 +54,13 @@
 			<!-- Carousel -->
 				<section class="carousel">
 					<div class="reel">
-
 						<article>
 							<a href="#" class="image featured"><img src="${path}/pic01.jpg" alt="" /></a>
 							<header>
-								<!-- 사진 클릭 시 해당 기업의 채용정보로 이동한다면? -->
-								<a href="#"><img src="${path}/images/index_microsoft.jpg" style="width: 270px;height: 170px;" alt="" /></a>
-								<h3>마이크로소프트</h3>
+							    <a href="#"><img src="${path}/images/index_microsoft.jpg" style="width: 270px; height: 170px;" alt="마이크로소프트" /></a>
+							    <h3>마이크로소프트</h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>'IT·소프트웨어' 분야 집중 구인 중</p>
 						</article>
 
 						<article>
@@ -72,15 +70,15 @@
 								<a href="#"><img src="${path}/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3>스타벅스</h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>서비스직 구인 중</p>
 						</article>
 
 						<article>
 							<header>
-								<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+								<a href="#"><img src="${path}/images/hospital.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 								<h3>A병원</h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>보건·의료직 구인 중</p>
 						</article>
 
 						<article>
@@ -88,17 +86,22 @@
 								<a href="#"><img src="${path}/images/index_megacoffee.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3><a href="#">메가커피</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>바리스타 자격증 소시자 우대</p>
 						</article>
 						<article>
-							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
+							<header>
+								<a href="#"><img src="${path}/images/hospital2.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3><a href="#">B병원</a></h3>
 							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
+							<p>간호학과 졸업자 우대</p>
 						</article>
-					</div>
+					</div>				
 				</section>
-				
+				<article id="main" class="container special">
+					<footer>
+						<a href="${path}/CInfo/getCInfoList.do" class="button">상세 보기</a>
+					</footer>
+				</article>
 				<!-- 공간 띄움 -->
 				<section id="banner">
 					<br>

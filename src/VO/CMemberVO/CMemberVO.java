@@ -59,10 +59,7 @@ public class CMemberVO {
 	}
 
 	//getter & setter
-    
-    
-    
-    
+
 	public String getCno() {
 		return cno;
 	}

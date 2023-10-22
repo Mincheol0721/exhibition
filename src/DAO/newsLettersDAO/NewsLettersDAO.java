@@ -3,7 +3,9 @@ package DAO.newsLettersDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.naming.Context;
@@ -87,6 +89,8 @@ public class NewsLettersDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("getBoardCount메소드 실행 오류 : " + e);
+
 		} finally {
 			freeResource();
 		}
@@ -95,143 +99,218 @@ public class NewsLettersDAO {
 		
 	}//getBoardCount end
 	
-	//뉴스레터 게시판 글 목록 조회해오는 메소드
-	public List<NewsLettersVO> getBoardList(int startRow, int pageSize){
+	public List<NewsLettersVO> getBoardList(int startRow, int pageSize) {
 		
-	    query = "SELECT * FROM (SELECT ROWNUM AS rnum, n.* FROM (SELECT * FROM newsLetters ORDER BY re_ref DESC, re_seq ASC) n) WHERE rnum >= ? AND rnum <= ?";
-		
-		List<NewsLettersVO> list = new ArrayList<NewsLettersVO>();
-		
-		try {
-			
-			//DB연결
-			con = ds.getConnection();
-			
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, pageSize);
-			
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				
-				NewsLettersVO vo = new NewsLettersVO();
-				
-				vo.setNo(rs.getInt("no"));
-				vo.setArticleType(rs.getString("articleType"));
-				vo.setTitle(rs.getString("title"));
-				vo.setContent(rs.getString("content"));				
-				vo.setFileName(rs.getString("fileName"));
-				vo.setFileRealName(rs.getString("fileRealName"));
-				vo.setRe_lev(rs.getInt("re_lev"));
-				vo.setRe_ref(rs.getInt("re_ref"));
-				vo.setRe_seq(rs.getInt("re_seq"));
-				vo.setWriteDate(rs.getDate("writeDate"));
-				vo.setReadCount(rs.getInt("readCount"));
-				
-				list.add(vo);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			freeResource();
-		}
-		
-		return list;
-		
+	    List<NewsLettersVO> list = new ArrayList<NewsLettersVO>();
+	    
+	    query = "SELECT * FROM (SELECT ROWNUM AS rnum, n.* FROM (SELECT * FROM newsLetters ORDER BY no DESC) n) WHERE rnum >= ? AND rnum <= ?";
+
+	    try {
+	        // DB 연결
+	        con = ds.getConnection();
+	        pstmt = con.prepareStatement(query);
+	        pstmt.setInt(1, startRow + 1);
+	        pstmt.setInt(2, startRow + pageSize);
+
+	        rs = pstmt.executeQuery();
+
+	        while (rs.next()) {
+	            NewsLettersVO vo = new NewsLettersVO();
+
+	            vo.setNo(rs.getInt("no"));
+	            vo.setTitle(rs.getString("title"));
+	            vo.setContent(rs.getString("content"));
+	            vo.setFileName(rs.getString("fileName"));
+	            vo.setFileRealName(rs.getString("fileRealName"));
+	            vo.setWriteDate(rs.getDate("writeDate"));
+	            vo.setReadCount(rs.getInt("readCount"));
+
+	            list.add(vo);
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+			System.out.println("getBoardList메소드 실행 오류 : " + e);
+
+	    } finally {
+	        freeResource();
+	    }
+
+	    return list;
+	    
 	}//getBoardList end
-	
-	public void insertNewsLetters(NewsLettersVO vo) {
-		
-		query =  "insert into newsLetters INSERT INTO newsLetters (no, articleType, title, content, fileName, fileRealName, re_ref, re_lev, re_seq, writeDate, readCount)"
-				   + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ";
-		
-		int no = 0; //글번호
-		
-		try {
-			
-			//DB연결
-			con = ds.getConnection();
-			
-			pstmt = con.prepareStatement(query);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {				
-				no = rs.getInt(1) + 1;	//글이 존재할 경우 최대값 + 1 		
-			}else {
-				no = 1; //글이 없을 경우 1
-			}
-			
-			pstmt.setInt(1, no);
-			pstmt.setString(2, vo.getArticleType());
-			pstmt.setString(3, vo.getTitle());
-			pstmt.setString(4, vo.getContent());
-			pstmt.setString(5, vo.getFileName());
-			pstmt.setString(6, vo.getFileRealName());
-			pstmt.setInt(7, no); //re_ref 그룹 번호 == no 주글번호 기준
-			pstmt.setInt(8, 0); //들여쓰기
-			pstmt.setInt(9, 0); //답글순서
-			pstmt.setString(10, vo.getArticleType());
-			pstmt.setInt(11, 0); //조회수
-			
-			//insert 실행
-			pstmt.executeUpdate();
-			
-		} catch (Exception e) {
+
+
+	 // 뉴스레터 글 등록
+    public void insertNewsLetters(String title, String content, String fileName, String fileRealName) {
+
+        String query = "INSERT INTO newsLetters (no, title, content, fileName, fileRealName, writeDate, readCount) " +
+                	   "VALUES (newsLetters_no.NEXTVAL, ?, ?, ?, ?, SYSDATE, 0)";
+        try {
+        	
+            con = ds.getConnection();
+            
+            pstmt = con.prepareStatement(query);
+            
+            pstmt.setString(1, title);
+            pstmt.setString(2, content);
+            pstmt.setString(3, fileName);
+            pstmt.setString(4, fileRealName);
+
+            pstmt.executeUpdate();
+            
+        } catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("insertNewsLetters메소드 실행 오류 : " + e);
 		} finally {
 			freeResource();
 		}
-		
-		
-	}//insertNewsLetters end
+        
+    }//insertNewsLetters end
 	
 	//특정 뉴스레터 게시글 클릭 시 뉴스레터 게시글을 조회하는 메소드
 	public NewsLettersVO getNewsLettersDetail(int no) {		
 			
-			System.out.println("getNewsLettersDetail메소드 뉴스레터 번호: " + no);
-			query = "select * from newsLetters where no=" + no;
+		System.out.println("getNewsLettersDetail메소드 뉴스레터 번호: " + no);
+		query = "select * from newsLetters where no=" + no;
+		
+		try {
 			
-			try {
-				//DB연결
-				con = ds.getConnection();
+			con = ds.getConnection();
+			
+			pstmt = con.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			//한 행사의 데이터를 불러옴
+			if (rs.next()) {
 				
-				pstmt = con.prepareStatement(query);
+				vo = new NewsLettersVO();
 				
-				rs = pstmt.executeQuery();
+				vo.setNo(rs.getInt("no"));
+				vo.setTitle(rs.getString("title"));
+				vo.setContent(rs.getString("content"));				
+				vo.setFileName(rs.getString("fileName"));
+				vo.setFileRealName(rs.getString("fileRealName"));
+				vo.setWriteDate(rs.getDate("writeDate"));
+				vo.setReadCount(rs.getInt("readCount"));
 				
-				//한 행사의 데이터를 불러옴
-				if (rs.next()) {
-					
-					vo = new NewsLettersVO();
-					
-					vo.setNo(rs.getInt("no"));
-					vo.setArticleType(rs.getString("articleType"));
-					vo.setTitle(rs.getString("title"));
-					vo.setContent(rs.getString("content"));				
-					vo.setFileName(rs.getString("fileName"));
-					vo.setFileRealName(rs.getString("fileRealName"));
-					vo.setRe_lev(rs.getInt("re_lev"));
-					vo.setRe_ref(rs.getInt("re_ref"));
-					vo.setRe_seq(rs.getInt("re_seq"));
-					vo.setWriteDate(rs.getDate("writeDate"));
-					vo.setReadCount(rs.getInt("readCount"));
-					
-				}	
+			}	
+						
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("getNewsLettersDetail메소드 실행 오류 : " + e);
+		} finally {
+			freeResource();
+		}
 				
-				System.out.println("getNewsLettersDetail메소드 실행 완료");
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("getNewsLettersDetail메소드 실행 오류 : " + e);
-			} finally {
-				freeResource();
-			}
-					
 		return vo;
 		
 	}//getNewsLettersDetail end
 	
+	//수정하기 위해 no값에 따라 불러오는 메소드
+	public NewsLettersVO getNewsLetterByNo(int no) {
+
+	    query = "SELECT * FROM newsLetters WHERE no = ?";
+
+	    try {
+	    	
+	        con = ds.getConnection();
+	        
+	        pstmt = con.prepareStatement(query);
+	        pstmt.setInt(1, no);
+	        rs = pstmt.executeQuery();
+
+	        if (rs.next()) {
+	        	
+	            vo = new NewsLettersVO();
+	            
+	            vo.setNo(rs.getInt("no"));
+	            vo.setTitle(rs.getString("title"));
+	            vo.setContent(rs.getString("content"));
+	           
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+			System.out.println("getNewsLetterByNo메소드 실행 오류 : " + e);
+
+	    } finally {
+	       freeResource();
+	    }
+	    return vo;
+	    
+	}//getNewsLetterByNo end
+	
+	public void updateNewsLetter(int no, String title, String content) {
+
+	    query = "UPDATE newsLetters SET title = ?, content = ? WHERE no = ?";
+
+	    try {
+	    	
+	        con = ds.getConnection();
+	        pstmt = con.prepareStatement(query);
+	        
+	        pstmt.setString(1, title);
+	        pstmt.setString(2, content);
+	        pstmt.setInt(3, no);
+
+	        pstmt.executeUpdate();
+	      
+	    } catch (Exception e) {
+	        e.printStackTrace();
+			System.out.println("updateNewsLetter메소드 실행 오류 : " + e);
+
+	    } finally {
+	        freeResource();
+	    }
+	    
+	}//updateNewsLetter end
+	
+	//조회수 올리는 메소드
+	public void increaseReadCount(int no) {
+
+	    query = "UPDATE newsLetters SET readCount = readCount + 1 WHERE no = ?";
+
+	    try {
+	    	
+	        con = ds.getConnection();
+	        
+	        pstmt = con.prepareStatement(query);
+	        pstmt.setInt(1, no);
+	        
+	        pstmt.executeUpdate();
+	        
+	    } catch (Exception e) {
+	        e.printStackTrace();
+			System.out.println("increaseReadCount메소드 실행 오류 : " + e);
+
+	    } finally {
+	       freeResource();
+	    }   
+	}//increaseReadCount end
+	
+	//뉴스레터 게시글 삭제하는 기능의 메소드
+	public void delNewsLetters(int no) {
+		
+		query = "delete from newsLetters where no=?";
+		
+		try {
+			
+			con = ds.getConnection();
+	
+			pstmt = con.prepareStatement(query);			
+			pstmt.setInt(1, no);
+			
+			pstmt.executeUpdate();
+						
+			//System.out.println("delNewsLetters 구문 실행 완료");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("delNewsLetters메소드 실행 오류 : " + e);
+		} finally {
+			freeResource();
+		}
+			
+	}//delNewsLetters end
+
 }

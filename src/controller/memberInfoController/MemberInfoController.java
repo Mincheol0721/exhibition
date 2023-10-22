@@ -20,6 +20,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
+import VO.iJobExpVO.IjobExpVO;
 import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
 import VO.iapplicationVO.LicenseVO;
@@ -378,6 +379,36 @@ public class MemberInfoController extends HttpServlet {
 				
 				
 				
+			}else if (action.equals("/reservationStatus.me")) {
+				IMemberVO vo = null;
+				
+				//요청한값 얻기
+				HttpSession session = request.getSession();
+				
+				String id = (String)session.getAttribute("id");
+				
+				vo = memberInfoservice.serviceSearchMyInfo(id);
+				
+				System.out.println(vo.getName());
+				List<IjobExpVO> membersList = memberInfoservice.servicelistMembers(vo);
+				
+				//request내장객체 영역에 웹브라우저로 응답할 조회된회원정보들이 저장된 ArrayList배열을 바인딩 합니다.
+				request.setAttribute("membersList", membersList);
+				
+				nextPage = "/view/mypage/reservationStatus.jsp";
+				
+			}else if(action.equals("/delMember.me")){
+				//요청한 값 얻기 (삭제할 회원의 ID 얻기)
+				String no = request.getParameter("no");
+				
+				//ID에 해당되는 회원정보를 DB의 t_member테이블에서 삭제 하는 명령!
+				memberInfoservice.serviceDelMember(no);
+				
+				//삭제에 성공하면 listMembers.jsp에 삭제작업 완료 메세지를 전달 하기 위해
+				//request에 삭제 성공 조건 값을 바인딩합니다.
+				request.setAttribute("msg", "deleted");
+				
+				nextPage = "/memberInfo/reservationStatus.me";
 			}else {
 				nextPage = "/view/index.jsp";
 			}

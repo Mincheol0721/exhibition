@@ -2,6 +2,20 @@ package VO.JobExpVO;
 
 public class CJobExpVO {
 
+	String cname;
+	String title;
+	String content;
+	String iPart;
+	String teacher;
+	String startTime;
+	String endTime;
+	String locate;
+	String fileName;
+	String fileRealName;
+	
+	
+	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
+			String endTime, String locate, String fileName, String fileRealName) {
 	private String cname;
 	private String title;
 	private String content;
@@ -36,6 +50,7 @@ public class CJobExpVO {
 	public CJobExpVO() {
 		// TODO Auto-generated constructor stub
 	}
+    
 	public String getCname() {
 		return cname;
 	}

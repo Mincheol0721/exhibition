@@ -186,7 +186,7 @@
 								</form>
 								<div id="regBtn"> 
 									<button class="bn632-hover bn27" class="regType" id="submitBtn" type="submit">수정하기</button>
-									<button class="bn632-hover bn27"  class="regType" id="backBtn">뒤로</button>
+									<button class="bn632-hover bn27"  class="regType" id="backList">목록으로</button>
 								</div>
 								<br>
 								
@@ -290,10 +290,8 @@
 			})
 			
 
-			$("#backBtn").on('click',function(){
-				
-				history.go(-1);
-	    		
+			$("#backList").on('click',function(){
+				location.href = "http://localhost:8090/Exhibition/view/mypage/iMypage.jsp";
 			})
 		
 			

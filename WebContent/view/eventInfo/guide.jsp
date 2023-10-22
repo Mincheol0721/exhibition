@@ -64,14 +64,33 @@
 									new daum.roughmap.Lander({
 										"timestamp" : "1697532655607",
 										"key" : "2ghcb",
-										"mapWidth" : "640",
-										"mapHeight" : "360"
+										"mapWidth" : "1000",
+										"mapHeight" : "500"
 									}).render();
 								</script>
 								
 							    </div>	
 								</div>	
-							</section>												
+							</section>
+							<!-- 공간 띄움 -->
+							<div class="wrapper style1">
+								<section>
+									<header>
+										<h3>주차안내</h3>
+									</header>
+									<img src="${path}/images/parking.jpg" alt="주차안내" />							
+								</section>	
+							</div>
+							
+							<div class="wrapper style1">
+								<section>
+									<header>
+										<h3>부대시설 안내</h3>
+									</header>
+									<!-- 채워넣을 생각중 -->						
+								</section>	
+							</div>	
+																		
 						</article>				
 						<hr/>					
 					</div>
