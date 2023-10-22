@@ -84,14 +84,14 @@
 					
 			<!-- Main -->
 				<div class="wrapper style1" style="float: none; margin: 0 auto;">
-						<div align="center"></div>
+						<div align="center">
 						<br>
 						<br>
 						<img alt="mypage" src="images/mypage_01.png" style="cursor: pointer" id="cinfo1">	
 						<img alt="mypage" src="images/mypage_02.png" onclick="" style="cursor: pointer" id="cinfo2">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<img alt="mypage" src="images/mypage_03.png" onclick="" style="cursor: pointer" id="cinfo2">
-
+						</div>
 				</div>
 
 			<!-- Footer -->
