@@ -4,10 +4,7 @@
 
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<c:set var="path" value="<%=request.getContextPath()%>" />
-
-<%-- 회원정보 추가, 회원정보 수정, 회원정보 삭제에 성공하면  request에 바인딩된 msg에 관한 성공메세지를 조건에 따라 결과를 보여주기 위한 코드 --%>    
-
+<c:set var="path" value="<%=request.getContextPath()%>" />  
 
 <!DOCTYPE html>
 <html>
@@ -30,6 +27,7 @@
 								<h1><a href="${path}/view/index.jsp" id="logo">취업 박람회</a></h1>
 								<hr />
 								<p>우수한 기업들과 만나고 새로운 기회를 발견하세요!</p>
+								<!-- ${vo.no} : 상세보기 no값 받아오는지 확인용 -->
 							</header>
 							<footer>
 								<a href="#banner" class="button circled scrolly">Start</a>
@@ -68,7 +66,8 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="${path}/pic02.jpg" alt="" /></a>
+							<header>
+								<a href="#"><img src="${path}/images/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 							<header>
 								<a href="#"><img src="${path}/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3>스타벅스</h3>
@@ -77,7 +76,6 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="${path}/pic03.jpg" alt="" /></a>
 							<header>
 								<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 								<h3>A병원</h3>
@@ -86,80 +84,43 @@
 						</article>
 
 						<article>
-							<a href="#" class="image featured"><img src="${path}/pic04.jpg" alt="" /></a>
 							<header>
 								<a href="#"><img src="${path}/images/index_megacoffee.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3><a href="#">메가커피</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
-
 						<article>
 							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
 								<h3><a href="#">B병원</a></h3>
 							</header>
 							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
 						</article>
-
-						<article>
-							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
-							<header>
-								<h3><a href="#">기업정보6</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
-							<header>
-								<h3><a href="#">기업정보7</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
-							<header>
-								<h3><a href="#">기업정보8</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#" class="image featured"><img src="${path}/images/pic04.jpg" alt="" /></a>
-							<header>
-								<h3><a href="#">기업정보9</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
-						<article>
-							<a href="#"><img src="${path}/images/pic01.jpg" style="width: 270px;height: 170px;" alt="" /></a>						
-							<header>
-								<h3><a href="#">기업정보10</a></h3>
-							</header>
-							<p>Commodo id natoque malesuada sollicitudin elit suscipit magna.</p>
-						</article>
-
 					</div>
 				</section>
-
+				
+				<!-- 공간 띄움 -->
+				<section id="banner">
+					<br>
+				</section>
+				
 			<!-- Main -->
 				<div class="wrapper style2">
 
 					<article id="main" class="container special">
-						<a href="#" class="image featured"><img src="${path}/images/pic06.jpg" alt="" /></a>
 						<header>
 							<h2><a href="#"></a></h2>
-						<a href="#" class="image featured"><img src="${path}/images/index_mainPoster.jpg" alt="" /></a>
+							<a href="${path}/EventInfo/getEventInfoList.do" class="image featured"><img src="${path}/images/index_mainPoster.jpg" alt="" /></a>
+						</header>
 						<footer>
-							<a href="eventInfo_main.jsp" class="button">상세 보기</a>
+							<a href="${path}/EventInfo/getEventInfoList.do" class="button">상세 보기</a>
 						</footer>
 					</article>
-
+ 
 				</div>
 
 			<!-- Features -->
+			
 				<div class="wrapper style1">
 
 					<section id="features" class="container special">
@@ -210,13 +171,13 @@
 		</div>
 
 		<!-- Scripts -->
-			<script src="${path}/assets/js/jquery.min.js"></script>
-			<script src="${path}/assets/js/jquery.dropotron.min.js"></script>
-			<script src="${path}/assets/js/jquery.scrolly.min.js"></script>
-			<script src="${path}/assets/js/jquery.scrollex.min.js"></script>
-			<script src="${path}/assets/js/browser.min.js"></script>
-			<script src="${path}/assets/js/breakpoints.min.js"></script>
-			<script src="${path}/assets/js/util.js"></script>
-			<script src="${path}/assets/js/main.js"></script>
+		<script src="${path}/assets/js/jquery.min.js"></script>
+		<script src="${path}/assets/js/jquery.dropotron.min.js"></script>
+		<script src="${path}/assets/js/jquery.scrolly.min.js"></script>
+		<script src="${path}/assets/js/jquery.scrollex.min.js"></script>
+		<script src="${path}/assets/js/browser.min.js"></script>
+		<script src="${path}/assets/js/breakpoints.min.js"></script>
+		<script src="${path}/assets/js/util.js"></script>
+		<script src="${path}/assets/js/main.js"></script>
 	</body>
 </html>

@@ -43,7 +43,7 @@ public class EventInfoDAO {
 			// DataSouce커넥션풀 객체를 찾아서 반환해 줍니다.
 			ds = (DataSource) envContext.lookup("jdbc/oracle");
 			
-			System.out.println("DataSource 커넥션풀 객체 얻기 성공!");
+			//System.out.println("DataSource 커넥션풀 객체 얻기 성공!");
 		} catch (Exception e) {
 			System.out.println("DataSource커넥션풀 객체 얻기 실패  : " + e);
 		}
@@ -98,7 +98,7 @@ public class EventInfoDAO {
 		//등록된 과목들을 담을 객체
 		ArrayList<EventInfoVO> list = new ArrayList<EventInfoVO>();
 		//query문
-		query = "select * from eventInfo";
+		query = "select * from eventInfo order by no DESC";
 		
 		try {
 			
@@ -147,25 +147,23 @@ public class EventInfoDAO {
 	}//getEventInfoList end
 		
 	//특정 박람회 포스터 클릭 시 조회하는 메소드
-	public EventInfoVO getEventInfo(String name) {
+	public EventInfoVO getEventInfo(int no) {
 		
-		System.out.println("getEventInfo메소드가 박람회 이름: " + name);
-		query = "select * from eventInfo where name=?";
+		System.out.println("getEventInfo메소드가 박람회 번호: " + no);
+		query = "select * from eventInfo where no=" + no;
 		
 		try {
-			
 			//DB연결
 			con = ds.getConnection();
 			
 			pstmt = con.prepareStatement(query);
 			
-			//DB에 전달할 ?값 세팅
-			pstmt.setString(1, name);
-			
 			rs = pstmt.executeQuery();
 			
 			//한 행사의 데이터를 불러옴
 			if (rs.next()) {
+				
+				vo = new EventInfoVO();
 				
 				vo.setNo(rs.getInt("no"));
 				vo.setName(rs.getString("name"));
@@ -176,8 +174,8 @@ public class EventInfoDAO {
 				vo.setcPart(rs.getString("cPart"));
 				vo.setWay(rs.getString("way"));
 				vo.setContent(rs.getString("content"));
-				vo.setFileName(rs.getString("fileName"));				
-				vo.setFileRealName(rs.getString("fileRealName"));				
+				vo.setFileName(rs.getString("fileName"));
+				vo.setFileRealName(rs.getString("fileRealName"));
 				
 			}	
 			
@@ -194,6 +192,39 @@ public class EventInfoDAO {
 
 	}//getEventInfo end
 	
+	// selectMaxEventInfo 메서드
+	public EventInfoVO selectMaxEventInfo() {
+        
+        EventInfoVO  maxEventInfo = new EventInfoVO();
+        
+	    try {
+	    	
+	    	//DB연결
+			con = ds.getConnection();
+			
+			pstmt = con.prepareStatement("SELECT no,fileRealName " + 
+										"FROM eventInfo " + 
+										"WHERE no = (SELECT MAX(no) FROM eventInfo)");
+			
+			rs = pstmt.executeQuery();			
+			
+	        if (rs.next()) {
+	        	
+	            maxEventInfo.setNo(rs.getInt(1));
+	            maxEventInfo.setFileRealName(rs.getString(2));
+	            
+	            
+	        }
+	    } catch (Exception e) {
+	    	System.out.println("selectMaxEventInfo()" + e);
+	        e.printStackTrace();
+	        // 예외 처리
+	    } finally {
+	        freeResource();
+	    }
+
+	    return maxEventInfo;
+	}
 	
 
 }
