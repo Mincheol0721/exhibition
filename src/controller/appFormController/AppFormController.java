@@ -78,6 +78,19 @@ public class AppFormController extends HttpServlet {
 	    String edu = request.getParameter("edu");
 	    String eduStat = request.getParameter("eduStat");
 	    String imageId = request.getParameter("imageId");
+	    String cstartDate = request.getParameter("cstartDate");
+	    String cendDate = request.getParameter("cendDate");
+	    String damdang = request.getParameter("damdang");
+	    String lname = request.getParameter("lname");
+	    String lnum = request.getParameter("lnum");
+	    String getDate = request.getParameter("getDate");
+	    String pub = request.getParameter("pub");
+	    String eduName = request.getParameter("eduName");
+	    String tstartDate = request.getParameter("tstartDate");
+	    String tendDate = request.getParameter("tendDate");
+	    String content = request.getParameter("content");
+	    String carCname = request.getParameter("carCname");
+	    
 	    
 	    String action = request.getPathInfo();
 		
@@ -96,10 +109,6 @@ public class AppFormController extends HttpServlet {
 				request.setAttribute("list", list);
 				
 				nextPage = "/view/appForm/appFormList.jsp";
-				
-				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/getAppForm.do")) {
 				System.out.println("AppFormController 2단계 요청주소: " + action);
@@ -133,11 +142,26 @@ public class AppFormController extends HttpServlet {
 				nextPage = "/view/appForm/viewAppForm.jsp?ssn=" + ssn; 
 				System.out.println("nextPage: " + nextPage);
 				
-				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+			} else if(action.equals("/applicateComp.do")) {
+				String id = request.getParameter("id");
+				System.out.println("cname: " + cname);
+				
+				vo.setName(name); vo.setSsn(ssn); vo.setTel(tel); vo.setMilServ(milServ);
+				vo.setAddr(addr); vo.setEdu(edu); vo.setEduStat(eduStat); vo.setCname(cname);
+				vo.setCalCname(carCname); vo.setCstartDate(cstartDate); vo.setCendDate(cendDate); vo.setDamdang(damdang);
+				vo.setLname(lname); vo.setLnum(lnum); vo.setGetDate(getDate); vo.setPub(pub);
+				vo.setEduName(eduName); vo.setTstartDate(tstartDate); vo.setTendDate(tendDate); vo.setContent(content);
+				
+				as.insertAppForm(vo, id);
+				
+				nextPage = "/hireInfo/getList.do?pageNum=" + pageNum;
+				
+				
 			}
 			
+			// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+			dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

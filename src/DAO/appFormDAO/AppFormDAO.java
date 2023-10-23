@@ -521,6 +521,69 @@ public class AppFormDAO {
 			return vo;
 		}
 		
+		public void insertAppForm(AppFormVO vo, String id) {
+			System.out.println("dao: " + vo.getCstartDate());
+			try {
+				con = ds.getConnection();
+				query = " insert into appform(name, ssn, cname, addr, tel, milServ, edu, eduStat) "
+						+ " values(?, ?, ?, ?, ?, ?, ?, ?) ";
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, vo.getName());
+				pstmt.setString(2, vo.getSsn());
+				pstmt.setString(3, vo.getCname());
+				pstmt.setString(4, vo.getAddr());
+				pstmt.setString(5, vo.getTel());
+				pstmt.setString(6, vo.getMilServ());
+				pstmt.setString(7, vo.getEdu());
+				pstmt.setString(8, vo.getEduStat());
+				
+				pstmt.executeUpdate();
+				
+				if(vo.getCalCname() != null) {
+					query = " INSERT INTO careerExp(no, name, cname, startDate, endDate, damdang) " + 
+							" VALUES(careerExp_no.nextval, ?, ?, TO_DATE(?, 'YYYY-MM-DD'), TO_DATE(?, 'YYYY-MM-DD'), ?) "; 
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, vo.getName());
+					pstmt.setString(2, vo.getCalCname());
+					pstmt.setString(3, vo.getCstartDate());
+					pstmt.setString(4, vo.getCendDate());
+					pstmt.setString(5, vo.getDamdang());
+					
+					pstmt.executeUpdate();
+				} 
+				if(vo.getLname() != null) {
+					query = " INSERT INTO license (lname, name, lnum, getDate,pub) " + 
+							" VALUES (?, ?, ?, TO_DATE('?', 'YYYY-MM-DD'), ?) ";
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, vo.getLname());
+					pstmt.setString(2, vo.getLnum());
+					pstmt.setString(3, vo.getGetDate());
+					pstmt.setString(4, vo.getPub());
+					
+					pstmt.executeUpdate();
+				}
+				if(vo.getEduName() != null) {
+					query = " INSERT INTO training (tno,name,eduName, startDate, endDate,content) " + 
+							" VALUES (training_tno.nextval, ?, ?, TO_DATE(?, 'YYYY-MM-DD'), TO_DATE(?, 'YYYY-MM-DD'), ?)";
+					
+					pstmt = con.prepareStatement(query);
+					pstmt.setString(1, vo.getName());
+					pstmt.setString(2, vo.getEduName());
+					pstmt.setString(3, vo.getTstartDate());
+					pstmt.setString(4, vo.getTendDate());
+					pstmt.setString(5, vo.getContent());
+					
+					pstmt.executeUpdate();
+				}
+				
+			} catch (Exception e) {
+				System.out.println("AppFormDAO내부 insertAppForm메소드에서 예외 발생: " + e);
+			} finally {
+				freeResource();
+			}
+		}
+		
 		public byte[] getImageBytesFromDatabase(String imageId) {
 		    byte[] imageBytes = null;
 		    
@@ -542,5 +605,7 @@ public class AppFormDAO {
 		    
 		    return imageBytes;
 		}
+
+		
 		
 }

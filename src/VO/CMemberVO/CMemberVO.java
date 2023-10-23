@@ -54,13 +54,7 @@ public class CMemberVO {
 		this.addr4 = addr4;
 	}
 
-
-
 	//getter & setter
-    
-    
-    
-    
 	public String getCno() {
 		return cno;
 	}

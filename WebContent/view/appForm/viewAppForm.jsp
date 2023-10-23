@@ -16,7 +16,7 @@
 <html>
 	<head>
 		<title>입사지원서</title>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -89,11 +89,11 @@
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">주소</th>
-											<td colspan="3">${vo.addr}</td>
+											<td colspan="4">${vo.addr}</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">최종학력</th>
-											<td colspan="3">${vo.edu}&nbsp;(${vo.eduStat})</td>
+											<td colspan="4">${vo.edu}&nbsp;(${vo.eduStat})</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">경력사항</th>

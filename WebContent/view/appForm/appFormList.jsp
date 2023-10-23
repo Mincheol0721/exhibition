@@ -65,7 +65,7 @@
 <html>
 	<head>
 		<title>입사지원서</title>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
