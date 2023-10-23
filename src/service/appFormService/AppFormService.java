@@ -45,6 +45,10 @@ public class AppFormService {
 	public byte[] getImageBytesFromDatabase(String imageId) {
 		return dao.getImageBytesFromDatabase(imageId);
 	}
+
+	public void insertAppForm(AppFormVO vo, String id) {
+		dao.insertAppForm(vo, id);
+	}
 	
 
 	
