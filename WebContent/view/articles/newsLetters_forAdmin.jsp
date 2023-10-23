@@ -67,7 +67,7 @@
 							</header>			
 						<section>						
 						<table class="table table-hover">					    
-					        <tr>					        	
+					        <tr style="background-color: #dee2e6;">						        	
 					            <th>글 번호</th>
 					            <th>제목</th>
 					            <th>작성일</th>
