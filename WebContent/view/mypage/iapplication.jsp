@@ -7,14 +7,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <% request.setCharacterEncoding("UTF-8");
    AllAppFormVO vo = null;
    vo = (AllAppFormVO)request.getAttribute("vo");
   
    
 %>
+
+<c:choose>	
+	
+	<c:when test="${requestScope.msg == 'deleted'}">		
+		<script>
+			window.onload = function(){
+				location.href = "${path}/view/mypage/iMypage.jsp";
+				alert("입사지원서를 삭제 하였습니다..");
+			}
+		</script>
+	</c:when>	
+	</c:choose>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<fmt:formatDate pattern="yyyy-MM-dd" value="${career[0].startDate}" var="careerSDate1"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${career[1].startDate}" var="careerSDate2"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${career[2].startDate}" var="careerSDate3"/>
+
+<fmt:formatDate pattern="yyyy-MM-dd" value="${career[0].endDate}" var="careerEDate1"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${career[1].endDate}" var="careerEDate2"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${career[2].endDate}" var="careerEDate3"/>
+
+<fmt:formatDate pattern="yyyy-MM-dd" value="${license[0].getDate}" var="licenseDate1"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${license[1].getDate}" var="licenseDate2"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${license[2].getDate}" var="licenseDate3"/>
+
+<fmt:formatDate pattern="yyyy-MM-dd" value="${training[0].trstartDate}" var="trainingSDate1"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${training[1].trstartDate}" var="trainingSDate2"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${training[2].trstartDate}" var="trainingSDate3"/>
+
+<fmt:formatDate pattern="yyyy-MM-dd" value="${training[0].trendDate}" var="trainingEDate1"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${training[1].trendDate}" var="trainingEDate2"/>
+<fmt:formatDate pattern="yyyy-MM-dd" value="${training[2].trendDate}" var="trainingEDate3"/>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -123,6 +156,48 @@
 			  box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
 			}
 			
+			.bn631-hover {
+			  width: 2000px;
+			  font-size: 16px;
+			  font-weight: 600;
+			  color: #fff;
+			  cursor: pointer;
+			  padding:15px;
+			  margin: 20px;
+			  height: 55px;
+			  text-align:center;
+			  border: none;
+			  background-size: 300% 100%;
+			  border-radius: 15px;
+			  moz-transition: all .4s ease-in-out;
+			  -o-transition: all .4s ease-in-out;
+			  -webkit-transition: all .4s ease-in-out;
+			  transition: all .4s ease-in-out;
+			}
+			
+				.bn631-hover:hover {
+			  background-position: 100% 0;
+			  moz-transition: all .4s ease-in-out;
+			  -o-transition: all .4s ease-in-out;
+			  -webkit-transition: all .4s ease-in-out;
+			  transition: all .4s ease-in-out;
+			}
+			
+			.bn631-hover:focus {
+			  outline: none;
+			}
+			
+			.bn631-hover.bn27 {
+			  background-image: linear-gradient(
+			    to right,
+			    #ed6ea0,
+			    #ec8c69,
+			    #f7186a,
+			    #fbb03b
+			  );
+			  
+			  box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+			}
 			
 		
 		</style>
@@ -169,10 +244,10 @@
 					</span>
 					<span class="input-group-text" id="addon-wrapping">
 					<label for="address">주소</label>
-					<input type="text" id="sample4_postcode" name="address1" class="form-control" placeholder="우편번호" hidden="">
+					<input type="text" id="sample4_postcode" name="address1" class="form-control" placeholder="우편번호" hidden="" value="<%=vo.getAddr1()%>">
 					
 					<input type="text" id="sample4_roadAddress" name="address2" placeholder="도로명주소" class="form-control" value="<%=vo.getAddr2()%>" style="flex: 90em">
-					<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="address3" class="form-control" hidden="">
+					<input type="text" id="sample4_jibunAddress" placeholder="지번주소" name="address3" class="form-control" hidden="" value="<%=vo.getAddr3()%>">
 					<span id="guide" style="color:#999;display:none"></span>
 					<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="address4" class="form-control" style="flex: 140em" value="<%=vo.getAddr4()%>">
 					<input type="button" onclick="sample4_execDaumPostcode()" value="검색" class="form-control" width="10px">
@@ -187,15 +262,15 @@
 		              <input type="radio" name="milServ" value="전역" checked> 전역 &nbsp;&nbsp;
 		              <input type="radio" name="milServ" value="미필"> 미필 &nbsp;&nbsp;
 		              <input type="radio" name="milServ" value="면제"> 면제 &nbsp;&nbsp;
-		              <input type="radio" name="milServ" value="해당사항 없음"> 면제 &nbsp;&nbsp;
+		              <input type="radio" name="milServ" value="해당사항 없음"> 해당사항없음 &nbsp;&nbsp;
 					</span>
 		
 					<span class="input-group-text" id="addon-wrapping">
 						<label>최종학력</label>
 						<input style="width: 300px;" type="text" id="edu" class="form-control" aria-describedby="addon-wrapping" name="edu" value="${appForm[0].edu}" >
-							<label>재학상태</label>
+							<label for="eduStat">재학상태</label>
 						<select id="eduStat" name="eduStat">
-	                       	<option value="무학">무학</option>
+	                       	<option value="무학" >무학</option>
 	                       	<option value="재학">재학</option>
 	                       	<option value="졸업">졸업</option>
 	                       	<option value="휴학">휴학</option>
@@ -230,8 +305,8 @@
 					<input type="text" id="no1" class="form-control" aria-describedby="addon-wrapping" name="no1" value="${career[0].no}" hidden="">
 					<input type="text" id="careerName1" class="form-control" aria-describedby="addon-wrapping" name="careerName1" value="${career[0].carName}" >
 					<input type="text" id="careerCname1" class="form-control" aria-describedby="addon-wrapping" name="careerCname1" value="${career[0].carcName}" >
-					<input type="date" id="careerStartDate1" class="form-control" aria-describedby="addon-wrapping" name="careerStartDate1" value="${career[0].startDate}" max="9999-12-31">
-					<input type="date" id="careerEndDate1" class="form-control" aria-describedby="addon-wrapping" name="careerEndDate1" value="${career[0].endDate}" >
+					<input type="date" id="careerStartDate1" class="form-control" aria-describedby="addon-wrapping" name="careerStartDate1" value="${careerSDate1}" max="9999-12-31">
+					<input type="date" id="careerEndDate1" class="form-control" aria-describedby="addon-wrapping" name="careerEndDate1" value="${careerEDate1}" >
 					<input style="width: 300px" type="text" id="damdang1" class="form-control" aria-describedby="addon-wrapping" name="damdang1" value="${career[0].damdang}" >
 					</span>															
 					<!-- 경력사항 인풋2 -->
@@ -239,8 +314,8 @@
 					<input type="text" id="no2" class="form-control" aria-describedby="addon-wrapping" name="no2" value="${career[1].no}" hidden="">
 					<input type="text" id="careerName2" class="form-control" aria-describedby="addon-wrapping" name="careerName2" value="${career[1].carName}" >
 					<input type="text" id="careerCname2" class="form-control" aria-describedby="addon-wrapping" name="careerCname2" value="${career[1].carcName}" >
-					<input type="date" id="careerStartDate2" class="form-control" aria-describedby="addon-wrapping" name="careerStartDate2" value="${career[1].startDate}" max="9999-12-31">
-					<input type="date" id="careerEndDate2" class="form-control" aria-describedby="addon-wrapping" name="careerEndDate2" value="${career[1].endDate}" >
+					<input type="date" id="careerStartDate2" class="form-control" aria-describedby="addon-wrapping" name="careerStartDate2" value="${careerSDate2}" max="9999-12-31">
+					<input type="date" id="careerEndDate2" class="form-control" aria-describedby="addon-wrapping" name="careerEndDate2" value="${careerEDate2}" >
 					<input style="width: 300px" type="text" id="damdang2" class="form-control" aria-describedby="addon-wrapping" name="damdang2" value="${career[1].damdang}" >
 					</span>
 					<!-- 경력사항 인풋3 -->
@@ -248,8 +323,8 @@
 					<input type="text" id="no2" class="form-control" aria-describedby="addon-wrapping" name="no3" value="${career[2].no}" hidden="">
 					<input type="text" id="name" class="form-control" aria-describedby="addon-wrapping" name="careerName3" value="${career[2].carName}" >
 					<input type="text" id="cname" class="form-control" aria-describedby="addon-wrapping" name="careerCname3" value="${career[2].carcName}" >
-					<input type="date" id="startDate" class="form-control" aria-describedby="addon-wrapping" name="careerStartDate3" value="${career[2].startDate}" max="9999-12-31">
-					<input type="date" id="endDate" class="form-control" aria-describedby="addon-wrapping" name="careerEndDate3" value="${career[2].startDate}" >
+					<input type="date" id="startDate" class="form-control" aria-describedby="addon-wrapping" name="careerStartDate3" value="${careerSDate3}" max="9999-12-31">
+					<input type="date" id="endDate" class="form-control" aria-describedby="addon-wrapping" name="careerEndDate3" value="${careerEDate3}" >
 					<input style="width: 300px" type="text" id="damdang3" class="form-control" aria-describedby="addon-wrapping" name="damdang3" value="${career[2].damdang}" >
 					</span>
 					
@@ -276,7 +351,7 @@
 					<input type="text" id="licenseName1" class="form-control" aria-describedby="addon-wrapping" name="licenseName1" value="${license[0].liname}" >
 					<input type="text" id="lname1" class="form-control" aria-describedby="addon-wrapping" name="lname1" value="${license[0].lname}" >
 					<input type="text" id="lnum1" class="form-control" aria-describedby="addon-wrapping" name="lnum1" value="${license[0].lnum }" >
-					<input type="date" id="getDate" class="form-control" aria-describedby="addon-wrapping" name="getDate1" value="${license[0].getDate}" >
+					<input type="date" id="getDate" class="form-control" aria-describedby="addon-wrapping" name="getDate1" value="${licenseDate1}" >
 					<input style="width: 300px" type="text" id="pub" class="form-control" aria-describedby="addon-wrapping" name="pub1" value="${license[0].pub}" >
 					</span>
 					<!-- 자격면허 인풋2 -->
@@ -284,7 +359,7 @@
 					<input type="text" id="licenseName2" class="form-control" aria-describedby="addon-wrapping" name="licenseName2" value="${license[1].liname}" >
 					<input type="text" id="lname2" class="form-control" aria-describedby="addon-wrapping" name="lname2" value="${license[1].lname}" >
 					<input type="text" id="lnum2" class="form-control" aria-describedby="addon-wrapping" name="lnum2" value="${license[1].lnum}" >
-					<input type="date" id="getDate2" class="form-control" aria-describedby="addon-wrapping" name="getDate2" value="${license[0].getDate}" >
+					<input type="date" id="getDate2" class="form-control" aria-describedby="addon-wrapping" name="getDate2" value="${licenseDate2}" >
 					<input style="width: 300px" type="text" id="pub2" class="form-control" aria-describedby="addon-wrapping" name="pub2" value="${license[0].pub}" >
 					</span>
 					<!-- 자격면허 인풋3 -->
@@ -292,7 +367,7 @@
 					<input type="text" id="licenseName3" class="form-control" aria-describedby="addon-wrapping" name="licenseName3" value="${license[2].liname}" >
 					<input type="text" id="lname3" class="form-control" aria-describedby="addon-wrapping" name="lname3" value="${license[2].lname}" >
 					<input type="text" id="lnum3" class="form-control" aria-describedby="addon-wrapping" name="lnum3" value="${license[2].lnum}">
-					<input type="date" id="getDate" class="form-control" aria-describedby="addon-wrapping" name="getDate3" value="${license[2].getDate}" >
+					<input type="date" id="getDate" class="form-control" aria-describedby="addon-wrapping" name="getDate3" value="${licenseDate3}" >
 					<input style="width: 300px" type="text" id="pub3" class="form-control" aria-describedby="addon-wrapping" name="pub3" value="${license[2].pub}" >
 					</span>
 					
@@ -322,17 +397,17 @@
 					<input type="text" id="tno1" class="form-control" aria-describedby="addon-wrapping" name="tno1" value="${training[0].tno}" hidden="">
 					<input type="text" id="tname1" class="form-control" aria-describedby="addon-wrapping" name="tname1" value="${training[0].trname}" >
 					<input type="text" id="eduName1" class="form-control" aria-describedby="addon-wrapping" name="eduName1" value="${training[0].eduName}" >
-					<input type="date" id="tStartDate1" class="form-control" aria-describedby="addon-wrapping" name="tStartDate1" value="${training[0].trstartDate}" >
-					<input type="date" id="tEndDate1" class="form-control" aria-describedby="addon-wrapping" name="tEndDate1" value="${training[0].trendDate}" >
+					<input type="date" id="tStartDate1" class="form-control" aria-describedby="addon-wrapping" name="tStartDate1" value="${trainingSDate1}" >
+					<input type="date" id="tEndDate1" class="form-control" aria-describedby="addon-wrapping" name="tEndDate1" value="${trainingEDate1}" >
 					<input style="width: 300px" type="text" id="content1" class="form-control" aria-describedby="addon-wrapping" name="content1" value="${training[0].content}" >
-					</span>
+					</span>					
 					<!-- 교육 및 훈련 인풋2 -->
 					<span class="input-group-text" id="addon-wrapping">
 					<input type="text" id="tno2" class="form-control" aria-describedby="addon-wrapping" name="tno2" value="${training[1].tno}" hidden="">
 					<input type="text" id="tname2" class="form-control" aria-describedby="addon-wrapping" name="tname2" value="${training[1].trname}" >
 					<input type="text" id="eduName2" class="form-control" aria-describedby="addon-wrapping" name="eduName2" value="${training[1].eduName}">
-					<input type="date" id="tStartDate2" class="form-control" aria-describedby="addon-wrapping" name="tStartDate2" value="${training[1].trstartDate}" >
-					<input type="date" id="tEndDate2" class="form-control" aria-describedby="addon-wrapping" name="tEndDate2" value="${training[1].trendDate}" >
+					<input type="date" id="tStartDate2" class="form-control" aria-describedby="addon-wrapping" name="tStartDate2" value="${trainingSDate2}" >
+					<input type="date" id="tEndDate2" class="form-control" aria-describedby="addon-wrapping" name="tEndDate2" value="${trainingEDate2}" >
 					<input style="width: 300px" type="text" id="content2" class="form-control" aria-describedby="addon-wrapping" name="content2" value="${training[1].content}" >
 					</span>
 					<!-- 교육 및 훈련 인풋3 -->
@@ -340,8 +415,8 @@
 					<input type="text" id="tno3" class="form-control" aria-describedby="addon-wrapping" name="tno3" value="${training[2].tno}" hidden="">
 					<input type="text" id="tname3" class="form-control" aria-describedby="addon-wrapping" name="tname3" value="${training[2].trname}" >
 					<input type="text" id="eduName3" class="form-control" aria-describedby="addon-wrapping" name="eduName3" value="${training[2].eduName}">
-					<input type="date" id="tStartDate3" class="form-control" aria-describedby="addon-wrapping" name="tStartDate3" value="${training[2].trstartDate}" >
-					<input type="date" id="tEndDate3" class="form-control" aria-describedby="addon-wrapping" name="tEndDate3" value="${training[2].trendDate}" >
+					<input type="date" id="tStartDate3" class="form-control" aria-describedby="addon-wrapping" name="tStartDate3" value="${trainingSDate3}" >
+					<input type="date" id="tEndDate3" class="form-control" aria-describedby="addon-wrapping" name="tEndDate3" value="${trainingEDate3}" >
 					<input style="width: 300px" type="text" id="content3" class="form-control" aria-describedby="addon-wrapping" name="content3" value="${training[2].content}" >
 					</span>
 					
@@ -351,11 +426,12 @@
 				</div>
 				<div id="regBtn"> 
 					<button class="bn632-hover bn27" name="registerBtn" id="registerBtn" class="regType" value="등록하기">등록하기</button>
-					
 					<button class="bn632-hover bn27" name="backList"  class="regType" value="목록으로" type="button" id="backList">목록으로</button>
+					
 				</div>
 				</div>
 				</form>
+				<button class="bn632-hover bn27"  id="delBtn" class="regType" value="삭제하기">삭제하기</button>
 			</div>	
 			</div>
 		
@@ -451,6 +527,16 @@
 			$("#backList").on('click',function(){
 				location.href = "http://localhost:8090/Exhibition/view/mypage/iMypage.jsp";
 			})
+			$("#delBtn").on('click',function(){
+				location.href = "http://localhost:8090/Exhibition/memberInfo/delAppForm.do?name=${vo.getName()}";
+				
+			})
+			
+			 $("input[type='radio'][value=${appForm[0].milServ}]").attr("checked", true);
+                                    	
+			$("option[value = ${appForm[0].eduStat}]").attr("selected", true);
+			
+			
 		</script>
 	</body>
 </html>

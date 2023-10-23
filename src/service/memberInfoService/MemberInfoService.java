@@ -91,6 +91,13 @@ public class MemberInfoService {
 		dao.delMember(no);
 		
 	}
+	//단위기능 10. 입사지원서 삭제 기능
+	public void serviceDelAppFormList(String name) {
+		dao.delAppForm(name);
+		dao.delcareerExp(name);
+		dao.delLicense(name);
+		dao.delTraining(name);
+	}
 	
 	
 }
