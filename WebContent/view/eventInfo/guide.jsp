@@ -16,6 +16,38 @@
 		<link rel="stylesheet" href="${path}/assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>	
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
+		
+		<style>
+	        table {
+	            border-collapse: collapse;
+	            width: 80%;
+	            margin: 20px auto;
+	            text-align: center;
+	        }
+	
+	        th, td {
+	            border: 1px solid #ccc;
+	            padding: 15px; /* 모든 셀의 높이를 동일하게 조정 */
+	        }
+	
+	        th {	         	
+	            background-color: #e6e6e6;
+	            font-weight: bold; /* 굵게 표시 */ /* 안 먹힘 */
+	        }
+	
+	        tr:nth-child(even) {
+	            background-color: #f2f2f2;
+	        }
+	
+	        tr:nth-child(odd) {
+	            background-color: #fff;
+	        }
+	
+	        td:first-child {
+	            font-weight: bold;
+	            background-color: #e6e6e6;
+	        }
+    	</style>
 	</head>		
 		<div id="page-wrapper">
 			
@@ -45,7 +77,7 @@
 							
 							<section>
 								<header>
-									<h3>오시는 길</h3>
+									<h3 style="font-weight: bold;">찾아오시는 길</h3>
 								</header>
 								<div class="page-table-div">
 								<div class="table-div">					
@@ -64,33 +96,54 @@
 									new daum.roughmap.Lander({
 										"timestamp" : "1697532655607",
 										"key" : "2ghcb",
-										"mapWidth" : "1000",
-										"mapHeight" : "500"
+										"mapWidth" : "1500",
+										"mapHeight" : "700"
 									}).render();
 								</script>
 								
 							    </div>	
-								</div>	
+								</div>									
 							</section>
-							<!-- 공간 띄움 -->
-							<div class="wrapper style1">
-								<section>
-									<header>
-										<h3>주차안내</h3>
-									</header>
-									<img src="${path}/images/parking.jpg" alt="주차안내" />							
-								</section>	
-							</div>
+							<h1 style="font-weight: bold;">제 1전시장</h1>  
+							<p>부산광역시 해운대구 APEC 55로</p>
+							<h1 style="font-weight: bold;">제 2전시장</h1>  
+							<p>부산광역시 해운대구 APEC 30로</p>
+							<h1 style="font-weight: bold;">전화</h1>
+							<p>051-123-4567</p>
 							
 							<div class="wrapper style1">
 								<section>
 									<header>
-										<h3>부대시설 안내</h3>
+										<h3 style="font-weight: bold;">주차안내</h3>
 									</header>
-									<!-- 채워넣을 생각중 -->						
+									<img src="${path}/images/parking.jpg" alt="주차안내" />													
 								</section>	
-							</div>	
-																		
+							</div>
+							<h1 style="font-weight: bold;">주차장 요금 안내</h1><br>
+							 <table>
+						        <tr>
+						            <th style="font-weight: bold;">구분</th>
+						            <th style="font-weight: bold;">주간 (08:00 - 18:00)</th>
+						            <th style="font-weight: bold;">야간 (18:00 - 08:00)</th>
+						            <th style="font-weight: bold;">일일 주차 요금</th>
+						        </tr>
+						        <tr>
+						            <td>소형</td>
+						            <td>500원</td>
+						            <td>600원</td>
+						            <td>15,000원</td>
+						        </tr>
+						        <tr>
+						        </tr>
+						        <tr>
+						            <td>대형</td>
+						            <td>1,000원</td>
+						            <td>1,200원</td>
+						            <td>30,000원</td>
+						        </tr>
+						        <tr>
+						        </tr>
+						    </table>																				
 						</article>				
 						<hr/>					
 					</div>
