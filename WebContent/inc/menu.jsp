@@ -64,6 +64,16 @@
 				<ul>
 					<li><a href="${path}/EventInfo/getEventInfoList.do">행사안내</a></li>
 					<li><a href="${path}/Menu/guide.do">이용안내</a></li>
+					<c:choose>						
+						<c:when test="${isAdmin == 1}">
+							<li style="display: none;"><a href="${path}/Articles/NewsLetters_forAdmin.do">뉴스 레터</a></li>
+							<li><a href="${path}/Articles/NewsLetters_forAdmin.do">뉴스 레터(관리자용)</a></li>
+						</c:when>						
+						<c:otherwise>
+							<li><a href="${path}/Articles/NewsLetters.do">뉴스 레터</a></li>
+							<li style="display: none;"><a href="${path}/Articles/NewsLetters.do">뉴스 레터(관리자용)</a></li>
+						</c:otherwise>
+					</c:choose>		
 				</ul>
 			</li>
 			<li>
@@ -145,7 +155,7 @@
 					<%-- 기업회원일 경우  --%>
 					<c:when test="${cno != null && id == null}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="${path}/view/mypage/cMypage.jsp" class="membership">마이페이지</a></li>
+					<li><a href="${path}/memberInfo/cInfo.me" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					</c:choose>
