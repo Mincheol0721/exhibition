@@ -288,9 +288,11 @@ public class MemberInfoController extends HttpServlet {
 				iMemVO = new IMemberVO(addr1, addr2, addr3, addr4, tel, fileName, fileRealName);
 				
 				// 입사지원 테이블에 insert할 값
+				String addr5 = multipartRequest.getParameter("address2");
+				String addr6 = multipartRequest.getParameter("address4");
 				String name = multipartRequest.getParameter("name");
 				String ssn = multipartRequest.getParameter("ssn");
-				String addr = addr2 + addr4;
+				String addr = addr5 + addr6;
 				String milServ = multipartRequest.getParameter("milServ");
 				String edu = multipartRequest.getParameter("edu");
 				String eduStat = multipartRequest.getParameter("eduStat");
@@ -409,6 +411,19 @@ public class MemberInfoController extends HttpServlet {
 				request.setAttribute("msg", "deleted");
 				
 				nextPage = "/memberInfo/reservationStatus.me";
+				
+			}else if(action.equals("/delAppForm.do")) {
+				//요청한 값 얻기 (삭제할 회원의 ID 얻기)
+				String name = request.getParameter("name");
+				
+				//ID에 해당되는 회원정보를 DB의 t_member테이블에서 삭제 하는 명령!
+				memberInfoservice.serviceDelAppFormList(name);
+				
+				//삭제에 성공하면 listMembers.jsp에 삭제작업 완료 메세지를 전달 하기 위해
+				//request에 삭제 성공 조건 값을 바인딩합니다.
+				request.setAttribute("msg", "deleted");
+				
+				nextPage = "/memberInfo/application.me";
 			}else {
 				nextPage = "/view/index.jsp";
 			}

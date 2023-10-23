@@ -859,7 +859,7 @@ public class MemberInfoDAO {
 							"                            tel = ?,\r\n" + 
 							"                            milserv = ?,\r\n" + 
 							"                            edu = ?,\r\n" + 
-							"                            eduStat = ?\r\n" + 
+							"                            eduStat = ? " + 
 							"\r\n" + 
 							"            WHEN NOT MATCHED THEN\r\n" + 
 							"                INSERT(\r\n" + 
@@ -869,7 +869,7 @@ public class MemberInfoDAO {
 							"                         tel,\r\n" + 
 							"                         milserv,\r\n" + 
 							"                         edu,\r\n" + 
-							"                         eduStat\r\n" + 
+							"                         eduStat " + 
 							"                )\r\n" + 
 							"                VALUES(\r\n" + 
 							"                         ?,\r\n" + 
@@ -1126,6 +1126,89 @@ public class MemberInfoDAO {
 					//자원해제 
 					freeResource();
 				}
+			}
+
+			public void delAppForm(String name) {
+				try {
+					//1.커넥션풀(DataSouce)객체 내부에 있는 Connection객체 얻기(DB연결)
+					con = dataSource.getConnection();
+					//2.매개변수로 전달 받은 삭제할 회원 아이디를 이용해 DELETE SQL문장 만들기
+					String sql = "delete from AppForm where name=?";
+					//3. delete문장 전체를 미리 로드한 OraclcePreparedStatementWrapper실행 객체 얻기
+					pstmt = con.prepareStatement(sql);
+					//3.1 ? 설정
+					pstmt.setString(1, name);
+					//4. 완성된 delete전체 문장을  DB에 전송해서 실행!
+					pstmt.executeUpdate(); //삭제에 성공하면 1을 반환 , 삭제에 실패하면 0을 반환 
+					
+				} catch (Exception e) {
+					System.out.println("MemberDAO의 delMember메소드 내부에서 SQL문 실행 오류 : " + e);
+				} finally {
+					//자원해제 
+					freeResource();
+				}
+			}
+				public void delcareerExp(String name) {
+					try {
+						//1.커넥션풀(DataSouce)객체 내부에 있는 Connection객체 얻기(DB연결)
+						con = dataSource.getConnection();
+						//2.매개변수로 전달 받은 삭제할 회원 아이디를 이용해 DELETE SQL문장 만들기
+						String sql = "delete from careerExp where name=?";
+						//3. delete문장 전체를 미리 로드한 OraclcePreparedStatementWrapper실행 객체 얻기
+						pstmt = con.prepareStatement(sql);
+						//3.1 ? 설정
+						pstmt.setString(1, name);
+						//4. 완성된 delete전체 문장을  DB에 전송해서 실행!
+						pstmt.executeUpdate(); //삭제에 성공하면 1을 반환 , 삭제에 실패하면 0을 반환 
+						
+					} catch (Exception e) {
+						System.out.println("MemberDAO의 delMember메소드 내부에서 SQL문 실행 오류 : " + e);
+					} finally {
+						//자원해제 
+						freeResource();
+					}
+				}
+					public void delLicense(String name) {
+						try {
+							//1.커넥션풀(DataSouce)객체 내부에 있는 Connection객체 얻기(DB연결)
+							con = dataSource.getConnection();
+							//2.매개변수로 전달 받은 삭제할 회원 아이디를 이용해 DELETE SQL문장 만들기
+							String sql = "delete from license where name=?";
+							//3. delete문장 전체를 미리 로드한 OraclcePreparedStatementWrapper실행 객체 얻기
+							pstmt = con.prepareStatement(sql);
+							//3.1 ? 설정
+							pstmt.setString(1, name);
+							//4. 완성된 delete전체 문장을  DB에 전송해서 실행!
+							pstmt.executeUpdate(); //삭제에 성공하면 1을 반환 , 삭제에 실패하면 0을 반환 
+							
+						} catch (Exception e) {
+							System.out.println("MemberDAO의 delMember메소드 내부에서 SQL문 실행 오류 : " + e);
+						} finally {
+							//자원해제 
+							freeResource();
+						}
+					}
+						public void delTraining(String name) {
+							try {
+								//1.커넥션풀(DataSouce)객체 내부에 있는 Connection객체 얻기(DB연결)
+								con = dataSource.getConnection();
+								//2.매개변수로 전달 받은 삭제할 회원 아이디를 이용해 DELETE SQL문장 만들기
+								String sql = "delete from Training where name=?";
+								//3. delete문장 전체를 미리 로드한 OraclcePreparedStatementWrapper실행 객체 얻기
+								pstmt = con.prepareStatement(sql);
+								//3.1 ? 설정
+								pstmt.setString(1, name);
+								//4. 완성된 delete전체 문장을  DB에 전송해서 실행!
+								pstmt.executeUpdate(); //삭제에 성공하면 1을 반환 , 삭제에 실패하면 0을 반환 
+								
+							} catch (Exception e) {
+								System.out.println("MemberDAO의 delMember메소드 내부에서 SQL문 실행 오류 : " + e);
+							} finally {
+								//자원해제 
+								freeResource();
+							}
+							
+							
 			}
 			
 }//class의 끝
