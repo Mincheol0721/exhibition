@@ -55,7 +55,6 @@
 				<section class="carousel">
 					<div class="reel">
 						<article>
-							<a href="#" class="image featured"><img src="${path}/pic01.jpg" alt="" /></a>
 							<header>
 							    <a href="#"><img src="${path}/images/index_microsoft.jpg" style="width: 270px; height: 170px;" alt="마이크로소프트" /></a>
 							    <h3>마이크로소프트</h3>
@@ -66,8 +65,6 @@
 						<article>
 							<header>
 								<a href="#"><img src="${path}/images/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
-							<header>
-								<a href="#"><img src="${path}/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3>스타벅스</h3>
 							</header>
 							<p>서비스직 구인 중</p>

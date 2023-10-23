@@ -2,7 +2,7 @@ package VO.JobExpVO;
 
 public class CJobExpVO {
 
-	String cname;
+	String cname; 
 	String title;
 	String content;
 	String iPart;
@@ -12,23 +12,9 @@ public class CJobExpVO {
 	String locate;
 	String fileName;
 	String fileRealName;
-	
-	
-	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
-			String endTime, String locate, String fileName, String fileRealName) {
-	private String cname;
-	private String title;
-	private String content;
-	private String iPart;
-	private String teacher;
-	private String startTime;
-	private String endTime;
-	private String locate;
-	private String fileName;
-	private String fileRealName;
-	private String startDate;
-	private String endDate;
-	private int isrecog;
+	String endDate;
+	String startDate;
+
 	
 	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
 			String endTime, String locate, String fileName, String fileRealName, String startDate, String endDate) {
@@ -73,7 +59,7 @@ public class CJobExpVO {
 		return iPart;
 	}
 	public void setiPart(String iPart) {
-		this.iPart = iPart;
+		this.iPart = iPart; 
 	}
 	public String getTeacher() {
 		return teacher;

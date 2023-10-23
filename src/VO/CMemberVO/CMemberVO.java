@@ -54,10 +54,6 @@ public class CMemberVO {
 		this.addr4 = addr4;
 	}
 
-	public CMemberVO() {
-		// TODO Auto-generated constructor stub
-	}
-
 	//getter & setter
 
 	public String getCno() {
