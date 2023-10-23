@@ -58,12 +58,12 @@
 	</head>
 	<body>
 		<ul>
-			<li><a href="${path}/view/index.jsp">홈</a></li>
+			<li><a href="${path}/Menu/searchIndexNo.do">홈</a></li>
 			<li>
 				<a href="#">박람회안내</a>
 				<ul>
-					<li><a href="${path}/view/eventInfo_main.jsp">행사안내</a></li>
-					<li><a href="${path}/view/guide.jsp">이용안내</a></li>
+					<li><a href="${path}/EventInfo/getEventInfoList.do">행사안내</a></li>
+					<li><a href="${path}/Menu/guide.do">이용안내</a></li>
 				</ul>
 			</li>
 			<li>
@@ -149,9 +149,7 @@
 					</c:when>
 					
 					</c:choose>
-					
-
-					
+		
 				</ul>
 			</li>
 		</ul>

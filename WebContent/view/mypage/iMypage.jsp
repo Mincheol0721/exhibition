@@ -84,14 +84,14 @@
 					
 			<!-- Main -->
 				<div class="wrapper style1" style="float: none; margin: 0 auto;">
-						<div align="center"></div>
+						<div align="center">
 						<br>
 						<br>
 						<img alt="mypage" src="images/mypage_01.png" style="cursor: pointer" id="info1">	
-						<img alt="mypage" src="images/mypage_02.png" onclick="" style="cursor: pointer" id="info2">
+						<img alt="mypage" src="images/mypage_02.png" style="cursor: pointer" id="info2">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<img alt="mypage" src="images/mypage_03.png" onclick="" style="cursor: pointer" id="info2">
-
+						<img alt="mypage" src="images/mypage_03.png" style="cursor: pointer" id="info3">
+						</div>
 				</div>
 
 			<!-- Footer -->
@@ -117,6 +117,15 @@
 					location.href = "http://localhost:8090/Exhibition/memberInfo/iInfo.me";
 		    		
 				})
+				$("#info2").on('click',function(){
+					
+					location.href = "http://localhost:8090/Exhibition/memberInfo/application.me";
+		    	})
+		    	$("#info3").on('click',function(){
+					
+					location.href = "http://localhost:8090/Exhibition/memberInfo/reservationStatus.me";
+		    	})
+		    	
 			</script>
 	
 	</body>
