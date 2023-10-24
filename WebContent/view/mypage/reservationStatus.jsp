@@ -153,7 +153,7 @@
 			
 			<script type="text/javascript">
 			$("#backList").on('click',function(){
-				location.href = "http://localhost:8090/Exhibition/view/mypage/iMypage.jsp";
+				location.href = "${path}/view/mypage/iMypage.jsp";
 			})	
 			</script>
 	

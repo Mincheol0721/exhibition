@@ -74,6 +74,7 @@
 							<li style="display: none;"><a href="${path}/Articles/NewsLetters.do">뉴스 레터(관리자용)</a></li>
 						</c:otherwise>
 					</c:choose>		
+					<li><a href="${path}/notice/noticeBoard.do">공지사항</a></li>
 				</ul>
 			</li>
 			<li>
@@ -107,24 +108,20 @@
 			<li>
 				<a href="#">진로설계</a>
 				<ul>
-					<li><a href="#">진로상담</a></li>
+					<li><a href="${path}/careerAdv/careerAdvBoard.do">진로상담</a></li>
 					<li>
-						<a href="#" class="arrow">
-						컨설팅
-						<i class="fas fa-angle-right"></i>
-						</a>
-						<ul>
-							<li><a href="#">모의면접</a></li>
-							<li><a href="#">자기소개서 컨설팅</a></li>
-						</ul>
+						
+							
+						<li><a href="${path}/cons/consBoard.do">자기소개서 컨설팅</a></li>
+						
 					</li>
-				<li><a href="#">취업특강</a></li>
+				<li><a href="${path}/jobLecture/jobLectureBoard.do">취업특강</a></li>
 				</ul>
 			</li>
 			<li>
 				<a href="#">직업체험</a>
 				<ul>
-					<li><a href="${path}/cjobExp/cjobExpBoard.do">직업체험</a></li>
+					<li><a href="${path}/jobExp/jobExpBoard.do">직업체험</a></li>
 					<li><a href="${path}/event/getList.do">부대행사</a></li>
 				</ul>
 			</li>

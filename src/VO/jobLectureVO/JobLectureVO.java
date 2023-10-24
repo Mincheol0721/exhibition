@@ -1,10 +1,10 @@
-package VO.JobExpVO;
+package VO.jobLectureVO;
 
 import java.sql.Date;
 
-public class CJobExpVO {
+public class JobLectureVO {
 
-	String cname;
+	int no;
 	String title;
 	String content;
 	String iPart;
@@ -14,16 +14,15 @@ public class CJobExpVO {
 	String locate;
 	String fileName;
 	String fileRealName;
-	Date startDate;
 	
-	public CJobExpVO() {
+	public JobLectureVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public CJobExpVO(String cname, String title, String content, String iPart, String teacher, String startTime,
-			String endTime, String locate, String fileName, String fileRealName, Date startDate) {
+	public JobLectureVO(int no, String title, String content, String iPart, String teacher, String startTime, String endTime,
+			String locate, String fileName, String fileRealName) {
 		super();
-		this.cname = cname;
+		this.no = no;
 		this.title = title;
 		this.content = content;
 		this.iPart = iPart;
@@ -33,15 +32,14 @@ public class CJobExpVO {
 		this.locate = locate;
 		this.fileName = fileName;
 		this.fileRealName = fileRealName;
-		this.startDate = startDate;
 	}
 
-	public String getCname() {
-		return cname;
+	public int getNo() {
+		return no;
 	}
 
-	public void setCname(String cname) {
-		this.cname = cname;
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 	public String getTitle() {
@@ -115,14 +113,7 @@ public class CJobExpVO {
 	public void setFileRealName(String fileRealName) {
 		this.fileRealName = fileRealName;
 	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+	
 	
 	
 	
