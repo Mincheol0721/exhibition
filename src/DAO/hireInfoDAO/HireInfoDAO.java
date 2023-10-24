@@ -15,6 +15,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import VO.CMemberVO.CMemberVO;
+import VO.IMemberVO.IMemberVO;
 import VO.hireInfoVO.HireInfoVO;
 
 public class HireInfoDAO {
@@ -322,12 +323,45 @@ public class HireInfoDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("HireInfoDAO내부 getMemtype에서 예외 발생: " + e);
+			System.out.println("HireInfoDAO내부 getCmemberINfo에서 예외 발생: " + e);
 		} finally {
 			freeResource();
 		}
 		
 		return cvo;
 	}
-
+	
+	public IMemberVO getImember(String id) {
+		IMemberVO vo = new IMemberVO();
+		try {
+			con = ds.getConnection();
+			query = "SELECT * FROM iMember WHERE id='" + id + "'";
+			
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				vo = new IMemberVO( rs.getString("id"), 
+									rs.getString("password"), 
+									rs.getString("ssn"), 
+									rs.getString("name"), 
+									rs.getString("addr1"), 
+									rs.getString("addr2"), 
+									rs.getString("addr3"), 
+									rs.getString("addr4"), 
+									rs.getString("itel"), 
+									rs.getString("email"), 
+									rs.getString("fileName"), 
+									rs.getString("fileRealName") );
+			}
+			
+		} catch (Exception e) {
+			System.out.println("HireInfoDAO내부 getImember에서 예외 발생: " + e);
+		} finally {
+			freeResource();
+		}
+		
+		return vo;
+	}
+	
 }

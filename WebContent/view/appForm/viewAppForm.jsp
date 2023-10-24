@@ -16,7 +16,7 @@
 <html>
 	<head>
 		<title>입사지원서</title>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -77,7 +77,9 @@
 											<td>${vo.name}</td>
 											<th style="border:1px solid gray;" >주민등록번호</th>
 											<td>${vo.ssn}</td>
-											<td rowspan="4" id="photo" height="300px">증명사진란</td>
+											<td rowspan="4" id="photo" height="300px">
+												<img alt="증명사진란" src="${path}/upload/${ivo.fileName}" style="height: 300px; vertical-align: middle; object-fit: scale-down;"> 
+											</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">전화번호</th>
@@ -87,11 +89,11 @@
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">주소</th>
-											<td colspan="3">${vo.addr}</td>
+											<td colspan="4">${vo.addr}</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">최종학력</th>
-											<td colspan="3">${vo.edu}&nbsp;(${vo.eduStat})</td>
+											<td colspan="4">${vo.edu}&nbsp;(${vo.eduStat})</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">경력사항</th>
