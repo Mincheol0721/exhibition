@@ -20,7 +20,7 @@
 	<c:when test="${requestScope.msg == 'deleted'}">		
 		<script>
 			window.onload = function(){
-				location.href = "${path}/view/mypage/iMypage.jsp";
+				location.href = "${path}/Exhibition/view/mypage/iMypage.jsp";
 				alert("입사지원서를 삭제 하였습니다..");
 			}
 		</script>
@@ -360,7 +360,7 @@
 					<input type="text" id="lname2" class="form-control" aria-describedby="addon-wrapping" name="lname2" value="${license[1].lname}" >
 					<input type="text" id="lnum2" class="form-control" aria-describedby="addon-wrapping" name="lnum2" value="${license[1].lnum}" >
 					<input type="date" id="getDate2" class="form-control" aria-describedby="addon-wrapping" name="getDate2" value="${licenseDate2}" >
-					<input style="width: 300px" type="text" id="pub2" class="form-control" aria-describedby="addon-wrapping" name="pub2" value="${license[0].pub}" >
+					<input style="width: 300px" type="text" id="pub2" class="form-control" aria-describedby="addon-wrapping" name="pub2" value="${license[1].pub}" >
 					</span>
 					<!-- 자격면허 인풋3 -->
 					<span class="input-group-text" id="addon-wrapping">

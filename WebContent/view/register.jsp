@@ -264,8 +264,8 @@
 									   type="button"
 										class="bn631-hover bn27">가입하기</a>
 									
-                                     <a href="#" 
-									   type="reset" onclick="top.location='javascript:location.reload()'"
+                                     <a href="${path}/view/register.jsp" 
+									   type="button" 
 										class="bn631-hover bn27">다시입력</a>
 								</form>
 								
@@ -392,7 +392,7 @@
                                     <br>
                                     <b id="jobTypeInput"></b>
                                     <a href="#" onclick="check2(); return false;" type="button" class="bn631-hover bn27">가입하기</a>
-									                  <a href="#" type="reset" class="bn631-hover bn27">다시입력</a>
+									                  <a href="${path}/view/register.jsp" type="button" class="bn631-hover bn27">다시입력</a>
 								</form>
 							</header>
 					</div>
