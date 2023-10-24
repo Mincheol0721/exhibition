@@ -311,7 +311,7 @@
 
 			$("#backBtn").on('click',function(){
 				
-				location.href = "http://localhost:8090/Exhibition/Menu/searchIndexNo.do";
+				location.href = "${path}/Menu/searchIndexNo.do";
 	    		
 			})
 			

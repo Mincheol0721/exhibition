@@ -114,16 +114,16 @@
 			<script type="text/javascript">
 				$("#info1").on('click',function(){
 					
-					location.href = "http://localhost:8090/Exhibition/memberInfo/iInfo.me";
+					location.href = "${path}/memberInfo/iInfo.me";
 		    		
 				})
 				$("#info2").on('click',function(){
 					
-					location.href = "http://localhost:8090/Exhibition/memberInfo/application.me";
+					location.href = "${path}/memberInfo/application.me";
 		    	})
 		    	$("#info3").on('click',function(){
 					
-					location.href = "http://localhost:8090/Exhibition/memberInfo/reservationStatus.me";
+					location.href = "${path}/memberInfo/reservationStatus.me";
 		    	})
 		    	
 			</script>

@@ -114,7 +114,7 @@
 			<script type="text/javascript">
 				$("#cinfo1").on('click',function(){
 					
-					location.href = "http://localhost:8090/Exhibition/memberInfo/cInfo.me";
+					location.href = "${path}/memberInfo/cInfo.me";
 		    		
 				})
 			</script>
