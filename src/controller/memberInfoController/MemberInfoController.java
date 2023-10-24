@@ -20,12 +20,13 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
-import VO.consVO.ConsVO;
+
 import VO.iJobExpVO.IjobExpVO;
 import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
 import VO.iapplicationVO.LicenseVO;
 import VO.iapplicationVO.TrainingVO;
+import VO.myConsVO.MyConsVO;
 import service.memberInfoService.MemberInfoService;
 
 
@@ -400,7 +401,7 @@ public class MemberInfoController extends HttpServlet {
 				
 				System.out.println(vo.getName());
 				List<IjobExpVO> membersList = memberInfoservice.servicelistMembers(vo);
-				List<ConsVO> conslist = memberInfoservice.serviceConslist(vo);
+				List<MyConsVO> conslist = memberInfoservice.serviceConslist(vo);
 				//request내장객체 영역에 웹브라우저로 응답할 조회된회원정보들이 저장된 ArrayList배열을 바인딩 합니다.
 				request.setAttribute("membersList", membersList);
 				request.setAttribute("conslist", conslist);

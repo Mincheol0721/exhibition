@@ -14,6 +14,7 @@ import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
 import VO.iapplicationVO.LicenseVO;
 import VO.iapplicationVO.TrainingVO;
+import VO.myConsVO.MyConsVO;
 
 
 
@@ -88,7 +89,7 @@ public class MemberInfoService {
 		return dao.listMembers(vo);
 	}
 	//단위기능10. 컨설팅 조회
-	public List<ConsVO> serviceConslist(IMemberVO vo) {
+	public List<MyConsVO> serviceConslist(IMemberVO vo) {
 		return dao.conslist(vo);
 	}
 	//단위기능 11. 직업체험 예약 내역 삭제 기능
