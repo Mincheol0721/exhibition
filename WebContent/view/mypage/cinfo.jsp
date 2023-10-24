@@ -18,7 +18,7 @@
 	<c:when test="${requestScope.msg == 'modifyOk'}">
 		<script>
 			window.onload = function(){
-				location.href = "${path}/view/mypage/cMypage.jsp";
+				location.href = "${path}/memberInfo/cInfo.me";
 				alert("수정 하였습니다.");
 			}
 		</script>
@@ -133,7 +133,7 @@
 									
 									<div class="regdiv">
                                         <label for="id">회사명<span><small id="chkId"></small></span></label>
-                                        <input class="form-control" id="cname" type="text" name="cname" value="<%=cvo.getCname()%>" required="required"/>
+                                        <input class="form-control" id="cname" type="text" name="cname" value="<%=cvo.getCname()%>" required="required" />
                                         <br>
                                         <b id="cnameInput"></b>
                                     </div>
@@ -146,7 +146,7 @@
                                     </div>
                                     <div class="regdiv">
                                         <label for="ctel">회사 전화번호</label>
-                                        <input class="form-control" id="ctel" type="tel" name="ctel" value="<%=cvo.getCtel()%>" required="required"/>
+                                        <input class="form-control" id="ctel" type="tel" name="ctel" value="<%=cvo.getCtel()%>" required="required" placeholder="-를 제외하고 입력하여 주세요"/>
                                         <br>
                                         <b id="ctelInput"></b>
                                     </div>
@@ -185,15 +185,15 @@
 											<%-- name속성값 address1 부터 ~~ address5 까지 입력되어 있는 주소를 모두 합쳐서 DB에 address열에  INSERT 하자. --%>
 											
 											 
-											<input type="text" id="sample4_postcode2" name="addr1" class="form-control" placeholder="우편번호" value="<%=cvo.getAddr1()%>">
+											<input type="text" id="sample4_postcode1" name="addr1" class="form-control" placeholder="우편번호" value="<%=cvo.getAddr1()%>">
 											<input type="button" onclick="sample4_execDaumPostcode2()" value="우편번호 찾기" class="form-control"><br>
 											
 											<input type="text" id="sample4_roadAddress2" name="addr2" placeholder="도로명주소" class="form-control" value="<%=cvo.getAddr2()%>">
-											<input type="text" id="sample4_jibunAddress2" placeholder="지번주소" name="addr3" class="form-control" value="<%=cvo.getAddr3()%>">
+											<input type="text" id="sample4_jibunAddress3" placeholder="지번주소" name="addr3" class="form-control" value="<%=cvo.getAddr3()%>">
 											
 											<span id="guide" style="color:#999;display:none"></span>
 											
-											<input type="text" id="sample4_detailAddress2" placeholder="상세주소" name="addr4" class="form-control" value="<%=cvo.getAddr4()%>">
+											<input type="text" id="sample4_detailAddress4" placeholder="상세주소" name="addr4" class="form-control" value="<%=cvo.getAddr4()%>">
 											
 											
 										</div>
@@ -205,7 +205,7 @@
 								</form>
 								<div id="regBtn"> 
 									<button class="bn632-hover bn27" class="regType" id="submitBtn" type="submit">수정하기</button>
-									<button class="bn632-hover bn27"  class="regType" id="backBtn">목록으로</button>
+									<button class="bn632-hover bn27"  class="regType" id="backBtn">메인으로</button>
 								</div>
 								<br>
 								
@@ -276,9 +276,9 @@
 		                }
 
 		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-		                document.getElementById('sample4_postcode2').value = data.zonecode;
+		                document.getElementById('sample4_postcode1').value = data.zonecode;
 		                document.getElementById("sample4_roadAddress2").value = roadAddr;
-		                document.getElementById("sample4_jibunAddress2").value = data.jibunAddress;
+		                document.getElementById("sample4_jibunAddress3").value = data.jibunAddress;
 		                
 		                
 
@@ -311,7 +311,7 @@
 
 			$("#backBtn").on('click',function(){
 				
-				location.href = "http://localhost:8090/Exhibition/view/mypage/cMypage.jsp";
+				location.href = "http://localhost:8090/Exhibition/Menu/searchIndexNo.do";
 	    		
 			})
 			
