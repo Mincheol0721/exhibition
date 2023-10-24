@@ -43,7 +43,6 @@
 						appBtn.hide();
 					}
 				}
-				
 			});
 		</script>
 		<style type="text/css">

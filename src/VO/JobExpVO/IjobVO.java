@@ -63,6 +63,5 @@ public class IjobVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-
 	
 }

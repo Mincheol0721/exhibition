@@ -14,19 +14,19 @@
   
    
 %>
-
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <c:choose>	
 	
 	<c:when test="${requestScope.msg == 'deleted'}">		
 		<script>
 			window.onload = function(){
-				location.href = "${path}/Exhibition/view/mypage/iMypage.jsp";
+				location.href = "${path}/view/mypage/iMypage.jsp";
 				alert("입사지원서를 삭제 하였습니다..");
 			}
 		</script>
 	</c:when>	
 	</c:choose>
-<c:set var="path" value="${pageContext.request.contextPath}" />
+
 <fmt:formatDate pattern="yyyy-MM-dd" value="${career[0].startDate}" var="careerSDate1"/>
 <fmt:formatDate pattern="yyyy-MM-dd" value="${career[1].startDate}" var="careerSDate2"/>
 <fmt:formatDate pattern="yyyy-MM-dd" value="${career[2].startDate}" var="careerSDate3"/>

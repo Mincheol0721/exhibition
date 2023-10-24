@@ -35,9 +35,6 @@ public class ConsVO {
 		this.no = no;
 		this.name = name;
 		this.title = title;
-		this.content = content;
-		this.iPart = iPart;
-		this.sitel = sitel;
 		this.ampm = ampm;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -220,9 +217,5 @@ public class ConsVO {
 	public void setConsType(String consType) {
 		this.consType = consType;
 	}
-
-
-	
-	
 	
 }

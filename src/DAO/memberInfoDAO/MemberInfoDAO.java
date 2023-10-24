@@ -79,95 +79,9 @@ public class MemberInfoDAO {
 							e.printStackTrace();
 						}
 					}
-			public int ilogin(String id, String pwd) {
-				int check = -1;
-				try {
-					//DB연결
-					con = dataSource.getConnection();
-					//sql문 작성
-					String sql = "select id,password,isAdmin from Imember where id = ?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, id);
-					
-					rs = pstmt.executeQuery();
-					if(rs.next()) {//입력한 아이디로 조회한 행이 있으면? (아이디가 있으면?)
-						
-						//입력한 비밀번호와 조회된 비밀번호와 비교해서 있으면 ?(비밀번호가 있으면?)
-						if(pwd.equals(rs.getString("password"))) {
-							check = 1;
-						}else {//아이디는 맞고 , 비밀번호 틀림
-							check = 0;
-						}
-					}else {//아이디가 틀림
-						check = -1;
-					}
-					
-				} catch (Exception e) {
-					System.out.println("LoginDAO클래스의 Ilogin메소드의 sql문 오류 발생" + e);
-				}finally {
-					freeResource();
-				}
-				
-				
-				return check;
-			}
 			
-			public int adminCheck(String id) {
-				int check = 0;
-				try {
-					//DB연결
-					con = dataSource.getConnection();
-					//sql문 작성
-					String sql = "select id,password,isAdmin from Imember where id = ?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setString(1, id);
-					rs = pstmt.executeQuery();
-					
-					if (rs.next()) {
-						check = rs.getInt("isAdmin");
-					}
-					
-				} catch (Exception e) {
-					System.out.println("LoginDAO클래스의 adminCheck메소드의 sql문 오류 발생" + e);
-				}finally {
-					freeResource();
-				}
-				return check;
-			}
 
-			public int clogin(String cno,String cPwd) {
-				int check = -1;
-				try {
-					//DB연결
-					con = dataSource.getConnection();
-					//Sql문 작성
-					String sql = "select cno,password from Cmember where cno = ?";
-					pstmt = con.prepareStatement(sql);
-					
-					pstmt.setString(1, cno);
-					
-					rs = pstmt.executeQuery();
-					if(rs.next()) {//입력한 아이디로 조회한 행이 있으면? (아이디가 있으면?)
-						
-						//입력한 비밀번호와 조회된 비밀번호와 비교해서 있으면 ?(비밀번호가 있으면?)
-						if(cPwd.equals(rs.getString("password"))) {
-							check = 1;
-						}else {//아이디는 맞고 , 비밀번호 틀림
-							check = 0;
-						}
-					}else {//아이디가 틀림
-						check = -1;
-					}
-					
-				} catch (Exception e) {
-					System.out.println("LoginDAO클래스의 clogin메소드의 sql문 오류 발생" + e);
-				}finally {
-					freeResource();
-				}
-				
-				
-				return check;
-			}
+			
 			//회원 수정화면에서 조회해올 메소드
 			public IMemberVO searchMyInfo(String id) {
 				IMemberVO vo = null;
