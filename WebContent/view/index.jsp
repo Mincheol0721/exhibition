@@ -188,10 +188,9 @@
 							<article class="col-4 col-12-mobile special">	
 								<br>														
 								<header>
-									<h3><a href="#">취업 특강</a></h3>
-								</header>
-								<!-- 안내 페이지로 이동 링크 수정해야함 -->
-								<a href="#" class="image featured"><img src="${path}/images/index_jobLecture.jpg" alt="" /></a>
+									<h3><a href="${path}/jobLecture/jobLectureBoard.do">취업 특강</a></h3>
+								</header>							
+								<a href="${path}/jobLecture/jobLectureBoard.do" class="image featured"><img src="${path}/images/index_jobLecture.jpg" alt="" /></a>
 							</article>
 							<article class="col-4 col-12-mobile special">
 								<br>
