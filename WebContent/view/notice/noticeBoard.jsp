@@ -25,34 +25,46 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.html" id="logo">직업체험</a></h1>
+								<h1><a href="index.html" id="logo">공지사항</a></h1>
 							</header>
 						</div>
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
 
-			<form method="post"   action="">
-	<h1  class="text_center">참여 등록 창</h1>
-	<table  align="center">
-	   <tr>
-	      <td width="200"><p align="right">참가자명</td>
-	      <td width="400"><input type="text" name="name"></td>
-	   </tr>
-	   <tr>
-	      <td width="200"><p align="right">개인연락처</td>
-	      <td width="400"><input type="text" name="tel"></td>
-	    </tr>
-	    <tr>
-	       <td width="200"><p>&nbsp;</p></td>
-	       <td width="400"><input type="submit" value="신청하기"><input type="reset" value="다시입력"></td>
-	    </tr>
-	</table>
-	</form>
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<form id="mainform" action="" method="post" name="mainform">
+                   	           <table id="main_tabel" border="1"  style="border-collapse: collapse; border-color: lightgrey;" class="lec"> 
+                   	           		<tr bgcolor="lightgrey" align="center">
+                   	           			<td width=5%>번호</td>
+                   	           			<td width=5%>분류</td>
+                   	           			<td width=5%>제목</td>
+                   	           			<td width=5%>작성일</td>
+                   	           			<td width=5%>조회수</td>
+                   	           		</tr>
+                   	           		<c:forEach var="NoticeVO" items="${requestScope.noticelist}">
+                   	           		<tr align="center">
+                   	           			<td>${NoticeVO.no }</td>
+                   	           			<td>${NoticeVO.articleType }</td>
+                   	           			<td><a href="${path}/notice/viewNotice.do?no=${NoticeVO.no }">${NoticeVO.title }</a></td>
+                   	           			<td>${NoticeVO.writeDate }</td>
+                   	           			<td>${NoticeVO.readCount }</td>	
+                   	           		</tr>
+                   	           		</c:forEach>
+                   	           	</table>
+                   	      </form>
+						<hr />
+						
+					</div>
+
+				</div>
 
 			<!-- Footer -->
 				<div id="footer">

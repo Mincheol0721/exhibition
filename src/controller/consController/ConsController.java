@@ -1,4 +1,4 @@
-package controller.JobExpController;
+package controller.consController;
 
 import java.io.IOException;
 
@@ -16,11 +16,13 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import VO.JobExpVO.CJobExpVO;
 import VO.JobExpVO.IJobExpVO;
+import VO.consVO.ConsVO;
 import service.JobExpService.JobExpService;
+import service.consService.copy.ConsService; 
 
 
-@WebServlet("/jobExp/*")
-public class JobExpController extends HttpServlet {
+@WebServlet("/cons/*") 
+public class ConsController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,78 +44,51 @@ public class JobExpController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("2단계 요청 주소: "+action);
 		
-		JobExpService jobExpService = new JobExpService();
-		CJobExpVO cjobExpVO = new CJobExpVO();
-		IJobExpVO ijobExpVO = new IJobExpVO();
+		ConsService consService = new ConsService();
+		ConsVO consVO = new ConsVO();
 		String nextPage = null;
 				
-		if(action == null || action.equals("/jobExpBoard.do")) {
+		if(action == null || action.equals("/consBoard.do")) {
 			
-			ArrayList expolist = jobExpService.getcjobExpListSerivce();
+			ArrayList conslist = consService.getIntroConsListSerivce();
 			
 
 			
 			
-			request.setAttribute("expolist", expolist);
+			request.setAttribute("conslist", conslist);
 			
-			nextPage="/view/jobExp/JobExpBoard.jsp";
+			nextPage="/view/cons/introconsBoard.jsp";
 			
-		}else if(action.equals("/IJobExpReg.do")) {
-			String title = request.getParameter("title");
-			request.setAttribute("title", title);
 			
-			nextPage="/view/jobExp/IJobExpReg.jsp";
-		
-		
-		}else if(action.equals("/IJobExpReg2.do")) {
+		}/*else if(action.equals("/consReg2.do")) {
+			
+			ConsVO consVO = new ConsVO();
+			
 			String name = request.getParameter("name");
-			String tel = request.getParameter("tel");
-			String jobexpname = request.getParameter("jobexpname");
-			
-		
-			System.out.println(name);
-			System.out.println(tel);
-			ijobExpVO.setName(name);
-			ijobExpVO.setTel(tel);	
-			ijobExpVO.setJobexpname(jobexpname);
-			
-			jobExpService.insertIjobExpSerivce(ijobExpVO);
-			
-			nextPage= "/jobExp/jobExpBoard.do";
-			
-			
-		}else if(action.equals("/CJobExpReg.do")) {
-			
-			nextPage="/view/jobExp/CJobExpReg.jsp";
-			
-		}else if(action.equals("/CJobExpReg2.do")) {
-			
-			String path = getServletContext().getRealPath("/upload/");
-			int maxSize = 1024 * 1024 * 1024;
-			MultipartRequest multipartRequest = new MultipartRequest(request,
-																	 path,
-																	 maxSize,
-																	 "UTF-8", 
-																	 new DefaultFileRenamePolicy());
-			
-			String cname = multipartRequest.getParameter("cname");
-			String title = multipartRequest.getParameter("title");
-			String content = multipartRequest.getParameter("content");
-			String iPart = multipartRequest.getParameter("iPart");
-			String teacher = multipartRequest.getParameter("teacher");
-			String startTime = multipartRequest.getParameter("startTime");
-			String endTime = multipartRequest.getParameter("endTime");
-			String locate = multipartRequest.getParameter("locate");
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			String iPart = request.getParameter("iPart");
+			String sitel = request.getParameter("sitel");
+			String ampm = request.getParameter("ampm");
+			String startTime = request.getParameter("startTime");
+			String endTime = request.getParameter("endTime");
+			String locate = request.getParameter("locate");
+			String homepage = request.getParameter("homepage");
+			String fileName = request.getParameter("fileName");
+			String fileRealName = request.getParameter("fileRealName");
+			String usePeople = request.getParameter("usePeople");
+			String regDate = request.getParameter("regDate");
+			String reservation = request.getParameter("reservation");
+			String consType = request.getParameter("consType");
 			
 			
-			cjobExpVO.setCname(cname);
-			cjobExpVO.setTitle(title);
-			cjobExpVO.setContent(content);
-			cjobExpVO.setiPart(iPart);
-			cjobExpVO.setTeacher(teacher);
-			cjobExpVO.setStartTime(startTime);
-			cjobExpVO.setEndTime(endTime);
-			cjobExpVO.setLocate(locate);
+			consVO.set
+			consVO.setTitle(title);
+			consVO.setContent(content);
+			consVO.setiPart(iPart);
+			consVO.setStartTime(startTime);
+			consVO.setEndTime(endTime);
+			consVO.setLocate(locate);
 			
 			
 			
@@ -137,7 +112,7 @@ public class JobExpController extends HttpServlet {
 			System.out.println(title);
 			
 			nextPage="/view/jobExp/JobExpBoard.jsp";
-		}
+		}*/
 	
 		//포워딩 (디스패처 방식)
 		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);

@@ -33,10 +33,15 @@
 			$(function() {
 				var appBtn = $('#applicate');
 				var dday = <%=dday%>;
+				var id = '<%=id%>';
+				
 				if(dday <= 0) {
 					appBtn.hide();
 				} else {
 					appBtn.show();
+					if (id == 'null') {
+						appBtn.hide();
+					}
 				}
 			});
 		</script>

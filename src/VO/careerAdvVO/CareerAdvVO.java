@@ -1,51 +1,39 @@
-package VO.consVO;
+package VO.careerAdvVO;
 
-import java.sql.Date;
-
-public class ConsVO {
+public class CareerAdvVO {
 
 	int no;
-	String name;
 	String title;
 	String content;
 	String iPart;
-	String sitel;
-	String ampm;
 	String startTime;
 	String endTime;
 	String locate;
 	String homepage;
 	String fileName;
 	String fileRealName;
-	int usePeople;
-	Date regDate;
-	int reservation;
-	String consType;
+	String catel;
 	
 	
-	public ConsVO() {
+	public CareerAdvVO() {
 		// TODO Auto-generated constructor stub
 	}
-
-
-	public ConsVO(int no, String name, String title, String content, String iPart, String sitel, String ampm,
-			String startTime, String endTime, String locate, String homepage, String fileName, String fileRealName,
-			int usePeople, Date regDate, int reservation, String consType) {
+	
+	
+	public CareerAdvVO(int no, String title, String content, String iPart, String startTime, String endTime,
+			String locate, String homepage, String fileName, String fileRealName, String catel) {
 		super();
 		this.no = no;
-		this.name = name;
 		this.title = title;
-		this.ampm = ampm;
+		this.content = content;
+		this.iPart = iPart;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.locate = locate;
 		this.homepage = homepage;
 		this.fileName = fileName;
 		this.fileRealName = fileRealName;
-		this.usePeople = usePeople;
-		this.regDate = regDate;
-		this.reservation = reservation;
-		this.consType = consType;
+		this.catel = catel;
 	}
 
 
@@ -56,16 +44,6 @@ public class ConsVO {
 
 	public void setNo(int no) {
 		this.no = no;
-	}
-
-
-	public String getName() {
-		return name;
-	}
-
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 
@@ -96,26 +74,6 @@ public class ConsVO {
 
 	public void setiPart(String iPart) {
 		this.iPart = iPart;
-	}
-
-
-	public String getSitel() {
-		return sitel;
-	}
-
-
-	public void setSitel(String sitel) {
-		this.sitel = sitel;
-	}
-
-
-	public String getAmpm() {
-		return ampm;
-	}
-
-
-	public void setAmpm(String ampm) {
-		this.ampm = ampm;
 	}
 
 
@@ -179,43 +137,15 @@ public class ConsVO {
 	}
 
 
-	public int getUsePeople() {
-		return usePeople;
+	public String getCatel() {
+		return catel;
 	}
 
 
-	public void setUsePeople(int usePeople) {
-		this.usePeople = usePeople;
+	public void setCatel(String catel) {
+		this.catel = catel;
 	}
-
-
-	public Date getRegDate() {
-		return regDate;
-	}
-
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-
-
-	public int getReservation() {
-		return reservation;
-	}
-
-
-	public void setReservation(int reservation) {
-		this.reservation = reservation;
-	}
-
-
-	public String getConsType() {
-		return consType;
-	}
-
-
-	public void setConsType(String consType) {
-		this.consType = consType;
-	}
+	
+	
 	
 }

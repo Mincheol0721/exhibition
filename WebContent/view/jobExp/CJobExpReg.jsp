@@ -31,40 +31,59 @@
 
 					<!-- Nav -->
 						<nav id="nav">
-							<jsp:include page="../inc/menu.jsp" />
+							<jsp:include page="/inc/menu.jsp" />
 						</nav>
 
 				</div>
 
-			<!-- Main -->
-				<div class="wrapper style1">
-
-					<div class="container">
-						<article id="main" class="special">
-							
-							
-							<c:forEach var="cjobExpVO" items="${requestScope.expolist }">
-							<header>
-								<h2>${cjobExpVO.title}</a></h2>
-								<p>                            
-									${cjobExpVO.content}
-								</p>
-							
-							</header>
-							<a href="#" class="image featured"><img src="${path}/images/pic06.jpg" alt="" /></a>
-							<p>대상:  ${cjobExpVO.iPart}</p> 
-							<p>장소: ${cjobExpVO.locate}</p> 
-							<p>이용시간:  ${cjobExpVO.startTime}~${cjobExpVO.endTime}</p>
-							
-							<button type="button" class="btn text-white" style="background-color: rgb(0, 0, 255);"  onClick="location.href='${path}/cjobExp/JobExpReg.do'">신청하러 가기</button>
-							</c:forEach>
-							
-						</article>
-						<hr />
-						
-					</div>
-
-				</div>
+			<form method="post"   action="${path}/jobExp/CJobExpReg2.do" enctype="multipart/form-data">
+	<h1  class="text_center">참여 등록 창</h1>
+	<table  align="center">
+	   <tr>
+	      <td width="200"><p align="right">주최기업명</td>
+	      <td width="400"><input type="text" name="cname"></td>
+	   </tr>
+	   <tr>
+	      <td width="200"><p align="right">글제목</td>
+	      <td width="400"><input type="text" name="title"></td>
+	    </tr>
+	   <tr>
+	      <td width="200"><p align="right">글내용</td>
+	      <td width="400"><input type="text" name="content"></td>
+	    </tr>
+	   <tr>
+	      <td width="200"><p align="right">참여대상</td>
+	      <td width="400"><input type="text" name="iPart"></td>
+	    </tr>
+	    <tr>
+	      <td width="200"><p align="right">강사</td>
+	      <td width="400"><input type="text" name="teacher"></td>
+	    </tr>
+	   <tr>
+	      <td width="200"><p align="right">이용시간(시작)</td>
+	      <td width="400"><input type="text" name="startTime"></td>
+	    </tr>
+	   <tr>
+	      <td width="200"><p align="right">이용시간(종료)</td>
+	      <td width="400"><input type="text" name="endTime"></td>
+	    </tr>
+	   <tr>
+	      <td width="200"><p align="right">행사장소</td>
+	      <td width="400"><input type="text" name="locate"></td>
+	    </tr>
+	    </tr>
+	      <td width="200"><p align="right">직업체험 사진</td>
+	      <td>
+	            <input type="file" name="file">   
+	       </td>
+        </tr>
+	    <tr>
+	       <td width="200"><p>&nbsp;</p></td>
+	       <td width="400"><input type="submit" value="신청하기"><input type="reset" value="다시입력"></td>
+	    </tr>
+	    
+	</table>
+	</form>
 
 			<!-- Footer -->
 				<div id="footer">

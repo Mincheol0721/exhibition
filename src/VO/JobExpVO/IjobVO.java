@@ -27,7 +27,6 @@ public class IjobVO {
 		this.regDate = regDate;
 	}
 
-
 	public String getName() {
 		return name;
 	}
@@ -64,6 +63,5 @@ public class IjobVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	
 	
 }
