@@ -697,41 +697,43 @@ public class MemberInfoDAO {
 							!trainingVO.gettStartDate1().isEmpty() && 
 							!trainingVO.gettEndDate1().isEmpty() &&
 							!trainingVO.getContent1().isEmpty()) {
-					sql = "MERGE INTO training \r\n" + 
-							"            USING dual \r\n" + 
-							"            ON (name = ? and tno = ?) \r\n" + 
-							" \r\n" + 
-							"    WHEN MATCHED THEN \r\n" + 
-							"        UPDATE SET eduname = ? ,\r\n" + 
-							"        startDate = ? ,\r\n" + 
-							"        endDate = ? ,\r\n" + 
-							"        content = ? \r\n" + 
-							"    WHEN NOT MATCHED THEN \r\n" + 
-							"        INSERT(\r\n" + 
-							"         tno, \r\n" + 
-							"          name,\r\n" + 
-							"         eduname,\r\n" + 
-							"         startDate,\r\n" + 
-							"         endDate,\r\n" + 
-							"         content\r\n" + 
-							"        )\r\n" + 
-							"        VALUES(\r\n" + 
-							"         careerExp_no.nextval,\r\n" + 
-							"         ?,\r\n" + 
-							"         ?,\r\n" + 
-							"         ?,\r\n" + 
-							"         ?,\r\n" + 
-							"         ?\r\n" + 
+					sql = "MERGE INTO training\n" + 
+							"            USING dual\n" + 
+							"            ON (name = ? AND tno = ?)\n" + 
+							"\n" + 
+							"    WHEN MATCHED THEN\n" + 
+							"        UPDATE SET eduname = ?,\n" + 
+							"        startDate = ?,\n" + 
+							"        endDate = ?,\n" + 
+							"        content = ?\n" + 
+							"\n" + 
+							"    WHEN NOT MATCHED THEN\n" + 
+							"        INSERT (\n" + 
+							"         tno,\n" + 
+							"          name,\n" + 
+							"         eduname,\n" + 
+							"         startDate,\n" + 
+							"         endDate,\n" + 
+							"         content\n" + 
+							"        )\n" + 
+							"        VALUES (\n" + 
+							"         careerExp_no.nextval,\n" + 
+							"         ?,\n" + 
+							"         ?,\n" + 
+							"         ?,\n" + 
+							"         ?,\n" + 
+							"         ?\n" + 
 							"        )";
 						
 						pstmt = con.prepareStatement(sql);
+						
 						pstmt.setString(1, trainingVO.getTname1());
 						pstmt.setString(2, trainingVO.getTno1());
 						pstmt.setString(3, trainingVO.getEduName1());
 						pstmt.setString(4, trainingVO.gettStartDate1());
 						pstmt.setString(5, trainingVO.gettEndDate1());
 						pstmt.setString(6, trainingVO.getContent1());
-						pstmt.setString(7, trainingVO.getTno1());
+						pstmt.setString(7, trainingVO.getTname1());
 						pstmt.setString(8, trainingVO.getEduName1());
 						pstmt.setString(9, trainingVO.gettStartDate1());
 						pstmt.setString(10, trainingVO.gettEndDate1());
@@ -774,13 +776,14 @@ public class MemberInfoDAO {
 								"        )";
 							
 							pstmt = con.prepareStatement(sql);
+							
 							pstmt.setString(1, trainingVO.getTname2());
 							pstmt.setString(2, trainingVO.getTno2());
 							pstmt.setString(3, trainingVO.getEduName2());
 							pstmt.setString(4, trainingVO.gettStartDate2());
 							pstmt.setString(5, trainingVO.gettEndDate2());
 							pstmt.setString(6, trainingVO.getContent2());
-							pstmt.setString(7, trainingVO.getTno2());
+							pstmt.setString(7, trainingVO.getTname2());
 							pstmt.setString(8, trainingVO.getEduName2());
 							pstmt.setString(9, trainingVO.gettStartDate2());
 							pstmt.setString(10, trainingVO.gettEndDate2());
@@ -827,7 +830,7 @@ public class MemberInfoDAO {
 							pstmt.setString(4, trainingVO.gettStartDate3());
 							pstmt.setString(5, trainingVO.gettEndDate3());
 							pstmt.setString(6, trainingVO.getContent3());
-							pstmt.setString(7, trainingVO.getTno3());
+							pstmt.setString(7, trainingVO.getTname3());
 							pstmt.setString(8, trainingVO.getEduName3());
 							pstmt.setString(9, trainingVO.gettStartDate3());
 							pstmt.setString(10, trainingVO.gettEndDate3());
