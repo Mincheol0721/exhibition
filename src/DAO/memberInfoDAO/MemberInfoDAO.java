@@ -16,12 +16,14 @@ import org.apache.regexp.recompile;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
-import VO.consVO.ConsVO;
+
 import VO.iJobExpVO.IjobExpVO;
 import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
 import VO.iapplicationVO.LicenseVO;
 import VO.iapplicationVO.TrainingVO;
+import VO.myConsVO.MyConsVO;
+
 
 public class MemberInfoDAO {
 	//위 4가지 접속 설정값을 이용해서 오라클 DB와 접속한 정보를 지니고 있는 Connection객체를 저장할 참조변수 선언
@@ -1129,8 +1131,8 @@ public class MemberInfoDAO {
 							
 			}
 
-						public List<ConsVO> conslist(IMemberVO vo) {
-							List<ConsVO> list = new ArrayList<ConsVO>();
+						public List<MyConsVO> conslist(IMemberVO vo) {
+							List<MyConsVO> list = new ArrayList<MyConsVO>();
 							try {
 								//DB연결
 								con = dataSource.getConnection();
@@ -1153,7 +1155,7 @@ public class MemberInfoDAO {
 									 String ampm = rs.getString("ampm");
 									 String consType = rs.getString("consType");
 									
-									ConsVO consvo = new ConsVO(no, name, title, ampm, startTime, endTime, locate, consType);
+									MyConsVO consvo = new MyConsVO(no, name, title, ampm, startTime, endTime, locate, consType);
 									
 									list.add(consvo);
 								}
