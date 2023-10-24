@@ -16,6 +16,7 @@ import org.apache.regexp.recompile;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
 import VO.appFormVO.AppFormVO;
+import VO.consVO.ConsVO;
 import VO.iJobExpVO.IjobExpVO;
 import VO.iapplicationVO.AllAppFormVO;
 import VO.iapplicationVO.CareerExpVO;
@@ -1213,5 +1214,62 @@ public class MemberInfoDAO {
 							
 							
 			}
+
+						public List<ConsVO> conslist(IMemberVO vo) {
+							List<ConsVO> list = new ArrayList<ConsVO>();
+							try {
+								//DB연결
+								con = dataSource.getConnection();
+								//Sql문 작성
+								String sql = "select * from cons where name = ?";
+								pstmt = con.prepareStatement(sql);
+								
+								pstmt.setString(1, vo.getName());
+								
+								rs = pstmt.executeQuery();
+								
+								while (rs.next()) {
+									 int no = rs.getInt("no");
+									
+									 String name = rs.getString("name");
+									 String title = rs.getString("title");
+									 String startTime = rs.getString("startTime");
+									 String endTime = rs.getString("endTime");
+									 String locate = rs.getString("locate");
+									 String ampm = rs.getString("ampm");
+									 String consType = rs.getString("consType");
+									
+									ConsVO consvo = new ConsVO(no, name, title, ampm, startTime, endTime, locate, consType);
+									
+									list.add(consvo);
+								}
+							} catch (Exception e) {
+								System.out.println("MemberInfoDAO클래스의 conslist메소드의 sql문 오류" + e);
+							}finally {
+								freeResource();
+							}
+							return list;
+						}
+
+						public void delCons(String name, String no, String consType) {
+							try {
+								//DB연결
+								con = dataSource.getConnection();
+								//sql문작성
+								String sql = "delete from Cons where name = ? and no = ? and constype = ? ";
+								pstmt = con.prepareStatement(sql);
+								pstmt.setString(1, name);
+								pstmt.setString(2, no);
+								pstmt.setString(3, consType);
+								
+								pstmt.executeUpdate();
+								
+							} catch (Exception e) {
+								System.out.println("MemberDAO클래스의 delCons메소드의 sql문 오류" + e);
+							}finally {
+								freeResource();
+							}
+							
+						}
 			
 }//class의 끝
