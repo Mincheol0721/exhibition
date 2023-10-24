@@ -3,6 +3,7 @@ package service.hireInfoService;
 import java.util.List;
 
 import DAO.hireInfoDAO.HireInfoDAO;
+import VO.CMemberVO.CMemberVO;
 import VO.hireInfoVO.HireInfoVO;
 
 public class HireInfoService {
@@ -35,4 +36,5 @@ public class HireInfoService {
 	public void delHireInfo(String cname) {
 		dao.delHireInfo(cname);
 	}
+
 }

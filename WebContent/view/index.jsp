@@ -14,6 +14,46 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<noscript><link rel="stylesheet" href="${path}/assets/css/noscript.css" /></noscript>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<style>
+			.button {
+			  padding: 1.5em 3em;
+			  border: none;
+			  border-radius: 5px;
+			  font-weight: bold;
+			  letter-spacing: 5px;
+			  text-transform: uppercase;
+			  color: #2c9caf;
+			  transition: all 1000ms;
+			  font-size: 22px;
+			  position: relative;
+			  overflow: hidden;
+			  outline: 2px solid #2c9caf;
+			}
+			
+			button:hover {
+			  color: #ffffff;
+			  transform: scale(1.1);
+			  outline: 2px solid #70bdca;
+			  box-shadow: 4px 5px 17px -4px #268391;
+			}
+			
+			button::before {
+			  content: "";
+			  position: absolute;
+			  left: -50px;
+			  top: 0;
+			  width: 0;
+			  height: 100%;
+			  background-color: #2c9caf;
+			  transform: skewX(45deg);
+			  z-index: -1;
+			  transition: width 1000ms;
+			}
+			
+			button:hover::before {
+			  width: 250%;
+			}
+		</style>
 	</head>
 	<body class="homepage is-preload">
 		 <div id="page-wrapper">
@@ -55,7 +95,6 @@
 				<section class="carousel">
 					<div class="reel">
 						<article>
-							<a href="#" class="image featured"><img src="${path}/pic01.jpg" alt="" /></a>
 							<header>
 							    <a href="#"><img src="${path}/images/index_microsoft.jpg" style="width: 270px; height: 170px;" alt="마이크로소프트" /></a>
 							    <h3>마이크로소프트</h3>
@@ -66,8 +105,6 @@
 						<article>
 							<header>
 								<a href="#"><img src="${path}/images/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
-							<header>
-								<a href="#"><img src="${path}/index_starbucks.jpg" style="width: 270px;height: 170px;" alt="" /></a>							
 								<h3>스타벅스</h3>
 							</header>
 							<p>서비스직 구인 중</p>
@@ -99,7 +136,9 @@
 				</section>
 				<article id="main" class="container special">
 					<footer>
-						<a href="${path}/CInfo/getCInfoList.do" class="button">상세 보기</a>
+						<button class="button">
+							<a href="${path}/CInfo/getCInfoList.do">상세보기</a>
+						</button>
 					</footer>
 				</article>
 				<!-- 공간 띄움 -->
@@ -116,7 +155,9 @@
 							<a href="${path}/EventInfo/getEventInfoList.do" class="image featured"><img src="${path}/images/index_mainPoster.jpg" alt="" /></a>
 						</header>
 						<footer>
-							<a href="${path}/EventInfo/getEventInfoList.do" class="button">상세 보기</a>
+						<button class="button">
+							<a href="${path}/EventInfo/getEventInfoList.do">상세보기</a>
+						</button>
 						</footer>
 					</article>
  

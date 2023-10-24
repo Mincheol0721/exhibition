@@ -1,38 +1,29 @@
 package service.eventInfoService;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import DAO.hireInfoDAO.HireInfoDAO;
-import VO.hireInfoVO.HireInfoVO;
+import DAO.eventInfoDAO.EventInfoDAO;
+import VO.eventInfoVO.EventInfoVO;
 
 public class EventInfoService {
-	private HireInfoDAO dao;
 	
-	public EventInfoService() {
-		dao = new HireInfoDAO();
-	}
+	EventInfoDAO dao;
 	
-	public void regHireInfo(HireInfoVO vo) {
-		dao.insertHireInfo(vo);
-	}
-	
-	public List<HireInfoVO> getHireInfoList(int pageNum, int pageSize) {
-		System.out.println("service");
-		List<HireInfoVO> list = dao.getHireInfoList(pageNum, pageSize);
+	public EventInfoService() { 
 		
-		return list;
+		dao = new EventInfoDAO();
+		
 	}
-
-	public HireInfoVO getHireInfo(String cname) {
-		HireInfoVO vo = dao.getHireInfo(cname);
-		return vo;
+	
+	public EventInfoVO getEventInfo(int no) { 
+		
+		return dao.getEventInfo(no);
+		
 	}
-
-	public void updateHireInfo(HireInfoVO vo) {
-		dao.updateHireInfo(vo);
-	}
-
-	public void delHireInfo(String cname) {
-		dao.delHireInfo(cname);
+	
+	public List<EventInfoVO> getEventInfoList() {
+		
+		return dao.getEventInfoList();
 	}
 }

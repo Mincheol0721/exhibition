@@ -16,7 +16,7 @@ public class CMemberVO {
     private String addr3; 
     private String addr4;
 	
-	
+	public CMemberVO() {}
     
     public CMemberVO(String cno, String ctel, String name, String cname, String divcomp, String jobtype,
 			String password, String fileName, String fileRealName, String addr1, String addr2, String addr3,
@@ -54,12 +54,7 @@ public class CMemberVO {
 		this.addr4 = addr4;
 	}
 
-	public CMemberVO() {
-		// TODO Auto-generated constructor stub
-	}
-
 	//getter & setter
-
 	public String getCno() {
 		return cno;
 	}

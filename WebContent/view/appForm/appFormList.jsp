@@ -1,3 +1,5 @@
+<%@page import="VO.IMemberVO.IMemberVO"%>
+<%@page import="VO.CMemberVO.CMemberVO"%>
 <%@page import="controller.appFormController.AppFormController"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
@@ -13,6 +15,8 @@
 	AppFormDAO dao = new AppFormDAO();
 	AppFormVO vo = new AppFormVO();
 	List<AppFormVO> list = null; 
+	IMemberVO ivo = null;
+	
 	String id = (String)session.getAttribute("id");
 	if(id == null || id.length() == 0) id = " ";
 // 	System.out.println("id: " + id);
@@ -61,7 +65,7 @@
 <html>
 	<head>
 		<title>입사지원서</title>
-		<meta charset="utf-8" />
+		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -210,6 +214,7 @@
 	 								<c:forEach var="vo" items="${list}">
 									<form action="${path}/appForm/getAppForm.do" method="post">
 										<input type="hidden" name="ssn" value="${vo.ssn}">
+										<input type="hidden" name="imageId" value="${ivo.fileName}">
 										<div class="card">
 											<p class="heading">${vo.name}</p>
 											<p class="para">${vo.addr}</p>

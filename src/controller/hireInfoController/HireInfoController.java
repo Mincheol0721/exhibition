@@ -2,6 +2,7 @@ package controller.hireInfoController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -17,8 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import DAO.hireInfoDAO.HireInfoDAO;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
+import VO.appFormVO.AppFormVO;
 import VO.hireInfoVO.HireInfoVO;
 import service.hireInfoService.HireInfoService;
 
@@ -104,6 +107,7 @@ public class HireInfoController extends HttpServlet {
 				System.out.println("cname: " + cname);
 				String expireDate = request.getParameter("expireDate");
 				System.out.println("expiredate: " + expireDate);
+				
 				nextPage = "/view/hireInfo/viewHireInfo.jsp?cname="+cname+"&expireDate="+expireDate;
 				
 			} else if (action.equals("/myHireInfo.do")) {
@@ -143,15 +147,24 @@ public class HireInfoController extends HttpServlet {
 				nextPage = "/view/index.jsp";
 				System.out.println("nextPage: " + nextPage);
 				
+			} else if(action.equals("/applicatePage.do")) {
+				String id = request.getParameter("id");
+				
+				IMemberVO vo = new HireInfoDAO().getImember(id);
+				request.setAttribute("vo", vo);
+				
+				nextPage = "/view/hireInfo/applicateForm.jsp";
 			}
+			
+			// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+			dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-		RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-		dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+		
 
 	}
 

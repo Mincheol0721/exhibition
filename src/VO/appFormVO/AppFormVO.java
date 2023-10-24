@@ -10,9 +10,10 @@ public class AppFormVO {
 	String milServ; //지원자 병역이행여부
 	String edu; //지원자 최종학력
 	String eduStat; //학력상태
+	String cname; //지원한 회사
 	
 	/* 경력사항 테이블 */
-	String cname; //사업체명 
+	String calCname; //사업체명 
 	String cstartDate; //근무시작일
 	String cendDate; //근무종료일
 	String damdang; //담당업무
@@ -102,18 +103,28 @@ public class AppFormVO {
 
 
 	/* 경력사항 생성자 및 getter, setter */
-	public AppFormVO(String cname, String cename, String cstartDate, String cendDate, String damdang) {
-		super();
-		this.cname = cname;
-		this.cstartDate = cstartDate;
-		this.cendDate = cendDate;
-		this.damdang = damdang;
-	}
+	
 	
 	public String getCname() {
 		return cname;
 	}
 	
+	public AppFormVO(String cname, String calCname, String cstartDate, String cendDate, String damdang) {
+		super();
+		this.calCname = calCname;
+		this.cstartDate = cstartDate;
+		this.cendDate = cendDate;
+		this.damdang = damdang;
+	}
+
+	public String getCalCname() {
+		return calCname;
+	}
+
+	public void setCalCname(String calCname) {
+		this.calCname = calCname;
+	}
+
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
