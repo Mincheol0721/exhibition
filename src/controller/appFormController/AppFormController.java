@@ -109,6 +109,10 @@ public class AppFormController extends HttpServlet {
 				request.setAttribute("list", list);
 				
 				nextPage = "/view/appForm/appFormList.jsp";
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/getAppForm.do")) {
 				System.out.println("AppFormController 2단계 요청주소: " + action);
@@ -119,6 +123,7 @@ public class AppFormController extends HttpServlet {
 				List<AppFormVO> careerExp = as.getCareerExp(ssn);
 				List<AppFormVO> license = as.getLicense(ssn);
 				List<AppFormVO> training = as.getTraining(ssn);
+				
 				IMemberVO ivo = as.getImember(ssn);
 				request.setAttribute("ivo", ivo);
 				
@@ -141,6 +146,10 @@ public class AppFormController extends HttpServlet {
 				
 				nextPage = "/view/appForm/viewAppForm.jsp?ssn=" + ssn; 
 				System.out.println("nextPage: " + nextPage);
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/applicateComp.do")) {
 				String id = request.getParameter("id");
@@ -155,13 +164,13 @@ public class AppFormController extends HttpServlet {
 				as.insertAppForm(vo, id);
 				
 				nextPage = "/hireInfo/getList.do?pageNum=" + pageNum;
-				
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			}
 			
-			// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-			dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
