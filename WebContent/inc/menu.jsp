@@ -155,7 +155,7 @@
 					<%-- 기업회원일 경우  --%>
 					<c:when test="${cno != null && id == null}">
 					<li><a href="${path}/logout" class="membership">로그아웃</a></li>
-					<li><a href="${path}/view/mypage/cMypage.jsp" class="membership">마이페이지</a></li>
+					<li><a href="${path}/memberInfo/cInfo.me" class="membership">마이페이지</a></li>
 					</c:when>
 					
 					</c:choose>

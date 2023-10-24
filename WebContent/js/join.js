@@ -459,14 +459,7 @@
     		}	
 	    });
 	   
-	    $("#jobtype").change(function() {
-	    var jobTypeValue = $("#jobtype").val();
-	   
-		if (jobTypeValue == "") {
-		alert("모집직종을 선택해 주세요");
-			
-		}
-	    });	
+	    
 		
 	    $("input[name='addr1'],input[name='addr2'],input[name='addr3'],input[name='addr4']").focusout(function() {
 	    	
@@ -588,14 +581,7 @@
     			
     	
     			
-			//====================================================================================================
-    		var jobType = $("#jobtype")
-			var jobTypeValue = $("#jobtype").val()
-			if (jobTypeValue == '') {
-				alert("모집직종을 선택해 주세요");
-				jobType.focus();
-				return false;
-			}
+			
     		//====================================================================================================
 
     		var addr1 = $("#sample4_postcode2");

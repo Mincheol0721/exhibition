@@ -185,7 +185,13 @@ public class MemberInfoController extends HttpServlet {
 	 			String addr4 = request.getParameter("addr4");
 	 			
 	 			System.out.println(cname);
-	 			
+	 			if (cname == null || name == null || ctel == null || password == null) {
+					out.print("<script>");
+						out.print("alert('모든 항목을 입력하지 않으셨습니다.');");
+						out.print("location.href='"+request.getContextPath()+"/memberInfo/cInfo.me';");
+					out.print("</script>");
+					return;
+				}
 	 			if (cname.length() < 1 && cname.length() > 10 ) {
 					out.print("<script>");
 						out.print("alert('회사명을 제대로 입력하여 주세요');");
@@ -212,7 +218,7 @@ public class MemberInfoController extends HttpServlet {
 	 			
 	 			if (password.length() < 4) {
 					out.print("<script>");
-						out.print("alert('4글자 이상 입력해 주세요');");
+						out.print("alert('비밀번호를 4글자 이상 입력해 주세요');");
 						out.print("location.href='"+request.getContextPath()+"/memberInfo/cInfo.me';");
 					out.print("</script>");
 					return;
