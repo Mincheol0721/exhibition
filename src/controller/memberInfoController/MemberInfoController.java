@@ -374,7 +374,7 @@ public class MemberInfoController extends HttpServlet {
 						tStartDate1, tStartDate2, tStartDate3, 
 						tEndDate1, tEndDate2, tEndDate3, 
 						content1, content2, content3);
-				
+				System.out.println("controller단 "+tname1);
 				//입력한 회원정보들을 DB의 IMember테이블에 insert명령하기 위해
 				//memberInfoservice객체의 addMember메소드 호출!
 //				memberInfoservice.serviceAddRegister();
