@@ -10,7 +10,7 @@
 		<script>
 			window.onload = function(){
 				location.href = "${path}/view/mypage/iMypage.jsp";
-				alert("회원 정보를 삭제했습니다.");
+				alert("예약정보를 삭제 했습니다.");
 			}
 		</script>
 	</c:when>	
@@ -97,8 +97,9 @@
 					
 			<!-- Main -->
 				<div class="wrapper style1" style="float: none; margin: 0 auto;">
-					
+			
 	<table align="center" border="1">
+	<h1>직업체험</h1>		
 		<tr align="center" bgcolor="lightgreen">
 			<td width="7%"><b>행사 정보 번호</b></td>
 			<td width="7%"><b>개인연락처</b></td>
@@ -128,11 +129,49 @@
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>
-</c:choose>		
+</c:choose>
+</table>
+<h1>자소서 & 모의면접</h1>
+<table align="center" border="1">
+		<tr align="center" bgcolor="lightgreen">
+			
+			<td width="7%"><b>글번호</b></td>
+			<td width="7%"><b>신청자명</b></td>
+			<td width="7%"><b>글 제목</b></td>
+			<td width="7%"><b>이용시간(시작)</b></td>
+			<td width="7%"><b>이용시간(종료)</b></td>
+			<td width="7%"><b>행사장소</b></td>
+			<td width="7%"><b>컨설팅 종류</b></td>
+			<td width="7%"><b>삭제</b></td>			
+		</tr>			
+<c:choose>  			  
+	 <c:when test="${empty requestScope.conslist}"><%-- request에 바인딩된  ArrayList배열이 없으면?(조회된 정보가 없으면?)  --%>
+	 	<tr align="center">
+	 		<td colspan="8">
+	 			<b>신청한 예약이 없습니다.</b>
+	 		</td>
+	 	</tr>
+	 </c:when>                  
+	 <c:when test="${not empty requestScope.conslist}"> <%--request에 바인딩된 ArrayList배열이 있으면?(조회된 정보가 있으면?) --%>
+	 	<%-- request에 바인딩된 ArrayList배열을 꺼내오고 MemberVO객체의 갯수만큼 반복해서 얻어 출력 --%>
+	 	<c:forEach  var="mem"   items="${requestScope.conslist}"  >
+	 		<tr align="center">
+	 			<td>${mem.no}</td>
+	 			<td>${mem.name}</td>
+	 			<td>${mem.title}</td>
+	 			<td>${mem.startTime}</td>
+	 			<td>${mem.endTime}</td>
+	 			<td>${mem.locate}</td>
+	 			<td>${mem.consType}</td>
+	 			<td><a href="${path}/memberInfo/delCons.do?no=${mem.no}&name=${mem.name}&consType=${mem.consType}">삭제</a></td>	 			
+	 		</tr>
+	 	</c:forEach>
+	 </c:when>
+</c:choose>			
 	</table>
 	<button class="bn632-hover bn27" class="regType" id="backList" type="submit">목록으로</button>	
 
-				</div>
+				
 
 			<!-- Footer -->
 				<div id="footer">
