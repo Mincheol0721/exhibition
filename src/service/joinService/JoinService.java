@@ -20,7 +20,7 @@ public class JoinService {
 	
 	//2.단위기능(기업회원가입)
 	public void serviceAddCMember(CMemberVO vo) {
-
+		dao.addCMember(vo);
 	}
 	
 	//3.단위기능(아이디중복체크)
