@@ -87,16 +87,22 @@
 											<th style="border:1px solid gray;">이름</th>
 											<td><input type="text" name="name" value="${vo.name}"></td>
 											<th style="border:1px solid gray;" >주민등록번호</th>
-											<td><input type="text" name="name" value="${vo.ssn}"></td>
+											<td><input type="text" name="ssn" value="${vo.ssn}"></td>
 											<td rowspan="4" id="photo" height="300px">
 												<img alt="증명사진란" src="${path}/upload/${ivo.fileName}" style="height: 300px; vertical-align: middle; object-fit: scale-down;"> 
 											</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">전화번호</th>
-											<td><input type="text" name="name" value="${vo.tel}"></td>
+											<td><input type="text" name="tel" value="${vo.tel}"></td>
 											<th style="border:1px solid gray;">병역이행여부</th>
-											<td><input type="text" name="ssn" value="${vo.ssn}"></td>
+											<td>
+												<input type="radio" name="milServ" value="군필" <c:if test="${vo.milServ eq '군필'}">checked</c:if>> 군필
+												<input type="radio" name="milServ" value="미필" <c:if test="${vo.milServ eq '미필'}">checked</c:if>> 미필
+												<input type="radio" name="milServ" value="면제" <c:if test="${vo.milServ eq '군면제' || vo.milServ eq '면제'}">checked</c:if>> 면제
+												<input type="radio" name="milServ" value="해당사항없음" <c:if test="${vo.milServ eq '해당사항없음'}">checked</c:if>> 해당사항없음
+											</td>
+											</td>
 										</tr>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">주소</th>
