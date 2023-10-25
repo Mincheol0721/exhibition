@@ -74,7 +74,7 @@
 							<li style="display: none;"><a href="${path}/Articles/NewsLetters.do">뉴스 레터(관리자용)</a></li>
 						</c:otherwise>
 					</c:choose>		
-					<li><a href="${path}/notice/noticeBoard.do">공지사항</a></li>
+<%-- 					<li><a href="${path}/notice/noticeBoard.do">공지사항</a></li> --%>
 				</ul>
 			</li>
 			<li>
