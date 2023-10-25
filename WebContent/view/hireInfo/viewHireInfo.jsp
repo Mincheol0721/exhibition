@@ -1,3 +1,4 @@
+<%@page import="VO.IMemberVO.IMemberVO"%>
 <%@page import="VO.CMemberVO.CMemberVO"%>
 <%@page import="java.util.List"%>
 <%@page import="VO.hireInfoVO.HireInfoVO"%>
@@ -14,7 +15,8 @@
 	HireInfoVO vo = null;
 	HireInfoDAO dao = new HireInfoDAO();
 	CMemberVO cvo = dao.getCmemberInfo(cname);
-	
+	IMemberVO ivo = dao.getImember(id);
+			
 	int dday = Integer.parseInt(request.getParameter("expireDate"));
 	vo = dao.getHireInfo(cname);
 %>
@@ -81,6 +83,7 @@
 								<br>
 								<form action="<%=request.getContextPath()%>/hireInfo/applicatePage.do" method="post">
 								<input type="hidden" name="id" value="<%=id%>">
+								<input type="hidden" name="ssn" value="<%=ivo.getSsn()%>">
 								<input type="hidden" name="cname" value="<%=vo.getCname()%>">
 									<table style="border:1px solid gray; border-collapse: collapse;">
 										<tr style="border:1px solid gray;">

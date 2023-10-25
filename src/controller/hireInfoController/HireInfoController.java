@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import DAO.appFormDAO.AppFormDAO;
 import DAO.hireInfoDAO.HireInfoDAO;
 import VO.CMemberVO.CMemberVO;
 import VO.IMemberVO.IMemberVO;
@@ -81,7 +82,6 @@ public class HireInfoController extends HttpServlet {
 		try {
 			
 			if(action.equals("/reg.do")) {
-				System.out.println("action값: " + action);
 				vo.setCname(cname);
 				vo.setDivComp(divComp);
 				vo.setHomepage(homepage);
@@ -96,25 +96,38 @@ public class HireInfoController extends HttpServlet {
 				his.regHireInfo(vo);
 				nextPage = "/view/hireInfo/myHireInfo.jsp?cname=" + cname;
 				System.out.println("nextPage: " + nextPage);
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if (action.equals("/regPage.do")) {
 				
-				System.out.println("cname: " + cname);
 				nextPage = "/view/hireInfo/hireInfoReg.jsp?cname="+cname;
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if (action.equals("/viewHireInfo.do")) {
 				
-				System.out.println("cname: " + cname);
 				String expireDate = request.getParameter("expireDate");
 				System.out.println("expiredate: " + expireDate);
 				
 				nextPage = "/view/hireInfo/viewHireInfo.jsp?cname="+cname+"&expireDate="+expireDate;
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if (action.equals("/myHireInfo.do")) {
 				
-				System.out.println("cname: " + cname);
 				nextPage = "/view/hireInfo/myHireInfo.jsp?cname="+cname;
 				System.out.println("nextPage: " + nextPage);
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if (action.equals("/getList.do")) {
 				if(request.getParameter("pageNum") != null) pageNum = Integer.parseInt(request.getParameter("pageNum"));
@@ -123,13 +136,19 @@ public class HireInfoController extends HttpServlet {
 				request.setAttribute("list", list);
 				
 				nextPage = "/view/hireInfo/hireInfoList.jsp";
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/modPage.do")) {
-				System.out.println("cname: " + cname);
-				
 				nextPage = "/view/hireInfo/modHireInfo.jsp?cname=" + cname;
 				System.out.println("nextPage: " + nextPage);
 
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
 			} else if(action.equals("/mod.do")) {
 				vo.setCname(cname); vo.setDivComp(divComp); vo.setHomepage(homepage);
 				vo.setHtel(htel); vo.setJobtype(jobtype); vo.setLegal(legal); vo.setWorkTime(workTime);
@@ -139,6 +158,10 @@ public class HireInfoController extends HttpServlet {
 				
 				nextPage = "/view/hireInfo/myHireInfo.jsp";
 				System.out.println("nextPage: " + nextPage);
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/del.do")) {
 				System.out.println("cname: " + cname);
@@ -146,19 +169,41 @@ public class HireInfoController extends HttpServlet {
 				
 				nextPage = "/view/index.jsp";
 				System.out.println("nextPage: " + nextPage);
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			} else if(action.equals("/applicatePage.do")) {
 				String id = request.getParameter("id");
+				String ssn = request.getParameter("ssn");
 				
-				IMemberVO vo = new HireInfoDAO().getImember(id);
+				AppFormVO vo = new AppFormDAO().getAppForm(ssn);
+				IMemberVO ivo = new AppFormDAO().getImember(ssn);
+				List<AppFormVO> careerExp = new AppFormDAO().getCareerExp(ssn);
+				List<AppFormVO> license = new AppFormDAO().getLicense(ssn);
+				List<AppFormVO> training = new AppFormDAO().getTraining(ssn);
+				
+				request.setAttribute("ivo", ivo);
+				
 				request.setAttribute("vo", vo);
+				request.setAttribute("carExp", careerExp);
+				request.setAttribute("license", license);
+				request.setAttribute("training", training);
 				
-				nextPage = "/view/hireInfo/applicateForm.jsp";
+				if(careerExp != null || license != null || training != null) {
+					nextPage = "/view/hireInfo/viewAppForm.jsp";
+					System.out.println("if문 탑승: " + nextPage);
+				} else if(careerExp == null || license == null || training == null) {
+					nextPage = "/view/hireInfo/applicateForm.jsp";
+					System.out.println("else if문 탑승: " + nextPage);
+				}
+
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
 			}
-			
-			// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-			dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 			
 		} catch (Exception e) {
 			e.printStackTrace();
