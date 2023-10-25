@@ -299,50 +299,19 @@ public class AppFormDAO {
 			List<AppFormVO> list = new ArrayList<AppFormVO>();
 			try {
 				con = ds.getConnection();
-				query = "SELECT * " + 
-						"FROM ( " + 
-						"    SELECT ROWNUM AS rn, a.* " + 
-						"    FROM ( " + 
-						"	 SELECT " + 
-						"        af.name AS name, " + 
-						"        af.ssn AS ssn, " + 
-						"        af.cname AS acname, " + 
-						"        af.addr AS addr, " + 
-						"        af.tel AS tel, " + 
-						"        af.milServ AS milServ, " + 
-						"        af.edu AS edu, " + 
-						"        af.eduStat AS eduStat, " + 
-						"        ce.cname AS cname, " + 
-						"        ce.startDate AS cstartDate, " + 
-						"        ce.endDate AS cendDate, " + 
-						"        ce.damdang AS damdang, " + 
-						"        l.lname AS lname, " + 
-						"        l.lnum AS lnum, " + 
-						"        l.getDate AS getDate, " + 
-						"        l.pub AS publisher, " + 
-						"        t.eduName AS eduName, " + 
-						"        t.startDate AS eduStartDate, " + 
-						"        t.endDate AS eduEndDate, " + 
-						"        t.content AS eduContent" + 
-						"        FROM appForm af " + 
-						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
-						"        LEFT JOIN license l ON af.name = l.name " + 
-						"        LEFT JOIN training t ON af.name = t.name " +
-						"    ) a" + 
-						"    WHERE a.ssn='" + ssn + "')"; 
-				
+				query = "select * from careerExp WHERE name = (SELECT name FROM imember WHERE ssn='" + ssn + "')";  
 				
 				pstmt = con.prepareStatement(query);
 				
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
+				while(rs.next()) {
 					vo = new AppFormVO();
 					
 					vo.setCname(rs.getString("cname"));
-					vo.setCstartDate(rs.getString("cstartDate"));
-					vo.setCendDate(rs.getString("cendDate"));
+					vo.setCstartDate(rs.getString("startDate"));
+					vo.setCendDate(rs.getString("endDate"));
 					vo.setDamdang(rs.getString("damdang"));
 					
 					list.add(vo);
@@ -362,37 +331,7 @@ public class AppFormDAO {
 			List<AppFormVO> list = new ArrayList<AppFormVO>();
 			try {
 				con = ds.getConnection();
-				query = "SELECT * " + 
-						"FROM ( " + 
-						"    SELECT ROWNUM AS rn, a.* " + 
-						"    FROM ( " + 
-						"	 SELECT " + 
-						"        af.name AS name, " + 
-						"        af.ssn AS ssn, " + 
-						"        af.cname AS acname, " + 
-						"        af.addr AS addr, " + 
-						"        af.tel AS tel, " + 
-						"        af.milServ AS milServ, " + 
-						"        af.edu AS edu, " + 
-						"        af.eduStat AS eduStat, " + 
-						"        ce.cname AS cname, " + 
-						"        ce.startDate AS cstartDate, " + 
-						"        ce.endDate AS cendDate, " + 
-						"        ce.damdang AS damdang, " + 
-						"        l.lname AS lname, " + 
-						"        l.lnum AS lnum, " + 
-						"        l.getDate AS getDate, " + 
-						"        l.pub AS publisher, " + 
-						"        t.eduName AS eduName, " + 
-						"        t.startDate AS eduStartDate, " + 
-						"        t.endDate AS eduEndDate, " + 
-						"        t.content AS eduContent" + 
-						"        FROM appForm af " + 
-						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
-						"        LEFT JOIN license l ON af.name = l.name " + 
-						"        LEFT JOIN training t ON af.name = t.name " +
-						"    ) a" + 
-						"    WHERE a.ssn='" + ssn + "')"; 
+				query = "select * from license WHERE name = (SELECT name FROM imember WHERE ssn='" + ssn + "')";  
 						
 				
 				pstmt = con.prepareStatement(query);
@@ -400,18 +339,18 @@ public class AppFormDAO {
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
+				while(rs.next()) {
 					vo = new AppFormVO();
 					vo.setLname(rs.getString("lname"));
 					vo.setLnum(rs.getString("lnum"));
 					vo.setGetDate(rs.getString("getDate"));
-					vo.setPub(rs.getString("publisher"));
+					vo.setPub(rs.getString("pub"));
 					
 					list.add(vo);
 				}
 			
 			} catch (Exception e) {
-				System.out.println("AppFormDAO내부 getAppForm에서 예외 발생: " + e);
+				System.out.println("AppFormDAO내부 getLicense에서 예외 발생: " + e);
 			} finally {
 				freeResource();
 			}
@@ -424,56 +363,25 @@ public class AppFormDAO {
 			List<AppFormVO> list = new ArrayList<AppFormVO>();
 			try {
 				con = ds.getConnection();
-				query = "SELECT * " + 
-						"FROM ( " + 
-						"    SELECT ROWNUM AS rn, a.* " + 
-						"    FROM ( " + 
-						"	 SELECT " + 
-						"        af.name AS name, " + 
-						"        af.ssn AS ssn, " + 
-						"        af.cname AS acname, " + 
-						"        af.addr AS addr, " + 
-						"        af.tel AS tel, " + 
-						"        af.milServ AS milServ, " + 
-						"        af.edu AS edu, " + 
-						"        af.eduStat AS eduStat, " + 
-						"        ce.cname AS cname, " + 
-						"        ce.startDate AS cstartDate, " + 
-						"        ce.endDate AS cendDate, " + 
-						"        ce.damdang AS damdang, " + 
-						"        l.lname AS lname, " + 
-						"        l.lnum AS lnum, " + 
-						"        l.getDate AS getDate, " + 
-						"        l.pub AS publisher, " + 
-						"        t.eduName AS eduName, " + 
-						"        t.startDate AS eduStartDate, " + 
-						"        t.endDate AS eduEndDate, " + 
-						"        t.content AS eduContent" + 
-						"        FROM appForm af " + 
-						"        LEFT JOIN careerExp ce ON af.name = ce.name " + 
-						"        LEFT JOIN license l ON af.name = l.name " + 
-						"        LEFT JOIN training t ON af.name = t.name " +
-						"    ) a" + 
-						"    WHERE a.ssn='" + ssn + "')"; 
-						
+				query = "select * from training WHERE name = (SELECT name FROM imember WHERE ssn='" + ssn + "')";  
 				
 				pstmt = con.prepareStatement(query);
 				
 				
 				rs = pstmt.executeQuery();
 				
-				if(rs.next()) {
+				while(rs.next()) {
 					vo = new AppFormVO();
 					vo.setEduName(rs.getString("eduname"));
-					vo.setTstartDate(rs.getString("edustartdate"));
-					vo.setTendDate(rs.getString("eduenddate"));
-					vo.setContent(rs.getString("educontent"));
+					vo.setTstartDate(rs.getString("startdate"));
+					vo.setTendDate(rs.getString("enddate"));
+					vo.setContent(rs.getString("content"));
 					
 					list.add(vo);
 				}
 			
 			} catch (Exception e) {
-				System.out.println("AppFormDAO내부 getAppForm에서 예외 발생: " + e);
+				System.out.println("AppFormDAO내부 getTraining에서 예외 발생: " + e);
 			} finally {
 				freeResource();
 			}

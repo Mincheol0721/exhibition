@@ -179,28 +179,25 @@
 						</header>
 						<div class="row">
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>									
+								<br>									
 								<header>
-									<h3><a href="#">채용 공고</a></h3>
-								</header>		
-								<!-- 안내 페이지로 이동 링크 수정해야함 -->					
-								<a href="#" class="image featured"><img src="${path}/images/index_cMember.jpg" alt="" /></a>															
+									<h3><a href="${path}/hireInfo/getList.do">채용 공고</a></h3>
+								</header>														
+								<a href="${path}/hireInfo/getList.do" class="image featured"><img src="${path}/images/index_cMember.jpg" alt="" /></a>															
+							</article>
+							<article class="col-4 col-12-mobile special">	
+								<br>														
+								<header>
+									<h3><a href="${path}/jobLecture/jobLectureBoard.do">취업 특강</a></h3>
+								</header>							
+								<a href="${path}/jobLecture/jobLectureBoard.do" class="image featured"><img src="${path}/images/index_jobLecture.jpg" alt="" /></a>
 							</article>
 							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>							
+								<br>
 								<header>
-									<h3><a href="#">취업 특강</a></h3>
-								</header>
-								<!-- 안내 페이지로 이동 링크 수정해야함 -->
-								<a href="#" class="image featured"><img src="${path}/images/index_jobLecture.jpg" alt="" /></a>
-							</article>
-							<article class="col-4 col-12-mobile special">
-								<a href="#" class="image featured"><img src="${path}/pic05.jpg" alt="" /></a>							
-								<header>
-									<h3><a href="#">직업 체험 프로그램</a></h3>
-								</header>
-								<!-- 안내 페이지로 이동 링크 수정해야함 -->
-								<a href="#" class="image featured"><img src="${path}/images/index_cjobExp.jpg" alt="" /></a>
+									<h3><a href="${path}/event/getList.do">부대 행사</a></h3>
+								</header>								
+								<a href="${path}/event/getList.do" class="image featured"><img src="${path}/images/index_cjobExp.jpg" alt="" /></a>
 							</article>
 						</div>
 					</section>

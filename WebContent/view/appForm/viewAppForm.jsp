@@ -101,19 +101,36 @@
 											<th style="border:1px solid gray;">근무기간</th>
 											<th style="border:1px solid gray;" colspan="2">담당업무</th>
 										</tr>
+							<c:set var="carExpSize" value="${fn:length(carExp)}" />
+							<c:forEach var="carExp" items="${carExp}" varStatus="loop">
+							<c:set var="cstartDate" value="${carExp.cstartDate}" />
+							<c:set var="cendDate" value="${carExp.cendDate}" />
+							<c:set var="start" value='${fn:substring(cstartDate, 0, 10)}' />
+							<c:set var="end" value='${fn:substring(cendDate, 0, 10)}' />
+								<c:choose>
+									<c:when test="${loop.index == 0}">
 										<tr style="border:1px solid gray;">
-											<c:set var="carExpSize" value="${fn:length(carExp)}" />
-												<td rowspan="${carExpSize}" style="text-align: center; padding: 0;">경력사항</td>
-											<c:forEach var="carExp" items="${carExp}">
-											<c:set var="cstartDate" value="${carExp.cstartDate}" />
-											<c:set var="cendDate" value="${carExp.cendDate}" />
-											<c:set var="start" value='${fn:substring(cstartDate, 0, 10)}' />
-											<c:set var="end" value='${fn:substring(cendDate, 0, 10)}' />
-												<td style="border:1px solid gray; text-align: center; padding: 0;">${carExp.cname}</td>
-												<td style="border:1px solid gray; text-align: center; padding: 0;">${start} ~ ${end}</td>
-												<td style="border:1px solid gray; text-align: center; padding: 0;" colspan="2">${carExp.damdang}</td>
-											</c:forEach>
+										<c:if test="${carExpSize >= 3}">
+											<td rowspan="3" style="text-align: center; padding: 0;">경력사항</td>
+										</c:if>
+										<c:if test="${carExpSize < 3}">
+											<td rowspan="${carExpSize}" style="text-align: center; padding: 0;">경력사항</td>
+										</c:if>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${carExp.cname}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${start} ~ ${end}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;" colspan="2">${carExp.damdang}</td>
 										</tr>
+									</c:when>
+									<c:when test="${loop.index < 3}">
+										<tr style="border:1px solid gray;">
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${carExp.cname}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${start} ~ ${end}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;" colspan="2">${carExp.damdang}</td>
+										</tr>
+									</c:when>
+									<c:otherwise></c:otherwise>
+								</c:choose>
+							</c:forEach>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">자격(면허)증 사항</th>
 											<th style="border:1px solid gray;">자격(면허)증 종목</th>
@@ -121,37 +138,72 @@
 											<th style="border:1px solid gray;">자격(면허)증 취득일</th>
 											<th style="border:1px solid gray;">자격(면허)증 발행처</th>
 										</tr>
+							<c:set var="licenseSize" value="${fn:length(license)}" />
+							<c:forEach var="license" items="${requestScope.license}" varStatus="loop">
+							<c:set var="getDate" value="${license.getDate}" />
+							<c:set var="date" value='${fn:substring(getDate, 0, 10)}' />
+								<c:choose>
+									<c:when test="${loop.index == 0}">
 										<tr style="border:1px solid gray;">
-											<c:set var="licenseSize" value="${fn:length(license)}" />
-												<td rowspan="${licenseSize}" style="text-align: center; padding: 0;">자격(면허)증</td>
-											<c:forEach var="license" items="${license}">
-											<c:set var="getDate" value="${license.getDate}" />
-											<c:set var="date" value='${fn:substring(getDate, 0, 10)}' />
+										<c:if test="${licenseSize >= 3}">
+											<td rowspan="3" style="text-align: center; padding: 0;">자격(면허)증</td>
+										</c:if>
+										<c:if test="${licenseSize < 3}">
+											<td rowspan="${licenseSize}" style="text-align: center; padding: 0;">자격(면허)증</td>
+										</c:if>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${license.lname}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${license.lnum}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${date}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${license.pub}</td>
+										</tr>
+									</c:when>
+										<c:when test="${loop.index < 3}">
+											<tr style="border:1px solid gray;">
 												<td style="border:1px solid gray; text-align: center; padding: 0;">${license.lname}</td>
 												<td style="border:1px solid gray; text-align: center; padding: 0;">${license.lnum}</td>
 												<td style="border:1px solid gray; text-align: center; padding: 0;">${date}</td>
 												<td style="border:1px solid gray; text-align: center; padding: 0;">${license.pub}</td>
-											</c:forEach>
-										</tr>
+											</tr>
+										</c:when>
+									<c:otherwise></c:otherwise>
+								</c:choose>
+							</c:forEach>
 										<tr style="border:1px solid gray;">
 											<th style="border:1px solid gray;">교육·훈련 사항</th>
 											<th style="border:1px solid gray;">교육·훈련명</th>
 											<th style="border:1px solid gray;">교육·훈련 기간</th>
 											<th style="border:1px solid gray;" colspan="2">교육·훈련 내용</th>
 										</tr>
-										<tr style="border:1px solid gray;">
 											<c:set var="trainingSize" value="${fn:length(training)}" />
-												<td rowspan="${trainingSize}" style="text-align: center; padding: 0;">교육·훈련 사항</td>
-											<c:forEach var="training" items="${training}">
+						 	<c:forEach var="training" items="${training}" varStatus="loop">
 											<c:set var="tstartDate" value="${training.tstartDate}" /> 
 											<c:set var="tendDate" value="${training.tendDate}" />
 											<c:set var="tstart" value='${fn:substring(tstartDate, 0, 10)}' />
 											<c:set var="tend" value='${fn:substring(tendDate, 0, 10)}' />
-												<td style="border:1px solid gray; text-align: center; padding: 0;">${training.eduName}</td>
-												<td style="border:1px solid gray; text-align: center; padding: 0;">${tstart} ~ ${tend}</td>
-												<td style="border:1px solid gray; text-align: center; padding: 0;" colspan="2">${training.content}</td>
-											</c:forEach>
+						 		<c:choose>
+						 			<c:when test="${loop.index == 0}">
+										<tr style="border:1px solid gray;">
+										<c:if test="${trainingSize >= 3 }">
+											<td rowspan="3" style="text-align: center; padding: 0;">교육·훈련 사항</td>
+										</c:if>
+										<c:if test="${trainingSize < 3 }">
+											<td rowspan="${trainingSize}" style="text-align: center; padding: 0;">교육·훈련 사항</td>
+										</c:if>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${training.eduName}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${tstart} ~ ${tend}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;" colspan="2">${training.content}</td>
 										</tr>
+						 			</c:when>
+						 			<c:when test="${loop.index < 3}">
+										<tr style="border:1px solid gray;">
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${training.eduName}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;">${tstart} ~ ${tend}</td>
+											<td style="border:1px solid gray; text-align: center; padding: 0;" colspan="2">${training.content}</td>
+										</tr>
+						 			</c:when>
+						 			<c:otherwise></c:otherwise>
+						 		</c:choose>
+							</c:forEach> 
 									</table>
 									<input type="button" value="글목록" onclick="javascript: history.go(-1);">
 							</header>

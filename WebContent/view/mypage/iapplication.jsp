@@ -262,7 +262,7 @@
 		              <input type="radio" name="milServ" value="전역" checked> 전역 &nbsp;&nbsp;
 		              <input type="radio" name="milServ" value="미필"> 미필 &nbsp;&nbsp;
 		              <input type="radio" name="milServ" value="면제"> 면제 &nbsp;&nbsp;
-		              <input type="radio" name="milServ" value="해당사항 없음"> 해당사항없음 &nbsp;&nbsp;
+		              <input type="radio" name="milServ" value="해당사항없음"> 해당사항없음 &nbsp;&nbsp;
 					</span>
 		
 					<span class="input-group-text" id="addon-wrapping">
