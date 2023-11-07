@@ -1,4 +1,4 @@
-![image](https://github.com/Mincheol0721/exhibition/assets/41099574/1edbeab7-4b1f-465a-b223-0dc422f48fe0)# exhibition
+# exhibition
 
 #### 기능별 이미지
 
