@@ -1,6 +1,33 @@
 # exhibition
 
-#### 기능별 이미지
+## 📖 프로젝트 소개
+부산 지역 진로 및 취업 박람회 정보를 제공해주는 
+박람회 사이트입니다.
+
+<br>
+
+## ⏱ 프로젝트 기간
+* 23.10.10 ~ 23.10.24 (총 15일)
+
+<br>
+
+## ⚙ 개발 환경
+- Server: `Apache Tomcat 9.0`, `Oracle DB Server`
+- Language: `JAVA`, `Servlet`, `HTML`, `CSS`, `JavaScript`, `AJAX`, `OracleSQL`
+- IDE: `Eclipse 2018-03`, `SQL Developer`
+- Configuration Management: `Git`, `Git Bash`, `Github`
+
+<br>
+
+## 🔗 내용 요약
+
+박람회 사이트를 구현하면서 많은 기능들을 넣었지만 제가 구현한 기능들 위주로 
+
+간략하게 구현 화면을 이미지로 나타내보았습니다.
+
+<br>
+
+## 🖥️ 구현 페이지 화면
 
 * 메인페이지
 
